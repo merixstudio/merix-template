@@ -1,0 +1,36 @@
+/*
+ * Reset browser styles
+ */
+html {min-height: 100%; padding-bottom: 1px}
+body {background: #fff; color: #000; font: .75em/1.5 "Arial", "Helvetica", sans-serif}
+* {overflow: hidden; margin: 0; padding: 0}
+p, ul, ol, dl {padding-bottom: 1em}
+ul, ol {margin-left: 0; padding-left: 2em}
+h1, h2, h3, h4, h5, h6 {font-size: 1em}
+textarea, input, select, option, optgroup, button {font: 1em "Arial", "Helvetica", sans-serif}
+img {border: none; vertical-align: bottom}
+a {color: #00f; text-decoration: none; outline: none; cursor: pointer}
+a:hover {text-decoration: underline}
+button, [type="radio"], [type="checkbox"], [type="submit"], [type="button"], [type="reset"], label[for], select {cursor: pointer}
+
+
+/*
+ * Some globally used classes
+ */
+.left {float: left !important}
+.right {float: right !important}
+
+.text-left {text-align: left !important}
+.text-center {text-align: center !important}
+.text-right {text-align: right !important}
+
+.no-margin {padding-bottom: 0 !important}
+.margin {padding-bottom: 1em !important}
+
+ul.plain,
+ol.plain {list-style: none; padding: 0}
+
+
+/*
+ * The End
+ */

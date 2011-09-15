@@ -29,7 +29,10 @@ button, [type="radio"], [type="checkbox"], [type="submit"], [type="button"], [ty
 .margin {padding-bottom: 1em !important}
 
 ul.plain,
-ol.plain {list-style: none; padding: 0}
+ol.plain {list-style: none !important; padding: 0 !important}
+
+ul[class],
+ol[class] {list-style: none; padding: 0}
 
 
 /*

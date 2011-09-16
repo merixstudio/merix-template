@@ -7,7 +7,8 @@ body {background: #fff; color: #000; font: .75em/1.5 "Arial", "Helvetica", sans-
 body * {overflow: hidden}
 p, ul, ol, dl {padding-bottom: 1em}
 ul, ol {margin-left: 0; padding-left: 2em}
-ul[class], ol[class] {list-style: none; padding: 0}
+li ul, li ol {padding-bottom: 0}
+[class] {list-style: none; padding: 0}
 h1, h2, h3, h4, h5, h6 {font-size: 1em}
 dt {font-weight: 700}
 table {border-collapse: collapse}
@@ -16,8 +17,12 @@ a {color: #00f; text-decoration: none; outline: none; cursor: pointer}
 a:hover {text-decoration: underline}
 textarea, input, select, option, optgroup, button {font: 1em "Arial", "Helvetica", sans-serif}
 button, [type="radio"], [type="checkbox"], [type="submit"], [type="button"], [type="reset"], label[for], select {cursor: pointer}
+input, select, textarea {outline: none}
 
-/* Reset padding in buttons in Firefox */
+
+/*
+ * Reset padding in buttons in Firefox
+ */
 button::-moz-focus-inner,
 input[type="reset"]::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,

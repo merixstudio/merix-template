@@ -7,6 +7,7 @@ body {background: #fff; color: #000; font: .75em/1.5 "Arial", "Helvetica", sans-
 body * {overflow: hidden}
 p, ul, ol, dl {padding-bottom: 1em}
 ul, ol {margin-left: 0; padding-left: 2em}
+ul[class], ol[class] {list-style: none; padding: 0}
 h1, h2, h3, h4, h5, h6 {font-size: 1em}
 dt {font-weight: 700}
 table {border-collapse: collapse}
@@ -36,9 +37,6 @@ input[type="file"]>input[type="button"]::-moz-focus-inner {padding: 0; border: n
 
 .no-margin {padding-bottom: 0 !important}
 .margin {padding-bottom: 1em !important}
-
-ul[class],
-ol[class] {list-style: none; padding: 0}
 
 
 /*

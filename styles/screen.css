@@ -3,17 +3,16 @@
  */
 * {margin: 0; padding: 0}
 html {min-height: 100%; padding-bottom: 1px}
-body {background: #fff; color: #000; font: .75em/1.5 "Arial", "Helvetica", sans-serif}
-body * {overflow: hidden}
+body {overflow: visible !important; background: #fff; color: #666; font: .75em/1.5 "Arial", "Helvetica", sans-serif}
 p, ul, ol, dl {padding-bottom: 1em}
 ul, ol {margin-left: 0; padding-left: 2em}
 li ul, li ol {padding-bottom: 0}
-[class] {list-style: none; padding: 0}
+[class] {overflow: hidden; list-style: none; padding: 0}
 h1, h2, h3, h4, h5, h6 {font-size: 1em}
 dt {font-weight: 700}
 table {border-collapse: collapse}
 img {border: none; vertical-align: middle}
-a {color: #00f; text-decoration: none; outline: none; cursor: pointer}
+a {color: #d81630; text-decoration: none; outline: none; cursor: pointer}
 a:hover {text-decoration: underline}
 textarea, input, select, option, optgroup, button {font: 1em "Arial", "Helvetica", sans-serif}
 button, [type="radio"], [type="checkbox"], [type="submit"], [type="button"], [type="reset"], label[for], select {cursor: pointer}

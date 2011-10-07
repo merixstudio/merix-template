@@ -14,7 +14,7 @@ table {border-collapse: collapse}
 img {border: none; vertical-align: middle}
 a {color: #d81630; text-decoration: none; outline: none; cursor: pointer}
 a:hover {text-decoration: underline}
-textarea, input, select, option, optgroup, button {font: 1em "Arial", "Helvetica", sans-serif}
+textarea, input, select, button {font: 1em "Arial", "Helvetica", sans-serif}
 button, input[type="radio"], input[type="checkbox"], input[type="submit"], input[type="button"], input[type="reset"], label[for], select {cursor: pointer}
 input, select, textarea {outline: none}
 

@@ -12,7 +12,7 @@ h1, h2, h3, h4, h5, h6 {font-size: 1em}
 dt {font-weight: 700}
 table {border-collapse: collapse}
 img {border: none; vertical-align: middle}
-a {color: #d81630; text-decoration: none; outline: none; cursor: pointer}
+a {color: #d81630; text-decoration: none; cursor: pointer}
 a:hover {text-decoration: underline}
 textarea, input, select, button {font: 1em "Arial", "Helvetica", sans-serif}
 button, input[type="radio"], input[type="checkbox"], input[type="submit"], input[type="button"], input[type="reset"], label[for], select {cursor: pointer}

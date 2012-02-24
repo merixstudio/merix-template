@@ -2,4 +2,4 @@
  * IE7 fixes
  */
 html {overflow: auto !important; font-size: 100%}
-body {position: relative}
+body {position: relative; overflow: visible !important}

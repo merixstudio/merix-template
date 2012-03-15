@@ -16,13 +16,10 @@ a {color: #d81630; text-decoration: none; cursor: pointer}
 a:hover {text-decoration: underline}
 textarea, input, select, button {font: 1em "Arial", "Helvetica", sans-serif; vertical-align: middle}
 textarea[class] {overflow: auto}
-button, input[type="radio"], input[type="checkbox"], input[type="submit"], input[type="button"], input[type="reset"], label[for], label[htmlFor], select {cursor: pointer}
+button, input[type="radio"], input[type="checkbox"], input[type="submit"], input[type="button"], input[type="reset"], label[for], select {cursor: pointer}
 input, select, textarea {outline: none}
 
-
-/*
- * Reset padding in buttons in Firefox
- */
+/* Reset padding in buttons in Firefox */
 button::-moz-focus-inner,
 input[type="reset"]::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,

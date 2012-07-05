@@ -2,7 +2,7 @@
  * Reset browser styles
  */
 * {margin: 0; padding: 0}
-html {overflow: auto !important; min-height: 100%; padding-bottom: 1px}
+html {overflow: visible !important; min-height: 100%; padding-bottom: 1px}
 body {overflow: visible !important; background: #fff; color: #666; font: .75em/1.5 "Arial", "Helvetica", sans-serif}
 p, ul, ol, dl {padding-bottom: 1em}
 ul, ol {margin-left: 0; padding-left: 2em}
@@ -40,6 +40,7 @@ input[type="file"]>input[type="button"]::-moz-focus-inner {padding: 0; border: n
 .no-margin {padding-bottom: 0 !important}
 .margin {padding-bottom: 1em !important}
 
+html.no-scroll body {overflow: hidden !important}
 
 /*
  * The End

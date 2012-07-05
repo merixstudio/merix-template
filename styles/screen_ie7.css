@@ -4,3 +4,5 @@
 html {overflow: auto !important; font-size: 100%}
 body {position: relative; overflow: visible !important}
 label[htmlFor] {cursor: pointer}
+
+html.no-scroll {overflow: hidden !important}

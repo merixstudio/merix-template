@@ -2,7 +2,7 @@
  * Reset browser styles
  */
 * {margin: 0; padding: 0; text-overflow: ellipsis}
-html {overflow: visible !important; min-height: 100%; padding-bottom: 1px}
+html {overflow: visible !important; min-height: 100%; padding-bottom: 1px !important}
 body {overflow: visible !important; background: #fff; color: #666; font: .75em/1.5 "Arial", "Helvetica", sans-serif}
 p, ul, ol, dl {padding-bottom: 1em}
 ul, ol {margin-left: 0; padding-left: 2em}

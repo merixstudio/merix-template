@@ -3,42 +3,21 @@
  */
 * {margin: 0; padding: 0; text-overflow: ellipsis}
 html {overflow: visible !important; min-height: 100%; padding-bottom: 1px !important}
-body {overflow: visible !important; background: #fff; color: #666; font: .75em/1.5 "Arial", "Helvetica", sans-serif}
-p, ul, ol, dl {padding-bottom: 1em}
-ul, ol {margin-left: 0; padding-left: 2em}
+body {overflow: visible !important; background: #fff; color: #666; font: 12px/1.5 "Arial", "Helvetica", sans-serif}
+p, ul, ol, dl {padding-bottom: 12px}
+ul, ol {margin-left: 0; padding-left: 24px}
 li ul, li ol {padding-bottom: 0}
 [class] {overflow: hidden; list-style: none; padding: 0}
-h1, h2, h3, h4, h5, h6 {font-size: 1em}
+h1, h2, h3, h4, h5, h6 {font-size: 12px}
 dt {font-weight: 700}
 table {border-collapse: collapse}
 img {border: none; vertical-align: middle}
 a {color: #d81630; text-decoration: none; cursor: pointer}
 a:hover {text-decoration: underline}
-textarea, input, select, button {font: 1em "Arial", "Helvetica", sans-serif; vertical-align: middle}
+textarea, input, select, button {font: 12px "Arial", "Helvetica", sans-serif; vertical-align: middle}
 textarea[class] {overflow: auto}
 button, input[type="radio"], input[type="checkbox"], input[type="submit"], input[type="button"], input[type="reset"], label[for], select {cursor: pointer}
 input, select, textarea {outline: none}
-
-/* Reset padding in buttons in Firefox */
-button::-moz-focus-inner,
-input[type="reset"]::-moz-focus-inner,
-input[type="button"]::-moz-focus-inner,
-input[type="submit"]::-moz-focus-inner,
-input[type="file"]>input[type="button"]::-moz-focus-inner {padding: 0; border: none}
-
-
-/*
- * Some globally used classes
- */
-.left {float: left !important}
-.right {float: right !important}
-
-.text-left {text-align: left !important}
-.text-center {text-align: center !important}
-.text-right {text-align: right !important}
-
-.no-margin {padding-bottom: 0 !important}
-.margin {padding-bottom: 1em !important}
 
 html.no-scroll body {overflow: hidden !important}
 

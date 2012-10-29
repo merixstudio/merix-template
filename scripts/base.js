@@ -36,6 +36,10 @@ jQuery.fn.closestScrollable = function() {
     if (this.is('body'))
         return this;
 
+    // Filter out select tags which could be scrollable (multiple choices)
+    if (this.is('select'))
+        return this.parent().closestScrollable();
+
     var overflowX = this.css('overflow-x');
     var overflowY = this.css('overflow-y');
 
@@ -53,10 +57,17 @@ jQuery.fn.positionUntil = function(selector) {
     var result = {left: 0, top: 0};
     var element = this;
 
-    while (element.length) {
+    while (element.length && !element.is('body')) {
         var position = element.position();
+
         result.left += position.left + element.scrollLeft();
         result.top += position.top + element.scrollTop();
+
+        if (!isNaN(parseFloat(element.css('margin-left'), 10)))
+            result.left += parseFloat(element.css('margin-left'), 10);
+
+        if (!isNaN(parseFloat(element.css('margin-top'), 10)))
+            result.top += parseFloat(element.css('margin-top'), 10);
 
         if (element.is(selector))
             break;

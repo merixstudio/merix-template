@@ -66,32 +66,34 @@ jQuery.fn.scrollbar = function(options) {
             e.preventDefault();
             e.stopPropagation();
             setScrollTop(Math.max(0, scrollTop - scrollStep));
-            updateHandle();
             // Repeat if mouse is down
             timeout = setTimeout(function() {
                 $scrollUp.mousedown();
             }, 50);
-        }).mouseup(function(e) {
-            clearTimeout(timeout);
         });
 
         $scrollDown.mousedown(function(e) {
             e.preventDefault();
             e.stopPropagation();
             setScrollTop(Math.min(scrollMaxTop, scrollTop + scrollStep));
-            updateHandle();
             // Repeat if mouse is down
             timeout = setTimeout(function() {
                 $scrollDown.mousedown();
             }, 50);
-        }).mouseup(function(e) {
+        });
+
+        jQuery(document).mouseup(function(e) {
             clearTimeout(timeout);
         });
 
         $div.scroll(function(e) {
+            updateScrollbar();
             scrollTop = $div.scrollTop();
 
-            var percentY = $div.scrollTop() / scrollMaxTop;
+            var percentY = 0;
+            if (scrollMaxTop)
+                percentY = scrollTop / scrollMaxTop;
+
             pixelsY = Math.min(handleMaxHeight - handleHeight, Math.floor(percentY * (handleMaxHeight - handleHeight)));
             updateHandle();
         });
@@ -106,6 +108,7 @@ jQuery.fn.scrollbar = function(options) {
                 e.stopPropagation();
                 drag = true;
                 clickY = Math.floor(Math.min(Math.max(0, e.pageY - $handle.offset().top), $handle.offset().top));
+                $scrollbar.addClass('drag');
             });
 
             jQuery(document).mousemove(function(e) {
@@ -122,6 +125,7 @@ jQuery.fn.scrollbar = function(options) {
 
             jQuery(document).mouseup(function(e) {
                 drag = false;
+                $scrollbar.removeClass('drag');
             });
         });
 
@@ -131,25 +135,19 @@ jQuery.fn.scrollbar = function(options) {
             var y = e.pageY - $div.offset().top - $scrollUp.outerHeight(true);
             var newScrollTop = (y / (handleMaxHeight - handleHeight)) * (scrollHeight - clipHeight);
             setScrollTop(newScrollTop);
-            updateHandle();
         });
 
-        $div.update = function() {
-            updateScrollbar();
-            updateHandle();
-            $div.scroll();
-        };
 
         // Initial update
-        $div.update();
+        $div.scroll();
 
         // Update scrollbar when images load
         $div.find('img').load(function() {
-            $div.update();
+            $div.scroll();
         });
 
         jQuery(window).resize(function() {
-            $div.update();
+            $div.scroll();
         });
 
         // Save scrollbar object with external methods to an HTML element

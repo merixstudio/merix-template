@@ -11,9 +11,10 @@ jQuery.fn.customFileInput = function(options) {
         var $wrapper = $file.parentsUntil($inputParent).last().addClass($file.attr('class'));
         var $input = jQuery('<span class="' + get(options.inputClass, 'file-input-value') + '"><span><span/></span></span>').insertBefore($file).find('span').last();
         var $button = jQuery('<a class="button ' + get(options.buttonClass, 'file-input-button') + '">' + get(options.buttonText, 'Browse') + '</a>').insertBefore($file);
+        var emptyText = get(options.emptyText, '');
 
         function update() {
-            $input.text($file.val());
+            $input.text($file.val() != '' ? $file.val() : emptyText);
             $wrapper.toggleClass('file-selected', $file.val() != '');
         }
 

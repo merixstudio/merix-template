@@ -47,7 +47,7 @@ jQuery.fn.scrollbar = function(options) {
             clipHeight = $clip.outerHeight();
             scrollHeight = Math.max(clipHeight, $div[0].scrollHeight);
 
-            handleMaxHeight = clipHeight - $scrollUp.outerHeight(true) - $scrollDown.outerHeight(true);
+            handleMaxHeight = $scrollbar.outerHeight() - $scrollUp.outerHeight(true) - $scrollDown.outerHeight(true);
             handleHeight = Math.floor(handleMaxHeight * clipHeight / scrollHeight);
 
             scrollMaxTop = scrollHeight - clipHeight;
@@ -117,7 +117,7 @@ jQuery.fn.scrollbar = function(options) {
                 if (!drag)
                     return;
 
-                var percentY = e.pageY - $div.offset().top - $scrollUp.outerHeight(true);
+                var percentY = e.pageY - $scrollbar.offset().top - $scrollUp.outerHeight(true);
                 percentY = Math.max(0, Math.min(handleMaxHeight, percentY - clickY));
                 pixelsY = Math.min(handleMaxHeight - handleHeight, Math.floor(percentY));
                 setScrollTop((percentY / (handleMaxHeight - handleHeight)) * scrollMaxTop);
@@ -132,7 +132,7 @@ jQuery.fn.scrollbar = function(options) {
         // Scroll and move handle when user clicks on the scrollbar but not
         // the handle or arrows
         $scrollbar.mousedown(function(e) {
-            var y = e.pageY - $div.offset().top - $scrollUp.outerHeight(true);
+            var y = e.pageY - $scrollbar.offset().top - $scrollUp.outerHeight(true);
             var newScrollTop = (y / (handleMaxHeight - handleHeight)) * (scrollHeight - clipHeight);
             setScrollTop(newScrollTop);
         });

@@ -1,0 +1,7 @@
+/*
+ * Shortcut for managing many files. Please don't use this file on a live site due to performance implications.
+ * Instead merge the files below to a single CSS file manually or using your backend technology.
+ */
+@import url('normalize2.css');
+@import url('main.css');
+@import url('responsive.css');

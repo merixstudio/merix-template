@@ -9,16 +9,6 @@
         'scripts/main.js'
     ];
 
-    function load() {
-        if (paths.length == 0)
-            return;
-
-        var script = document.createElement('script');
-        script.src = paths.shift();
-        script.onreadystatechange = load;
-        script.onload = load;
-        document.body.appendChild(script);
-    }
-
-    load();
+    for (var i = 0; i < paths.length; i++)
+        document.write('<script src="' + paths[i] + '"></script>');
 })();

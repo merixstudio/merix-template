@@ -1,3 +1,7 @@
+syntax: glob
+
+*.komodoproject
+
 syntax: regexp
 
 ^\.source/

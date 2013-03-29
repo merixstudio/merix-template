@@ -2,6 +2,7 @@
  * Base styles
  */
 * {margin: 0; padding: 0; text-overflow: ellipsis}
+body * {-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box}
 [class] {overflow: hidden; list-style: none; padding: 0}
 
 /* Page defaults */
@@ -10,42 +11,49 @@ body {overflow: visible !important; min-height: 100%; color: #f0f; font: 12px/1.
 
 /* Block-level elements */
 p,
-ul,
-ol,
 dl,
-figure {margin: 18px 0}
+ol,
 ul,
-ol {margin-left: 0; padding-left: 24px}
-li ul,
-li ol {padding-bottom: 0}
+figure {margin: 18px 0}
+
+ol,
+ul {margin-left: 0; padding-left: 24px}
+
+li ol,
+li ul {margin-top: 0; margin-bottom: 0}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {margin: 18px 0; font-size: 12px}
+
 dt {font-weight: 700}
 table {border-collapse: collapse}
 
 /* Form elements */
-textarea,
 input,
-select,
-button {font: 12px 'Arial', 'Helvetica', sans-serif; vertical-align: middle; outline: none}
-textarea[class] {overflow: auto}
 button,
-input[type="radio"],
-input[type="checkbox"],
-input[type="submit"],
-input[type="button"],
-input[type="reset"],
+select,
+textarea {font: 12px 'Arial', 'Helvetica', sans-serif; vertical-align: middle; outline: none}
+
+textarea[class] {overflow: auto}
+
+button,
+select,
 label[for],
-select {cursor: pointer}
+input[type="reset"],
+input[type="radio"],
+input[type="button"],
+input[type="submit"],
+input[type="checkbox"] {cursor: pointer}
 
 /* Inline elements */
-img {border: none; vertical-align: middle}
 a {color: #f0f; text-decoration: none; cursor: pointer}
 a:hover {text-decoration: underline}
+
+img {border: none; vertical-align: middle}
 
 
 /*

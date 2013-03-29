@@ -1,7 +1,0 @@
-/*
- * IE6 fixes
- */
-* {zoom: 1}
-html {font-size: 100%}
-body {position: relative}
-a * {cursor: pointer}

@@ -3,5 +3,5 @@
  * Instead merge the files below to a single CSS file manually or using your backend technology.
  */
 @import url('normalize2.css');
+@import url('base.css');
 @import url('main.css');
-@import url('responsive.css');

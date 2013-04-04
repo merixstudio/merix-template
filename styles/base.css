@@ -52,7 +52,7 @@ input[type="checkbox"] {cursor: pointer}
 a {color: #f0f; text-decoration: none; cursor: pointer}
 a:hover {text-decoration: underline}
 
-img {vertical-align: middle}
+img {display: inline-block; vertical-align: middle}
 
 
 /*

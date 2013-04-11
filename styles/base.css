@@ -10,11 +10,17 @@ html {overflow: visible !important; overflow-y: scroll !important; background: #
 body {overflow: visible !important; min-height: 100%; color: #f0f; font: 12px/1.5 /* 18px */ 'Arial', 'Helvetica', sans-serif}
 
 /* Block-level elements */
-p,
-dl,
-ol,
-ul,
-figure {margin: 18px 0}
+*+p,
+*+dl,
+*+h1,
+*+h2,
+*+h3,
+*+h4,
+*+h5,
+*+h6,
+*+ol,
+*+ul,
+*+figure {margin-top: 18px}
 
 ol,
 ul {margin-left: 0; padding-left: 24px}
@@ -27,7 +33,7 @@ h2,
 h3,
 h4,
 h5,
-h6 {margin: 18px 0; font-size: 12px}
+h6 {font-size: 12px}
 
 dt {font-weight: 700}
 

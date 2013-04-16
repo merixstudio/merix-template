@@ -37,6 +37,8 @@ h6 {font-size: 12px}
 
 dt {font-weight: 700}
 
+table {overflow: visible !important}
+
 /* Form elements */
 input,
 button,

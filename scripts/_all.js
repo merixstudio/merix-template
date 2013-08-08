@@ -4,8 +4,8 @@
  */
 (function() {
     var paths = [
+        'scripts/require.js',
         'scripts/jquery.js',
-        'scripts/base.js',
         'scripts/main.js'
     ];
 

@@ -23,7 +23,7 @@ body {overflow: visible !important; min-height: 100%; color: #f0f; font: 12px/1.
 *+figure {margin-top: 18px}
 
 ol,
-ul {margin-left: 0; padding-left: 24px}
+ul {margin-left: 0; padding-left: 40px}
 
 li ol,
 li ul {margin-top: 0; margin-bottom: 0}

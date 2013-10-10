@@ -1,8 +1,9 @@
 syntax: glob
 
 *.komodoproject
+*.sublime-project
+*.sublime-workspace
 
 syntax: regexp
 
-^\.source/
-^\.temp/
+^\.

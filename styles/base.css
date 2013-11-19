@@ -1,74 +1,14 @@
 /*
  * Base styles
  */
-* {margin: 0; padding: 0; text-overflow: ellipsis}
-body * {-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box}
-[class] {overflow: hidden; list-style: none; padding: 0}
+html {overflow-y: scroll; }
+body {min-height: 100%; background: #fff; color: #000; font: 12px/1.5 /* 18px */ 'Arial', 'Helvetica', sans-serif}
+body * {overflow: hidden; -moz-box-sizing: border-box; box-sizing: border-box; margin: 0; padding: 0; text-overflow: ellipsis; list-style: none}
 
-/* Page defaults */
-html {overflow: visible !important; overflow-y: scroll !important; background: #f0f}
-body {overflow: visible !important; min-height: 100%; color: #f0f; font: 12px/1.5 /* 18px */ 'Arial', 'Helvetica', sans-serif}
+a {text-decoration: none}
 
-/* Block-level elements */
-*+p,
-*+dl,
-*+h1,
-*+h2,
-*+h3,
-*+h4,
-*+h5,
-*+h6,
-*+ol,
-*+ul,
-*+figure {margin-top: 18px}
+/* Disable scrollbar and scrolling */
+.clip {overflow: hidden}
 
-ol,
-ul {margin-left: 0; padding-left: 40px}
-
-li ol,
-li ul {margin-top: 0; margin-bottom: 0}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {font-size: 12px}
-
-dt {font-weight: 700}
-
-table {overflow: visible !important}
-
-/* Form elements */
-input,
-button,
-select,
-textarea {vertical-align: middle; outline: none}
-
-textarea[class] {overflow: auto}
-
-button,
-select,
-label[for],
-input[type="reset"],
-input[type="radio"],
-input[type="button"],
-input[type="submit"],
-input[type="checkbox"] {cursor: pointer}
-
-/* Inline elements */
-a {color: #f0f; text-decoration: none; cursor: pointer}
-a:hover {text-decoration: underline}
-
-img {display: inline-block; vertical-align: middle}
-
-
-/*
- * Some useful classes
- */
-
-/* Disable scrollbar */
-html.no-scroll {overflow: hidden !important}
-
-/* Mark elements as not finished (when integrating with backend). */
+/* For backend developers: mark elements as not finished (when integrating templates with backend). */
 ._placeholder {outline: 2px dashed rgba(255, 0, 255, .33) !important}

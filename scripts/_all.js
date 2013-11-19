@@ -3,6 +3,7 @@
  * Instead merge the files below to a single JavaScript file manually or using your backend technology.
  */
 (function() {
+    'use strict';
     var paths = [
         'scripts/require.js',
         'scripts/jquery.js',

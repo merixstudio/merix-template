@@ -2,6 +2,7 @@
  * Allows for a simple Asynchronous module definition.
  */
 function define(moduleName) {
+    'use strict';
     var dependencies = [], moduleCode, i, args;
     if (moduleName in define.modules && moduleName !== 'settings')
         throw new ReferenceError("module '" + moduleName + "' is already defined");
@@ -29,12 +30,14 @@ function define(moduleName) {
 }
 
 function require(moduleName) {
+    'use strict';
     if (moduleName in define.modules)
         return define.modules[moduleName];
     throw new ReferenceError("no module named '" + moduleName + "'");
 }
 
 require.jQueryPlugins = function() {
+    'use strict';
     var jQuery = require('jquery');
     var missing = [];
 

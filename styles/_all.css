@@ -4,4 +4,6 @@
  */
 @import url('normalize2.css');
 @import url('base.css');
+@import url('forms.css');
+@import url('wysiwyg.css');
 @import url('main.css');

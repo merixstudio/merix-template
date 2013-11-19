@@ -1,25 +1,30 @@
-
-function define(moduleName, dependencies, moduleCode) {
-    if (moduleName in define.modules)
+/*
+ * Allows for a simple Asynchronous module definition.
+ */
+function define(moduleName) {
+    var dependencies = [], moduleCode, i, args;
+    if (moduleName in define.modules && moduleName !== 'settings')
         throw new ReferenceError("module '" + moduleName + "' is already defined");
-    if (typeof dependencies !== 'function' && typeof moduleCode !== 'function')
-        throw new TypeError("module '" + moduleName + "' is not a function");
 
-    var args = [];
-    if (typeof dependencies === 'function')
-        moduleCode = dependencies;
-    else
-        for (var i = 0; i < dependencies.length; i++)
+    if (arguments.length === 3)
+        dependencies = arguments[1];
+    moduleCode = arguments[arguments.length - 1];
+
+    if (typeof moduleCode === 'function') {
+        args = [];
+        for (i = 0; i < dependencies.length; i++)
             args.push(require(dependencies[i]));
-
-    moduleCode = moduleCode.apply(this, args);
+        moduleCode = moduleCode.apply(this, args);
+    }
 
     if (typeof moduleCode === 'undefined')
         throw new TypeError("module '" + moduleName + "' doesn't export any definitions");
 
+    if (moduleName === 'settings')
+        moduleName = '_settings';
+
     if (moduleName === 'jquery')
         jQuery.noConflict(true);
-
     define.modules[moduleName] = moduleCode;
 }
 
@@ -42,4 +47,14 @@ require.jQueryPlugins = function() {
 };
 
 define.amd = {'jQuery': true};
-define.modules = {};
+define.modules = {
+    /*
+     * Custom user settings are stored under a `_settings` alias and the function below acts as a shortcut.
+     */
+    'settings': function(name, fallback) {
+        if (typeof define.modules._settings[name] !== 'undefined')
+            return define.modules._settings[name];
+        return fallback;
+    },
+    '_settings': {}
+};

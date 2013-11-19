@@ -6,6 +6,7 @@
     var paths = [
         'scripts/require.js',
         'scripts/jquery.js',
+        'scripts/site.js'
         'scripts/main.js'
     ];
 

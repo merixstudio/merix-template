@@ -4,13 +4,15 @@
  */
 (function() {
     'use strict';
+
     var paths = [
+        'scripts/polyfills.js',  // IE8 support, skip or remove if targeting IE9+.
         'scripts/require.js',
+        'scripts/settings.js',
         'scripts/jquery.js',
         'scripts/site.js',
         'scripts/main.js'
     ];
 
-    for (var i = 0; i < paths.length; i++)
-        document.write('<script src="' + paths[i] + '"></script>');
+    document.write('<script src="' + paths.join('"></script>\n<script src="') + '"></script>');
 })();

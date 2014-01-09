@@ -9,7 +9,9 @@
         'scripts/polyfills.js',  // IE8 support, skip or remove if targeting IE9+.
         'scripts/require.js',
         'scripts/settings.js',
+        'scripts/signal.js',
         'scripts/jquery.js',
+        'scripts/viewport.js',
         'scripts/site.js',
         'scripts/main.js'
     ];

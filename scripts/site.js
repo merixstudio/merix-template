@@ -1,8 +1,9 @@
-define('site', ['jquery'], function(jQuery) {
+define('site', ['jquery', 'viewport'], function(jQuery, viewport) {
     'use strict';
 
     function Site() {
         this.parseContent(document.body);
+        viewport.enable();
     }
 
     Site.prototype.parseContent = function(root) {

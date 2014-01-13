@@ -1,0 +1,207 @@
+/*
+ * Percentage-based responsive column classes. Hard-coded breakpoints (also configured in scripts/settings.js):
+ *
+ *     viewport width  settings alias  body class
+ *                                     (added automatically by the viewport.js script)
+ *     =============== =============== ================================================
+ *     0 - 479         '320'           viewport-320
+ *     480 - 719       '480'           viewport-480
+ *     720 - 959       '720'           viewport-720
+ *     960 - 1279      '960'           viewport-960
+ *     1280 - 1599     '1280'          viewport-1280
+ *     1600 - 1919     '1600'          viewport-1600
+ *     1920+           '1920'          viewport-1920
+ *
+ */
+.columns:after {content: ''; clear: both; display: block}
+.columns>* {float: left}
+
+@media (min-width: 320px) and (max-width: 479px) {
+    .v320-hide {display: none !important}
+}
+@media (min-width: 480px) and (max-width: 719px) {
+    .v480-hide {display: none !important}
+}
+@media (min-width: 720px) and (max-width: 959px) {
+    .v720-hide {display: none !important}
+}
+@media (min-width: 960px) and (max-width: 1279px) {
+    .v960-hide {display: none !important}
+}
+@media (min-width: 1280px) and (max-width: 1599px) {
+    .v1280-hide {display: none !important}
+}
+@media (min-width: 1600px) and (max-width: 1919px) {
+    .v1600-hide {display: none !important}
+}
+@media (min-width: 1920px) {
+    .v1920-hide {display: none !important}
+}
+
+@media (min-width: 320px) {
+    .v320-1 {width: 100%}
+
+    .v320-padding           {padding:        10px}
+    .v320-padding-top       {padding-top:    10px}
+    .v320-padding-left      {padding-left:   10px}
+    .v320-padding-right     {padding-right:  10px}
+    .v320-padding-bottom    {padding-bottom: 10px}
+    .v320-no-padding-top    {padding-top:    0}
+    .v320-no-padding-left   {padding-left:   0}
+    .v320-no-padding-right  {padding-right:  0}
+    .v320-no-padding-bottom {padding-bottom: 0}
+}
+
+@media (min-width: 480px) {
+    .v480-1 {width: 100%}
+
+    .v480-1-of-2 {width: 50%}
+
+    .v480-padding           {padding:        10px}
+    .v480-padding-top       {padding-top:    10px}
+    .v480-padding-left      {padding-left:   10px}
+    .v480-padding-right     {padding-right:  10px}
+    .v480-padding-bottom    {padding-bottom: 10px}
+    .v480-no-padding-top    {padding-top:    0}
+    .v480-no-padding-left   {padding-left:   0}
+    .v480-no-padding-right  {padding-right:  0}
+    .v480-no-padding-bottom {padding-bottom: 0}
+}
+
+@media (min-width: 720px) {
+    .v720-1 {width: 100%}
+
+    .v720-1-of-2 {width: 50%}
+
+    .v720-1-of-3 {width: 33.3333333333%}
+    .v720-2-of-3 {width: 66.6666666666%}
+
+    .v720-padding           {padding:        10px}
+    .v720-padding-top       {padding-top:    10px}
+    .v720-padding-left      {padding-left:   10px}
+    .v720-padding-right     {padding-right:  10px}
+    .v720-padding-bottom    {padding-bottom: 10px}
+    .v720-no-padding-top    {padding-top:    0}
+    .v720-no-padding-left   {padding-left:   0}
+    .v720-no-padding-right  {padding-right:  0}
+    .v720-no-padding-bottom {padding-bottom: 0}
+}
+
+@media (min-width: 960px) {
+    .v960-1 {width: 100%}
+
+    .v960-1-of-2 {width: 50%}
+
+    .v960-1-of-3 {width: 33.3333333333%}
+    .v960-2-of-3 {width: 66.6666666666%}
+
+    .v960-1-of-4 {width: 25%}
+    .v960-2-of-4 {width: 50%}
+    .v960-3-of-4 {width: 75%}
+
+    .v960-padding           {padding:        10px}
+    .v960-padding-top       {padding-top:    10px}
+    .v960-padding-left      {padding-left:   10px}
+    .v960-padding-right     {padding-right:  10px}
+    .v960-padding-bottom    {padding-bottom: 10px}
+    .v960-no-padding-top    {padding-top:    0}
+    .v960-no-padding-left   {padding-left:   0}
+    .v960-no-padding-right  {padding-right:  0}
+    .v960-no-padding-bottom {padding-bottom: 0}
+}
+
+@media (min-width: 1280px) {
+    .v1280-1 {width: 100%}
+
+    .v1280-1-of-2 {width: 50%}
+
+    .v1280-1-of-3 {width: 33.3333333333%}
+    .v1280-2-of-3 {width: 66.6666666666%}
+
+    .v1280-1-of-4 {width: 25%}
+    .v1280-2-of-4 {width: 50%}
+    .v1280-3-of-4 {width: 75%}
+
+    .v1280-1-of-5 {width: 20%}
+    .v1280-2-of-5 {width: 40%}
+    .v1280-3-of-5 {width: 60%}
+    .v1280-4-of-5 {width: 80%}
+
+    .v1280-padding           {padding:        10px}
+    .v1280-padding-top       {padding-top:    10px}
+    .v1280-padding-left      {padding-left:   10px}
+    .v1280-padding-right     {padding-right:  10px}
+    .v1280-padding-bottom    {padding-bottom: 10px}
+    .v1280-no-padding-top    {padding-top:    0}
+    .v1280-no-padding-left   {padding-left:   0}
+    .v1280-no-padding-right  {padding-right:  0}
+    .v1280-no-padding-bottom {padding-bottom: 0}
+}
+
+@media (min-width: 1600px) {
+    .v1600-1 {width: 100%}
+
+    .v1600-1-of-2 {width: 50%}
+
+    .v1600-1-of-3 {width: 33.3333333333%}
+    .v1600-2-of-3 {width: 66.6666666666%}
+
+    .v1600-1-of-4 {width: 25%}
+    .v1600-2-of-4 {width: 50%}
+    .v1600-3-of-4 {width: 75%}
+
+    .v1600-1-of-5 {width: 20%}
+    .v1600-2-of-5 {width: 40%}
+    .v1600-3-of-5 {width: 60%}
+    .v1600-4-of-5 {width: 80%}
+
+    .v1600-1-of-6 {width: 16.6666666666%}
+    .v1600-2-of-6 {width: 33.3333333333%}
+    .v1600-3-of-6 {width: 50%}
+    .v1600-4-of-6 {width: 66.6666666666%}
+    .v1600-5-of-6 {width: 83.3333333333%}
+
+    .v1600-padding           {padding:        10px}
+    .v1600-padding-top       {padding-top:    10px}
+    .v1600-padding-left      {padding-left:   10px}
+    .v1600-padding-right     {padding-right:  10px}
+    .v1600-padding-bottom    {padding-bottom: 10px}
+    .v1600-no-padding-top    {padding-top:    0}
+    .v1600-no-padding-left   {padding-left:   0}
+    .v1600-no-padding-right  {padding-right:  0}
+    .v1600-no-padding-bottom {padding-bottom: 0}
+}
+
+@media (min-width: 1920px) {
+    .v1920-1 {width: 100%}
+
+    .v1920-1-of-2 {width: 50%}
+
+    .v1920-1-of-3 {width: 33.3333333333%}
+    .v1920-2-of-3 {width: 66.6666666666%}
+
+    .v1920-1-of-4 {width: 25%}
+    .v1920-2-of-4 {width: 50%}
+    .v1920-3-of-4 {width: 75%}
+
+    .v1920-1-of-5 {width: 20%}
+    .v1920-2-of-5 {width: 40%}
+    .v1920-3-of-5 {width: 60%}
+    .v1920-4-of-5 {width: 80%}
+
+    .v1920-1-of-6 {width: 16.6666666666%}
+    .v1920-2-of-6 {width: 33.3333333333%}
+    .v1920-3-of-6 {width: 50%}
+    .v1920-4-of-6 {width: 66.6666666666%}
+    .v1920-5-of-6 {width: 83.3333333333%}
+
+    .v1920-padding           {padding:        10px}
+    .v1920-padding-top       {padding-top:    10px}
+    .v1920-padding-left      {padding-left:   10px}
+    .v1920-padding-right     {padding-right:  10px}
+    .v1920-padding-bottom    {padding-bottom: 10px}
+    .v1920-no-padding-top    {padding-top:    0}
+    .v1920-no-padding-left   {padding-left:   0}
+    .v1920-no-padding-right  {padding-right:  0}
+    .v1920-no-padding-bottom {padding-bottom: 0}
+}

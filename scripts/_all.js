@@ -4,12 +4,16 @@
  */
 (function() {
     var paths = [
+        'scripts/polyfills.js',
         'scripts/require.js',
+        'scripts/settings.js',
+        'scripts/signal.js',
         'scripts/jquery.js',
+        'scripts/viewport.js',
+        'scripts/smart_blocks.js',
         'scripts/site.js',
         'scripts/main.js'
     ];
 
-    for (var i = 0; i < paths.length; i++)
-        document.write('<script src="' + paths[i] + '"></script>');
+    document.write('<script src="' + paths.join('"></script><script src="') + '"></script>');
 })();

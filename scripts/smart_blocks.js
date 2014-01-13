@@ -57,7 +57,6 @@ define('smart_blocks', ['settings', 'signal'], function(settings, Signal) {
     }
 
     function enable() {
-        updateDocument();
         window.addEventListener('resize', updateDocument);
     }
 

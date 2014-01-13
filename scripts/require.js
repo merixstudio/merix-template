@@ -45,24 +45,8 @@
      * Allows to store given 'module' for later use. A module can be a single function or class constructor
      * or an object containing any of these as properties.
      */
-        'settings': function(name, fallback) {
-            var settings = modules._settings || {};
-            if (typeof settings[name] !== 'undefined')
-                return settings[name];
-            return fallback;
-        },
-    };
-
-
     function define(moduleName) {
         var dependencies = [], moduleCode, i, args;
-            throw new InvalidModuleNameError(moduleName);
-
-        if (moduleName === 'settings')
-            moduleName = '_settings';
-
-        if (moduleName in modules)
-            throw new DuplicateModuleError(moduleName);
 
         if (arguments.length < 2 || arguments.length > 3)
             throw new define.ArgumentCountError();
@@ -122,10 +106,6 @@
     function passMessage(message) {
         return message;
     }
-    define.InvalidModuleNameError = InvalidModuleNameError;
-    define.InvalidModuleError = InvalidModuleError;
-    define.DuplicateModuleError = DuplicateModuleError;
-    define.RequireError = RequireError;
 
     function alreadyDefinedMessage(moduleName) {
         return "module '" + moduleName + "' is already defined";

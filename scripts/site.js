@@ -11,6 +11,7 @@ define('site', ['jquery', 'viewport', 'smart_blocks'], function(jQuery, viewport
         function find(selector) {
             return jQuery(root).is(selector) ? jQuery(root) : jQuery(root).find('*').filter(selector);
         }
+
         smartBlocks.updateTree(root);
     };
 

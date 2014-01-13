@@ -10,5 +10,8 @@ a {text-decoration: none}
 /* Disable scrollbar and scrolling */
 .clip {overflow: hidden}
 
+/* Make container extend to full height, even when containing floated elements. */
+.clear:after {content: ''; clear: both; display: block}
+
 /* For backend developers: mark elements as not finished (when integrating templates with backend). */
 ._placeholder {outline: 2px dashed rgba(255, 0, 255, .33) !important}

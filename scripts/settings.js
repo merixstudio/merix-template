@@ -18,17 +18,17 @@ define('settings', {
     'SMART_BLOCKS': {
         // Example smart block configuration.
         // Initial element selector.
-        '.block': {
-        // Additional classes that will be applied when width of parent is between given numbers.
-            'small': [0, 299],
-            'medium': [300, 699],
-            'big': [700, Infinity],
-        },
-        '.self-block': {
-        // Additional classes that will be applied when width of parent is between given numbers.
-            'small': [0, 299, 'self'],
-            'medium': [300, 699, 'self'],
-            'big': [700, Infinity, 'self'],
-        }
+        // '.block': {
+        //     //Additional classes that will be applied when width of parent is between given numbers.
+        //     'small': [0, 299],
+        //     'medium': [300, 699],
+        //     'big': [700, Infinity],
+        // },
+        // '.self-block': {
+        //    // Additional classes that will be applied when width of parent is between given numbers.
+        //    'small': [0, 299, 'self'],
+        //    'medium': [300, 699, 'self'],
+        //    'big': [700, Infinity, 'self'],
+        //}
     }
 });

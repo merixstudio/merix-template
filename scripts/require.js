@@ -1,60 +1,143 @@
 /*
- * Allows for a simple Asynchronous module definition.
+ * require.js v1.0.1
+ * Allows for a simple module definition, similar to AMD, but without the A.
+ *
+ * Full documentation:
+ * http://requirejs.rtfd.org/
+ *
+ * Mercurial repository:
+ * https://bitbucket.org/PythonFanboy/require.js
+ *
+ * Git repository:
+ * https://github.com/PythonFanboy/require.js
+ *
+ * Copyright 2013 Tomasz Grajewski AKA Python Fanboy
+ * Released under the MIT license
+ * http://requirejs.readthedocs.org/en/latest/#license
+ *
  */
-function define(moduleName) {
-    var dependencies = [], moduleCode, i, args;
-    if (moduleName in define.modules && moduleName !== 'settings')
-        throw new ReferenceError("module '" + moduleName + "' is already defined");
+(function() {
+    'use strict';
 
-    if (arguments.length === 3)
-        dependencies = arguments[1];
-    moduleCode = arguments[arguments.length - 1];
-
-    if (typeof moduleCode === 'function') {
-        args = [];
-        for (i = 0; i < dependencies.length; i++)
-            args.push(require(dependencies[i]));
-        moduleCode = moduleCode.apply(this, args);
+    function initialModules() {
+        /*
+         * Custom user settings are stored under a `_settings` alias and the function below acts as a shortcut/getter.
+         */
+        return {
+            'settings': function(name, fallback) {
+                if (arguments.length < 1 || arguments.length > 2)
+                    throw new TypeError('settings getter accepts only one or two arguments');
+                var settings = modules._settings || {};
+                return name in settings ? settings[name] : fallback;
+            }
+        };
     }
 
-    if (typeof moduleCode === 'undefined')
-        throw new TypeError("module '" + moduleName + "' doesn't export any definitions");
+    var namePattern = /^[a-z0-9_]+(?:\/[a-z0-9_]+)*$/;
+    var modules = initialModules();
 
-    if (moduleName === 'settings')
-        moduleName = '_settings';
+    // Used in tests to clear all defined modules and settings.
+    function reset() {
+        define.modules = modules = initialModules();
+    }
 
-    if (moduleName === 'jquery')
-        jQuery.noConflict(true);
-    define.modules[moduleName] = moduleCode;
-}
-
-function require(moduleName) {
-    if (moduleName in define.modules)
-        return define.modules[moduleName];
-    throw new ReferenceError("no module named '" + moduleName + "'");
-}
-
-require.jQueryPlugins = function() {
-    var jQuery = require('jquery');
-    var missing = [];
-
-    for (var i = 0; i < arguments.length; i++)
-        if (typeof jQuery.fn[arguments[i]] === 'undefined' && typeof jQuery[arguments[i]] === 'undefined')
-            missing.push(arguments[i]);
-
-    if (missing.length)
-        throw new ReferenceError("no jQuery plugins named '" + missing.join("', '") + "'");
-};
-
-define.amd = {'jQuery': true};
-define.modules = {
     /*
-     * Custom user settings are stored under a `_settings` alias and the function below acts as a shortcut.
+     * Allows to store given 'module' for later use. A module can be a single function or class constructor
+     * or an object containing any of these as properties.
      */
-    'settings': function(name, fallback) {
-        if (typeof define.modules._settings[name] !== 'undefined')
-            return define.modules._settings[name];
-        return fallback;
-    },
-    '_settings': {}
-};
+    function define(moduleName) {
+        var dependencies = [], moduleCode, i, args;
+
+        if (arguments.length < 2 || arguments.length > 3)
+            throw new define.ArgumentCountError();
+        if (typeof moduleName !== 'string' || !namePattern.test(moduleName))
+            throw new define.InvalidModuleNameError(moduleName);
+        if (moduleName === 'settings')
+            moduleName = '_settings';
+        if (moduleName in modules)
+            throw new define.DuplicateModuleError(moduleName);
+
+        moduleCode = arguments[arguments.length - 1];
+        if (arguments.length === 3) {
+            if (typeof moduleCode !== 'function')
+                throw new define.Error('redundant dependecies specified when module is not a function');
+            dependencies = arguments[1];
+        }
+
+        if (typeof moduleCode === 'function') {
+            // Collect required dependencies for the currently defined module.
+            args = [];
+            for (i = 0; i < dependencies.length; i++)
+                args.push(require(dependencies[i]));
+            moduleCode = moduleCode.apply(this, args);
+        }
+
+        if (arguments.length < 2 || typeof moduleCode === 'undefined')
+            throw new define.InvalidModuleError(moduleName);
+
+        if (moduleName === 'jquery' && modules.settings('JQUERY_NO_CONFLICT', true))
+            jQuery.noConflict(true);
+        modules[moduleName] = moduleCode;
+    }
+
+    /*
+     * Returns 'module' by name, from an internal module container. The 'module' must be 'defined' prior to calling
+     * this function.
+     */
+    function require(moduleName) {
+        if (arguments.length !== 1 || typeof moduleName !== 'string')
+            throw new require.ArgumentsError();
+        if (moduleName in modules)
+            return modules[moduleName];
+        throw new require.Error(moduleName);
+    }
+
+    function makeException(parentObject, parentClass, name, message) {
+        function Exception() {
+            this.message = (typeof message === 'function') ? message.apply(null, arguments) : message;
+        }
+        var shortName = name.split('.');
+        shortName = shortName[shortName.length - 1];
+        Exception.prototype = Object.create(parentClass.prototype);
+        Exception.prototype.name = name;
+        parentObject[shortName] = Exception;
+    }
+
+    function passMessage(message) {
+        return message;
+    }
+
+    function alreadyDefinedMessage(moduleName) {
+        return "module '" + moduleName + "' is already defined";
+    }
+
+    function noExportsMessage(moduleName) {
+        return "module '" + moduleName + "' doesn't export any definitions";
+    }
+
+    function invalidCharsMessage(moduleName) {
+        return "module name '" + moduleName + "' is invalid, allowed characters: a-z, 0-9, _ and /";
+    }
+
+    function notFoundMessage(moduleName) {
+        return "no module named '" + moduleName + "'";
+    }
+
+    makeException(define, TypeError, 'define.Error', passMessage);
+    makeException(define, define.Error, 'define.ArgumentCountError', '`define()` accepts only two or three arguments');
+    makeException(define, define.Error, 'define.InvalidModuleNameError', invalidCharsMessage);
+    makeException(define, define.Error, 'define.InvalidModuleError', noExportsMessage);
+    makeException(define, define.Error, 'define.DuplicateModuleError', alreadyDefinedMessage);
+
+    makeException(require, TypeError, 'require.Error', notFoundMessage);
+    makeException(require, TypeError, 'require.ArgumentsError',
+                  '`require()` accepts only one argument and it must be a string with a module name');
+
+    // Publicize things.
+    define.amd = {'jQuery': true};
+    define._reset = reset;
+    define.modules = modules;
+    window.define = define;
+    window.require = require;
+
+})();

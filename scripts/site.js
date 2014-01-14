@@ -1,4 +1,4 @@
-define('site', ['jquery', 'viewport', 'smart_blocks'], function(jQuery, viewport, smartBlocks) {
+define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks'], function(jQuery, viewport, smartBlocks) {
     'use strict';
 
     function Site() {

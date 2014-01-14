@@ -17,7 +17,7 @@
  * Only one viewport is active in given moment, even when two specifications are overlapping
  * (random one will be returned), thus it's recommened to define non-overlapping breakpoints.
  */
-define('viewport', ['settings', 'signal'], function(settings, Signal) {
+define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Signal) {
     'use strict';
 
     var VIEWPORTS = settings('VIEWPORTS', {});

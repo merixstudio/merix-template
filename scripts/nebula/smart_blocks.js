@@ -13,7 +13,7 @@
  *         }
  *     }
  */
-define('smart_blocks', ['settings', 'signal'], function(settings, Signal) {
+define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, Signal) {
     'use strict';
 
     var BLOCKS = settings('SMART_BLOCKS', {});

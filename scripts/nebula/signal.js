@@ -1,4 +1,4 @@
-define('signal', function() {
+define('nebula/signal', function() {
     'use strict';
 
     function Signal() {

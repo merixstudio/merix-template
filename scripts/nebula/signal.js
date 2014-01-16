@@ -1,3 +1,6 @@
+/*
+ * Simple signal dispatcher implementation.
+ */
 define('nebula/signal', function() {
     'use strict';
 
@@ -18,11 +21,12 @@ define('nebula/signal', function() {
         for (var i = 0; i < this.receivers.length; i++)
             if (this.receivers[i] === receiver) {
                 this.receivers.splice(i, 1);
-                break;
+                return;
             }
     };
 
     Signal.prototype.send = function() {
+        // Execute all connected receivers, forwarding all arguments.
         for (var i = 0; i < this.receivers.length; i++)
             this.receivers[i].apply(this, arguments);
     };

@@ -1,22 +1,10 @@
 /*
- * require.js v1.0.1
  * Allows for a simple module definition, similar to AMD, but without the A.
- *
- * Full documentation:
- * http://requirejs.rtfd.org/
- *
- * Mercurial repository:
- * https://bitbucket.org/PythonFanboy/require.js
- *
- * Git repository:
- * https://github.com/PythonFanboy/require.js
- *
- * Copyright 2013 Tomasz Grajewski AKA Python Fanboy
- * Released under the MIT license
- * http://requirejs.readthedocs.org/en/latest/#license
- *
  */
 (function() {
+    /*
+     * Allows for a simple module definition, similar to AMD, but without the A.
+     */
     'use strict';
 
     function initialModules() {

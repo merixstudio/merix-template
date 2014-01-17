@@ -31,9 +31,11 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, 
             var width = measureSelf ? block.offsetWidth : block.parentNode.offsetWidth;
             var classAdded = block.classList.contains(className);
 
-            if (minWidth <= width && width <= maxWidth && !classAdded) {
-                block.classList.add(className);
-                classModified = true;
+            if (minWidth <= width && width <= maxWidth) {
+                if (!classAdded) {
+                    block.classList.add(className);
+                    classModified = true;
+                }
             } else if (classAdded) {
                 block.classList.remove(className);
                 classModified = true;

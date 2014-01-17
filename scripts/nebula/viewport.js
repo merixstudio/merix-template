@@ -20,8 +20,6 @@
 define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Signal) {
     'use strict';
 
-    var VIEWPORTS = settings('VIEWPORTS', {});
-    var VIEWPORT_CLASS_PREFIX = settings('VIEWPORT_CLASS_PREFIX', 'viewport-');
     var active = null, portrait = null;
     var onChange = new Signal();
 
@@ -43,6 +41,8 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
     }
 
     function _update() {
+        var VIEWPORTS = settings('VIEWPORTS', {});
+        var VIEWPORT_CLASS_PREFIX = settings('VIEWPORT_CLASS_PREFIX', 'viewport-');
         var old = active, oldPortrait = portrait;
         portrait = height() >= width();
         if (portrait !== oldPortrait) {
@@ -71,6 +71,7 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
          * Returns `true` if given `alias` is currently active. `alias` must be one of the viewport names defined
          * in settings.
          */
+        var VIEWPORTS = settings('VIEWPORTS', {});
         if (alias in VIEWPORTS)
             return alias === active;
         throw new Error('Unknown viewport alias: ' + alias);

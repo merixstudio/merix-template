@@ -14,6 +14,8 @@ define('settings', {
         '1600': [1600, 1919],
         '1920': [1920, Infinity],
     },
+    // Uncomment this to disable 'viewport-portrait' and 'viewport-landscape' classes added automatically to body.
+    // 'VIEWPORT_ORIENTATION_CLASS': false,
 
     'SMART_BLOCKS': {
         // Example smart block configuration.

@@ -1,7 +1,9 @@
 describe('require.js', function() {
 
+    var modules = define.modules;
+    beforeEach(define._reset);
     afterEach(function() {
-        define._reset();
+        define.modules = modules;
     });
 
     describe('`define()`', function() {

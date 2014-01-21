@@ -15,18 +15,17 @@
             'settings': function(name, fallback) {
                 if (arguments.length < 1 || arguments.length > 2)
                     throw new TypeError('settings getter accepts only one or two arguments');
-                var settings = modules._settings || {};
+                var settings = define.modules._settings || {};
                 return name in settings ? settings[name] : fallback;
             }
         };
     }
 
     var namePattern = /^[a-z0-9_]+(?:\/[a-z0-9_]+)*$/;
-    var modules = initialModules();
 
     // Used in tests to clear all defined modules and settings.
     function reset() {
-        define.modules = modules = initialModules();
+        define.modules = initialModules();
     }
 
     /*
@@ -42,7 +41,7 @@
             throw new define.InvalidModuleNameError(moduleName);
         if (moduleName === 'settings')
             moduleName = '_settings';
-        if (moduleName in modules)
+        if (moduleName in define.modules)
             throw new define.DuplicateModuleError(moduleName);
 
         moduleCode = arguments[arguments.length - 1];
@@ -63,9 +62,9 @@
         if (arguments.length < 2 || typeof moduleCode === 'undefined')
             throw new define.InvalidModuleError(moduleName);
 
-        if (moduleName === 'jquery' && modules.settings('JQUERY_NO_CONFLICT', true))
+        if (moduleName === 'jquery' && define.modules.settings('JQUERY_NO_CONFLICT', true))
             jQuery.noConflict(true);
-        modules[moduleName] = moduleCode;
+        define.modules[moduleName] = moduleCode;
     }
 
     /*
@@ -75,8 +74,8 @@
     function require(moduleName) {
         if (arguments.length !== 1 || typeof moduleName !== 'string')
             throw new require.ArgumentsError();
-        if (moduleName in modules)
-            return modules[moduleName];
+        if (moduleName in define.modules)
+            return define.modules[moduleName];
         throw new require.Error(moduleName);
     }
 
@@ -125,7 +124,7 @@
     // Publicize things.
     define.amd = {'jQuery': true};
     define._reset = reset;
-    define.modules = modules;
+    define.modules = initialModules();
     window.define = define;
     window.require = require;
 

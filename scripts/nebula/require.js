@@ -88,6 +88,7 @@
         shortName = shortName[shortName.length - 1];
         Exception.prototype = Object.create(parentClass.prototype);
         Exception.prototype.name = name;
+        Exception.prototype.constructor = Exception;
         parentObject[shortName] = Exception;
     }
 

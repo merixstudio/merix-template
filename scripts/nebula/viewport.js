@@ -21,7 +21,7 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
     'use strict';
 
     var winAPI = window;  // Can be overriden, to allow unit testing.
-    var active = null, portrait = null;
+    var active = null, portrait = null, initialized = false;
     var onChange = new Signal();
 
     function _check(specification) {
@@ -31,7 +31,9 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
          */
         if (typeof specification === 'function')
             return specification();
-        else if (specification instanceof Array)
+        else if (specification instanceof Array && specification.length === 2 &&
+                 typeof specification[0] === 'number' && typeof specification[1] === 'number' &&
+                 specification[0] <= specification[1])
             return specification[0] <= width() && width() <= specification[1];
         else if (typeof specification === 'string') {
             if (!winAPI.matchMedia)
@@ -41,16 +43,18 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
         throw new Error('Invalid viewport specification: ' + specification);
     }
 
-    function _updateOrientationClass(newPortrait) {
+    function _changeOrientation(newPortrait) {
         if (newPortrait !== portrait) {
-            var VIEWPORT_CLASS_PREFIX = settings('VIEWPORT_CLASS_PREFIX', 'viewport-');
-            winAPI.document.body.classList.remove(VIEWPORT_CLASS_PREFIX + (newPortrait ? 'landscape' : 'portrait'));
-            winAPI.document.body.classList.add(VIEWPORT_CLASS_PREFIX + (newPortrait ? 'portrait' : 'landscape'));
+            if (settings('VIEWPORT_ORIENTATION_CLASS', true)) {
+                var VIEWPORT_CLASS_PREFIX = settings('VIEWPORT_CLASS_PREFIX', 'viewport-');
+                winAPI.document.body.classList.remove(VIEWPORT_CLASS_PREFIX + (portrait ? 'portrait' : 'landscape'));
+                winAPI.document.body.classList.add(VIEWPORT_CLASS_PREFIX + (newPortrait ? 'portrait' : 'landscape'));
+            }
             portrait = newPortrait;
         }
     }
 
-    function _updateViewportClass(newClass) {
+    function _changeViewport(newClass) {
         if (newClass !== active) {
             var VIEWPORT_CLASS_PREFIX = settings('VIEWPORT_CLASS_PREFIX', 'viewport-');
             if (active)
@@ -63,7 +67,7 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
     }
 
     function _update() {
-        var VIEWPORTS = settings('VIEWPORTS', {}), newClass;
+        var VIEWPORTS = settings('VIEWPORTS', {}), newClass = null;
 
         for (var alias in VIEWPORTS)
             if (_check(VIEWPORTS[alias])) {
@@ -71,9 +75,8 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
                 break;
             }
 
-        if (settings('VIEWPORT_ORIENTATION_CLASS', true))
-            _updateOrientationClass(height() >= width());
-        _updateViewportClass(newClass);
+        _changeViewport(newClass);
+        _changeOrientation(height() >= width());
     }
 
     function _is(alias) {
@@ -88,6 +91,8 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
     }
 
     function is(aliases) {
+        if (!initialized)
+            throw new Error('You must call `viewport.enable()` first to use `viewport.is()`');
         /*
          * Returns `true` if any of the aliases is currently active. `aliases` must be a string with any
          * viewport names defined in settings, separated by space.
@@ -100,13 +105,15 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
     }
 
     function get() {
+        if (!initialized)
+            throw new Error('You must call `viewport.enable()` first to use `viewport.get()`');
         /*
          * Returns name of currently active viewport. May return `null` if none viewport is active.
          */
         return active;
     }
 
-    function width(d) {
+    function width() {
         /*
          * Returns window width, excluding toolbars and scrollbars.
          */
@@ -121,29 +128,38 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
     }
 
     function isPortrait() {
+        if (!initialized)
+            throw new Error('You must call `viewport.enable()` first to use `viewport.isPortrait()`');
         return portrait;
     }
 
     function isLandscape() {
+        if (!initialized)
+            throw new Error('You must call `viewport.enable()` first to use `viewport.isLandscape()`');
         return !portrait;
     }
 
-    function enable() {
+    function enable(api) {
+        if (api)
+            winAPI = api;
         _update();
         winAPI.addEventListener('resize', _update);
+        initialized = true;
     }
 
     function disable() {
         winAPI.removeEventListener('resize', _update);
+        active = portrait = null;
+        initialized = false;
     }
 
-    function _changeAPI(api) {
-        // Unit test helper, allows to provide custom window and document implementations (mocks).
-        winAPI = api;
+    function isEnabled() {
+        return initialized;
     }
 
     return {
-        '_changeAPI': _changeAPI,
+        '_changeOrientation': _changeOrientation,
+        '_changeViewport': _changeViewport,
         '_check': _check,
         '_update': _update,
         'width': width,
@@ -154,6 +170,7 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
         'isLandscape': isLandscape,
         'onChange': onChange,
         'enable': enable,
-        'disable': disable
+        'disable': disable,
+        'isEnabled': isEnabled
     }
 });

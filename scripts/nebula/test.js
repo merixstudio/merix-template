@@ -10,19 +10,25 @@ define('nebula/test', function() {
          * Settings are overriden only for the time needed to execute provided callback and then old values
          * are restored.
          */
-        var name, backup = {}, settings = define.modules._settings;
+        var name, backup = {}, settings, result;
+
+        if ('_settings' in define.modules)
+            settings = define.modules._settings;
+        else
+            settings = define.modules._settings = {};
 
         for (name in newSettings) {
             if (name in settings)
                 backup[name] = settings[name];
-            settings[name] = newSettings[name]
+            settings[name] = newSettings[name];
         }
 
-        callback();
+        result = callback(require('settings'));
 
         // Restore previous settings.
         for (name in backup)
             settings[name] = backup[name];
+        return result;
     }
 
     return {

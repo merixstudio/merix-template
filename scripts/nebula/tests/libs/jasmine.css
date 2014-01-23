@@ -1,6 +1,7 @@
-body { background-color: #eeeeee; padding: 0; margin: 5px; overflow-y: scroll; }
+body { background-color: #eeeeee; padding: 0 0 10px; margin: 5px; overflow-y: scroll; }
 
-.html-reporter { font-size: 11px; font-family: Monaco, "Lucida Console", monospace; line-height: 14px; color: #333333; }
+.html-reporter { font-size: 11px; font-family: "Consolas", "Monaco", "Lucida Console", monospace; line-height: 14px; color: #333333; }
+.html-reporter input[type="checkbox"] { vertical-align: middle; }
 .html-reporter a { text-decoration: none; }
 .html-reporter a:hover { text-decoration: underline; }
 .html-reporter p, .html-reporter h1, .html-reporter h2, .html-reporter h3, .html-reporter h4, .html-reporter h5, .html-reporter h6 { margin: 0; line-height: 14px; }

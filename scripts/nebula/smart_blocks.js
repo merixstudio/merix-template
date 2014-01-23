@@ -16,8 +16,7 @@
 define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, Signal) {
     'use strict';
 
-    var BLOCKS = settings('SMART_BLOCKS', {});
-
+    var winAPI = window;
     // Signal sent whenever any of the blocks had class changed.
     var onUpdate = new Signal();
 
@@ -46,6 +45,7 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, 
     }
 
     function updateTree(root) {
+        var BLOCKS = settings('SMART_BLOCKS', {});
         var selector, blocks, i;
         for (selector in BLOCKS) {
             blocks = root.querySelectorAll(selector);
@@ -55,15 +55,17 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, 
     }
 
     function updateDocument() {
-        updateTree(document.body);
+        updateTree(winAPI.document.body);
     }
 
-    function enable() {
-        window.addEventListener('resize', updateDocument);
+    function enable(api) {
+        if (api)
+            winAPI = api;
+        winAPI.addEventListener('resize', updateDocument);
     }
 
     function disable() {
-        window.removeEventListener('resize', updateDocument);
+        winAPI.removeEventListener('resize', updateDocument);
     }
 
     return {

@@ -12,7 +12,7 @@ define('settings', {
         '960': [960, 1279],
         '1280': [1280, 1599],
         '1600': [1600, 1919],
-        '1920': [1920, Infinity],
+        '1920': [1920, Infinity]
     },
     // Uncomment this to disable 'viewport-portrait' and 'viewport-landscape' classes added automatically to body.
     // 'VIEWPORT_ORIENTATION_CLASS': false,

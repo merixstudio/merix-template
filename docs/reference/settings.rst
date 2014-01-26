@@ -3,6 +3,9 @@ Settings
 ********
 
 
+Core settings
+=============
+
 .. js:data:: JQUERY_NO_CONFLICT
 
    Default: ``true``
@@ -20,10 +23,14 @@ Settings
    .. code-block:: javascript
 
       define('my_module', ['jquery'], function(jQuery) {
-         ...
+          ...
       });
 
    Note that module names are all lowercase!
+
+
+Viewport
+========
 
 .. js:data:: VIEWPORTS
 
@@ -34,13 +41,13 @@ Settings
    .. code-block:: javascript
 
       'VIEWPORTS': {
-         '320': [0, 479],
-         '480': [480, 719],
-         '720': [720, 959],
-         '960': [960, 1279],
-         '1280': [1280, 1599],
-         '1600': [1600, 1919],
-         '1920': [1920, Infinity]
+          '320': [0, 479],
+          '480': [480, 719],
+          '720': [720, 959],
+          '960': [960, 1279],
+          '1280': [1280, 1599],
+          '1600': [1600, 1919],
+          '1920': [1920, Infinity]
       }
 
    An object whose contents maps viewport aliases to a viewport specification, which is usually an array holding
@@ -49,8 +56,8 @@ Settings
    .. code-block:: javascript
 
       'VIEWPORTS': {
-         '(viewport-name)': (specification),
-         ...
+          '(viewport-name)': (specification),
+          ...
       }
 
    ``(specification)`` can be one of these:
@@ -80,6 +87,9 @@ Settings
    dimensions.
 
 
+Smart blocks
+============
+
 .. js:data:: SMART_BLOCKS
 
    Default: ``{}`` (empty object)
@@ -91,15 +101,15 @@ Settings
    .. code-block:: javascript
 
       'SMART_BLOCKS': {
-         'div.block': {
-            'small': [0, 100],
-            'medium': [101, 200],
-            'big': [201, Infinity]
-         },
-         'ul.grid>li': {
-            'narrow': [200, 480, 'self'],
-            'wide': [481, Infinity, 'self'],
-         }
+          'div.block': {
+              'small': [0, 100],
+              'medium': [101, 200],
+              'big': [201, Infinity]
+          },
+          'ul.grid>li': {
+              'narrow': [200, 480, 'self'],
+              'wide': [481, Infinity, 'self'],
+          }
       }
 
    Overall pattern is as this:
@@ -107,10 +117,10 @@ Settings
    .. code-block:: javascript
 
       'SMART_BLOCKS': {
-         '(CSS-selector)': {
-            '(class-name)': [(min-width), (max-width), ('self')]
-            ...
-         }
+          '(CSS-selector)': {
+              '(class-name)': [(min-width), (max-width), ('self')]
+              ...
+          }
       }
 
    ``(CSS-selector)``

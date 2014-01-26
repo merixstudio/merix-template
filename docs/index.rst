@@ -11,15 +11,16 @@ Nebula documentation contents
 
    reference/require
    reference/settings
+   reference/files
    reference/libs
 
 
 **Introduction**
 
 *  Overview
-*  Writting JavaScript modules
+*  Writing JavaScript modules
 *  Defining settings
-*  Writting jQuery plugins
+*  Gritting jQuery plugins
 *  Coding guidelines
 
 **Responsive web sites**
@@ -36,7 +37,7 @@ Nebula documentation contents
 
 *  :doc:`reference/require`
 *  :doc:`List of all settings <reference/settings>`
-*  Directory structure
+*  :doc:`reference/files`
 *  :doc:`reference/libs`
 
 

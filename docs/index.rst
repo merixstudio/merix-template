@@ -10,6 +10,7 @@ Nebula documentation contents
    :hidden:
 
    reference/settings
+   reference/libs
 
 
 **Introduction**
@@ -32,16 +33,15 @@ Nebula documentation contents
 *  require.js
 *  Settings
 *  Signals
-*  Included third-party software
 
 **Reference**
 
 *  :doc:`List of all settings <reference/settings>`
+*  :doc:`reference/libs`
 
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`

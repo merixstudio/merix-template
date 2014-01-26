@@ -9,6 +9,7 @@ Nebula documentation contents
 .. toctree::
    :hidden:
 
+   reference/require
    reference/settings
    reference/libs
 
@@ -16,11 +17,10 @@ Nebula documentation contents
 **Introduction**
 
 *  Overview
-*  Coding guidelines
-*  Directory structure
 *  Writting JavaScript modules
 *  Defining settings
 *  Writting jQuery plugins
+*  Coding guidelines
 
 **Responsive web sites**
 
@@ -30,13 +30,13 @@ Nebula documentation contents
 
 **Other core functionalities**
 
-*  require.js
-*  Settings
 *  Signals
 
 **Reference**
 
+*  :doc:`reference/require`
 *  :doc:`List of all settings <reference/settings>`
+*  Directory structure
 *  :doc:`reference/libs`
 
 

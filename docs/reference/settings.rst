@@ -64,7 +64,7 @@ Viewport
 
    *  Two-element array: ``[(minWidth), (maxWidth)]`` - minimum and maximum window width.
 
-   *  A Callback function returning ``true`` if given viewport should be activated or ``false`` if not. Such a function
+   *  A Callback function returning ``true`` if given viewport should be activated or ``false`` if not. Such function
       may be used to implement more complex scenarios.
 
    *  Media query string, e.g. ``'(min-width: 640px) and (max-width: 1280px)'``. Note that media queries are not
@@ -94,7 +94,7 @@ Smart blocks
 
    Default: ``{}`` (empty object)
 
-   An object whose contents maps CSS selectors to class names and their rules required to apply that class.
+   An object whose contents maps CSS selectors to class names and rules required to apply that class.
 
    Example:
 
@@ -112,7 +112,7 @@ Smart blocks
           }
       }
 
-   Overall pattern is as this:
+   General pattern is as follows:
 
    .. code-block:: javascript
 
@@ -128,7 +128,7 @@ Smart blocks
 
    ``(class-name)``
       This must be a string with name of the class that will be applied to the element specified with ``(CSS-selector)``
-      if given condition for this class are met.
+      if conditions for this class are met.
 
    ``(min-width)``, ``(max-width)``
       Minimum and maximum width of *parent element* required to apply given class.

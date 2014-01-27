@@ -20,7 +20,7 @@ Nebula documentation contents
 *  Overview
 *  Writing JavaScript modules
 *  Defining settings
-*  Gritting jQuery plugins
+*  Writing jQuery plugins
 *  Coding guidelines
 
 **Responsive web sites**

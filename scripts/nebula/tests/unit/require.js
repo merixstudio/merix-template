@@ -67,7 +67,7 @@ describe('require.js', function() {
                         return {};
                     });
                 };
-                expect(invalid).toThrowError(require.Error);
+                expect(invalid).toThrow();
             });
         });
 

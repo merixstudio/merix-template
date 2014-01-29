@@ -1,12 +1,14 @@
 /*
  * Simple signal dispatcher implementation.
  */
-define('nebula/signal', function() {
+define('nebula/signal', ['nebula/utils/callable'], function(callable) {
     'use strict';
 
     function Signal() {
         this.receivers = [];
     }
+
+    Signal = callable(Signal);
 
     Signal.prototype.connect = function(receiver) {
         if (typeof receiver !== 'function')
@@ -16,6 +18,8 @@ define('nebula/signal', function() {
                 return;
         this.receivers.push(receiver);
     };
+
+    Signal.prototype.call = Signal.prototype.connect;
 
     Signal.prototype.disconnect = function(receiver) {
         for (var i = 0; i < this.receivers.length; i++)

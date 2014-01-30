@@ -11,6 +11,8 @@ Nebula documentation contents
 
    /intro/style
 
+   /topics/signals
+
    /reference/require
    /reference/settings
    /reference/files
@@ -33,7 +35,7 @@ Nebula documentation contents
 
 **Other core functionalities**
 
-*  Signals
+*  :doc:`/topics/signals`
 
 **Reference**
 

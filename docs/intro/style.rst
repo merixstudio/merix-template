@@ -190,7 +190,7 @@ JavaScript
 *  Use ``UPPER_CASE_WITH_UNDERSCORES`` when naming constants (or settings in the :file:`settings.js` file):
    ``var DEBUG = true;``, ``var ANIMATION_TIME = 1000;``.
 
-*  Use single quotes for strings by default. Use double quotes if a string contains any single qoute characters.
+*  Use single quote for strings by default. Use double quote if a string contains single qoute character.
 
 *  Always quote property names when using object literal.
 

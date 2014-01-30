@@ -101,6 +101,14 @@ describe('require.js', function() {
             define('define2', valid);
             expect(require('define2')).toBe(module);
         });
+
+        it('modules can have dependencies', function() {
+            var dependency = {};
+            var dependencyWithMember = {'python': 'Rocks!'};
+            define('dependency', dependency);
+            define('dependency_with_member', dependencyWithMember);
+            expect(define.bind(null, 'define99', ['dependency', 'dependency_with_member.python'], function() { return {}; })).not.toThrow();
+        });
     });
 
     describe('`require()`', function() {

@@ -71,12 +71,21 @@
      * Returns 'module' by name, from an internal module container. The 'module' must be 'defined' prior to calling
      * this function.
      */
-    function require(moduleName) {
-        if (arguments.length !== 1 || typeof moduleName !== 'string')
+    function require(modulePath) {
+        if (arguments.length !== 1 || typeof modulePath !== 'string')
             throw new require.ArgumentsError();
-        if (moduleName in define.modules)
-            return define.modules[moduleName];
-        throw new require.Error(moduleName);
+        var parts = modulePath.split('.');
+        var moduleName = parts[0];
+        var memberName = parts[1];  // May be undefined, this is checked a few lines later.
+        if (moduleName in define.modules) {
+            var module = define.modules[moduleName];
+            if (typeof memberName !== 'undefined') {
+                if (memberName in module)
+                    return module[memberName];
+            } else
+                return module;
+        }
+        throw new require.Error(modulePath);
     }
 
     function makeException(parentObject, parentClass, name, message) {

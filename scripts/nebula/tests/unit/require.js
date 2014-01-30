@@ -101,7 +101,6 @@ describe('require.js', function() {
             define('define2', valid);
             expect(require('define2')).toBe(module);
         });
-
     });
 
     describe('`require()`', function() {
@@ -126,6 +125,25 @@ describe('require.js', function() {
             it('when requested module was not defined', function() {
                 expect(require.bind(null, 'not_exists')).toThrowError(require.Error);
             });
+            it('when module ', function() {
+                var module = {'foo': 'bar'};
+                define('spam', module);
+                expect(require.bind(null, 'spam.unknown')).toThrowError(require.Error);
+            });
+        });
+
+        it('retrieves a previously defined module', function() {
+            var module = {'foo': 'bar'};
+            var valid = function() { return module; };
+            define('define3', valid);
+            expect(require('define3')).toBe(module);
+        });
+
+        it('retrieves member of a module', function() {
+            var module = {'foo': {}};
+            var valid = function() { return module; };
+            define('define4', valid);
+            expect(require('define4.foo')).toBe(module.foo);
         });
     });
 

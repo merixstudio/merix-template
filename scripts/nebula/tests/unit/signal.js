@@ -14,9 +14,9 @@ describe('signal.js', function() {
             testSignal(someFunc3);
 
             expect(testSignalEmpty.receivers.length).toBe(0);
-            expect(testSignal.receivers[0]).toBe(someFunc1);
-            expect(testSignal.receivers[1]).toBe(someFunc2);
-            expect(testSignal.receivers[2]).toBe(someFunc3);
+            expect(testSignal.receivers[0].receiver).toBe(someFunc1);
+            expect(testSignal.receivers[1].receiver).toBe(someFunc2);
+            expect(testSignal.receivers[2].receiver).toBe(someFunc3);
         });
 
         it("doesn't connect a receiver if already connected", function() {
@@ -54,7 +54,7 @@ describe('signal.js', function() {
 
             testSignal(receiverFunc);
             testSignal.disconnect(unknownFunc);
-            expect(testSignal.receivers[0]).toBe(receiverFunc);
+            expect(testSignal.receivers[0].receiver).toBe(receiverFunc);
         });
     });
 
@@ -84,6 +84,31 @@ describe('signal.js', function() {
             testSignal.send(message);
 
             expect(someFunc).toHaveBeenCalledWith(message);
+        });
+
+        it("calls only receivers, whose sender matches or receivers without a sender", function() {
+            var testSignal = new Signal();
+            var sender = 'Barney & Betty';
+            var receiverA = {'receiver': jasmine.createSpy(), 'sender': sender};
+            var receiverB = {'receiver': jasmine.createSpy(), 'sender': 'Fred & Wilma'};
+            var receiverNoSender = {'receiver': jasmine.createSpy()};
+            testSignal(receiverA);
+            testSignal(receiverB);
+            testSignal(receiverNoSender);
+            testSignal.send(sender);
+            expect(receiverA.receiver).toHaveBeenCalledWith(sender);
+            expect(receiverB.receiver).not.toHaveBeenCalled();
+            expect(receiverNoSender.receiver).toHaveBeenCalledWith(sender);
+        });
+
+        it("calls receivers with correct context", function() {
+            var testSignal = new Signal();
+            var context = {};
+            var receiver = {'receiver': jasmine.createSpy(), 'context': context};
+            testSignal(receiver);
+            testSignal.send();
+            expect(receiver.receiver).toHaveBeenCalled();
+            expect(receiver.receiver.calls.mostRecent()).toEqual({'object': context, 'args': []});
         });
     });
 });

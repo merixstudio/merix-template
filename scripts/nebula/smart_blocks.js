@@ -20,7 +20,7 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, 
     // Signal sent whenever any of the blocks had class changed.
     var onUpdate = new Signal();
 
-    function updateBlock(block, specification) {
+    function updateBlock(block, specification, selector) {
         var classModified = false;
         for (var className in specification) {
             var args = specification[className];
@@ -41,7 +41,7 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, 
             }
         }
         if (classModified)
-            onUpdate.send(block);
+            onUpdate.send(selector, block);
     }
 
     function updateTree(root) {
@@ -50,7 +50,7 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, 
         for (selector in BLOCKS) {
             blocks = root.querySelectorAll(selector);
             for (i = 0; i < blocks.length; i++)
-                updateBlock(blocks[i], BLOCKS[selector]);
+                updateBlock(blocks[i], BLOCKS[selector], selector);
         }
     }
 

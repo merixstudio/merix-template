@@ -135,5 +135,11 @@ describe('smart_blocks.js', function() {
             smartBlocks.updateBlock(block, blockSpec);
             expect(signalCheck).toHaveBeenCalled();
         });
+        it("passes selector as sender", function() {
+            var signalCheck = jasmine.createSpy('signalCheck');
+            smartBlocks.onUpdate(signalCheck);
+            smartBlocks.updateBlock(block, blockSpec, 'div>div');
+            expect(signalCheck).toHaveBeenCalledWith('div>div', block);
+        });
     });
 });

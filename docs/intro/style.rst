@@ -248,3 +248,25 @@ JavaScript
       jQuery(window).resize(function() {
          ...
       });
+
+*  If you're using third-party libraries, e.g. jQuery, or Leaflet, or something else, please do use their full name
+   in your code, not shorthands, like ``$`` for jQuery, or ``L`` for Leaflet.
+
+   | Yes: ``jQuery('.slider');``
+   | No: ``$('.slider');``
+
+*  Chaining :js:func:`require` call with other code is considered a really bad practice!
+
+   Yes:
+
+   .. code-block:: javascript
+
+      var jQuery = require('jquery');
+
+      jQuery('.slider').each(function() { ...
+
+   No:
+
+   .. code-block:: javascript
+
+      require('jquery')('.slider').each(function() { ...

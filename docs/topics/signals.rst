@@ -21,7 +21,7 @@ All these signals are instances of the :js:class:`Signal` class.
 Listening to signals
 ====================
 
-If you want your code to be notified, when given action occurs (when signal is sent), you need to connect a receiver
+If you want your code to be notified, when an action occurs (when signal is sent), you need to connect a receiver
 (callback) function to the given signal. Use the :js:func:`Signal.connect` method for this purpose:
 
 .. js:function:: Signal.connect(receiver)
@@ -52,9 +52,9 @@ arguments you can receive in your callbacks.
 Defining signals
 ================
 
-You can of course define own signals. This is especially useful if you want to write universal modules that you would
-like to be used by other developers. Signals allows you to communicate to the outside, that a given action occurred
-inside your code.
+You can of course define your own signals. This is especially useful if you want to write universal modules that you
+would like to be used by other developers. Signals allow you to communicate to the outside, that a given action
+occurred inside your code.
 
 .. js:class:: Signal()
 
@@ -89,7 +89,7 @@ To notify others that an action occurred in your code, you must use the :js:func
 
 .. js:function:: Signal.send([arguments, ...])
 
-To send a signal, just call it ``send`` method like this:
+To send a signal, just call its ``send`` method like this:
 
 .. code-block:: javascript
 
@@ -108,7 +108,8 @@ Disconnecting signals
 
 .. js:function:: Signal.disconnect(receiver)
 
-   Use this function to disconnect a receiver from a signal if you do not want to be notified when the given signal is
-   sent.
+   Use this function to disconnect a receiver from a signal if you do not want to be notified when it is sent.
+   Remember that disconnecting an anonymous function will be impossible if you do not have stored this function in a
+   variable.
 
-   ``receiver`` must the same function previously used in a :js:func:`Signal.connect` call.
+   ``receiver`` must be the exact same function previously used in a :js:func:`Signal.connect` call.

@@ -10,6 +10,7 @@ Nebula documentation contents
    :hidden:
 
    /intro/style
+   /intro/plugins
 
    /topics/signals
 
@@ -24,7 +25,7 @@ Nebula documentation contents
 *  Overview
 *  Writing JavaScript modules
 *  Defining settings
-*  Writing jQuery plugins
+*  :doc:`/intro/plugins`
 *  :doc:`Style guide </intro/style>`
 
 **Responsive web sites**

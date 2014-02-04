@@ -9,12 +9,11 @@ Nebula documentation contents
 .. toctree::
    :hidden:
 
+   /intro/modules
    /intro/settings
    /intro/plugins
    /intro/style
-
    /topics/signals
-
    /reference/require
    /reference/settings
    /reference/files
@@ -24,7 +23,7 @@ Nebula documentation contents
 **Introduction**
 
 *  Overview
-*  Writing JavaScript modules
+*  :doc:`/intro/modules`
 *  :doc:`/intro/settings`
 *  :doc:`/intro/plugins`
 *  :doc:`Style guide </intro/style>`

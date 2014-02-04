@@ -94,6 +94,7 @@ pygments_style = 'sphinx'
 # If true, keep warnings as "system message" paragraphs in the built documents.
 #keep_warnings = False
 
+primary_domain = 'js'
 
 # -- Options for HTML output ----------------------------------------------
 

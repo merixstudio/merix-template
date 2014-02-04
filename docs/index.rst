@@ -14,18 +14,15 @@ Nebula documentation contents
    /intro/plugins
    /intro/style
    /topics/signals
-   /reference/require
    /reference/settings
    /reference/files
    /reference/libs
 
 
-**Introduction**
+**Basics**
 
 *  Overview
-*  :doc:`/intro/modules`
-*  :doc:`/intro/settings`
-*  :doc:`/intro/plugins`
+*  **Creating modules:** :doc:`Overview </intro/modules>` | :doc:`/intro/settings` | :doc:`/intro/plugins`
 *  :doc:`Style guide </intro/style>`
 
 **Responsive web sites**
@@ -40,7 +37,6 @@ Nebula documentation contents
 
 **Reference**
 
-*  :doc:`/reference/require`
 *  :doc:`List of all settings </reference/settings>`
 *  :doc:`/reference/files`
 *  :doc:`/reference/libs`

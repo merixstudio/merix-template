@@ -8,7 +8,7 @@ The ``'settings'`` module in the :file:`/scripts/settings.js` can be used to cus
 modules in a single place. other modules will reference this settings module and treat it as a central point of a run
 time configuration.
 
-.. code-block:: javascript
+::
 
    define('settings', {
        // Used by require.js, defaults to true, used to toggle 'no conflict mode' for jQuery.
@@ -23,9 +23,7 @@ time configuration.
 
 All settings are considered constants, thus their names are written using upper-case notation.
 
-You can also use a function to generate settings:
-
-.. code-block:: javascript
+You can also use a function to generate settings::
 
    define('settings', function() {
        // Some block of code that calculates various settings.
@@ -45,16 +43,14 @@ Retrieving settings
 Although ``'settings'`` module is usually a simple JavaScript object, when retrieving configuration from other modules,
 Nebula gives you a getter function to ease development.
 
-.. code-block:: javascript
+::
 
    var settings = require('settings');
 
    if (settings('DEBUG', false))
        ...
 
-Or:
-
-.. code-block:: javascript
+Or::
 
    define('my_module', ['settings'], function(settings) {
 
@@ -66,7 +62,7 @@ Or:
 ``settings`` in this case is a function. It returns value of a configuration option and in case of an unknown, not
 defined setting name, this function returns a fallback value (the second argument).
 
-.. js:function:: settings(name, fallback)
+.. function:: settings(name, fallback)
 
    Returns value of a setting from the ``'settings'`` module or ``fallback`` if setting with this name is not defined.
 

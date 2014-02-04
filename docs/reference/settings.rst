@@ -6,21 +6,17 @@ Settings
 Core settings
 =============
 
-.. js:data:: JQUERY_NO_CONFLICT
+.. data:: JQUERY_NO_CONFLICT
 
    Default: ``true``
 
    Toggles strict `jQuery 'no conflict' mode <http://api.jquery.com/jQuery.noConflict/>`_. By default, when this setting
    is set to ``true``, there are no global ``$`` and ``jQuery`` variables. To use jQuery you need to import it like
-   any other JavaScript module, which looks like this:
-
-   .. code-block:: javascript
+   any other JavaScript module, which looks like this::
 
       var jQuery = require('jquery');
 
-   Or this:
-
-   .. code-block:: javascript
+   Or this::
 
       define('my_module', ['jquery'], function(jQuery) {
           ...
@@ -32,13 +28,11 @@ Core settings
 Viewport
 ========
 
-.. js:data:: VIEWPORTS
+.. data:: VIEWPORTS
 
    Default: ``{}`` (empty object, used when setting is not set)
 
-   Default supplied in the ``settings.js`` file:
-
-   .. code-block:: javascript
+   Default supplied in the ``settings.js`` file::
 
       'VIEWPORTS': {
           '320': [0, 479],
@@ -53,7 +47,7 @@ Viewport
    An object whose contents maps viewport aliases to a viewport specification, which is usually an array holding
    minimum and maximum window dimensions.
 
-   .. code-block:: javascript
+   ::
 
       'VIEWPORTS': {
           '(viewport-name)': (specification),
@@ -71,7 +65,7 @@ Viewport
       supported in some browsers, including IE8.
 
 
-.. js:data:: VIEWPORT_CLASS_PREFIX
+.. data:: VIEWPORT_CLASS_PREFIX
 
    Default: ``'viewport-'``
 
@@ -79,7 +73,7 @@ Viewport
    ``viewport-landscape`` and ``viewport-portrait`` classes for this purposes.
 
 
-.. js:data:: VIEWPORT_ORIENTATION_CLASS
+.. data:: VIEWPORT_ORIENTATION_CLASS
 
    Default: ``true``
 
@@ -90,15 +84,13 @@ Viewport
 Smart blocks
 ============
 
-.. js:data:: SMART_BLOCKS
+.. data:: SMART_BLOCKS
 
    Default: ``{}`` (empty object)
 
    An object whose contents maps CSS selectors to class names and rules required to apply that class.
 
-   Example:
-
-   .. code-block:: javascript
+   Example::
 
       'SMART_BLOCKS': {
           'div.block': {
@@ -112,9 +104,7 @@ Smart blocks
           }
       }
 
-   General pattern is as follows:
-
-   .. code-block:: javascript
+   General pattern is as follows::
 
       'SMART_BLOCKS': {
           '(CSS-selector)': {

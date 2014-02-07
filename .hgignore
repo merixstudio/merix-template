@@ -3,8 +3,11 @@ syntax: glob
 *.komodoproject
 *.sublime-project
 *.sublime-workspace
-docs/_build/
+
 
 syntax: regexp
 
 ^\.
+^docs/_build/
+^_build/
+^node_modules/

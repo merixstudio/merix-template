@@ -199,9 +199,7 @@ JavaScript
 
 *  How to wrap long lines:
 
-   Yes:
-
-   .. code-block:: javascript
+   Yes::
 
       context.lineTo(x + midpoint.x + this.normals[i].x*20,
                      y + midpoint.y + this.normals[i].y*20);
@@ -214,9 +212,7 @@ JavaScript
                           'x': 21, '+': 18, '0': 18, '1': 14, '2': 18, '3': 18, '4': 19, '5': 18, '6': 18, '7': 17,
                           '8': 18, '9': 18, '-': 17, ' ': 8}});
 
-   No:
-
-   .. code-block:: javascript
+   No::
 
       context.lineTo(x + midpoint.x + this.normals[i].x*20,
           y + midpoint.y + this.normals[i].y*20);
@@ -231,9 +227,7 @@ JavaScript
 *  It's recommended to use named functions instead of anonymous ones. This is more useful for tracebacks, also improves
    readability, if function's name is chosen well.
 
-   Yes:
-
-   .. code-block:: javascript
+   Yes::
 
       function reposition() {
          ...
@@ -241,10 +235,26 @@ JavaScript
 
       jQuery(window).resize(reposition);
 
-   No:
-
-   .. code-block:: javascript
+   No::
 
       jQuery(window).resize(function() {
          ...
       });
+
+*  If you're using third-party libraries, e.g. jQuery, or Leaflet, or something else, please do use their full name
+   in your code, not shorthands, like ``$`` for jQuery, or ``L`` for Leaflet.
+
+   | Yes: ``jQuery('.slider');``
+   | No: ``$('.slider');``
+
+*  Chaining :func:`require` call with other code is considered a really bad practice!
+
+   Yes::
+
+      var jQuery = require('jquery');
+
+      jQuery('.slider').each(function() { ...
+
+   No::
+
+      require('jquery')('.slider').each(function() { ...

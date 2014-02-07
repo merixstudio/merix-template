@@ -9,27 +9,26 @@ Nebula documentation contents
 .. toctree::
    :hidden:
 
+   /intro/modules
+   /intro/settings
+   /intro/plugins
    /intro/style
-
+   /topics/viewports
    /topics/signals
-
-   /reference/require
    /reference/settings
    /reference/files
    /reference/libs
 
 
-**Introduction**
+**Basics**
 
 *  Overview
-*  Writing JavaScript modules
-*  Defining settings
-*  Writing jQuery plugins
+*  **Creating modules:** :doc:`Overview </intro/modules>` | :doc:`/intro/settings` | :doc:`/intro/plugins`
 *  :doc:`Style guide </intro/style>`
 
 **Responsive web sites**
 
-*  Viewport
+*  :doc:`/topics/viewports`
 *  Smart blocks
 *  CSS columns
 
@@ -39,7 +38,6 @@ Nebula documentation contents
 
 **Reference**
 
-*  :doc:`/reference/require`
 *  :doc:`List of all settings </reference/settings>`
 *  :doc:`/reference/files`
 *  :doc:`/reference/libs`

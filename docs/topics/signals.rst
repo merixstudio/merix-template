@@ -10,9 +10,9 @@ Built-in signals
 
 Some modules in Nebula already provide various signals:
 
-*  :attr:`nebula/viewport.onChange` -- Sent when viewport changes (usually due to window resize).
+*  :attr:`viewport.onChange` -- Sent when viewport changes (usually due to window resize).
 
-*  :attr:`nebula/smartBlocks.onUpdate` -- Sent when an element (smart block) had class changed (usually due to window
+*  :attr:`smartBlocks.onUpdate` -- Sent when an element (smart block) had class changed (usually due to window
    resize).
 
 All these signals are instances of the :class:`Signal` class.
@@ -28,7 +28,7 @@ If you want your code to be notified, when an action occurs (when signal is sent
 
    :param function receiver: A function, that will be connected to a signal and will be called when this signal is sent.
 
-Below is an example demonstrating how to connect to the :attr:`nebula/viewport.onChange` signal::
+Below is an example demonstrating how to connect to the :attr:`viewport.onChange` signal::
 
    define('my_module', ['nebula/viewport'], function(viewport) {
 

@@ -50,16 +50,18 @@ Viewport
    ::
 
       'VIEWPORTS': {
-          '(viewport-name)': (specification),
+          '(alias)': (specification),
           ...
       }
+
+   ``(alias)`` can be any string value.
 
    ``(specification)`` can be one of these:
 
    *  Two-element array: ``[(minWidth), (maxWidth)]`` - minimum and maximum window width.
 
-   *  A Callback function returning ``true`` if given viewport should be activated or ``false`` if not. Such function
-      may be used to implement more complex scenarios.
+   *  A callback function that returns ``true`` when given viewport should be activated or ``false`` if not. Such
+      function may be used to implement more complex scenarios.
 
    *  Media query string, e.g. ``'(min-width: 640px) and (max-width: 1280px)'``. Note that media queries are not
       supported in some browsers, including IE8.

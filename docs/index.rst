@@ -13,6 +13,7 @@ Nebula documentation contents
    /intro/settings
    /intro/plugins
    /intro/style
+   /topics/viewports
    /topics/signals
    /reference/settings
    /reference/files
@@ -27,7 +28,7 @@ Nebula documentation contents
 
 **Responsive web sites**
 
-*  Viewport
+*  :doc:`/topics/viewports`
 *  Smart blocks
 *  CSS columns
 

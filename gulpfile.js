@@ -4,6 +4,7 @@ var swig = require('gulp-swig');
 swig({'defaults': {'cache': false}});
 
 var TEMPLATES_SRC = './*.html';
+var TEMPLATES_TO_BUILD = './!(_)*.html';
 var STYLES_SRC = './styles/**/*';
 var SCRIPTS_SRC = './scripts/**/*';
 var FONTS_SRC = './fonts/**/*';
@@ -11,7 +12,7 @@ var IMAGES_SRC = './images/**/*';
 var MEDIA_SRC = './media/**/*';
 
 gulp.task('templates', function() {
-    return gulp.src(TEMPLATES_SRC).pipe(swig()).pipe(gulp.dest('./_build/'));
+    return gulp.src(TEMPLATES_TO_BUILD).pipe(swig()).pipe(gulp.dest('./_build/'));
 });
 
 gulp.task('styles', function() {

@@ -10,6 +10,7 @@
  *             'small': [0, 299],
  *             'medium': [300, 699],
  *             'big': [700, Infinity],
+ *             'big': function(block) {...},
  *         }
  *     }
  */
@@ -20,17 +21,23 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, 
     // Signal sent whenever any of the blocks had class changed.
     var onUpdate = new Signal();
 
+    function clean(block, args) {
+        if (typeof args === 'function')
+            return args(block);
+        else if (args instanceof Array && (args.length == 2 || (args.length == 3 && args[2] === 'self')) &&
+                 typeof args[0] === 'number' && typeof args[1] === 'number' && args[0] <= args[1]) {
+            var width = args[2] === 'self' ? block.offsetWidth : block.parentNode.offsetWidth;
+            return args[0] <= width && width <= args[1];
+        }
+        throw new Error('Invalid smart blocks args: ' + args);
+    }
+
     function updateBlock(block, specification, selector) {
         var classModified = false;
         for (var className in specification) {
-            var args = specification[className];
-            var minWidth = args[0];
-            var maxWidth = args[1];
-            var measureSelf = args[2] === 'self';
-            var width = measureSelf ? block.offsetWidth : block.parentNode.offsetWidth;
             var classAdded = block.classList.contains(className);
 
-            if (minWidth <= width && width <= maxWidth) {
+            if (clean(block, specification[className])) {
                 if (!classAdded) {
                     block.classList.add(className);
                     classModified = true;

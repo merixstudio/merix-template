@@ -29,6 +29,18 @@ describe('smart_blocks.js', function() {
             'self-medium': [3, 4, 'self'],
             'self-big': [5, 6, 'self']
         };
+        blockSpecFunctions = {
+            'function-true': function() {
+                return true;
+            },
+            'function-false': function() {
+                return false;
+            }
+        };
+
+        blockSpecArgsTest = {
+            'spy': jasmine.createSpy('specArgsTest')
+        };
 
         smartBlocks.onUpdate.receivers = [];
         smartBlocks.enable(win);
@@ -61,6 +73,14 @@ describe('smart_blocks.js', function() {
             smartBlocks.updateBlock(block, blockSpecSelf);
             expect(block.classList.add).toHaveBeenCalledWith('self-small');
         });
+        it("adds a valid class when block specification is a function and matches", function() {
+            smartBlocks.updateBlock(block, blockSpecFunctions);
+            expect(block.classList.add).toHaveBeenCalledWith('function-true');
+        });
+        it("doesn't add a valid class when block specification is a function and doesn't match", function() {
+            smartBlocks.updateBlock(block, blockSpecFunctions);
+            expect(block.classList.add).not.toHaveBeenCalledWith('function-false');
+        });
         it("changes block's class when other block specification matches", function() {
             smartBlocks.updateBlock(block, blockSpec);
             expect(block.classList.add).toHaveBeenCalledWith('small');
@@ -86,6 +106,43 @@ describe('smart_blocks.js', function() {
             smartBlocks.updateBlock(block, blockSpecSelf);
             expect(block.classList.remove).toHaveBeenCalledWith('self-small');
             expect(block.classList.add).toHaveBeenCalledWith('self-medium');
+        });
+        it("passes block instance as the first argument if block specification is a function", function() {
+            smartBlocks.updateBlock(block, blockSpecArgsTest);
+            expect(blockSpecArgsTest.spy).toHaveBeenCalledWith(block);
+        });
+
+        describe('throws errors', function() {
+            it("when a smart block specification is not an array or function", function() {
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': 3})).toThrow();
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': {}})).toThrow();
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': 'asd'})).toThrow();
+            });
+
+            it("when a smart block specification length is not 2 or 3", function() {
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': []})).toThrow();
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': [1]})).toThrow();
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': [1, 2, 'self', 4]})).toThrow();
+            });
+
+            it("when a smart block specification doesn't contain numbers", function() {
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': ['asd', 'asd']})).toThrow();
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': [[], 'asd']})).toThrow();
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': [[], {}]})).toThrow();
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': [[], function() {}]})).toThrow();
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': [true, function() {}]})).toThrow();
+            });
+
+            it("when a smart block specification range is invalid", function() {
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': [3, 2]})).toThrow();
+                expect(smartBlocks.updateBlock.bind(null, block, {'a': [3, 2, 'self']})).toThrow();
+            });
+
+            it("when a smart block specification`s third parameter is not `self`", function() {
+                var tests = [{}, [], 'asd', 3, function() {}, true, false, undefined, null];
+                for (var i = 0; i < tests.length; i++)
+                    expect(smartBlocks.updateBlock.bind(null, block, {'a': [1, 2, tests[i]]})).toThrow();
+            });
         });
     });
 

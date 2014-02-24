@@ -1,6 +1,8 @@
 {
   "devDependencies": {
     "gulp": "~3.5.2",
-    "gulp-swig": "~0.3.0"
+    "gulp-swig": "~0.3.0",
+    "map-stream": "^0.1.0",
+    "htmltidy": "0.0.6"
   }
 }

@@ -21,7 +21,7 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
     'use strict';
 
     var winAPI = window;  // Can be overriden, to allow unit testing.
-    var active = null, portrait = null, initialized = false;
+    var active = undefined, portrait = undefined;
     var onChange = new Signal();
 
     function _check(specification) {
@@ -55,7 +55,7 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
     }
 
     function _changeViewport(newClass) {
-        var previousClass = active;
+        var previousClass = active || null;
         if (newClass !== active) {
             var VIEWPORT_CLASS_PREFIX = settings('VIEWPORT_CLASS_PREFIX', 'viewport-');
             if (active)
@@ -92,7 +92,7 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
     }
 
     function is(aliases) {
-        if (!initialized)
+        if (!isEnabled())
             throw new Error('You must call `viewport.enable()` first to use `viewport.is()`');
         /*
          * Returns `true` if any of the aliases is currently active. `aliases` must be a string with any
@@ -106,7 +106,7 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
     }
 
     function get() {
-        if (!initialized)
+        if (!isEnabled())
             throw new Error('You must call `viewport.enable()` first to use `viewport.get()`');
         /*
          * Returns name of currently active viewport. May return `null` if none viewport is active.
@@ -129,13 +129,13 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
     }
 
     function isPortrait() {
-        if (!initialized)
+        if (!isEnabled())
             throw new Error('You must call `viewport.enable()` first to use `viewport.isPortrait()`');
         return portrait;
     }
 
     function isLandscape() {
-        if (!initialized)
+        if (!isEnabled())
             throw new Error('You must call `viewport.enable()` first to use `viewport.isLandscape()`');
         return !portrait;
     }
@@ -145,17 +145,15 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
             winAPI = api;
         _update();
         winAPI.addEventListener('resize', _update);
-        initialized = true;
     }
 
     function disable() {
         winAPI.removeEventListener('resize', _update);
-        active = portrait = null;
-        initialized = false;
+        active = portrait = undefined;
     }
 
     function isEnabled() {
-        return initialized;
+        return typeof active !== 'undefined';
     }
 
     return {

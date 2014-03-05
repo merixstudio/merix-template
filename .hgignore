@@ -10,4 +10,5 @@ syntax: regexp
 ^_source/
 ^docs/_build/
 ^_build/
+^build\.zip
 ^node_modules/

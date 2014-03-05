@@ -27,7 +27,7 @@ swig({'defaults': {'cache': false}});
 var TEMPLATES_SRC = './templates/*.html';
 var TEMPLATES_TO_BUILD = './templates/!(_)*.html';
 var STYLES_SRC = './styles/**/*';
-var SCRIPTS_SRC = './scripts/**/*';
+var SCRIPTS_SRC = ['./scripts/**/*', '!./scripts/nebula/test.js', '!./scripts/nebula/tests/**/*'];
 var FONTS_SRC = './fonts/**/*';
 var IMAGES_SRC = './images/**/*';
 var MEDIA_SRC = './media/**/*';

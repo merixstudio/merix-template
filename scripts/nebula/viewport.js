@@ -55,14 +55,15 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
     }
 
     function _changeViewport(newClass) {
+        var previousClass = active;
         if (newClass !== active) {
             var VIEWPORT_CLASS_PREFIX = settings('VIEWPORT_CLASS_PREFIX', 'viewport-');
             if (active)
                 winAPI.document.body.classList.remove(VIEWPORT_CLASS_PREFIX + active);
             if (newClass)
                 winAPI.document.body.classList.add(VIEWPORT_CLASS_PREFIX + newClass);
-            onChange.send(active, newClass);
             active = newClass;
+            onChange.send(previousClass, active);
         }
     }
 

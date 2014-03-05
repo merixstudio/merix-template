@@ -18,11 +18,11 @@ Using Nebula
 
 To use Nebula just clone it's repository::
 
-   hg clone ssh://hg@bitbucket.org/merixstudio/nebula-framework
+   hg clone ssh://hg@bitbucket.org/merixstudio/nebula
 
 Or this one::
 
-   git clone git@github.com:merixstudio/nebula-framework.git
+   git clone git@github.com:merixstudio/nebula.git
 
 
 Running the test suite

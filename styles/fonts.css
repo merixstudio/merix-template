@@ -1,0 +1,10 @@
+/*
+ * Zerospace
+ */
+@font-face {
+    font-family: 'Zerospace';
+    src: url('../fonts/zerospace.eot');
+    src:
+         url('../fonts/zerospace.eot') format('embedded-opentype'),
+         url('../fonts/zerospace.ttf') format('truetype');
+}

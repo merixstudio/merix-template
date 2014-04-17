@@ -2,7 +2,9 @@ var gulp = require('gulp');
 var swig = require('gulp-swig');
 var map = require('map-stream');
 var html = require('htmltidy');
-var zip = require('gulp-zip');
+var exec = require('child_process').exec;
+var sizeOf = require('image-size');
+var Table = require('cli-table');
 
 var tidyOptions = {
     'indent': true,
@@ -10,7 +12,8 @@ var tidyOptions = {
     'wrap': 0,
     'newline': 'LF',
     'vertical-space': true,
-    'show-body-only': 'auto'
+    'show-body-only': 'auto',
+    'new-blocklevel-tags': 'main'
 };
 
 var tidy = function() {
@@ -28,6 +31,32 @@ var stripBuild = function() {
         file.path = file.path.replace(file.cwd + path.sep + '_build' + path.sep, '');
         callback(null, file);
     });
+};
+
+var memoryUsage = {
+    'value': 0,
+    'files': [],
+    'count': function() {
+        return map(function(file, callback) {
+            if (!file.isDirectory()) {
+                try {
+                    var size = sizeOf(file.path);
+                    var bytes = size.width * size.height * 4;
+                    memoryUsage.value += bytes;
+                    memoryUsage.files.push({'path': file.path, 'bytes': bytes});
+                } catch(error) {
+
+                }
+            }
+            callback(null, file);
+        });
+    },
+    'sizeCompare': function(a, b) {
+        return a.bytes - b.bytes;
+    },
+    'formatSize': function(number) {
+        return (number / 1024).toFixed(2);
+    }
 };
 
 
@@ -67,7 +96,30 @@ gulp.task('media', function() {
 });
 
 gulp.task('zip', ['templates', 'styles', 'scripts', 'fonts', 'images', 'media'], function() {
-    return gulp.src(BUILD_SRC).pipe(stripBuild()).pipe(zip('build.zip')).pipe(gulp.dest('./'));
+    exec('cd _build && 7z a ../build.zip *');
+});
+
+gulp.task('memory_usage_count', [], function() {
+    memoryUsage.value = 0;
+    return gulp.src(IMAGES_SRC).pipe(memoryUsage.count());
+});
+
+gulp.task('memory_usage', ['memory_usage_count'], function() {
+    memoryUsage.files.sort(memoryUsage.sizeCompare);
+
+    var table = new Table({
+        head: ['KB', 'File'],
+        colAligns: ['right', 'left'],
+        chars: { 'top': '' , 'top-mid': '' , 'top-left': '' , 'top-right': ''
+         , 'bottom': '' , 'bottom-mid': '' , 'bottom-left': '' , 'bottom-right': ''
+         , 'left': '' , 'left-mid': '' , 'mid': '' , 'mid-mid': ''
+         , 'right': '' , 'right-mid': '' , 'middle': ' ' },
+    });
+
+    for (var i = 0; i < memoryUsage.files.length; i++)
+        table.push([memoryUsage.formatSize(memoryUsage.files[i].bytes), memoryUsage.files[i].path]);
+    table.push([memoryUsage.formatSize(memoryUsage.value), 'Total']);
+    console.log(table.toString());
 });
 
 gulp.task('server', ['templates', 'styles', 'scripts', 'fonts', 'images', 'media'], function() {

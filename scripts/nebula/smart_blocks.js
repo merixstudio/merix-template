@@ -9,12 +9,13 @@
  *             // Additional classes that will be applied when width of parent is between given numbers.
  *             'small': [0, 299],
  *             'medium': [300, 699],
+ *             'medium': 'viewportname',
  *             'big': [700, Infinity],
  *             'big': function(block) {...},
  *         }
  *     }
  */
-define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, Signal) {
+define('nebula/smart_blocks', ['settings', 'nebula/signal', 'nebula/viewport'], function(settings, Signal, viewport) {
     'use strict';
 
     var winAPI = window;
@@ -28,7 +29,8 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, 
                  typeof args[0] === 'number' && typeof args[1] === 'number' && args[0] <= args[1]) {
             var width = args[2] === 'self' ? block.offsetWidth : block.parentNode.offsetWidth;
             return args[0] <= width && width <= args[1];
-        }
+        } else if (typeof args === 'string')
+            return viewport.is(args);
         throw new Error('Invalid smart blocks args: ' + args);
     }
 

@@ -37,6 +37,10 @@ describe('smart_blocks.js', function() {
                 return false;
             }
         };
+        blockSpecViewports = {
+            'viewport-true': 'viewport-true',
+            'viewport-false': 'viewport-false'
+        };
 
         blockSpecArgsTest = {
             'spy': jasmine.createSpy('specArgsTest')
@@ -80,6 +84,26 @@ describe('smart_blocks.js', function() {
         it("doesn't add a valid class when block specification is a function and doesn't match", function() {
             smartBlocks.updateBlock(block, blockSpecFunctions);
             expect(block.classList.add).not.toHaveBeenCalledWith('function-false');
+        });
+        it("adds a valid class when block specification is a viewport alias and matches", function() {
+            var viewport = {
+                'is': jasmine.createSpy().and.returnValue(true)
+            };
+            test.overrideModules({'nebula/viewport': viewport}, function() {
+                smartBlocks.updateBlock(block, blockSpecViewports);
+            });
+            expect(block.classList.add).toHaveBeenCalledWith('viewport-true');
+            expect(viewport.is).toHaveBeenCalledWith('viewport-true');
+        });
+        it("doesn't add a valid class when block specification is a viewport alias and doesn't match", function() {
+            var viewport = {
+                'is': jasmine.createSpy().and.returnValue(false)
+            };
+            test.overrideModules({'nebula/viewport': viewport}, function() {
+                smartBlocks.updateBlock(block, blockSpecViewports);
+            });
+            expect(block.classList.add).not.toHaveBeenCalledWith('viewport-false');
+            expect(viewport.is).toHaveBeenCalledWith('viewport-false');
         });
         it("changes block's class when other block specification matches", function() {
             smartBlocks.updateBlock(block, blockSpec);

@@ -15,12 +15,14 @@
  *         }
  *     }
  */
-define('nebula/smart_blocks', ['settings', 'nebula/signal', 'nebula/viewport'], function(settings, Signal, viewport) {
+define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, Signal, viewport) {
     'use strict';
+
 
     var winAPI = window;
     // Signal sent whenever any of the blocks had class changed.
     var onUpdate = new Signal();
+
 
     function clean(block, args) {
         if (typeof args === 'function')
@@ -29,10 +31,13 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal', 'nebula/viewport'], 
                  typeof args[0] === 'number' && typeof args[1] === 'number' && args[0] <= args[1]) {
             var width = args[2] === 'self' ? block.offsetWidth : block.parentNode.offsetWidth;
             return args[0] <= width && width <= args[1];
-        } else if (typeof args === 'string')
+        } else if (typeof args === 'string') {
+            var viewport = require('nebula/viewport');
             return viewport.is(args);
+        }
         throw new Error('Invalid smart blocks args: ' + args);
     }
+
 
     function updateBlock(block, specification, selector) {
         var classModified = false;
@@ -53,6 +58,7 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal', 'nebula/viewport'], 
             onUpdate.send(selector, block);
     }
 
+
     function updateTree(root) {
         var BLOCKS = settings('SMART_BLOCKS', {});
         var selector, blocks, i;
@@ -63,9 +69,11 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal', 'nebula/viewport'], 
         }
     }
 
+
     function updateDocument() {
         updateTree(winAPI.document.body);
     }
+
 
     function enable(api) {
         if (api)
@@ -73,9 +81,11 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal', 'nebula/viewport'], 
         winAPI.addEventListener('resize', updateDocument);
     }
 
+
     function disable() {
         winAPI.removeEventListener('resize', updateDocument);
     }
+
 
     return {
         'onUpdate': onUpdate,

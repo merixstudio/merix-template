@@ -1,7 +1,7 @@
 /*
  * Base styles
  */
-html {overflow-y: scroll}
+html {overflow-y: scroll; -ms-overflow-style: auto}
 body {min-height: 100%; background: #fff; color: #000; font: 12px/1.5 /* 18px */ 'Arial', 'Helvetica', sans-serif}
 body * {-moz-box-sizing: border-box; box-sizing: border-box; margin: 0; padding: 0; text-overflow: ellipsis; list-style: none}
 

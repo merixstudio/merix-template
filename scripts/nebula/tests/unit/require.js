@@ -67,7 +67,7 @@ describe('require.js', function() {
                         return {};
                     });
                 };
-                expect(invalid).toThrowError(require.Error);
+                expect(invalid).toThrow();
             });
         });
 
@@ -102,6 +102,13 @@ describe('require.js', function() {
             expect(require('define2')).toBe(module);
         });
 
+        it('modules can have dependencies', function() {
+            var dependency = {};
+            var dependencyWithMember = {'python': 'Rocks!'};
+            define('dependency', dependency);
+            define('dependency_with_member', dependencyWithMember);
+            expect(define.bind(null, 'define99', ['dependency', 'dependency_with_member.python'], function() { return {}; })).not.toThrow();
+        });
     });
 
     describe('`require()`', function() {
@@ -126,6 +133,25 @@ describe('require.js', function() {
             it('when requested module was not defined', function() {
                 expect(require.bind(null, 'not_exists')).toThrowError(require.Error);
             });
+            it('when module ', function() {
+                var module = {'foo': 'bar'};
+                define('spam', module);
+                expect(require.bind(null, 'spam.unknown')).toThrowError(require.Error);
+            });
+        });
+
+        it('retrieves a previously defined module', function() {
+            var module = {'foo': 'bar'};
+            var valid = function() { return module; };
+            define('define3', valid);
+            expect(require('define3')).toBe(module);
+        });
+
+        it('retrieves member of a module', function() {
+            var module = {'foo': {}};
+            var valid = function() { return module; };
+            define('define4', valid);
+            expect(require('define4.foo')).toBe(module.foo);
         });
     });
 

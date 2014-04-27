@@ -111,6 +111,8 @@ Smart blocks
       'SMART_BLOCKS': {
           '(CSS-selector)': {
               '(class-name)': [(min-width), (max-width), ('self')]
+              '(class-name)': (function(block) { ... })
+              '(class-name)': ('viewport-name')
               ...
           }
       }
@@ -124,6 +126,13 @@ Smart blocks
 
    ``(min-width)``, ``(max-width)``
       Minimum and maximum width of *parent element* required to apply given class.
+
+   ``(function)``
+      A callback function, that will be passed a block (DOM element) as an argument and should return ``true``
+      or ``false`` to apply given class or not.
+
+   ``('viewport-name')``
+      Name of the :doc:`viewport </topics/viewports>` that when active will toggle given class.
 
    ``'self'``
       If this is specified as third parameter, then ``(min-width)`` and ``(max-width)`` are compared against the block

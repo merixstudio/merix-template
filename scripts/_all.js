@@ -9,6 +9,7 @@
         'scripts/polyfills.js',  // Mostly IE8 support, skip or remove if targeting IE9+.
         'scripts/nebula/require.js',
         'scripts/settings.js',
+        'scripts/nebula/utils/callable.js',
         'scripts/nebula/signal.js',
         'scripts/libs/jquery.js',
         'scripts/nebula/viewport.js',

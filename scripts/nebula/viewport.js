@@ -118,14 +118,14 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
         /*
          * Returns window width, excluding toolbars and scrollbars.
          */
-        return winAPI.document.documentElement.clientWidth;
+        return winAPI.innerWidth || winAPI.document.documentElement.clientWidth;
     }
 
     function height() {
         /*
          * Returns window height, excluding toolbars and scrollbars.
          */
-        return winAPI.document.documentElement.clientHeight;
+        return winAPI.innerHeight || winAPI.document.documentElement.clientHeight;
     }
 
     function isPortrait() {

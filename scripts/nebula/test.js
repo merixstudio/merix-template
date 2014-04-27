@@ -4,6 +4,7 @@
 define('nebula/test', function() {
     'use strict';
 
+
     function overrideSettings(newSettings, callback) {
         /*
          * Allows to override global settings, to help unit testing setting-dependent code.
@@ -18,8 +19,7 @@ define('nebula/test', function() {
             settings = define.modules._settings = {};
 
         for (name in newSettings) {
-            if (name in settings)
-                backup[name] = settings[name];
+            backup[name] = settings[name];
             settings[name] = newSettings[name];
         }
 
@@ -31,7 +31,25 @@ define('nebula/test', function() {
         return result;
     }
 
-    return {
-        'overrideSettings': overrideSettings
+
+    function overrideModules(modules, callback) {
+        var backup = {}, name;
+
+        for (name in modules) {
+            backup[name] = define.modules[name];
+            define.modules[name] = modules[name];
+        }
+
+        var result = callback();
+
+        for (name in backup)
+            define.modules[name] = backup[name];
+        return result;
     }
+
+
+    return {
+        'overrideSettings': overrideSettings,
+        'overrideModules': overrideModules
+    };
 });

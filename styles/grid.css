@@ -1,0 +1,16 @@
+/*
+ * Grid
+ */
+.grid {font-family: 'Zerospace'; font-size: 0}
+.grid>* {display: inline-block; font-family: 'Arial', 'Helvetica', sans-serif; font-size: 16px; vertical-align: top}
+.grid.bottom>* {vertical-align: bottom}
+.grid.middle>* {vertical-align: middle}
+
+.grid.padding {margin: -15px}
+.grid.padding>* {padding: 15px}
+
+.grid.padding.small {margin: -5px}
+.grid.padding.small>* {padding: 5px}
+
+.grid.padding.big {margin: -25px}
+.grid.padding.big>* {padding: 25px}

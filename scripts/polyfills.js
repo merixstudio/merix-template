@@ -2,34 +2,27 @@
  * Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
  */
 if (!Array.prototype.indexOf)
-    Array.prototype.indexOf = function (searchElement, fromIndex) {
-        if ( this === undefined || this === null ) {
-            throw new TypeError( '"this" is null or not defined' );
-        }
+    Array.prototype.indexOf = function(searchElement, fromIndex) {
+        if (this === undefined || this === null)
+            throw new TypeError('"this" is null or not defined');
 
-        var length = this.length >>> 0; // Hack to convert object.length to a UInt32
-
+        var length = this.length >>> 0;  // Hack to convert object.length to a UInt32
         fromIndex = +fromIndex || 0;
 
-        if (Math.abs(fromIndex) === Infinity) {
+        if (Math.abs(fromIndex) === Infinity)
             fromIndex = 0;
-        }
 
         if (fromIndex < 0) {
             fromIndex += length;
-            if (fromIndex < 0) {
+            if (fromIndex < 0)
                 fromIndex = 0;
-            }
         }
 
-        for (;fromIndex < length; fromIndex++) {
-            if (this[fromIndex] === searchElement) {
+        for (; fromIndex < length; fromIndex++)
+            if (this[fromIndex] === searchElement)
                 return fromIndex;
-            }
-        }
-
         return -1;
-    }
+    };
 
 
 /*
@@ -37,8 +30,8 @@ if (!Array.prototype.indexOf)
  *
  * Source: https://gist.github.com/jonathantneal/3748027
  */
-!window.addEventListener && (function (WindowPrototype, DocumentPrototype, ElementPrototype, addEventListener, removeEventListener, dispatchEvent, registry) {
-    WindowPrototype[addEventListener] = DocumentPrototype[addEventListener] = ElementPrototype[addEventListener] = function (type, listener) {
+!window.addEventListener && (function(WindowPrototype, DocumentPrototype, ElementPrototype, addEventListener, removeEventListener, dispatchEvent, registry) {
+    WindowPrototype[addEventListener] = DocumentPrototype[addEventListener] = ElementPrototype[addEventListener] = function(type, listener) {
         var target = this;
 
         registry.unshift([target, type, listener, function (event) {
@@ -46,25 +39,22 @@ if (!Array.prototype.indexOf)
             event.preventDefault = function () { event.returnValue = false };
             event.stopPropagation = function () { event.cancelBubble = true };
             event.target = event.srcElement || target;
-
             listener.call(target, event);
         }]);
 
-        this.attachEvent("on" + type, registry[0][3]);
+        this.attachEvent('on' + type, registry[0][3]);
     };
 
-    WindowPrototype[removeEventListener] = DocumentPrototype[removeEventListener] = ElementPrototype[removeEventListener] = function (type, listener) {
-        for (var index = 0, register; register = registry[index]; ++index) {
-            if (register[0] == this && register[1] == type && register[2] == listener) {
-                return this.detachEvent("on" + type, registry.splice(index, 1)[0][3]);
-            }
-        }
+    WindowPrototype[removeEventListener] = DocumentPrototype[removeEventListener] = ElementPrototype[removeEventListener] = function(type, listener) {
+        for (var index = 0, register; register = registry[index]; ++index)
+            if (register[0] == this && register[1] == type && register[2] == listener)
+                return this.detachEvent('on' + type, registry.splice(index, 1)[0][3]);
     };
 
-    WindowPrototype[dispatchEvent] = DocumentPrototype[dispatchEvent] = ElementPrototype[dispatchEvent] = function (eventObject) {
-        return this.fireEvent("on" + eventObject.type, eventObject);
+    WindowPrototype[dispatchEvent] = DocumentPrototype[dispatchEvent] = ElementPrototype[dispatchEvent] = function(eventObject) {
+        return this.fireEvent('on' + eventObject.type, eventObject);
     };
-})(Window.prototype, HTMLDocument.prototype, Element.prototype, "addEventListener", "removeEventListener", "dispatchEvent", []);
+})(Window.prototype, HTMLDocument.prototype, Element.prototype, 'addEventListener', 'removeEventListener', 'dispatchEvent', []);
 
 
 /*
@@ -74,35 +64,33 @@ if (!Array.prototype.indexOf)
  * Source: https://github.com/paulirish/matchMedia.js/blob/master/matchMedia.js
  */
 window.matchMedia || (window.matchMedia = function() {
-    "use strict";
+    'use strict';
 
     // For browsers that support matchMedium api such as IE 9 and webkit
     var styleMedia = (window.styleMedia || window.media);
 
     // For those that don't support matchMedium
     if (!styleMedia) {
-        var style       = document.createElement('style'),
-            script      = document.getElementsByTagName('script')[0],
-            info        = null;
+        var style = document.createElement('style');
+        var script = document.getElementsByTagName('script')[0];
+        var info = null;
 
-        style.type  = 'text/css';
-        style.id    = 'matchmediajs-test';
-
+        style.type = 'text/css';
+        style.id = 'matchmediajs-test';
         script.parentNode.insertBefore(style, script);
 
         // 'style.currentStyle' is used by IE <= 8 and 'window.getComputedStyle' for all other browsers
         info = ('getComputedStyle' in window) && window.getComputedStyle(style, null) || style.currentStyle;
 
         styleMedia = {
-            matchMedium: function(media) {
+            'matchMedium': function(media) {
                 var text = '@media ' + media + '{ #matchmediajs-test { width: 1px; } }';
 
                 // 'style.styleSheet' is used by IE <= 8 and 'style.textContent' for all other browsers
-                if (style.styleSheet) {
+                if (style.styleSheet)
                     style.styleSheet.cssText = text;
-                } else {
+                else
                     style.textContent = text;
-                }
 
                 // Test if media query is true or false
                 return info.width === '1px';
@@ -112,8 +100,8 @@ window.matchMedia || (window.matchMedia = function() {
 
     return function(media) {
         return {
-            matches: styleMedia.matchMedium(media || 'all'),
-            media: media || 'all'
+            'matches': styleMedia.matchMedium(media || 'all'),
+            'media': media || 'all'
         };
     };
 }());
@@ -127,161 +115,126 @@ window.matchMedia || (window.matchMedia = function() {
  * Public Domain.
  * NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
  */
-
-/*global self, document, DOMException */
-
 /*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js*/
 
-if (typeof document !== "undefined" && !("classList" in document.documentElement)) {
+if (typeof document !== 'undefined' && !('classList' in document.documentElement)) {
+    (function(view) {
+        'use strict';
 
-    (function (view) {
+        if (!('HTMLElement' in view) && !('Element' in view))
+            return;
 
-        "use strict";
-
-        if (!('HTMLElement' in view) && !('Element' in view)) return;
-
-        var
-              classListProp = "classList"
-            , protoProp = "prototype"
-            , elemCtrProto = (view.HTMLElement || view.Element)[protoProp]
-            , objCtr = Object
-            , strTrim = String[protoProp].trim || function () {
-                return this.replace(/^\s+|\s+$/g, "");
-            }
+        var classListProp = 'classList';
+        var protoProp = 'prototype';
+        var elemCtrProto = (view.HTMLElement || view.Element)[protoProp];
+        var objCtr = Object;
+        var strTrim = String[protoProp].trim || function () {
+            return this.replace(/^\s+|\s+$/g, '');
+        };
             // Vendors: please allow content code to instantiate DOMExceptions
-            , DOMEx = function (type, message) {
-                this.name = type;
-                this.code = DOMException[type];
-                this.message = message;
-            }
-            , checkTokenAndGetIndex = function (classList, token) {
-                if (token === "") {
-                    throw new DOMEx(
-                          "SYNTAX_ERR"
-                        , "An invalid or illegal string was specified"
-                    );
-                }
-                if (/\s/.test(token)) {
-                    throw new DOMEx(
-                          "INVALID_CHARACTER_ERR"
-                        , "String contains an invalid character"
-                    );
-                }
-                return Array[protoProp].indexOf.call(classList, token);
-            }
-            , ClassList = function (elem) {
-                var
-                      trimmedClasses = strTrim.call(elem.className)
-                    , classes = trimmedClasses ? trimmedClasses.split(/\s+/) : []
-                    , i = 0
-                    , len = classes.length
-                ;
-                for (; i < len; i++) {
-                    this.push(classes[i]);
-                }
-                this._updateClassName = function () {
-                    elem.className = this.toString();
-                };
-            }
-            , classListProto = ClassList[protoProp] = []
-            , classListGetter = function () {
-                return new ClassList(this);
-            }
-        ;
+        var DOMEx = function(type, message) {
+            this.name = type;
+            this.code = DOMException[type];
+            this.message = message;
+        }
+        var checkTokenAndGetIndex = function(classList, token) {
+            if (token === '')
+                throw new DOMEx('SYNTAX_ERR', 'An invalid or illegal string was specified');
+            if (/\s/.test(token))
+                throw new DOMEx('INVALID_CHARACTER_ERR', 'String contains an invalid character');
+            return Array[protoProp].indexOf.call(classList, token);
+        };
+        var ClassList = function(elem) {
+            var trimmedClasses = strTrim.call(elem.className);
+            var classes = trimmedClasses ? trimmedClasses.split(/\s+/) : [];
+            var i = 0;
+            var len = classes.length;
+            for (; i < len; i++)
+                this.push(classes[i]);
+            this._updateClassName = function() {
+                elem.className = this.toString();
+            };
+        };
+        var classListProto = ClassList[protoProp] = [];
+        var classListGetter = function() {
+            return new ClassList(this);
+        };
         // Most DOMException implementations don't allow calling DOMException's toString()
         // on non-DOMExceptions. Error's toString() is sufficient here.
         DOMEx[protoProp] = Error[protoProp];
-        classListProto.item = function (i) {
+        classListProto.item = function(i) {
             return this[i] || null;
         };
-        classListProto.contains = function (token) {
-            token += "";
+        classListProto.contains = function(token) {
+            token += '';
             return checkTokenAndGetIndex(this, token) !== -1;
         };
-        classListProto.add = function () {
-            var
-                  tokens = arguments
-                , i = 0
-                , l = tokens.length
-                , token
-                , updated = false
-            ;
+        classListProto.add = function() {
+            var tokens = arguments;
+            var i = 0;
+            var l = tokens.length;
+            var token;
+            var updated = false;
+
             do {
-                token = tokens[i] + "";
+                token = tokens[i] + '';
                 if (checkTokenAndGetIndex(this, token) === -1) {
                     this.push(token);
                     updated = true;
                 }
-            }
-            while (++i < l);
+            } while (++i < l);
 
-            if (updated) {
+            if (updated)
                 this._updateClassName();
-            }
         };
-        classListProto.remove = function () {
-            var
-                  tokens = arguments
-                , i = 0
-                , l = tokens.length
-                , token
-                , updated = false
-            ;
+        classListProto.remove = function() {
+            var tokens = arguments;
+            var i = 0;
+            var l = tokens.length;
+            var token;
+            var updated = false;
+
             do {
-                token = tokens[i] + "";
+                token = tokens[i] + '';
                 var index = checkTokenAndGetIndex(this, token);
                 if (index !== -1) {
                     this.splice(index, 1);
                     updated = true;
                 }
-            }
-            while (++i < l);
+            } while (++i < l);
 
-            if (updated) {
+            if (updated)
                 this._updateClassName();
-            }
         };
-        classListProto.toggle = function (token, forse) {
-            token += "";
-
-            var
-                  result = this.contains(token)
-                , method = result ?
-                    forse !== true && "remove"
-                :
-                    forse !== false && "add"
-            ;
-
-            if (method) {
+        classListProto.toggle = function(token, force) {
+            token += '';
+            var result = this.contains(token);
+            var method = result ? (force !== true && 'remove') : (force !== false && 'add');
+            if (method)
                 this[method](token);
-            }
-
             return !result;
         };
-        classListProto.toString = function () {
-            return this.join(" ");
+        classListProto.toString = function() {
+            return this.join(' ');
         };
 
         if (objCtr.defineProperty) {
             var classListPropDesc = {
-                  get: classListGetter
-                , enumerable: true
-                , configurable: true
+                'get': classListGetter,
+                'enumerable': true,
+                'configurable': true
             };
             try {
                 objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
-            } catch (ex) { // IE 8 doesn't support enumerable:true
+            } catch (ex) {  // IE 8 doesn't support enumerable:true
                 if (ex.number === -0x7FF5EC54) {
                     classListPropDesc.enumerable = false;
                     objCtr.defineProperty(elemCtrProto, classListProp, classListPropDesc);
                 }
             }
-        } else if (objCtr[protoProp].__defineGetter__) {
+        } else if (objCtr[protoProp].__defineGetter__)
             elemCtrProto.__defineGetter__(classListProp, classListGetter);
-        }
-
     }(self));
-
 }
 
 
@@ -301,7 +254,7 @@ if (!Object.create)
 // Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 if (!Function.prototype.bind)
     Function.prototype.bind = function(oThis) {
-        if (typeof this !== "function")
+        if (typeof this !== 'function')
             // closest thing possible to the ECMAScript 5 internal IsCallable function
             throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
 

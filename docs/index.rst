@@ -29,12 +29,15 @@ Nebula documentation contents
 **Responsive web sites**
 
 *  :doc:`/topics/viewports`
-*  Smart blocks
-*  CSS columns
 
 **Other core functionalities**
 
 *  :doc:`/topics/signals`
+
+**Undocumented modules**
+
+*  `Smart blocks <../../../scripts/nebula/smart_blocks.js>`_ (:file:`/scripts/nebula/smart_blocks.js`)
+*  `CSS columns <../../../styles/columns.css>`_ (:file:`/styles/columns.css`)
 
 **Reference**
 

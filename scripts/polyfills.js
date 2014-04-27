@@ -317,3 +317,18 @@ if (!Function.prototype.bind)
         fBound.prototype = new fNOP();
         return fBound;
     };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now
+if (!Date.now)
+    Date.now = function now() {
+        return new Date().getTime();
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign#Browser_compatibility
+if (!Math.sign)
+    Math.sign = function sign(n) {
+        n = Number(n);
+        return n ? n < 0 ? -1 : 1 : n === n ? n : NaN;
+    };

@@ -15,7 +15,7 @@
  *         }
  *     }
  */
-define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, Signal, viewport) {
+define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, Signal) {
     'use strict';
 
 

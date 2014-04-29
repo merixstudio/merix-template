@@ -36,6 +36,7 @@ Nebula documentation contents
 
 *  :doc:`/topics/signals`
 
+*  `Text <../../../scripts/nebula/text.js>`_ (:file:`/scripts/nebula/text.js`)
 **Reference**
 
 *  :doc:`List of all settings </reference/settings>`

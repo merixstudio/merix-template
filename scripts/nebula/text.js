@@ -18,10 +18,11 @@ define('nebula/text', function() {
     function escape(s, map) {
         // Escapes HTML special characters with HTML entities.
         s = String(s);
-        if (arguments.length < 2)
-            for (var c in _ESCAPE_MAP_FAST)
-                s = s.replace.apply(s, _ESCAPE_MAP_FAST[c]);
-        else
+        if (arguments.length === 1) {
+            map = _ESCAPE_MAP_FAST;
+            for (var c in map)
+                s = s.replace.apply(s, map[c]);
+        } else
             for (var c in map)
                 s = s.replace(new RegExp(c, 'g'), map[c]);
         return s;

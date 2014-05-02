@@ -43,10 +43,32 @@ define('nebula/number', function() {
     }
 
 
+    function format(number, decimalPlaces, decimalSeparator, thousandsSeparator) {
+        /*
+         * © 2011 Esa-Matti Suuronen
+         * Adapted from https://github.com/epeli/underscore.string
+         */
+        if (isNaN(number) || number == null)
+            return '';
+        if (arguments.length < 4)
+            thousandsSeparator = ',';
+        if (arguments.length < 3)
+            decimalSeparator = '.';
+        if (arguments.length < 2)
+            decimalPlaces = 2;
+        number = number.toFixed(decimalPlaces);
+        var parts = number.split('.');
+        var fnums = parts[0];
+        var decimals = parts[1] ? decimalSeparator + parts[1] : '';
+        return fnums.replace(/(\d)(?=(?:\d{3})+$)/g, '$1' + thousandsSeparator) + decimals;
+    }
+
+
     return {
         'mod': mod,
         'clamp': clamp,
         'scale': scale,
-        'range': range
+        'range': range,
+        'format': format
     };
 });

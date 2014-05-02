@@ -45,4 +45,33 @@ describe('number.js', function() {
             expect(number.range(0, -10, -2)).toEqual([0, -2, -4, -6, -8]);
         });
     });
+
+    describe('`format()`', function() {
+        it("doesn't require any arguments besides the number", function() {
+            expect(number.format(123456.789)).toBe('123,456.79');  // Rounding up!
+            expect(number.format(1)).toBe('1.00');
+            expect(number.format(-1)).toBe('-1.00');
+        });
+        it('allows to change number of digits after decimal point', function() {
+            expect(number.format(0.12345, 0)).toBe('0');
+            expect(number.format(0.9, 0)).toBe('1');  // Rounding up!
+            expect(number.format(0.12345, 1)).toBe('0.1');
+            expect(number.format(0.12345, 2)).toBe('0.12');
+            expect(number.format(0.12345, 3)).toBe('0.123');
+            expect(number.format(0.12345, 4)).toBe('0.1235');  // Rounding up!
+            expect(number.format(0.12345, 5)).toBe('0.12345');
+            expect(number.format(1, 5)).toBe('1.00000');
+        });
+        it('allows to change decimal separator character', function() {
+            expect(number.format(0.12345, 0, ':')).toBe('0');
+            expect(number.format(0.12345, 1, ':')).toBe('0:1');
+            expect(number.format(1, 5, ':')).toBe('1:00000');
+            expect(number.format(0.12345, 2, ' any string can be here ')).toBe('0 any string can be here 12');
+        });
+        it('allows to change thounsands separator character', function() {
+            expect(number.format(123456789.123456, 0, ':', ' ')).toBe('123 456 789');
+            expect(number.format(123456789.123456, 1, ':', ' ')).toBe('123 456 789:1');
+            expect(number.format(123456789.123456, 2, ':', ' any string ')).toBe('123 any string 456 any string 789:12');
+        });
+    });
 });

@@ -7,7 +7,7 @@
             function callable(F) {
                 function C() {
                     function obj() {
-                        C.prototype.call.apply(obj, arguments);
+                        return C.prototype.call.apply(obj, arguments);
                     }
                     obj.__proto__ = C.prototype;
                     F.apply(obj, arguments);
@@ -43,7 +43,7 @@
                 parent.callable = function(F) {\
                     var C = function() {\
                         var obj = function() {\
-                            C.prototype.call.apply(obj, arguments);\
+                            return C.prototype.call.apply(obj, arguments);\
                         };\
                         F.apply(obj, arguments);\
                         return obj;\

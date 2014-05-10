@@ -7,8 +7,11 @@
      */
     'use strict';
 
+    var SETTINGS_SELECTOR = 'script[type="application/vnd.nebula-settings+json"]';
+    var winAPI;
     var modules = {};
     var namePattern = /^[a-z0-9_]+(?:\/[a-z0-9_]+)*$/;
+    var codeSettingsDefined = false;
 
 
     function format(template, moduleName) {
@@ -72,9 +75,7 @@
             throw new DefineArgumentCountError('`define()` accepts only two or three arguments');
         if (typeof moduleName !== 'string' || !namePattern.test(moduleName))
             throw new DefineInvalidModuleNameError(moduleName);
-        if (moduleName === 'settings')
-            moduleName = '_settings';
-        if (moduleName in modules)
+        if ((moduleName in modules && moduleName !== 'settings') || (codeSettingsDefined && moduleName === 'settings'))
             throw new DefineDuplicateModuleError(moduleName);
 
         moduleCode = arguments[arguments.length - 1];
@@ -97,7 +98,13 @@
 
         if (moduleName === 'jquery' && modules.settings('JQUERY_NO_CONFLICT', true))
             jQuery.noConflict(true);
-        modules[moduleName] = moduleCode;
+        if (moduleName === 'settings') {
+            codeSettingsDefined = true;
+            for (var name in moduleCode)
+                if (!(name in modules._settings))
+                    modules._settings[name] = moduleCode[name];
+        } else
+            modules[moduleName] = moduleCode;
     }
 
 
@@ -109,10 +116,44 @@
     }
 
 
-    function init(_modules) {
+    function getHTMLSettings(initial) {
+        /*
+         * Loads settings from DOM, from <script> tags containing JSON and the type attribute set to
+         * "application/vnd.nebula-settings+json". Example:
+         *
+         *     <script type="application/vnd.nebula-settings+json">
+         *         {
+         *             "DEBUG": true,
+         *             "STATIC_URL": "/static/"
+         *         }
+         *     </script>
+         */
+        initial = initial || {};
+        var tags = winAPI.document.querySelectorAll(SETTINGS_SELECTOR);
+        if (tags.length > 1)
+            throw new DefineError('multiple settings defined in HTML, only one `<script>` tag with settings is allowed');
+        if (tags.length) {
+            try {
+                var settings = winAPI.JSON.parse(tags[0].innerHTML);
+            } catch(e) {
+                if (e instanceof SyntaxError)
+                    throw new DefineError('invalid syntax in the HTML settings: ' + e.message);
+                throw e;
+            }
+            for (var name in settings)
+                initial[name] = settings[name];
+        }
+        return initial;
+    }
+
+
+    function init(_modules, _winAPI) {
         // Used in tests to clear all defined modules and settings.
         var old = modules;
-        define._modules = modules = _modules || {'settings': getSetting};
+        winAPI = _winAPI || window;
+        codeSettingsDefined = false;
+        define._modules = modules = _modules || {'settings': getSetting, '_settings': {}};
+        modules._settings = getHTMLSettings();
         return old;
     }
 
@@ -131,6 +172,6 @@
     window.define = define;
     window.require = require;
 
-    init();
+    init(null, window);
 
 })();

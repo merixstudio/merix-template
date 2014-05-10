@@ -160,19 +160,44 @@ describe('require.js', function() {
     });
 
     describe("'settings' module", function() {
+        var winAPIOK = {
+            'JSON': JSON,
+            'document': {
+                'querySelectorAll': function() {
+                    return [{'innerHTML': '{"DEBUG": true}'}]
+                }
+            }
+        };
+        var winAPIMultiple = {
+            'JSON': JSON,
+            'document': {
+                'querySelectorAll': function() {
+                    return [{'innerHTML': '{"A": true}'}, {'innerHTML': '{"B": true}'}]
+                }
+            }
+        };
+        var winAPIInvalid = {
+            'JSON': JSON,
+            'document': {
+                'querySelectorAll': function() {
+                    return [{'innerHTML': "It's not a JSON!"}]
+                }
+            }
+        };
+
         it("is always available, even when not defined", function() {
             expect(require.bind(null, 'settings')).not.toThrow();
         });
         it('can be defined as a plain object', function() {
-            var settings = {'MY_SETTING': 99};
-            define('settings', settings);
-            expect(require('_settings')).toBe(settings);
+            define('settings', {'MY_PLAIN_SETTING': 99});
+            var settings = require('settings');
+            expect(settings('MY_PLAIN_SETTING')).toBe(99);
         });
         it('can be defined as a function returning object', function() {
-            var settings = {'MY_SETTING': 99};
-            var settingsGenerator = function() { return settings; };
+            var settingsGenerator = function() { return {'MY_FUNC_SETTING': 88}; };
             define('settings', settingsGenerator);
-            expect(require('_settings')).toBe(settings);
+            var settings = require('settings');
+            expect(settings('MY_FUNC_SETTING')).toBe(88);
         });
         it('is always a function', function() {
             expect(typeof require('settings')).toBe('function');
@@ -191,6 +216,24 @@ describe('require.js', function() {
             define('settings', {'MY_CUSTOM_SETTING': 99});
             var settings = require('settings');
             expect(settings('MY_CUSTOM_SETTING')).toBe(99);
+        });
+        it('can be defined in HTML as a `<script>` tag', function() {
+            define._init(null, winAPIOK);
+            var settings = require('settings');
+            expect(settings('DEBUG')).toBe(true);
+        });
+        it('treats HTML settings as more important than JS settings', function() {
+            define._init(null, winAPIOK);
+            define('settings', {'DEBUG': 'ignored', 'OTHER': 'b'});
+            var settings = require('settings');
+            expect(settings('DEBUG')).toBe(true);  // From HTML
+            expect(settings('OTHER')).toBe('b');  // From JavaScript object
+        });
+        it('allows only one `<script>` tag and throws an exception when there is more', function() {
+            expect(define._init.bind(null, null, winAPIMultiple)).toThrowError(define.Error);
+        });
+        it("throws `define.Error` when HTML settings doesn't contains valid JSON", function() {
+            expect(define._init.bind(null, null, winAPIInvalid)).toThrowError(define.Error);
         });
     });
 

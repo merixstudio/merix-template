@@ -43,6 +43,12 @@ define('nebula/number', function() {
     }
 
 
+    function toFixed(num, precision) {
+        // Consistently across browsers converts a number to given precision.
+        return (+(Math.round(+(num + 'e' + precision)) + 'e' + -precision)).toFixed(precision);
+    }
+
+
     function format(number, decimalPlaces, decimalSeparator, thousandsSeparator) {
         /*
          * © 2011 Esa-Matti Suuronen
@@ -56,7 +62,7 @@ define('nebula/number', function() {
             decimalSeparator = '.';
         if (arguments.length < 2)
             decimalPlaces = 2;
-        number = number.toFixed(decimalPlaces);
+        number = toFixed(number, decimalPlaces);
         var parts = number.split('.');
         var fnums = parts[0];
         var decimals = parts[1] ? decimalSeparator + parts[1] : '';

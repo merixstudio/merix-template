@@ -13,10 +13,10 @@ define('nebula/test', function() {
          */
         var name, backup = {}, settings, result;
 
-        if ('_settings' in define.modules)
-            settings = define.modules._settings;
+        if ('_settings' in define._modules)
+            settings = define._modules._settings;
         else
-            settings = define.modules._settings = {};
+            settings = define._modules._settings = {};
 
         for (name in newSettings) {
             backup[name] = settings[name];
@@ -36,14 +36,14 @@ define('nebula/test', function() {
         var backup = {}, name;
 
         for (name in modules) {
-            backup[name] = define.modules[name];
-            define.modules[name] = modules[name];
+            backup[name] = define._modules[name];
+            define._modules[name] = modules[name];
         }
 
         var result = callback();
 
         for (name in backup)
-            define.modules[name] = backup[name];
+            define._modules[name] = backup[name];
         return result;
     }
 

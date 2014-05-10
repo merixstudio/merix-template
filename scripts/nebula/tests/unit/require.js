@@ -1,9 +1,13 @@
 describe('require.js', function() {
 
-    var modules = define.modules;
-    beforeEach(define._reset);
+    var originalModules = define._init();
+
+    beforeEach(function() {
+        define._init();
+    });
+
     afterEach(function() {
-        define.modules = modules;
+        define._init(originalModules);
     });
 
     describe('`define()`', function() {
@@ -133,7 +137,7 @@ describe('require.js', function() {
             it('when requested module was not defined', function() {
                 expect(require.bind(null, 'not_exists')).toThrowError(require.Error);
             });
-            it('when module ', function() {
+            it("when module doesn't have specified attribute", function() {
                 var module = {'foo': 'bar'};
                 define('spam', module);
                 expect(require.bind(null, 'spam.unknown')).toThrowError(require.Error);
@@ -189,4 +193,6 @@ describe('require.js', function() {
             expect(settings('MY_CUSTOM_SETTING')).toBe(99);
         });
     });
+
+    define._init(originalModules);
 });

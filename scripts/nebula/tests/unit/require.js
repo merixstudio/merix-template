@@ -113,6 +113,13 @@ describe('require.js', function() {
             define('dependency_with_member', dependencyWithMember);
             expect(define.bind(null, 'define99', ['dependency', 'dependency_with_member.python'], function() { return {}; })).not.toThrow();
         });
+
+        it('modules can have aliases', function() {
+            define('settings', {'ALIASES': {'INVALID-NAME': 'valid_name'}});
+            define('INVALID-NAME', {'spam': 'eggs'});
+            var module = require('valid_name');
+            expect(module.spam).toBe('eggs');
+        });
     });
 
     describe('`require()`', function() {

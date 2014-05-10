@@ -71,10 +71,21 @@
          */
         var dependencies = [], moduleCode, i, args;
 
-        if (arguments.length < 2 || arguments.length > 3)
+        if (arguments.length < 2 || arguments.length > 3) {
+            console.log(arguments);
             throw new DefineArgumentCountError('`define()` accepts only two or three arguments');
-        if (typeof moduleName !== 'string' || !namePattern.test(moduleName))
+        }
+        if (typeof moduleName !== 'string')
             throw new DefineInvalidModuleNameError(moduleName);
+        if (!namePattern.test(moduleName)) {
+            var settings = require('settings');
+            var ALIASES = settings('ALIASES', {});
+            if (moduleName in ALIASES) {
+                var callArgs = [ALIASES[moduleName]].concat(Array.prototype.slice.call(arguments, 1));
+                return define.apply(this, callArgs);
+            }
+            throw new DefineInvalidModuleNameError(moduleName);
+        }
         if ((moduleName in modules && moduleName !== 'settings') || (codeSettingsDefined && moduleName === 'settings'))
             throw new DefineDuplicateModuleError(moduleName);
 

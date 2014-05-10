@@ -71,10 +71,8 @@
          */
         var dependencies = [], moduleCode, i, args;
 
-        if (arguments.length < 2 || arguments.length > 3) {
-            console.log(arguments);
+        if (arguments.length < 2 || arguments.length > 3)
             throw new DefineArgumentCountError('`define()` accepts only two or three arguments');
-        }
         if (typeof moduleName !== 'string')
             throw new DefineInvalidModuleNameError(moduleName);
         if (!namePattern.test(moduleName)) {

@@ -8,7 +8,7 @@ define('nebula/random', function() {
     var generator = Math.random;
 
 
-    function changeGenerator(newGenerator) {
+    function setPRNG(newGenerator) {
         generator = newGenerator;
     }
 
@@ -91,7 +91,7 @@ define('nebula/random', function() {
 
 
     return {
-        'changeGenerator': changeGenerator,
+        'setPRNG': setPRNG,
         'sign': sign,
         'uniform': uniform,
         'integer': integer,

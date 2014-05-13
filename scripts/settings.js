@@ -5,7 +5,7 @@ define('settings', {
     // Enable or disable jQuery 'no conflict' mode. Defaults to `true`.
     'JQUERY_NO_CONFLICT': true,
 
-    // Some libraries use naming that is not compatible with out strict naming rules. Using the mapping below you
+    // Some libraries use naming that is not compatible with our strict naming rules. Using the mapping below you
     // can make these libraries load properly under a new, compatible name.
     //'ALIASES': {
     //    'Phaser': 'phaser',

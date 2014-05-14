@@ -20,7 +20,7 @@ define('nebula/signal', ['nebula/utils/callable'], function(callable) {
         this.receivers.push({'receiver': kwargs.receiver, 'sender': kwargs.sender, 'context': kwargs.context});
     };
 
-    Signal.prototype.call = Signal.prototype.connect;
+    Signal.prototype.__call__ = Signal.prototype.connect;
 
     Signal.prototype.disconnect = function() {
         var kwargs = typeof arguments[0] === 'function' ? {'receiver': arguments[0]} : arguments[0];

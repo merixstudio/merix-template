@@ -1,6 +1,61 @@
 describe('number.js', function() {
     var number = require('nebula/number');
 
+    describe('`sum()`', function() {
+        it('returns sum of passed arguments', function() {
+            expect(number.sum(0, 1, 2, 3)).toBe(6);
+            expect(number.sum([0, 1, 2, 3])).toBe(6);
+            expect(number.sum([0, 1], [2, 3])).toBe(6);
+            expect(number.sum([0, 1], 2, 3)).toBe(6);
+            expect(number.sum([0, 1, [1, 2]], 2, 3)).toBe(9);
+            expect(number.sum([0, -1, [-1, -2]], -2, -3)).toBe(-9);
+        });
+
+        it('returns sum of passed arguments that are convertible to numbers', function() {
+            function MagicNumber(a) {
+                this.value = a;
+            }
+
+            MagicNumber.prototype.valueOf = function() {
+                return this.value;
+            };
+
+            expect(number.sum(new MagicNumber(3))).toBe(3);
+            expect(number.sum(new MagicNumber(3), [new MagicNumber(4), new MagicNumber(5)])).toBe(12);
+        });
+
+        it('throws typeError when an argument cannot be converted to a number', function() {
+            expect(number.sum.bind(undefined, 'asd', 2, 3)).toThrow();
+        });
+    });
+
+    describe('`multiply()`', function() {
+        it('returns product of passed arguments', function() {
+            expect(number.multiply(0, 1)).toBe(0);
+            expect(number.multiply([1, 2, 3])).toBe(6);
+            expect(number.multiply(1, [2, 3])).toBe(6);
+            expect(number.multiply([1, [1, 2]], 2, 3)).toBe(12);
+            expect(number.multiply([-1, [-1, -2]], -2, -3)).toBe(-12);
+        });
+
+        it('returns product of passed arguments that are convertible to numbers', function() {
+            function MagicNumber(a) {
+                this.value = a;
+            }
+
+            MagicNumber.prototype.valueOf = function() {
+                return this.value;
+            };
+
+            expect(number.multiply(new MagicNumber(3))).toBe(3);
+            expect(number.multiply(new MagicNumber(3), [new MagicNumber(4), new MagicNumber(5)])).toBe(60);
+        });
+
+        it('throws typeError when an argument cannot be converted to a number', function() {
+            expect(number.multiply.bind(undefined, 'asd', 2, 3)).toThrow();
+        });
+    });
+
     describe('`mod()`', function() {
         it('when dividend is negative result is positive', function() {
             expect(number.mod(-9, 5)).toBe(1);

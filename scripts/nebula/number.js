@@ -2,6 +2,30 @@ define('nebula/number', function() {
     'use strict';
 
 
+    function sum() {
+        return Array.prototype.slice.apply(arguments).reduce(function(result, value) {
+            if (value instanceof Array)
+                return result + sum.apply(this, value);
+            else if (isNaN(Number(value)))
+                throw new TypeError('sum(): `' + value + '` is not a number');
+            else
+                return result + Number(value);
+        }, 0);
+    }
+
+
+    function multiply() {
+        return Array.prototype.slice.apply(arguments).reduce(function(result, value) {
+            if (value instanceof Array)
+                return result * multiply.apply(this, value);
+            else if (isNaN(Number(value)))
+                throw new TypeError('sum(): `' + value + '` is not a number');
+            else
+                return result * Number(value);
+        }, 1);
+    }
+
+
     function mod(n, m) {
         // Alternative modulo operation where result's sign is the same divisor.
         return ((n % m) + m) % m;
@@ -71,6 +95,8 @@ define('nebula/number', function() {
 
 
     return {
+        'sum': sum,
+        'multiply': multiply,
         'mod': mod,
         'clamp': clamp,
         'scale': scale,

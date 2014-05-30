@@ -1,6 +1,14 @@
 describe('number.js', function() {
     var number = require('nebula/number');
 
+    function MagicNumber(a) {
+        this.value = a;
+    }
+
+    MagicNumber.prototype.valueOf = function() {
+        return this.value;
+    };
+
     describe('`sum()`', function() {
         it('returns sum of passed arguments', function() {
             expect(number.sum(0, 1, 2, 3)).toBe(6);
@@ -12,14 +20,6 @@ describe('number.js', function() {
         });
 
         it('returns sum of passed arguments that are convertible to numbers', function() {
-            function MagicNumber(a) {
-                this.value = a;
-            }
-
-            MagicNumber.prototype.valueOf = function() {
-                return this.value;
-            };
-
             expect(number.sum(new MagicNumber(3))).toBe(3);
             expect(number.sum(new MagicNumber(3), [new MagicNumber(4), new MagicNumber(5)])).toBe(12);
         });
@@ -39,14 +39,6 @@ describe('number.js', function() {
         });
 
         it('returns product of passed arguments that are convertible to numbers', function() {
-            function MagicNumber(a) {
-                this.value = a;
-            }
-
-            MagicNumber.prototype.valueOf = function() {
-                return this.value;
-            };
-
             expect(number.multiply(new MagicNumber(3))).toBe(3);
             expect(number.multiply(new MagicNumber(3), [new MagicNumber(4), new MagicNumber(5)])).toBe(60);
         });

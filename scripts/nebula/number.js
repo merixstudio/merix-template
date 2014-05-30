@@ -5,7 +5,7 @@ define('nebula/number', function() {
     function sum() {
         return Array.prototype.slice.apply(arguments).reduce(function(result, value) {
             if (value instanceof Array)
-                return result + sum.apply(this, value);
+                return result + sum.apply(undefined, value);
             else if (isNaN(Number(value)))
                 throw new TypeError('sum(): `' + value + '` is not a number');
             else
@@ -17,7 +17,7 @@ define('nebula/number', function() {
     function multiply() {
         return Array.prototype.slice.apply(arguments).reduce(function(result, value) {
             if (value instanceof Array)
-                return result * multiply.apply(this, value);
+                return result * multiply.apply(undefined, value);
             else if (isNaN(Number(value)))
                 throw new TypeError('sum(): `' + value + '` is not a number');
             else

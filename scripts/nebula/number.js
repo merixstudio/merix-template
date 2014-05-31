@@ -27,7 +27,7 @@ define('nebula/number', function() {
 
 
     function mod(n, m) {
-        // Alternative modulo operation where result's sign is the same divisor.
+        // Alternative modulo operation where result's sign is the same as divisor's.
         return ((n % m) + m) % m;
     }
 

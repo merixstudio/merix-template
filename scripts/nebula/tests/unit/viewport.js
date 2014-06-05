@@ -120,6 +120,8 @@ describe('viewport.js', function() {
             viewport._update();
             expect(onChangeCallback.calls.count()).toBe(2);
         });
+
+        viewport.onChange.disconnect(onChangeCallback);
     });
 
     it("throws an error when a viewport specification is invalid", function() {

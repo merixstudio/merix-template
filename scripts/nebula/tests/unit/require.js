@@ -51,10 +51,6 @@ describe('require.js', function() {
                 var invalid1 = define.bind(null, 'undefined_test', undefined);
                 expect(invalid1).toThrowError(define.InvalidModuleError);
             });
-            it('when module code is a function returning `undefined`', function() {
-                var invalid2 = define.bind(null, 'undefined_test', function() {});
-                expect(invalid2).toThrowError(define.InvalidModuleError);
-            });
         });
 
         describe('throws `define.Error`', function() {
@@ -90,13 +86,13 @@ describe('require.js', function() {
                 }
 
             function testInternalFunction() {}
-
             function testFunctionModule() {
-                return testInternalFunction;
+                this.testInternalFunction = testInternalFunction;
             }
 
             define('function', testFunctionModule);
-            expect(require('function')).toBe(testInternalFunction);
+            expect(require('function') instanceof testFunctionModule).toBe(true);
+            expect(require('function.testInternalFunction')).toBe(testInternalFunction);
         });
 
         it('modules can be functions returning objects', function() {
@@ -111,7 +107,11 @@ describe('require.js', function() {
             var dependencyWithMember = {'python': 'Rocks!'};
             define('dependency', dependency);
             define('dependency_with_member', dependencyWithMember);
-            expect(define.bind(null, 'define99', ['dependency', 'dependency_with_member.python'], function() { return {}; })).not.toThrow();
+            expect(define.bind(null, 'define99', ['dependency', 'dependency_with_member'], function(_dependency, _dependencyWithMember) {
+                expect(_dependency).toBe(dependency);
+                expect(_dependencyWithMember).toBe(dependencyWithMember);
+                return {};
+            })).not.toThrow();
         });
 
         it('modules can have aliases', function() {

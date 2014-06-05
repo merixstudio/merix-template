@@ -13,6 +13,8 @@ define('nebula/number', function() {
         }, 0);
     }
 
+    this.sum = sum;
+
 
     function multiply() {
         return Array.prototype.slice.apply(arguments).reduce(function(result, value) {
@@ -25,25 +27,27 @@ define('nebula/number', function() {
         }, 1);
     }
 
+    this.multiply = multiply;
 
-    function mod(n, m) {
+
+    this.mod = function(n, m) {
         // Alternative modulo operation where result's sign is the same as divisor's.
         return ((n % m) + m) % m;
-    }
+    };
 
 
-    function clamp(min, value, max) {
+    this.clamp = function(min, value, max) {
         return Math.max(min, Math.min(value, max));
-    }
+    };
 
 
-    function scale(n, currentMin, currentMax, newMin, newMax) {
+    this.scale = function(n, currentMin, currentMax, newMin, newMax) {
         // Scales n from one range to another.
         return newMin + (n - currentMin) * (newMax - newMin) / (currentMax - currentMin);
-    }
+    };
 
 
-    function range(start, stop, step) {
+    this.range = function(start, stop, step) {
         /*
          * Generate an integer Array containing an arithmetic progression. A port of the native Python `range()`
          * function. See the Python documentation: http://docs.python.org/library/functions.html#range.
@@ -64,7 +68,7 @@ define('nebula/number', function() {
         }
 
         return range;
-    }
+    };
 
 
     function toFixed(num, precision) {
@@ -73,7 +77,7 @@ define('nebula/number', function() {
     }
 
 
-    function format(number, decimalPlaces, decimalSeparator, thousandsSeparator) {
+    this.format = function(number, decimalPlaces, decimalSeparator, thousandsSeparator) {
         /*
          * © 2011 Esa-Matti Suuronen
          * Adapted from https://github.com/epeli/underscore.string
@@ -91,16 +95,5 @@ define('nebula/number', function() {
         var fnums = parts[0];
         var decimals = parts[1] ? decimalSeparator + parts[1] : '';
         return fnums.replace(/(\d)(?=(?:\d{3})+$)/g, '$1' + thousandsSeparator) + decimals;
-    }
-
-
-    return {
-        'sum': sum,
-        'multiply': multiply,
-        'mod': mod,
-        'clamp': clamp,
-        'scale': scale,
-        'range': range,
-        'format': format
     };
 });

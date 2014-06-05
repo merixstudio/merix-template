@@ -96,7 +96,7 @@
 
         if (typeof moduleCode === 'function') {
             // Collect required dependencies for the currently defined module.
-            args = [undefined];  // Required by the bind() call below.
+            args = [{}];  // Required by the bind() call below.
             for (i = 0; i < dependencies.length; i++)
                 args.push(require(dependencies[i]));
             moduleCode = new (Function.prototype.bind.apply(moduleCode, args));

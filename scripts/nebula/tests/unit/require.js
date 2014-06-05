@@ -84,7 +84,9 @@ describe('require.js', function() {
                     define(name, valid[name]);
                     expect(require(name)).toBe(valid[name]);
                 }
+        });
 
+        it('modules can be constructors', function() {
             function testInternalFunction() {}
             function testFunctionModule() {
                 this.testInternalFunction = testInternalFunction;
@@ -92,7 +94,8 @@ describe('require.js', function() {
 
             define('function', testFunctionModule);
             expect(require('function') instanceof testFunctionModule).toBe(true);
-            expect(require('function.testInternalFunction')).toBe(testInternalFunction);
+            var _testInternalFunction = require('function.testInternalFunction');
+            expect(_testInternalFunction === testInternalFunction).toBe(true);
         });
 
         it('modules can be functions returning objects', function() {

@@ -20,6 +20,8 @@ var COPY_TASKS = {
     'media': ['./media/**/*', './_build/media/']
 };
 
+var MEMORY_USAGE_PATHS = ['./images/**/*', './media/**/*'];
+
 var TIDY_OPTIONS = {
     'indent': true,
     'indent-spaces': 4,
@@ -104,7 +106,7 @@ gulp.task('zip', ['templates', 'styles', 'scripts', 'fonts', 'images', 'media'],
 
 gulp.task('memory_usage_count', [], function() {
     memoryUsage.value = 0;
-    return gulp.src(IMAGES_SRC).pipe(memoryUsage.count());
+    return gulp.src(MEMORY_USAGE_PATHS).pipe(memoryUsage.count());
 });
 
 

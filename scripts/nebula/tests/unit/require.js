@@ -111,10 +111,11 @@ describe('require.js', function() {
             define('dependency', dependency);
             define('dependency_with_member', dependencyWithMember);
             expect(define.bind(null, 'define99', ['dependency', 'dependency_with_member'], function(_dependency, _dependencyWithMember) {
-                expect(_dependency).toBe(dependency);
-                expect(_dependencyWithMember).toBe(dependencyWithMember);
-                return {};
+                return {'dependency': _dependency, 'dependencyWithMember': _dependencyWithMember};
             })).not.toThrow();
+            var define99 = require('define99');
+            expect(define99.dependency).toBe(dependency);
+            expect(define99.dependencyWithMember).toBe(dependencyWithMember);
         });
 
         it('modules can have aliases', function() {
@@ -130,8 +131,8 @@ describe('require.js', function() {
             it('when called without arguments', function() {
                 expect(require).toThrowError(require.ArgumentsError);
             });
-            it('when argument count is greater than 1', function() {
-                expect(require.bind(null, 'a', 'b')).toThrowError(require.ArgumentsError);
+            it('when argument count is greater than 2', function() {
+                expect(require.bind(null, 'a', 'b', 'c')).toThrowError(require.ArgumentsError);
             });
         });
 
@@ -166,6 +167,23 @@ describe('require.js', function() {
             var valid = function() { return module; };
             define('define4', valid);
             expect(require('define4.foo')).toBe(module.foo);
+        });
+
+        it('allows to override dependencies (creates a new module instance)', function() {
+            var dep1 = {'a': 'b'};
+            var dep2 = {'c': 'd'};
+            var dep3 = {'e': 'f'};
+            define('dep1', dep1);
+            define('dep3', dep3);
+            define('mod1', ['dep1', 'dep3'], function(dep, dep3) {
+                return {'dep': dep, 'dep3': dep3};
+            });
+            var mod1a = require('mod1');
+            var mod1b = require('mod1', {'dep1': dep2});
+            expect(mod1a.dep).toBe(dep1);
+            expect(mod1a.dep3).toBe(dep3);
+            expect(mod1b.dep).toBe(dep2);
+            expect(mod1b.dep3).toBe(dep3);
         });
     });
 

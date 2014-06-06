@@ -121,4 +121,17 @@ describe('number.js', function() {
             expect(number.format(123456789.123456, 2, ':', ' any string ')).toBe('123 any string 456 any string 789:12');
         });
     });
+
+    describe('`distance()`', function() {
+        it("properly measures distance between two points", function() {
+            expect(number.distance(1, 1, 4, 1)).toBe(3);
+            expect(number.distance(1, 1, 1, 3)).toBe(2);
+            expect(number.distance(0, 0, 1, 1)).toBe(Math.sqrt(2));
+            expect(number.distance(1, 1, 4, 5)).toBe(5);
+            expect(number.distance(-1, -1, -4, -1)).toBe(3);
+            expect(number.distance(-1, -1, -1, -3)).toBe(2);
+            expect(number.distance(0, 0, -1, -1)).toBe(Math.sqrt(2));
+            expect(number.distance(-1, -1, -4, -5)).toBe(5);
+        });
+    });
 });

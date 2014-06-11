@@ -15,11 +15,10 @@
  *         }
  *     }
  */
-define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, Signal, viewport) {
+define('nebula/smart_blocks', ['nebula/window', 'settings', 'nebula/signal'], function(window, settings, Signal) {
     'use strict';
 
 
-    var winAPI = window;
     // Signal sent whenever any of the blocks had class changed.
     var onUpdate = new Signal();
 
@@ -71,19 +70,17 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, 
 
 
     function updateDocument() {
-        updateTree(winAPI.document.body);
+        updateTree(window.document.body);
     }
 
 
-    function enable(api) {
-        if (api)
-            winAPI = api;
-        winAPI.addEventListener('resize', updateDocument);
+    function enable() {
+        window.addEventListener('resize', updateDocument);
     }
 
 
     function disable() {
-        winAPI.removeEventListener('resize', updateDocument);
+        window.removeEventListener('resize', updateDocument);
     }
 
 

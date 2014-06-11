@@ -1,12 +1,12 @@
 describe('smart_blocks.js', function() {
-    var smartBlocks = require('nebula/smart_blocks');
-    var test = require('nebula/test');
-    var block, blockSpec;
-
     var win = {
         'addEventListener': jasmine.createSpy('window.addEventListener'),
         'removeEventListener': jasmine.createSpy('window.removeEventListener')
     };
+    var smartBlocks = require('nebula/smart_blocks', {'nebula/window': win});
+    var test = require('nebula/test');
+    var block, blockSpec;
+
 
     beforeEach(function() {
         block = {
@@ -47,7 +47,7 @@ describe('smart_blocks.js', function() {
         };
 
         smartBlocks.onUpdate.receivers = [];
-        smartBlocks.enable(win);
+        smartBlocks.enable();
     });
 
     afterEach(function() {

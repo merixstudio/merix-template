@@ -1,5 +1,6 @@
 describe('require.js', function() {
 
+    var originalConstructors = define._constructors;
     var originalModules = define._init();
 
     beforeEach(function() {
@@ -7,7 +8,7 @@ describe('require.js', function() {
     });
 
     afterEach(function() {
-        define._init(originalModules);
+        define._init(originalModules, originalConstructors);
     });
 
     describe('`define()`', function() {
@@ -246,24 +247,24 @@ describe('require.js', function() {
             expect(settings('MY_CUSTOM_SETTING')).toBe(99);
         });
         it('can be defined in HTML as a `<script>` tag', function() {
-            define._init(null, winAPIOK);
+            define._init(null, null, winAPIOK);
             var settings = require('settings');
             expect(settings('DEBUG')).toBe(true);
         });
         it('treats HTML settings as more important than JS settings', function() {
-            define._init(null, winAPIOK);
+            define._init(null, null, winAPIOK);
             define('settings', {'DEBUG': 'ignored', 'OTHER': 'b'});
             var settings = require('settings');
             expect(settings('DEBUG')).toBe(true);  // From HTML
             expect(settings('OTHER')).toBe('b');  // From JavaScript object
         });
         it('allows only one `<script>` tag and throws an exception when there is more', function() {
-            expect(define._init.bind(null, null, winAPIMultiple)).toThrowError(define.Error);
+            expect(define._init.bind(null, null, null, winAPIMultiple)).toThrowError(define.Error);
         });
         it("throws `define.Error` when HTML settings doesn't contains valid JSON", function() {
-            expect(define._init.bind(null, null, winAPIInvalid)).toThrowError(define.Error);
+            expect(define._init.bind(null, null, null, winAPIInvalid)).toThrowError(define.Error);
         });
     });
 
-    define._init(originalModules);
+    define._init(originalModules, originalConstructors);
 });

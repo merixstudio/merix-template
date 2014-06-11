@@ -1,7 +1,4 @@
 describe('viewport.js', function() {
-    var viewport = require('nebula/viewport');
-    var test = require('nebula/test');
-
     var win = {
         'addEventListener': null,
         'removeEventListener': null,
@@ -11,13 +8,16 @@ describe('viewport.js', function() {
         }
     };
 
+    var viewport = require('nebula/viewport', {'nebula/window': win});
+    var test = require('nebula/test');
+
     beforeEach(function() {
         win.addEventListener = jasmine.createSpy('window.addEventListener');
         win.removeEventListener = jasmine.createSpy('window.removeEventListener'),
         win.document.body.classList.add = jasmine.createSpy('document.body.classList.add');
         win.document.body.classList.remove = jasmine.createSpy('document.body.classList.remove');
         win.document.documentElement = {'clientWidth': 1, 'clientHeight': 1};
-        viewport.enable(win);
+        viewport.enable();
     });
 
     afterEach(function() {
@@ -112,7 +112,7 @@ describe('viewport.js', function() {
 
         test.overrideSettings(customSettings, function() {
             viewport.disable();
-            viewport.enable(win);
+            viewport.enable();
             viewport._update();
             expect(onChangeCallback.calls.count()).toBe(1);
 
@@ -126,19 +126,19 @@ describe('viewport.js', function() {
 
     it("throws an error when a viewport specification is invalid", function() {
         test.overrideSettings({'VIEWPORTS': {'A': 999}}, function() {
-            expect(viewport.enable.bind(null, win)).toThrow();
+            expect(viewport.enable).toThrow();
         });
 
         test.overrideSettings({'VIEWPORTS': {'A': [999]}}, function() {
-            expect(viewport.enable.bind(null, win)).toThrow();
+            expect(viewport.enable).toThrow();
         });
 
         test.overrideSettings({'VIEWPORTS': {'A': [2, 1]}}, function() {
-            expect(viewport.enable.bind(null, win)).toThrow();
+            expect(viewport.enable).toThrow();
         });
 
         test.overrideSettings({'VIEWPORTS': {'A': [1, 2, 3]}}, function() {
-            expect(viewport.enable.bind(null, win)).toThrow();
+            expect(viewport.enable).toThrow();
         });
     });
 });

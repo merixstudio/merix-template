@@ -78,7 +78,9 @@
         if (arguments.length < 1 || arguments.length > 2 || typeof path !== 'string')
             throw new RequireArgumentsError('`require()` accepts only one or two arguments');
         var parts = path.split('.'), name = parts[0], member = parts[1], module;
-        if (overrides && path in constructors) {
+        if (overrides) {
+            if (!(path in constructors))
+                throw new RequireError(path);
             // If `overrides` is specified instantiate a new module instance.
             var dependencies = [];
             for (var i = 0; i < constructors[path].dependencies.length; i++) {
@@ -191,12 +193,12 @@
     }
 
 
-    function init(_modules, _winAPI) {
+    function init(_modules, _constructors, _winAPI) {
         // Used in tests to clear all defined modules and settings.
         var old = modules;
         winAPI = _winAPI || window;
         codeSettingsDefined = false;
-        define._constructors = constructors = {};
+        define._constructors = constructors = _constructors || {};
         define._modules = modules = _modules || {'settings': getSetting, '_settings': {}};
         modules._settings = getHTMLSettings();
         return old;
@@ -218,6 +220,6 @@
     window.define = define;
     window.require = require;
 
-    init(null, window);
+    init(null, null, window);
 
 })();

@@ -102,4 +102,14 @@ define('nebula/number', function() {
         var dx = x1 - x2, dy = y1 - y2;
         return Math.sqrt(dx*dx + dy*dy);
     };
+
+
+    this.radians = function(angle) {
+        return angle * Math.PI / 180;
+    };
+
+
+    this.degrees = function(angle) {
+        return angle * 180 / Math.PI;
+    };
 });

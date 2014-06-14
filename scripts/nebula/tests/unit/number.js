@@ -134,4 +134,22 @@ describe('number.js', function() {
             expect(number.distance(-1, -1, -4, -5)).toBe(5);
         });
     });
+
+    describe('`radians()`', function() {
+        it("properly converts degrees to radians", function() {
+            expect(number.radians(0)).toBe(0);
+            expect(number.radians(90)).toBe(Math.PI/2);
+            expect(number.radians(180)).toBe(Math.PI);
+            expect(number.radians(360)).toBe(Math.PI*2);
+        });
+    });
+
+    describe('`degrees()`', function() {
+        it("properly converts radians to degrees", function() {
+            expect(number.degrees(0)).toBe(0);
+            expect(number.degrees(Math.PI/2)).toBe(90);
+            expect(number.degrees(Math.PI)).toBe(180);
+            expect(number.degrees(Math.PI*2)).toBe(360);
+        });
+    });
 });

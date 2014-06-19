@@ -112,4 +112,34 @@ define('nebula/number', function() {
     this.degrees = function(angle) {
         return angle * 180 / Math.PI;
     };
+
+
+    this.isPowerOfTwo = function(n) {
+        /*
+         * Returns `true` if `n` is a power of 2. `n` must be a positive integer. Works only up to 2^31.
+         * Source: https://graphics.stanford.edu/~seander/bithacks.html#DetermineIfPowerOf2
+         */
+        if (n <= 0 || (n !== 2147483648 && n !== ~~n))
+            return false;
+        return !(n & (n - 1));
+    };
+
+
+    this.nextPowerOfTwo = function(n) {
+        /*
+         * Returns power of 2 greater or equal to `n`.
+         * Source: https://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2
+         */
+        if (n < 1)
+            return 1;
+        if (this.isPowerOfTwo(n))
+            return n;
+        n -= 1;
+        n |= n >> 1;
+        n |= n >> 2;
+        n |= n >> 4;
+        n |= n >> 8;
+        n |= n >> 16;
+        return n + 1;
+    };
 });

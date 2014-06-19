@@ -152,4 +152,38 @@ describe('number.js', function() {
             expect(number.degrees(Math.PI*2)).toBe(360);
         });
     });
+
+
+    describe('`isPowerOfTwo()`', function() {
+        it("properly identifies power of two's up to 2^31", function() {
+            for (var power = 0; power <= 31; power++)
+                expect(number.isPowerOfTwo(Math.pow(2, power))).toBe(true);
+        });
+        it("returns `false` for negative and decimal numbers", function() {
+            var values = [-1, -2, -3, -4, -5, -6, 0.5, 0, -0.5, 2.1, 3.5, 4.5, 8.5];
+            for (var i = 0; i < values.length; i++)
+                expect(number.isPowerOfTwo(values[i])).toBe(false);
+        });
+    });
+
+
+    describe('`nextPowerOfTwo()`', function() {
+        it("when called with power of 2, it just returns it", function() {
+            for (var power = 0; power <= 31; power++) {
+                var n = Math.pow(2, power);
+                expect(number.nextPowerOfTwo(n)).toBe(n);
+            }
+        });
+        it("returns 1 when called with argument less than 1", function() {
+            var values = [-2, -1, -0.5, 0, 0.5, 0.9];
+            for (var i = 0; i < values.length; i++)
+                expect(number.nextPowerOfTwo(values[i])).toBe(1);
+        });
+        it("finds correct power of 2 up to 2^31", function() {
+            for (var power = 2; power <= 31; power++) {
+                var n = Math.pow(2, power);
+                expect(number.nextPowerOfTwo(n-1)).toBe(n);
+            }
+        });
+    });
 });

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1">
+        <title>Easings | Nebula</title>
+        <link rel="stylesheet" href="../../styles/normalize2.css">
+        <link rel="stylesheet" href="../../styles/base.css">
+        <link rel="stylesheet" href="../../styles/forms.css">
+        <style>
+            body {padding: 20px 0; text-align: center}
+            h1 {margin: 0 10px}
+            h2 {margin: 0 10px}
+            figure.easing {display: inline-block; margin: 10px; padding: 4px; background: #eee}
+            figure.easing figcaption {padding-bottom: 4px; font: 400 12px/18px 'Consolas', monospace; text-align: center}
+            figure.easing canvas {vertical-align: top; background: #fff}
+        </style>
+    </head>
+    <body>
+
+        <h1>Easings</h1>
+        <h2>Linear</h2>
+        <figure class="easing" data-easing="linear"></figure>
+        <h2>Sine</h2>
+        <figure class="easing" data-easing="sine.in"></figure>
+        <figure class="easing" data-easing="sine.out"></figure>
+        <figure class="easing" data-easing="sine.inOut"></figure>
+        <h2>Quadratic</h2>
+        <figure class="easing" data-easing="quadratic.in"></figure>
+        <figure class="easing" data-easing="quadratic.out"></figure>
+        <figure class="easing" data-easing="quadratic.inOut"></figure>
+        <h2>Cubic</h2>
+        <figure class="easing" data-easing="cubic.in"></figure>
+        <figure class="easing" data-easing="cubic.out"></figure>
+        <figure class="easing" data-easing="cubic.inOut"></figure>
+        <h2>Quartic</h2>
+        <figure class="easing" data-easing="quartic.in"></figure>
+        <figure class="easing" data-easing="quartic.out"></figure>
+        <figure class="easing" data-easing="quartic.inOut"></figure>
+        <h2>Quintic</h2>
+        <figure class="easing" data-easing="quintic.in"></figure>
+        <figure class="easing" data-easing="quintic.out"></figure>
+        <figure class="easing" data-easing="quintic.inOut"></figure>
+        <h2>Exponential</h2>
+        <figure class="easing" data-easing="exponential.in"></figure>
+        <figure class="easing" data-easing="exponential.out"></figure>
+        <figure class="easing" data-easing="exponential.inOut"></figure>
+        <h2>Circular</h2>
+        <figure class="easing" data-easing="circular.in"></figure>
+        <figure class="easing" data-easing="circular.out"></figure>
+        <figure class="easing" data-easing="circular.inOut"></figure>
+        <h2>Elastic</h2>
+        <figure class="easing" data-easing="elastic.in"></figure>
+        <figure class="easing" data-easing="elastic.out"></figure>
+        <figure class="easing" data-easing="elastic.inOut"></figure>
+        <h2>Back</h2>
+        <figure class="easing" data-easing="back.in"></figure>
+        <figure class="easing" data-easing="back.out"></figure>
+        <figure class="easing" data-easing="back.inOut"></figure>
+        <h2>Bounce</h2>
+        <figure class="easing" data-easing="bounce.in"></figure>
+        <figure class="easing" data-easing="bounce.out"></figure>
+        <figure class="easing" data-easing="bounce.inOut"></figure>
+
+        <script src="../../scripts/nebula/require.js"></script>
+        <script src="../../scripts/nebula/text.js"></script>
+        <script src="../../scripts/nebula/easings.js"></script>
+
+        <script>
+            var text = require('nebula/text');
+            var easings = require('nebula/easings');
+
+
+            function attrPath(obj, path) {
+                var attrs = path.split('.');
+                while (attrs.length)
+                    obj = obj[attrs.shift()];
+                return obj;
+            }
+
+
+            function renderEasing(easingFunc, context, paddingX, paddingY) {
+                var w = context.canvas.width, h = context.canvas.height;
+                var innerW = w - paddingX*2, innerH = h - paddingY*2;
+                context.beginPath();
+                for (var x = 0; x <= innerW; x++) {
+                    var y = innerH - easingFunc(x / innerW) * innerH;
+                    context.lineTo(x + paddingX, y + paddingY);
+                }
+                context.stroke();
+            }
+
+
+            function renderAllEasings() {
+                var containers = document.querySelectorAll('.easing');
+                for (var i = 0; i < containers.length; i++) {
+                    var canvas = document.createElement('canvas');
+                    var context = canvas.getContext('2d');
+                    var funcPath = containers[i].getAttribute('data-easing');
+                    var easingFunc = attrPath(easings, funcPath);
+                    canvas.width = 200;
+                    canvas.height = 200;
+
+                    context.lineWidth = 1;
+                    context.lineCap = 'mitter';
+                    context.lineJoin = 'mitter';
+                    context.strokeStyle = '#ccc';
+                    context.strokeRect(-10, Math.floor(canvas.height*0.2) + 0.5, canvas.width+20, canvas.height*0.6);
+
+                    context.lineWidth = 2;
+                    context.lineCap = 'round';
+                    context.lineJoin = 'round';
+                    context.strokeStyle = '#000';
+                    renderEasing(easingFunc, context, 0, canvas.height * 0.2);
+
+                    containers[i].innerHTML = '<figcaption>easings.<b>' + text.escape(funcPath) + '</b>();</figcaption>';
+                    containers[i].appendChild(canvas);
+                }
+            }
+
+
+            renderAllEasings();
+        </script>
+    </body>
+</html>

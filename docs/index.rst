@@ -39,6 +39,7 @@ Nebula documentation contents
 *  `Smart blocks <../../../scripts/nebula/smart_blocks.js>`_ (:file:`/scripts/nebula/smart_blocks.js`)
 *  `CSS columns <../../../styles/columns.css>`_ (:file:`/styles/columns.css`)
 
+*  `Text <../../../scripts/nebula/text.js>`_ (:file:`/scripts/nebula/text.js`)
 **Reference**
 
 *  :doc:`List of all settings </reference/settings>`

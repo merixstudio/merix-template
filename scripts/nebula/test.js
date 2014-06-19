@@ -5,51 +5,55 @@ define('nebula/test', function() {
     'use strict';
 
 
+    function override(target, properties, callback) {
+        var result, old = {}, name;
+        for (name in properties) {
+            old[name] = target[name];
+            target[name] = properties[name];
+        }
+        result = callback();
+        for (name in old)
+            target[name] = old[name];
+        return result;
+    }
+
+
     function overrideSettings(newSettings, callback) {
         /*
          * Allows to override global settings, to help unit testing setting-dependent code.
          * Settings are overriden only for the time needed to execute provided callback and then old values
          * are restored.
          */
-        var name, backup = {}, settings, result;
-
-        if ('_settings' in define.modules)
-            settings = define.modules._settings;
-        else
-            settings = define.modules._settings = {};
-
-        for (name in newSettings) {
-            backup[name] = settings[name];
-            settings[name] = newSettings[name];
-        }
-
-        result = callback(require('settings'));
-
-        // Restore previous settings.
-        for (name in backup)
-            settings[name] = backup[name];
-        return result;
+        define._modules._settings = define._modules._settings || {};
+        return override(define._modules._settings, newSettings, callback);
     }
 
 
-    function overrideModules(modules, callback) {
-        var backup = {}, name;
+    function overrideModules(newModules, callback) {
+        return override(define._modules, newModules, callback);
+    }
 
-        for (name in modules) {
-            backup[name] = define.modules[name];
-            define.modules[name] = modules[name];
+
+    function overrideGlobals(properties, callback) {
+        return override(window, properties, callback);
+    }
+
+
+    function spy(values) {
+        // Dead-simple spy that returns one of the provided values on each call and records call count.
+        function s() {
+            s.calls += 1;
+            return values[s.calls - 1];
         }
-
-        var result = callback();
-
-        for (name in backup)
-            define.modules[name] = backup[name];
-        return result;
+        s.calls = 0;
+        return s;
     }
 
 
     return {
         'overrideSettings': overrideSettings,
-        'overrideModules': overrideModules
+        'overrideModules': overrideModules,
+        'overrideGlobals': overrideGlobals,
+        'spy': spy
     };
 });

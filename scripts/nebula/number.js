@@ -13,6 +13,8 @@ define('nebula/number', function() {
         }, 0);
     }
 
+    this.sum = sum;
+
 
     function multiply() {
         return Array.prototype.slice.apply(arguments).reduce(function(result, value) {
@@ -25,25 +27,27 @@ define('nebula/number', function() {
         }, 1);
     }
 
+    this.multiply = multiply;
 
-    function mod(n, m) {
+
+    this.mod = function(n, m) {
         // Alternative modulo operation where result's sign is the same as divisor's.
         return ((n % m) + m) % m;
-    }
+    };
 
 
-    function clamp(min, value, max) {
+    this.clamp = function(min, value, max) {
         return Math.max(min, Math.min(value, max));
-    }
+    };
 
 
-    function scale(n, currentMin, currentMax, newMin, newMax) {
+    this.scale = function(n, currentMin, currentMax, newMin, newMax) {
         // Scales n from one range to another.
         return newMin + (n - currentMin) * (newMax - newMin) / (currentMax - currentMin);
-    }
+    };
 
 
-    function range(start, stop, step) {
+    this.range = function(start, stop, step) {
         /*
          * Generate an integer Array containing an arithmetic progression. A port of the native Python `range()`
          * function. See the Python documentation: http://docs.python.org/library/functions.html#range.
@@ -64,7 +68,7 @@ define('nebula/number', function() {
         }
 
         return range;
-    }
+    };
 
 
     function toFixed(num, precision) {
@@ -73,7 +77,7 @@ define('nebula/number', function() {
     }
 
 
-    function format(number, decimalPlaces, decimalSeparator, thousandsSeparator) {
+    this.format = function(number, decimalPlaces, decimalSeparator, thousandsSeparator) {
         /*
          * © 2011 Esa-Matti Suuronen
          * Adapted from https://github.com/epeli/underscore.string
@@ -91,23 +95,51 @@ define('nebula/number', function() {
         var fnums = parts[0];
         var decimals = parts[1] ? decimalSeparator + parts[1] : '';
         return fnums.replace(/(\d)(?=(?:\d{3})+$)/g, '$1' + thousandsSeparator) + decimals;
-    }
+    };
 
 
-    function distance(x1, y1, x2, y2) {
+    this.distance = function(x1, y1, x2, y2) {
         var dx = x1 - x2, dy = y1 - y2;
         return Math.sqrt(dx*dx + dy*dy);
-    }
+    };
 
 
-    return {
-        'sum': sum,
-        'multiply': multiply,
-        'mod': mod,
-        'clamp': clamp,
-        'scale': scale,
-        'range': range,
-        'format': format,
-        'distance': distance
+    this.radians = function(angle) {
+        return angle * Math.PI / 180;
+    };
+
+
+    this.degrees = function(angle) {
+        return angle * 180 / Math.PI;
+    };
+
+
+    this.isPowerOfTwo = function(n) {
+        /*
+         * Returns `true` if `n` is a power of 2. `n` must be a positive integer. Works only up to 2^31.
+         * Source: https://graphics.stanford.edu/~seander/bithacks.html#DetermineIfPowerOf2
+         */
+        if (n <= 0 || (n !== 2147483648 && n !== ~~n))
+            return false;
+        return !(n & (n - 1));
+    };
+
+
+    this.nextPowerOfTwo = function(n) {
+        /*
+         * Returns power of 2 greater or equal to `n`.
+         * Source: https://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2
+         */
+        if (n < 1)
+            return 1;
+        if (this.isPowerOfTwo(n))
+            return n;
+        n -= 1;
+        n |= n >> 1;
+        n |= n >> 2;
+        n |= n >> 4;
+        n |= n >> 8;
+        n |= n >> 16;
+        return n + 1;
     };
 });

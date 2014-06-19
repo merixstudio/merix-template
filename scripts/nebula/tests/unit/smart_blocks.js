@@ -1,12 +1,12 @@
 describe('smart_blocks.js', function() {
-    var smartBlocks = require('nebula/smart_blocks');
-    var test = require('nebula/test');
-    var block, blockSpec;
-
     var win = {
         'addEventListener': jasmine.createSpy('window.addEventListener'),
         'removeEventListener': jasmine.createSpy('window.removeEventListener')
     };
+    var smartBlocks = require('nebula/smart_blocks', {'nebula/window': win});
+    var test = require('nebula/test');
+    var block, blockSpec;
+
 
     beforeEach(function() {
         block = {
@@ -47,7 +47,7 @@ describe('smart_blocks.js', function() {
         };
 
         smartBlocks.onUpdate.receivers = [];
-        smartBlocks.enable(win);
+        smartBlocks.enable();
     });
 
     afterEach(function() {
@@ -86,22 +86,18 @@ describe('smart_blocks.js', function() {
             expect(block.classList.add).not.toHaveBeenCalledWith('function-false');
         });
         it("adds a valid class when block specification is a viewport alias and matches", function() {
-            var viewport = {
-                'is': jasmine.createSpy().and.returnValue(true)
-            };
-            test.overrideModules({'nebula/viewport': viewport}, function() {
-                smartBlocks.updateBlock(block, blockSpecViewports);
-            });
+            var viewport = {'is': jasmine.createSpy().and.returnValue(true)};
+            var smartBlocks2 = require('nebula/smart_blocks', {'nebula/window': win, 'nebula/viewport': viewport});
+            smartBlocks2.enable();
+            smartBlocks2.updateBlock(block, blockSpecViewports);
             expect(block.classList.add).toHaveBeenCalledWith('viewport-true');
             expect(viewport.is).toHaveBeenCalledWith('viewport-true');
         });
         it("doesn't add a valid class when block specification is a viewport alias and doesn't match", function() {
-            var viewport = {
-                'is': jasmine.createSpy().and.returnValue(false)
-            };
-            test.overrideModules({'nebula/viewport': viewport}, function() {
-                smartBlocks.updateBlock(block, blockSpecViewports);
-            });
+            var viewport = {'is': jasmine.createSpy().and.returnValue(false)};
+            var smartBlocks2 = require('nebula/smart_blocks', {'nebula/window': win, 'nebula/viewport': viewport});
+            smartBlocks2.enable();
+            smartBlocks2.updateBlock(block, blockSpecViewports);
             expect(block.classList.add).not.toHaveBeenCalledWith('viewport-false');
             expect(viewport.is).toHaveBeenCalledWith('viewport-false');
         });

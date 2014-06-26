@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var concat = require('gulp-concat');
 var swig = require('gulp-swig');
 var map = require('map-stream');
 var html = require('htmltidy');
@@ -6,6 +7,7 @@ var prefix = require('gulp-autoprefixer');
 var exec = require('child_process').exec;
 var sizeOf = require('image-size');
 var Table = require('cli-table');
+var argv = require('yargs').argv;
 
 var TEMPLATES_SRC = './templates/*.html';
 var TEMPLATES_TO_BUILD = './templates/!(_)*.html';
@@ -85,6 +87,13 @@ var memoryUsage = {
     }
 };
 
+function toConsole() {
+    return map(function(file, callback) {
+        console.log(file.contents.toString());
+        callback(null, file);
+    });
+};
+
 
 gulp.task('templates', function() {
     return gulp.src(TEMPLATES_TO_BUILD).pipe(swig()).pipe(tidy()).pipe(gulp.dest('./_build/'));
@@ -125,6 +134,40 @@ gulp.task('memory_usage', ['memory_usage_count'], function() {
         table.push([memoryUsage.formatSize(memoryUsage.files[i].bytes), memoryUsage.files[i].path]);
     table.push([memoryUsage.formatSize(memoryUsage.value), 'Total']);
     console.log(table.toString());
+});
+
+
+/*
+ * Creates columns.css based on passed viewports and fractions
+ *
+ * Example usage: gulp make_columns --viewports 320,480,720 --fractions 9 --output styles/asd.css
+ */
+gulp.task('make_columns', function() {
+    var fractions = [1, 2, 3, 4, 5, 6];
+    var viewports = [320, 480, 720, 960, 1280, 1600, 1920]
+
+    if (argv.fractions) {
+        fractions = [];
+        for (var i = 1; i <= argv.fractions; i++)
+            fractions.push(i);
+    }
+
+    if (argv.viewports)
+        viewports = argv.viewports.split(',');
+
+    var data = {
+        'data': {
+            'viewports': viewports,
+            'fractions': fractions
+        }
+    };
+
+    var stream = gulp.src('./tools/_columns_template.css').pipe(swig(data));
+
+    if (argv.output)
+        stream.pipe(concat(argv.output)).pipe(gulp.dest('.'));
+    else
+        stream.pipe(toConsole());
 });
 
 

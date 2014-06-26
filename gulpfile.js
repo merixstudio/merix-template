@@ -87,12 +87,13 @@ var memoryUsage = {
     }
 };
 
+
 function toConsole() {
     return map(function(file, callback) {
         console.log(file.contents.toString());
         callback(null, file);
     });
-};
+}
 
 
 gulp.task('templates', function() {
@@ -138,18 +139,19 @@ gulp.task('memory_usage', ['memory_usage_count'], function() {
 
 
 /*
- * Creates columns.css based on passed viewports and fractions
+ * Creates columns.css based on passed viewports and columns.
  *
- * Example usage: gulp make_columns --viewports 320,480,720 --fractions 9 --output styles/asd.css
+ * Example usage:
+ *     gulp make_columns --viewports 320,480,720 --columns 9 --output styles/my_columns.css
  */
 gulp.task('make_columns', function() {
-    var fractions = [1, 2, 3, 4, 5, 6];
-    var viewports = [320, 480, 720, 960, 1280, 1600, 1920]
+    var columns = [1, 2, 3, 4, 5, 6];
+    var viewports = [320, 480, 720, 960, 1280, 1600, 1920];
 
-    if (argv.fractions) {
-        fractions = [];
-        for (var i = 1; i <= argv.fractions; i++)
-            fractions.push(i);
+    if (argv.columns) {
+        columns = [];
+        for (var i = 1; i <= argv.columns; i++)
+            columns.push(i);
     }
 
     if (argv.viewports)
@@ -158,7 +160,7 @@ gulp.task('make_columns', function() {
     var data = {
         'data': {
             'viewports': viewports,
-            'fractions': fractions
+            'columns': columns
         }
     };
 

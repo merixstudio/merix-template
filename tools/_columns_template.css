@@ -1,4 +1,12 @@
-{{ queries(viewports) }}
+{%- macro column(v) -%}
+    {%- for i in columns -%}
+        {%- for j in columns -%}
+            {%- if j < i -%}.v{{ v }}-{{ j }}-of-{{ i }} {width: {{ j/i*100 }}%}
+    {%- endif -%}
+        {%- endfor %}
+    {%- endfor -%}
+{%- endmacro -%}
+
 {%- macro query(min, max) %}
 @media (min-width: {{ min }}px) {% if max %}and (max-width: {{ max }}px) {% endif %}{
     .v{{ min }}-hide {display: none !important}
@@ -6,8 +14,7 @@
 
 @media (min-width: {{ min }}px) {
     .v{{ min }}-1 {width: 100%}
-    {{ fraction(min) }}
-
+    {{ column(min) }}
     .v{{ min }}-padding           {padding:        10px}
     .v{{ min }}-padding-top       {padding-top:    10px}
     .v{{ min }}-padding-left      {padding-left:   10px}
@@ -19,20 +26,11 @@
     .v{{ min }}-no-padding-bottom {padding-bottom: 0}
 }
 {% endmacro -%}
-{%- macro queries(v) -%}
-    {%- for key, val in v -%}
-        {%- if loop.last -%}
-            {{ query(val) }}
-        {%- else -%}
-            {{ query(val, v[key+1]-1) }}
-        {%- endif -%}
-    {%- endfor -%}
-{%- endmacro -%}
-{%- macro fraction(v) -%}
-    {%- for i in fractions -%}
-        {%- for j in fractions -%}
-            {%- if j < i -%}.v{{ v }}-{{ j }}-of-{{ i }} {width: {{ j/i*100 }}%}
+
+{%- for index, width in viewports -%}
+    {%- if loop.last -%}
+        {{ query(width) }}
+    {%- else -%}
+        {{ query(width, viewports[index+1]-1) }}
     {%- endif -%}
-        {%- endfor %}
-    {%- endfor -%}
-{%- endmacro -%}
+{%- endfor -%}

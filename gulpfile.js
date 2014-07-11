@@ -155,7 +155,7 @@ gulp.task('make_columns', function() {
     }
 
     if (argv.viewports)
-        viewports = argv.viewports.split(',');
+        viewports = String(argv.viewports).split(',');
 
     var data = {
         'data': {

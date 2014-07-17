@@ -9,7 +9,7 @@ var sizeOf = require('image-size');
 var Table = require('cli-table');
 var argv = require('yargs').argv;
 
-var TEMPLATES_SRC = './templates/*.html';
+var TEMPLATES_SRC = './templates/**/*';
 var TEMPLATES_TO_BUILD = './templates/!(_)*.html';
 var STYLES_SRC = './styles/**/*';
 var STYLES_TO_BUILD = './_build/styles/';
@@ -19,7 +19,8 @@ var COPY_TASKS = {
     'scripts': [['./scripts/**/*', '!./scripts/nebula/test.js', '!./scripts/nebula/tests/**/*'], './_build/scripts/'],
     'fonts': ['./fonts/**/*', './_build/fonts/'],
     'images': ['./images/**/*', './_build/images/'],
-    'media': ['./media/**/*', './_build/media/']
+    'media': ['./media/**/*', './_build/media/'],
+    'templatesToCopy': [['./templates/**/*', '!./templates/**/*.html', '!./templates/**/readme.txt'], './_build']
 };
 
 var MEMORY_USAGE_PATHS = ['./images/**/*', './media/**/*'];
@@ -164,7 +165,12 @@ gulp.task('make_columns', function() {
         }
     };
 
-    var stream = gulp.src('./tools/_columns_template.css').pipe(swig(data));
+    var templatePath = './tools/_columns_template.css';
+
+    if (argv.ie8)
+        templatePath = './tools/_columns_template_ie8.css';
+
+    var stream = gulp.src(templatePath).pipe(swig(data));
 
     if (argv.output)
         stream.pipe(concat(argv.output)).pipe(gulp.dest('.'));
@@ -173,8 +179,8 @@ gulp.task('make_columns', function() {
 });
 
 
-gulp.task('server', ['templates', 'styles', 'scripts', 'fonts', 'images', 'media'], function() {
-    gulp.watch(TEMPLATES_SRC, ['templates']);
+gulp.task('server', ['templates', 'templatesToCopy', 'styles', 'scripts', 'fonts', 'images', 'media'], function() {
+    gulp.watch(TEMPLATES_SRC, ['templates', 'templatesToCopy']);
     gulp.watch(STYLES_SRC, ['styles']);
     gulp.watch(COPY_TASKS.scripts[0], ['scripts']);
     gulp.watch(COPY_TASKS.fonts[0], ['fonts']);

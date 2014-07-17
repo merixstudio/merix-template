@@ -1,7 +1,7 @@
-{%- macro column(v) -%}
+{%- macro property(p, v) -%}
     {%- for i in columns -%}
         {%- for j in columns -%}
-            {%- if j < i -%}.v{{ v }}-{{ j }}-of-{{ i }} {width: {{ j/i*100 }}%}
+            {%- if j < i -%}.v{{ v }}{% if p !== 'width' %}-{{ p }}{% endif %}-{{ j }}-of-{{ i }} { {{ p }}: {{ j/i*100 }}%}
     {%- endif -%}
         {%- endfor %}
     {%- endfor -%}
@@ -10,20 +10,27 @@
 {%- macro query(min, max) %}
 @media (min-width: {{ min }}px) {% if max %}and (max-width: {{ max }}px) {% endif %}{
     .v{{ min }}-hide {display: none !important}
+
+    .v{{ min }}-no-padding-top    {padding-top:    0 !important}
+    .v{{ min }}-no-padding-left   {padding-left:   0 !important}
+    .v{{ min }}-no-padding-right  {padding-right:  0 !important}
+    .v{{ min }}-no-padding-bottom {padding-bottom: 0 !important}
 }
 
 @media (min-width: {{ min }}px) {
+    .v{{ min }}-auto {width: auto}
     .v{{ min }}-1 {width: 100%}
-    {{ column(min) }}
-    .v{{ min }}-padding           {padding:        10px}
-    .v{{ min }}-padding-top       {padding-top:    10px}
-    .v{{ min }}-padding-left      {padding-left:   10px}
-    .v{{ min }}-padding-right     {padding-right:  10px}
-    .v{{ min }}-padding-bottom    {padding-bottom: 10px}
-    .v{{ min }}-no-padding-top    {padding-top:    0}
-    .v{{ min }}-no-padding-left   {padding-left:   0}
-    .v{{ min }}-no-padding-right  {padding-right:  0}
-    .v{{ min }}-no-padding-bottom {padding-bottom: 0}
+    {{ property('width', min) }}
+
+    .v{{ min }}-margin-left-0 {margin-left: 0}
+    {{ property('margin-left', min) }}
+
+    .v{{ min }}-margin-right-0 {margin-right: 0}
+    {{ property('margin-right', min) }}
+
+    .v{{ min }}-text-left         {text-align: left}
+    .v{{ min }}-text-right        {text-align: right}
+    .v{{ min }}-text-center       {text-align: center}
 }
 {% endmacro -%}
 

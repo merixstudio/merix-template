@@ -56,6 +56,21 @@ describe('lock.js', function() {
         expectOpenedLock(lock);
     });
 
+    it('resets a closed lock', function() {
+        var lock = new Lock();
+        lock.acquire();
+        lock.acquire();
+        expectClosedLock(lock);
+        lock.reset();
+        expectOpenedLock(lock);
+
+        lock.acquire();
+        lock.acquire();
+        expectClosedLock(lock);
+        lock.open();
+        expectOpenedLock(lock);
+    });
+
     describe('`Lock` can be used to decorate objects', function() {
         function decorate(object) {
             object.lock = new Lock(object, 'pause', 'resume');

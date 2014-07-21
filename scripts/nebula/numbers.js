@@ -1,4 +1,4 @@
-define('nebula/number', function() {
+define('nebula/numbers', function() {
     'use strict';
 
 
@@ -30,14 +30,41 @@ define('nebula/number', function() {
     this.multiply = multiply;
 
 
+    this.fract = function(n) {
+        if (n > 0)
+            return n - Math.floor(n);
+        else if (n < 0)
+            return n - Math.ceil(n);
+        else
+            return 0;
+    };
+
+
     this.mod = function(n, m) {
         // Alternative modulo operation where result's sign is the same as divisor's.
         return ((n % m) + m) % m;
     };
 
 
-    this.clamp = function(min, value, max) {
+    this.clamp = function(value, min, max) {
         return Math.max(min, Math.min(value, max));
+    };
+
+
+    this.mix = function(min, max, alpha) {
+        return x * (1 - alpha) + y * alpha;
+    };
+
+
+    this.step = function(edge, n) {
+        return x < edge ? 0 : 1;
+    };
+
+
+    this.smoothStep = function(minEdge, maxEdge, n) {
+        // See also: http://en.wikipedia.org/wiki/Smoothstep
+        var t = this.clamp((n - minEdge) / (maxEdge - minEdge), 0, 1);
+        return t * t * (3 - 2*t);
     };
 
 

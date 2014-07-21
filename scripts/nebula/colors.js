@@ -1,4 +1,4 @@
-define('nebula/colors', ['nebula/number'], function(number) {
+define('nebula/colors', ['nebula/numbers'], function(numbers) {
     /*
      * Conversion functions between RGB and other color systems.
      *
@@ -78,11 +78,11 @@ define('nebula/colors', ['nebula/number'], function(number) {
             h = 2+rc-bc;
         else
             h = 4+gc-rc;
-        return {'h': number.mod(h/6, 1), 'l': l, 's': s};
+        return {'h': numbers.mod(h/6, 1), 'l': l, 's': s};
     }
 
     function _v(m1, m2, hue) {
-        hue = number.mod(hue, 1);
+        hue = numbers.mod(hue, 1);
         if (hue < 1/6)
             return m1 + (m2-m1)*hue*6;
         if (hue < 3/6)
@@ -124,7 +124,7 @@ define('nebula/colors', ['nebula/number'], function(number) {
             h = 2+rc-bc;
         else
             h = 4+gc-rc;
-        return {'h': number.mod(h/6, 1), 's': s, 'v': v};
+        return {'h': numbers.mod(h/6, 1), 's': s, 'v': v};
     }
 
     function hsv2rgb(h, s, v) {
@@ -135,7 +135,7 @@ define('nebula/colors', ['nebula/number'], function(number) {
         var p = v * (1 - s);
         var q = v * (1 - s*f);
         var t = v * (1 - s*(1-f));
-        i = number.mod(i, 6);
+        i = numbers.mod(i, 6);
         if (i === 0)
             return {'r': v, 'g': t, 'b': p};
         if (i === 1)

@@ -31,12 +31,7 @@ define('nebula/numbers', function() {
 
 
     this.fract = function(n) {
-        if (n > 0)
-            return n - Math.floor(n);
-        else if (n < 0)
-            return n - Math.ceil(n);
-        else
-            return 0;
+        return n - Math.trunc(n);
     };
 
 
@@ -47,17 +42,17 @@ define('nebula/numbers', function() {
 
 
     this.clamp = function(value, min, max) {
-        return Math.max(min, Math.min(value, max));
+        return Math.min(Math.max(value, min), max);
     };
 
 
     this.mix = function(min, max, alpha) {
-        return x * (1 - alpha) + y * alpha;
+        return min * (1 - alpha) + max * alpha;
     };
 
 
     this.step = function(edge, n) {
-        return x < edge ? 0 : 1;
+        return n < edge ? 0 : 1;
     };
 
 

@@ -152,12 +152,26 @@ define('nebula/colors', ['nebula/numbers'], function(numbers) {
     }
 
 
+    function pack(r, g, b) {
+        /*
+         * Converts three color components in range [0.0...1.0] to an integer. Examples:
+         *
+         *     pack(1, 1, 1) --> 0xffffff
+         *     pack(0, 0, 0) --> 0x000000
+         *     pack(1, 0, 0) --> 0xff0000
+         *     pack(0.5, 0.5, 0.5) --> 0x7f7f7f
+         */
+        return (r*255 << 16) + (g*255 << 8) + (b*255 << 0);
+    }
+
+
     return {
         'rgb2yiq': rgb2yiq,
         'yiq2rgb': yiq2rgb,
         'rgb2hls': rgb2hls,
         'hls2rgb': hls2rgb,
         'rgb2hsv': rgb2hsv,
-        'hsv2rgb': hsv2rgb
+        'hsv2rgb': hsv2rgb,
+        'pack': pack
     };
 });

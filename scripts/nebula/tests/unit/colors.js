@@ -126,4 +126,22 @@ describe('colors.js', function() {
             }
         });
     });
+
+    describe('`pack()`', function() {
+        it('converts three numbers to an unsigned integer', function() {
+            var values = [
+                [[0.0, 0.0, 0.0], 0x000000],  // black
+                [[0.5, 0.5, 0.5], 0x7f7f7f],  // grey
+                [[1.0, 1.0, 1.0], 0xffffff],  // white
+                [[1.0, 0.0, 0.0], 0xff0000],  // red
+                [[0.0, 1.0, 0.0], 0x00ff00],  // green
+                [[0.0, 0.0, 1.0], 0x0000ff],  // blue
+                [[0.0, 1.0, 1.0], 0x00ffff],  // cyan
+                [[1.0, 0.0, 1.0], 0xff00ff],  // purple
+                [[1.0, 1.0, 0.0], 0xffff00]   // yellow
+            ];
+            for (var i = 0; i < values.length; i++)
+                expect(colors.pack.apply(undefined, values[i][0])).toBe(values[i][1]);
+        });
+    });
 });

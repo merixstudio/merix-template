@@ -290,19 +290,18 @@ define('nebula/easings', function() {
     }
 
 
-    return {
-        'mirror': mirror,
-        'linear': linear,
-        'quadratic': quadratic,
-        'cubic': cubic,
-        'quartic': quartic,
-        'quintic': quintic,
-        'sine': sine,
-        'circular': circular,
-        'exponential': exponential,
-        'elastic': elastic,
-        'back': back,
-        'bounce': bounce,
-        'cubicBezier': cubicBezier
-    };
+    return define.functions(
+        mirror,
+        linear,
+        quadratic,
+        cubic,
+        quartic,
+        quintic,
+        sine,
+        circular,
+        exponential,
+        elastic,
+        back,
+        bounce,
+        cubicBezier);
 });

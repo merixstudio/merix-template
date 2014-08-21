@@ -138,12 +138,11 @@ define('nebula/colors/rgb', ['nebula/numbers'], function(numbers) {
     }
 
 
-    return {
-        'create': create,
-        'copy': copy,
-        'toYIQ': toYIQ,
-        'toHLS': toHLS,
-        'toHSV': toHSV,
-        'pack': pack
-    };
+    return define.functions(
+        create,
+        copy,
+        toYIQ,
+        toHLS,
+        toHSV,
+        pack);
 });

@@ -188,6 +188,32 @@ describe('require.js', function() {
         });
     });
 
+    describe('`define.functions()`', function() {
+        it('converts functions passed as arguments to a mapping with function names as keys', function() {
+            function a() {}
+            function f1() {}
+            function żółw() {}
+            function name_with_underscores() {}
+            function camelCaseName() {}
+            var result = {
+                'a': a,
+                'f1': f1,
+                'żółw': żółw,
+                'name_with_underscores': name_with_underscores,
+                'camelCaseName': camelCaseName
+            };
+            expect(define.functions(a, f1, żółw, name_with_underscores, camelCaseName)).toEqual(result);
+        });
+        it('throws an exception when one of the arguments is not a function', function() {
+            expect(define.functions.bind(undefined, {})).toThrow();
+        });
+        it("throws an exception when function name can't be retrieved", function() {
+            function invalid() {}
+            invalid.toString = function() { return 'not a valid function body'; };
+            expect(define.functions.bind(undefined, invalid)).toThrow();
+        });
+    });
+
     describe("'settings' module", function() {
         var winAPIOK = {
             'JSON': JSON,

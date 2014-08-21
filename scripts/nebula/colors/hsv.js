@@ -73,9 +73,5 @@ define('nebula/colors/hsv', ['nebula/numbers'], function(numbers) {
     }
 
 
-    return {
-        'create': create,
-        'copy': copy,
-        'toRGB': toRGB
-    };
+    return define.functions(create, copy, toRGB);
 });

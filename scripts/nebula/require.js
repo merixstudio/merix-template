@@ -154,6 +154,34 @@
     }
 
 
+    function functionName(func) {
+        /*
+         * Returns name of a function by extracting it from function's source code.
+         */
+        var pattern = /^\s*function\s+([^\s\(]+).*/i;
+        var body = String(func);
+        var match = pattern.exec(body);
+        return match.length === 2 ? match[1] : null;
+    }
+
+
+    function functions() {
+        /*
+         * Converts functions in arguments to an object whose keys are function names, and values are those functions.
+         */
+        var map = {}, name;
+        for (var i = 0; i < arguments.length; i++) {
+            if (typeof arguments[i] !== 'function')
+                throw new TypeError('argument ' + (i+1) + ' is not a function');
+            name = functionName(arguments[i]);
+            if (name === null)
+                throw new Error("couldn't get function name for argument " + (i+1));
+            map[name] = arguments[i];
+        }
+        return map;
+    }
+
+
     function getSetting(name, fallback) {
         if (arguments.length < 1 || arguments.length > 2)
             throw new TypeError('settings getter accepts only one or two arguments');
@@ -213,6 +241,7 @@
     define.InvalidModuleNameError = DefineInvalidModuleNameError;
     define.InvalidModuleError = DefineInvalidModuleError;
     define.DuplicateModuleError = DefineDuplicateModuleError;
+    define.functions = functions;
     define.amd = {'jQuery': true};
     define._init = init;
     define._modules = modules;

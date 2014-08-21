@@ -49,9 +49,5 @@ define('nebula/colors/yiq', function() {
     }
 
 
-    return {
-        'create': create,
-        'copy': copy,
-        'toRGB': toRGB
-    };
+    return define.functions(create, copy, toRGB);
 });

@@ -18,7 +18,7 @@ define('nebula/test', function() {
     }
 
 
-    this.overrideSettings = function(newSettings, callback) {
+    function overrideSettings(newSettings, callback) {
         /*
          * Allows to override global settings, to help unit testing setting-dependent code.
          * Settings are overriden only for the time needed to execute provided callback and then old values
@@ -26,10 +26,10 @@ define('nebula/test', function() {
          */
         define._modules._settings = define._modules._settings || {};
         return override(define._modules._settings, newSettings, callback);
-    };
+    }
 
 
-    this.spy = function(values) {
+    function spy(values) {
         // Dead-simple spy that returns one of the provided values on each call and records call count.
         function s() {
             s.calls += 1;
@@ -37,5 +37,8 @@ define('nebula/test', function() {
         }
         s.calls = 0;
         return s;
-    };
+    }
+
+
+    return define.functions(overrideSettings, spy);
 });

@@ -1,4 +1,4 @@
-define('nebula/text', function() {
+define('nebula/html', function() {
     'use strict';
 
 

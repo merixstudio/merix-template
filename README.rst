@@ -9,9 +9,6 @@ many of our sites.
 .. warning::
    This project is in very early development stage!
 
-This repository and all files are ready for development as-is, there is no build step required and there are no
-external dependencies required to use Nebula.
-
 
 Using Nebula
 ============
@@ -24,8 +21,18 @@ Or this one::
 
    git clone git@github.com:merixstudio/nebula.git
 
+It's recommended to install `node.js <http://nodejs.org/>` and `gulp.js <http://gulpjs.com/>`, if you want to use some
+of the features. When node.js and gulp.js are installed, then type this at command line in Nebula directory to install
+any additional dependencies::
+
+   npm install
+
+To build project type this at commandline::
+
+   gulp
+
 
 Running the test suite
 ======================
 
-Just open the ``scripts/nebula/tests/runner.html`` file in any browser.
+Just open the ``scripts/nebula/tests/index.html`` file in any browser.

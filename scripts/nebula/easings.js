@@ -284,24 +284,24 @@ define('nebula/easings', function() {
             return calcBezier(getTForX(x), y1, y2);
         }
         f.toString = function() {
-            return '<cubicBezier ' + [x1, y1, x2, y2] + '>';
+            return '[cubicBezier ' + [x1, y1, x2, y2] + ']';
         };
         return f;
     }
 
 
-    return define.functions(
-        mirror,
-        linear,
-        quadratic,
-        cubic,
-        quartic,
-        quintic,
-        sine,
-        circular,
-        exponential,
-        elastic,
-        back,
-        bounce,
-        cubicBezier);
+    return {
+        'mirror': mirror,
+        'linear': linear,
+        'quadratic': quadratic,
+        'cubic': cubic,
+        'quartic': quartic,
+        'quintic': quintic,
+        'sine': sine,
+        'circular': circular,
+        'exponential': exponential,
+        'elastic': elastic,
+        'back': back,
+        'bounce': bounce,
+        'cubicBezier': cubicBezier};
 });

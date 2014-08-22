@@ -1,13 +1,4 @@
 /*
- * Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf
- */
-Object.setPrototypeOf = Object.setPrototypeOf || function(oInstance, oProto) {
-    oInstance.__proto__ = oProto;
-    return oInstance;
-};
-
-
-/*
  * Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
  */
 if (!Array.prototype.indexOf)

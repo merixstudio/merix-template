@@ -10,7 +10,6 @@
         'scripts/nebula/require.js',
         'scripts/nebula/window.js',
         'scripts/settings.js',
-        'scripts/nebula/utils/callable.js',
         'scripts/nebula/signal.js',
         'scripts/libs/jquery.js',
         'scripts/nebula/viewport.js',

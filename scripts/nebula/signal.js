@@ -15,8 +15,8 @@ define('nebula/signal', ['nebula/utils/callable'], function(callable) {
         if (typeof kwargs.receiver !== 'function')
             throw new Error("can't connect receiver to a signal, receiver is not a function");
         for (var i = 0; i < this.receivers.length; i++)
-            if (this.receivers[i].receiver === kwargs.receiver)
-                return;
+            if (this.receivers[i].receiver === kwargs.receiver && this.receivers[i].context === kwargs.context && this.receivers[i].sender === kwargs.sender)
+                throw new Error("can't connect receiver to a signal, this receiver with same context and same sender is already connected");
         this.receivers.push({'receiver': kwargs.receiver, 'sender': kwargs.sender, 'context': kwargs.context});
     };
 

@@ -19,15 +19,21 @@ describe('signal.js', function() {
             expect(testSignal.receivers[2].receiver).toBe(someFunc3);
         });
 
-        it("doesn't connect a receiver if already connected", function() {
+        it("doesn't connect a receiver if there is a receiver with specified context and sender already connected", function() {
             var testSignal = new Signal();
             var someFunc = function() {};
+            var sender = {};
+            var context = {};
+            var kwargs = {'receiver': someFunc, 'sender': sender, 'context': context};
 
             testSignal(someFunc);
-            testSignal.connect(someFunc);
-            testSignal(someFunc);
+            testSignal(kwargs);
 
-            expect(testSignal.receivers.length).toBe(1);
+            expect(testSignal.bind(testSignal, kwargs)).toThrow();
+            expect(testSignal.connect.bind(testSignal, kwargs)).toThrow();
+
+            expect(testSignal.bind(testSignal, someFunc)).toThrow();
+            expect(testSignal.connect.bind(testSignal, someFunc)).toThrow();
         });
 
         it("allows only functions to be receivers", function() {

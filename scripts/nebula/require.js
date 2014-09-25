@@ -142,8 +142,6 @@
         if (arguments.length < 2 || typeof moduleCode === 'undefined')
             throw new DefineInvalidModuleError(moduleName);
 
-        if (moduleName === 'jquery' && modules.settings('JQUERY_NO_CONFLICT', true))
-            jQuery.noConflict(true);
         if (moduleName === 'settings') {
             codeSettingsDefined = true;
             for (var name in moduleCode)

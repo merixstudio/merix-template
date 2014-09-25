@@ -102,7 +102,7 @@ Smart blocks
           },
           'ul.grid>li': {
               'narrow': [200, 480, 'self'],
-              'wide': [481, Infinity, 'self'],
+              'wide': [481, Infinity, 'self']
           }
       }
 

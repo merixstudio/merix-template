@@ -8,6 +8,8 @@ var exec = require('child_process').exec;
 var sizeOf = require('image-size');
 var Table = require('cli-table');
 var argv = require('yargs').argv;
+var imagemin = require('gulp-imagemin');
+var pngcrush = require('imagemin-pngcrush');
 
 var TEMPLATES_SRC = './templates/**/*';
 var TEMPLATES_TO_BUILD = './templates/!(_)*.html';
@@ -137,6 +139,10 @@ gulp.task('memory_usage', ['memory_usage_count'], function() {
     table.push([memoryUsage.formatSize(memoryUsage.value), 'Total']);
     console.log(table.toString());
 });
+
+gulp.task('compress_images', function() {
+    return gulp.src('./images/**/*').pipe(imagemin({optimizationLevel: 7, progressive: true, svgoPlugins: [{removeViewBox: false}], use: [pngcrush()]})).pipe(gulp.dest('./_build/images/'));
+})
 
 
 /*

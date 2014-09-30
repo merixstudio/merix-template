@@ -141,7 +141,7 @@ gulp.task('memory_usage', ['memory_usage_count'], function() {
 });
 
 gulp.task('compress_images', function() {
-    return gulp.src('./images/**/*').pipe(imagemin({optimizationLevel: 7, progressive: true, svgoPlugins: [{removeViewBox: false}], use: [pngcrush()]})).pipe(gulp.dest('./_build/images/'));
+    return gulp.src('./images/**/*').pipe(imagemin({'optimizationLevel': 7, 'progressive': true, 'svgoPlugins': [{'removeViewBox': false}], 'use': [pngcrush()]})).pipe(gulp.dest('./_build/images/'));
 })
 
 

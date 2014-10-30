@@ -240,7 +240,6 @@
     define.InvalidModuleError = DefineInvalidModuleError;
     define.DuplicateModuleError = DefineDuplicateModuleError;
     define.functions = functions;
-    define.amd = {'jQuery': true};
     define._init = init;
     define._modules = modules;
     define._constructors = constructors;

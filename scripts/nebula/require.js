@@ -1,15 +1,32 @@
-/*
- * Allows for a simple module definition, similar to AMD, but without the A.
- */
 (function() {
     /*
-     * Allows for a simple module definition, similar to AMD, but without the A.
+     * Allows for a simple module definition, similar to AMD, without the A, but with some other goodies.
+     *
+     * Syntax:
+     *     define('module_name', ['dependencies'], function(...) {
+     *         // Module code goes here: functions, classes and constants.
+     *         // To export definitions, so other modules can access them two syntaxes are possible:
+     *         this.someFunction = function() { ... };
+     *
+     *         // Or:
+     *
+     *         function someFunction() { ... }
+     *
+     *         return {
+     *             'someFunction': someFunction
+     *         };
+     *     });
+     *
+     *     // To retrieve module use `require()`.
+     *     var moduleName = require('module_name');
+     *
      */
     'use strict';
 
     var SETTINGS_SELECTOR = 'script[type="application/vnd.nebula-settings+json"]';
     var winAPI;
     var modules = {};
+    var constructors = {};
     var namePattern = /^[a-z0-9_]+(?:\/[a-z0-9_]+)*$/;
     var codeSettingsDefined = false;
 
@@ -46,14 +63,33 @@
     var RequireArgumentsError = exception(RequireError, 'require.ArgumentsError');
 
 
-    function require(path) {
+    function instantiate(Constructor, dependencies) {
+        return new (Function.prototype.bind.apply(Constructor, [{}].concat(dependencies)));
+    }
+
+
+    function require(path, overrides) {
         /*
          * Returns 'module' by name, from an internal module container. The 'module' must be 'defined' prior
          * to calling this function.
+         *
+         * `overrides` can be used to replace some dependencies with custom implementations - useful for unit testing.
          */
-        if (arguments.length !== 1 || typeof path !== 'string')
-            throw new RequireArgumentsError('`require()` accepts only one argument and it must be a string with a module name');
-        var parts = path.split('.'), name = parts[0], member = parts[1], module = modules[name];
+        if (arguments.length < 1 || arguments.length > 2 || typeof path !== 'string')
+            throw new RequireArgumentsError('`require()` accepts only one or two arguments');
+        var parts = path.split('.'), name = parts[0], member = parts[1], module;
+        if (overrides) {
+            if (!(path in constructors))
+                throw new RequireError(path);
+            // If `overrides` is specified instantiate a new module instance.
+            var dependencies = [];
+            for (var i = 0; i < constructors[path].dependencies.length; i++) {
+                var depPath = constructors[path].dependencies[i];
+                dependencies.push(depPath in overrides ? overrides[depPath] : require(depPath));
+            }
+            module = instantiate(constructors[path].constructor, dependencies);
+        } else
+            module = modules[name];
         if (module) {
             if (typeof member === 'undefined')
                 return module;
@@ -69,7 +105,7 @@
          * Allows to store given 'module' for later use. A module can be a single function or class constructor
          * or an object containing any of these as properties.
          */
-        var dependencies = [], moduleCode, i, args;
+        var dependencies = [], moduleCode;
 
         if (arguments.length < 2 || arguments.length > 3)
             throw new DefineArgumentCountError('`define()` accepts only two or three arguments');
@@ -80,7 +116,7 @@
             var ALIASES = settings('ALIASES', {});
             if (moduleName in ALIASES) {
                 var callArgs = [ALIASES[moduleName]].concat(Array.prototype.slice.call(arguments, 1));
-                return define.apply(this, callArgs);
+                return define.apply(undefined, callArgs);
             }
             throw new DefineInvalidModuleNameError(moduleName);
         }
@@ -96,17 +132,16 @@
 
         if (typeof moduleCode === 'function') {
             // Collect required dependencies for the currently defined module.
-            args = [];
-            for (i = 0; i < dependencies.length; i++)
+            constructors[moduleName] = {'constructor': moduleCode, 'dependencies': dependencies};
+            var args = [];
+            for (var i = 0; i < dependencies.length; i++)
                 args.push(require(dependencies[i]));
-            moduleCode = moduleCode.apply(this, args);
+            moduleCode = instantiate(moduleCode, args);
         }
 
         if (arguments.length < 2 || typeof moduleCode === 'undefined')
             throw new DefineInvalidModuleError(moduleName);
 
-        if (moduleName === 'jquery' && modules.settings('JQUERY_NO_CONFLICT', true))
-            jQuery.noConflict(true);
         if (moduleName === 'settings') {
             codeSettingsDefined = true;
             for (var name in moduleCode)
@@ -114,6 +149,34 @@
                     modules._settings[name] = moduleCode[name];
         } else
             modules[moduleName] = moduleCode;
+    }
+
+
+    function functionName(func) {
+        /*
+         * Returns name of a function by extracting it from function's source code.
+         */
+        var pattern = /^\s*function\s+([^\s\(]+).*/i;
+        var body = String(func);
+        var match = pattern.exec(body);
+        return match.length === 2 ? match[1] : null;
+    }
+
+
+    function functions() {
+        /*
+         * Converts functions in arguments to an object whose keys are function names, and values are those functions.
+         */
+        var map = {}, name;
+        for (var i = 0; i < arguments.length; i++) {
+            if (typeof arguments[i] !== 'function')
+                throw new TypeError('argument ' + (i+1) + ' is not a function');
+            name = functionName(arguments[i]);
+            if (name === null)
+                throw new Error("couldn't get function name for argument " + (i+1));
+            map[name] = arguments[i];
+        }
+        return map;
     }
 
 
@@ -156,11 +219,12 @@
     }
 
 
-    function init(_modules, _winAPI) {
+    function init(_modules, _constructors, _winAPI) {
         // Used in tests to clear all defined modules and settings.
         var old = modules;
         winAPI = _winAPI || window;
         codeSettingsDefined = false;
+        define._constructors = constructors = _constructors || {};
         define._modules = modules = _modules || {'settings': getSetting, '_settings': {}};
         modules._settings = getHTMLSettings();
         return old;
@@ -175,12 +239,13 @@
     define.InvalidModuleNameError = DefineInvalidModuleNameError;
     define.InvalidModuleError = DefineInvalidModuleError;
     define.DuplicateModuleError = DefineDuplicateModuleError;
-    define.amd = {'jQuery': true};
+    define.functions = functions;
     define._init = init;
     define._modules = modules;
+    define._constructors = constructors;
     window.define = define;
     window.require = require;
 
-    init(null, window);
+    init(null, null, window);
 
 })();

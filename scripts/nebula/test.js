@@ -29,16 +29,6 @@ define('nebula/test', function() {
     }
 
 
-    function overrideModules(newModules, callback) {
-        return override(define._modules, newModules, callback);
-    }
-
-
-    function overrideGlobals(properties, callback) {
-        return override(window, properties, callback);
-    }
-
-
     function spy(values) {
         // Dead-simple spy that returns one of the provided values on each call and records call count.
         function s() {
@@ -50,10 +40,5 @@ define('nebula/test', function() {
     }
 
 
-    return {
-        'overrideSettings': overrideSettings,
-        'overrideModules': overrideModules,
-        'overrideGlobals': overrideGlobals,
-        'spy': spy
-    };
+    return define.functions(overrideSettings, spy);
 });

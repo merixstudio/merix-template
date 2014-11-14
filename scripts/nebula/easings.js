@@ -284,7 +284,7 @@ define('nebula/easings', function() {
             return calcBezier(getTForX(x), y1, y2);
         }
         f.toString = function() {
-            return '<cubicBezier ' + [x1, y1, x2, y2] + '>';
+            return '[cubicBezier ' + [x1, y1, x2, y2] + ']';
         };
         return f;
     }
@@ -303,6 +303,5 @@ define('nebula/easings', function() {
         'elastic': elastic,
         'back': back,
         'bounce': bounce,
-        'cubicBezier': cubicBezier
-    };
+        'cubicBezier': cubicBezier};
 });

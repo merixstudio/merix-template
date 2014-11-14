@@ -17,10 +17,9 @@
  * Only one viewport is active in given moment, even when two specifications are overlapping
  * (random one will be returned), thus it's recommened to define non-overlapping breakpoints.
  */
-define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Signal) {
+define('nebula/viewport', ['nebula/window', 'settings', 'nebula/signal'], function(window, settings, Signal) {
     'use strict';
 
-    var winAPI = window;  // Can be overriden, to allow unit testing.
     var active = undefined, portrait = undefined;
     var onChange = new Signal();
 
@@ -36,9 +35,9 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
                  specification[0] <= specification[1])
             return specification[0] <= width() && width() <= specification[1];
         else if (typeof specification === 'string') {
-            if (!winAPI.matchMedia)
+            if (!window.matchMedia)
                 throw new Error('matchMedia is not available in this browser, please add a polyfill');
-            return winAPI.matchMedia(specification).matches;
+            return window.matchMedia(specification).matches;
         }
         throw new Error('Invalid viewport specification: ' + specification);
     }
@@ -47,8 +46,8 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
         if (newPortrait !== portrait) {
             if (settings('VIEWPORT_ORIENTATION_CLASS', true)) {
                 var VIEWPORT_CLASS_PREFIX = settings('VIEWPORT_CLASS_PREFIX', 'viewport-');
-                winAPI.document.body.classList.remove(VIEWPORT_CLASS_PREFIX + (portrait ? 'portrait' : 'landscape'));
-                winAPI.document.body.classList.add(VIEWPORT_CLASS_PREFIX + (newPortrait ? 'portrait' : 'landscape'));
+                window.document.body.classList.remove(VIEWPORT_CLASS_PREFIX + (portrait ? 'portrait' : 'landscape'));
+                window.document.body.classList.add(VIEWPORT_CLASS_PREFIX + (newPortrait ? 'portrait' : 'landscape'));
             }
             portrait = newPortrait;
         }
@@ -59,9 +58,9 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
         if (newClass !== active) {
             var VIEWPORT_CLASS_PREFIX = settings('VIEWPORT_CLASS_PREFIX', 'viewport-');
             if (active)
-                winAPI.document.body.classList.remove(VIEWPORT_CLASS_PREFIX + active);
+                window.document.body.classList.remove(VIEWPORT_CLASS_PREFIX + active);
             if (newClass)
-                winAPI.document.body.classList.add(VIEWPORT_CLASS_PREFIX + newClass);
+                window.document.body.classList.add(VIEWPORT_CLASS_PREFIX + newClass);
             active = newClass;
             onChange.send(previousClass, active);
         }
@@ -118,14 +117,14 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
         /*
          * Returns window width, excluding toolbars and scrollbars.
          */
-        return winAPI.innerWidth || winAPI.document.documentElement.clientWidth;
+        return window.innerWidth || window.document.documentElement.clientWidth;
     }
 
     function height() {
         /*
          * Returns window height, excluding toolbars and scrollbars.
          */
-        return winAPI.innerHeight || winAPI.document.documentElement.clientHeight;
+        return window.innerHeight || window.document.documentElement.clientHeight;
     }
 
     function isPortrait() {
@@ -140,15 +139,13 @@ define('nebula/viewport', ['settings', 'nebula/signal'], function(settings, Sign
         return !portrait;
     }
 
-    function enable(api) {
-        if (api)
-            winAPI = api;
+    function enable() {
         _update();
-        winAPI.addEventListener('resize', _update);
+        window.addEventListener('resize', _update);
     }
 
     function disable() {
-        winAPI.removeEventListener('resize', _update);
+        window.removeEventListener('resize', _update);
         active = portrait = undefined;
     }
 

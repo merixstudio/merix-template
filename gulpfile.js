@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var concat = require('gulp-concat');
 var swig = require('gulp-swig');
 var map = require('map-stream');
 var html = require('htmltidy');
@@ -6,8 +7,11 @@ var prefix = require('gulp-autoprefixer');
 var exec = require('child_process').exec;
 var sizeOf = require('image-size');
 var Table = require('cli-table');
+var argv = require('yargs').argv;
+var imagemin = require('gulp-imagemin');
+var pngcrush = require('imagemin-pngcrush');
 
-var TEMPLATES_SRC = './templates/*.html';
+var TEMPLATES_SRC = './templates/**/*';
 var TEMPLATES_TO_BUILD = './templates/!(_)*.html';
 var STYLES_SRC = './styles/**/*';
 var STYLES_TO_BUILD = './_build/styles/';
@@ -17,7 +21,8 @@ var COPY_TASKS = {
     'scripts': [['./scripts/**/*', '!./scripts/nebula/test.js', '!./scripts/nebula/tests/**/*'], './_build/scripts/'],
     'fonts': ['./fonts/**/*', './_build/fonts/'],
     'images': ['./images/**/*', './_build/images/'],
-    'media': ['./media/**/*', './_build/media/']
+    'media': ['./media/**/*', './_build/media/'],
+    'templatesToCopy': [['./templates/**/*', '!./templates/**/*.html', '!./templates/**/readme.txt'], './_build']
 };
 
 var MEMORY_USAGE_PATHS = ['./images/**/*', './media/**/*'];
@@ -86,6 +91,14 @@ var memoryUsage = {
 };
 
 
+function toConsole() {
+    return map(function(file, callback) {
+        console.log(file.contents.toString());
+        callback(null, file);
+    });
+}
+
+
 gulp.task('templates', function() {
     return gulp.src(TEMPLATES_TO_BUILD).pipe(swig()).pipe(tidy()).pipe(gulp.dest('./_build/'));
 });
@@ -127,9 +140,53 @@ gulp.task('memory_usage', ['memory_usage_count'], function() {
     console.log(table.toString());
 });
 
+gulp.task('compress_images', function() {
+    return gulp.src('./images/**/*').pipe(imagemin({'optimizationLevel': 7, 'progressive': true, 'svgoPlugins': [{'removeViewBox': false}], 'use': [pngcrush()]})).pipe(gulp.dest('./_build/images/'));
+})
 
-gulp.task('server', ['templates', 'styles', 'scripts', 'fonts', 'images', 'media'], function() {
-    gulp.watch(TEMPLATES_SRC, ['templates']);
+
+/*
+ * Creates columns.css based on passed viewports and columns.
+ *
+ * Example usage:
+ *     gulp make_columns --viewports 320,480,720 --columns 9 --output styles/my_columns.css
+ */
+gulp.task('make_columns', function() {
+    var columns = [1, 2, 3, 4, 5, 6];
+    var viewports = [320, 480, 720, 960, 1280, 1600, 1920];
+
+    if (argv.columns) {
+        columns = [];
+        for (var i = 1; i <= argv.columns; i++)
+            columns.push(i);
+    }
+
+    if (argv.viewports)
+        viewports = String(argv.viewports).split(',');
+
+    var data = {
+        'data': {
+            'viewports': viewports,
+            'columns': columns
+        }
+    };
+
+    var templatePath = './tools/_columns_template.css';
+
+    if (argv.ie8)
+        templatePath = './tools/_columns_template_ie8.css';
+
+    var stream = gulp.src(templatePath).pipe(swig(data));
+
+    if (argv.output)
+        stream.pipe(concat(argv.output)).pipe(gulp.dest('.'));
+    else
+        stream.pipe(toConsole());
+});
+
+
+gulp.task('server', ['templates', 'templatesToCopy', 'styles', 'scripts', 'fonts', 'images', 'media'], function() {
+    gulp.watch(TEMPLATES_SRC, ['templates', 'templatesToCopy']);
     gulp.watch(STYLES_SRC, ['styles']);
     gulp.watch(COPY_TASKS.scripts[0], ['scripts']);
     gulp.watch(COPY_TASKS.fonts[0], ['fonts']);

@@ -1,13 +1,4 @@
 /*
- * Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf
- */
-Object.setPrototypeOf = Object.setPrototypeOf || function(oInstance, oProto) {
-    oInstance.__proto__ = oProto;
-    return oInstance;
-};
-
-
-/*
  * Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
  */
 if (!Array.prototype.indexOf)
@@ -288,15 +279,8 @@ if (!Date.now)
     };
 
 
-// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign#Browser_compatibility
-if (!Math.sign)
-    Math.sign = function sign(n) {
-        n = Number(n);
-        return n ? n < 0 ? -1 : 1 : n === n ? n : NaN;
-    };
-
 // Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
-if ('function' !== typeof Array.prototype.reduce) {
+if ('function' !== typeof Array.prototype.reduce)
     Array.prototype.reduce = function(callback /*, initialValue*/) {
         'use strict';
         if (null === this || 'undefined' === typeof this)
@@ -324,4 +308,151 @@ if ('function' !== typeof Array.prototype.reduce) {
 
         return value;
     };
-}
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sign#Browser_compatibility
+if (!Math.sign)
+    Math.sign = function sign(n) {
+        n = Number(n);
+        return n ? n < 0 ? -1 : 1 : n === n ? n : NaN;
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log2#Browser_compatibility
+if (!Math.log2)
+    Math.log2 = function log2(n) {
+        return Math.log(n) / Math.LN2;
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc
+if (!Math.trunc)
+    Math.trunc = function trunc(n) {
+        return n < 0 ? Math.ceil(n) : Math.floor(n);
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/tanh
+if (!Math.tanh)
+    Math.tanh = function tanh(n) {
+        if (n === Infinity)
+            return 1;
+        else if (n === -Infinity)
+            return -1;
+        else {
+            var y = Math.exp(2 * n);
+            return (y - 1) / (y + 1);
+        }
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/sinh
+if (!Math.sinh)
+    Math.sinh = function sinh(n) {
+        var y = Math.exp(n);
+        return (y - 1/y) / 2;
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log1p
+if (!Math.log1p)
+    Math.log1p = function log1p(n) {
+        return Math.log(1 + n);
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/log10
+if (!Math.log10)
+    Math.log10 = function log10(n) {
+        return Math.log(n) / Math.LN10;
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/imul
+if (!Math.imul)
+    Math.imul = function imul(a, b) {
+        var ah  = (a >>> 16) & 0xffff;
+        var al = a & 0xffff;
+        var bh  = (b >>> 16) & 0xffff;
+        var bl = b & 0xffff;
+        // the shift by 0 fixes the sign on the high part
+        // the final |0 converts the unsigned value into a signed value
+        return ((al * bl) + (((ah * bl + al * bh) << 16) >>> 0)|0);
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot
+if (!Math.hypot)
+    Math.hypot = function hypot() {
+        var sum = 0, n, i = arguments.length;
+        while (i--) {
+            n = arguments[i];
+            if (n === Infinity || n === -Infinity)
+                return Infinity;
+            sum += n*n;
+        }
+        return Math.sqrt(sum);
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/fround
+if (!Math.fround)
+    Math.fround = function fround(n) {
+        var f32 = new Float32Array(1);
+        return f32[0] = n, f32[0];
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/expm1
+if (!Math.expm1)
+    Math.expm1 = function expm1(n) {
+        return Math.exp(n) - 1;
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cosh
+if (!Math.cosh)
+    Math.cosh = function cosh(n) {
+        var y = Math.exp(n);
+        return (y + 1 / y) / 2;
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/clz32
+if (!Math.clz32)
+    Math.clz32 = function clz32(n) {
+        n = Number(n) >>> 0;
+        return n ? 32 - n.toString(2).length : 32;
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/cbrt
+if (!Math.cbrt)
+    Math.cbrt = function cbrt(n) {
+        var y = Math.pow(Math.abs(n), 1/3);
+        return n < 0 ? -y : y;
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/atanh
+if (!Math.atanh)
+    Math.atanh = function atanh(n) {
+        return Math.log((1+n) / (1-n)) / 2;
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/asinh
+if (!Math.asinh)
+    Math.asinh = function asinh(n) {
+        if (n === -Infinity)
+            return n;
+        else
+            return Math.log(n + Math.sqrt(n*n + 1));
+    };
+
+
+// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/acosh
+if (!Math.acosh)
+    Math.acosh = function acosh(n) {
+        return Math.log(n + Math.sqrt(n*n - 1));
+    };

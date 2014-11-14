@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1">
+        <title>{% block page_title %}Nebula{% endblock %}</title>
+
+        {% block styles %}
+            <link rel="stylesheet" href="styles/normalize2.css">
+            <link rel="stylesheet" href="styles/base.css">
+            <link rel="stylesheet" href="styles/columns.css">
+            <link rel="stylesheet" href="styles/fonts.css">
+            <link rel="stylesheet" href="styles/forms.css">
+            <link rel="stylesheet" href="styles/grid.css">
+            <link rel="stylesheet" href="styles/wysiwyg.css">
+            <link rel="stylesheet" href="styles/main.css">
+        {% endblock %}
+
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="styles/ie8.css">
+            <script src="scripts/libs/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        {% block page_header %}{% include "_header.html" %}{% endblock %}
+
+        {% block page_content %}{% endblock %}
+
+        {% block page_footer %}{% include "_footer.html" %}{% endblock %}
+
+        <!-- HTML settings take priority over the JS ones and can be backend-generated. -->
+        <!--
+        <script type="application/vnd.nebula-settings+json">
+            {
+                "STATIC_URL": ""
+            }
+        </script>
+        -->
+
+        {% block scripts %}
+            <!-- Third-party libraries -->
+            <script src="scripts/libs/jquery.js"></script>
+
+            <!-- Mostly IE8 and IE9 support, probably can be skipped if targeting other browsers. -->
+            <script src="scripts/polyfills.js"></script>
+
+            <!-- Nebula modules -->
+            <script src="scripts/nebula/require.js"></script>
+            <script src="scripts/settings.js"></script>
+            <script src="scripts/nebula/libs/jquery.js"></script>
+            <script src="scripts/nebula/window.js"></script>
+            <script src="scripts/nebula/signal.js"></script>
+            <script src="scripts/nebula/viewport.js"></script>
+            <script src="scripts/nebula/smart_blocks.js"></script>
+
+            <!-- Put own scripts here. -->
+
+            <script src="scripts/site.js"></script>
+            <script src="scripts/nebula/main.js"></script>
+        {% endblock %}
+    </body>
+</html>

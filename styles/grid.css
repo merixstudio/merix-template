@@ -6,11 +6,11 @@
 .grid.bottom>* {vertical-align: bottom}
 .grid.middle>* {vertical-align: middle}
 
-.grid.padding {margin: -15px}
-.grid.padding>* {padding: 15px}
+.grid.padding {margin: -30px 0 0 -30px}
+.grid.padding>* {padding: 30px 0 0 30px}
 
-.grid.padding.small {margin: -5px}
-.grid.padding.small>* {padding: 5px}
+.grid.padding.small {margin: -10px 0 0 -10px}
+.grid.padding.small>* {padding: 10px 0 0 10px}
 
-.grid.padding.big {margin: -25px}
-.grid.padding.big>* {padding: 25px}
+.grid.padding.big {margin: -50px 0 0 -50px}
+.grid.padding.big>* {padding: 50px 0 0 50px}

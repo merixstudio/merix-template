@@ -1,5 +1,6 @@
 describe('require.js', function() {
 
+    var originalConstructors = define._constructors;
     var originalModules = define._init();
 
     beforeEach(function() {
@@ -7,7 +8,7 @@ describe('require.js', function() {
     });
 
     afterEach(function() {
-        define._init(originalModules);
+        define._init(originalModules, originalConstructors);
     });
 
     describe('`define()`', function() {
@@ -51,10 +52,6 @@ describe('require.js', function() {
                 var invalid1 = define.bind(null, 'undefined_test', undefined);
                 expect(invalid1).toThrowError(define.InvalidModuleError);
             });
-            it('when module code is a function returning `undefined`', function() {
-                var invalid2 = define.bind(null, 'undefined_test', function() {});
-                expect(invalid2).toThrowError(define.InvalidModuleError);
-            });
         });
 
         describe('throws `define.Error`', function() {
@@ -88,15 +85,18 @@ describe('require.js', function() {
                     define(name, valid[name]);
                     expect(require(name)).toBe(valid[name]);
                 }
+        });
 
+        it('modules can be constructors', function() {
             function testInternalFunction() {}
-
             function testFunctionModule() {
-                return testInternalFunction;
+                this.testInternalFunction = testInternalFunction;
             }
 
             define('function', testFunctionModule);
-            expect(require('function')).toBe(testInternalFunction);
+            expect(require('function') instanceof testFunctionModule).toBe(true);
+            var _testInternalFunction = require('function.testInternalFunction');
+            expect(_testInternalFunction === testInternalFunction).toBe(true);
         });
 
         it('modules can be functions returning objects', function() {
@@ -111,7 +111,12 @@ describe('require.js', function() {
             var dependencyWithMember = {'python': 'Rocks!'};
             define('dependency', dependency);
             define('dependency_with_member', dependencyWithMember);
-            expect(define.bind(null, 'define99', ['dependency', 'dependency_with_member.python'], function() { return {}; })).not.toThrow();
+            expect(define.bind(null, 'define99', ['dependency', 'dependency_with_member'], function(_dependency, _dependencyWithMember) {
+                return {'dependency': _dependency, 'dependencyWithMember': _dependencyWithMember};
+            })).not.toThrow();
+            var define99 = require('define99');
+            expect(define99.dependency).toBe(dependency);
+            expect(define99.dependencyWithMember).toBe(dependencyWithMember);
         });
 
         it('modules can have aliases', function() {
@@ -127,8 +132,8 @@ describe('require.js', function() {
             it('when called without arguments', function() {
                 expect(require).toThrowError(require.ArgumentsError);
             });
-            it('when argument count is greater than 1', function() {
-                expect(require.bind(null, 'a', 'b')).toThrowError(require.ArgumentsError);
+            it('when argument count is greater than 2', function() {
+                expect(require.bind(null, 'a', 'b', 'c')).toThrowError(require.ArgumentsError);
             });
         });
 
@@ -163,6 +168,49 @@ describe('require.js', function() {
             var valid = function() { return module; };
             define('define4', valid);
             expect(require('define4.foo')).toBe(module.foo);
+        });
+
+        it('allows to override dependencies (creates a new module instance)', function() {
+            var dep1 = {'a': 'b'};
+            var dep2 = {'c': 'd'};
+            var dep3 = {'e': 'f'};
+            define('dep1', dep1);
+            define('dep3', dep3);
+            define('mod1', ['dep1', 'dep3'], function(dep, dep3) {
+                return {'dep': dep, 'dep3': dep3};
+            });
+            var mod1a = require('mod1');
+            var mod1b = require('mod1', {'dep1': dep2});
+            expect(mod1a.dep).toBe(dep1);
+            expect(mod1a.dep3).toBe(dep3);
+            expect(mod1b.dep).toBe(dep2);
+            expect(mod1b.dep3).toBe(dep3);
+        });
+    });
+
+    describe('`define.functions()`', function() {
+        it('converts functions passed as arguments to a mapping with function names as keys', function() {
+            function a() {}
+            function f1() {}
+            function żółw() {}
+            function name_with_underscores() {}
+            function camelCaseName() {}
+            var result = {
+                'a': a,
+                'f1': f1,
+                'żółw': żółw,
+                'name_with_underscores': name_with_underscores,
+                'camelCaseName': camelCaseName
+            };
+            expect(define.functions(a, f1, żółw, name_with_underscores, camelCaseName)).toEqual(result);
+        });
+        it('throws an exception when one of the arguments is not a function', function() {
+            expect(define.functions.bind(undefined, {})).toThrow();
+        });
+        it("throws an exception when function name can't be retrieved", function() {
+            function invalid() {}
+            invalid.toString = function() { return 'not a valid function body'; };
+            expect(define.functions.bind(undefined, invalid)).toThrow();
         });
     });
 
@@ -225,24 +273,24 @@ describe('require.js', function() {
             expect(settings('MY_CUSTOM_SETTING')).toBe(99);
         });
         it('can be defined in HTML as a `<script>` tag', function() {
-            define._init(null, winAPIOK);
+            define._init(null, null, winAPIOK);
             var settings = require('settings');
             expect(settings('DEBUG')).toBe(true);
         });
         it('treats HTML settings as more important than JS settings', function() {
-            define._init(null, winAPIOK);
+            define._init(null, null, winAPIOK);
             define('settings', {'DEBUG': 'ignored', 'OTHER': 'b'});
             var settings = require('settings');
             expect(settings('DEBUG')).toBe(true);  // From HTML
             expect(settings('OTHER')).toBe('b');  // From JavaScript object
         });
         it('allows only one `<script>` tag and throws an exception when there is more', function() {
-            expect(define._init.bind(null, null, winAPIMultiple)).toThrowError(define.Error);
+            expect(define._init.bind(null, null, null, winAPIMultiple)).toThrowError(define.Error);
         });
         it("throws `define.Error` when HTML settings doesn't contains valid JSON", function() {
-            expect(define._init.bind(null, null, winAPIInvalid)).toThrowError(define.Error);
+            expect(define._init.bind(null, null, null, winAPIInvalid)).toThrowError(define.Error);
         });
     });
 
-    define._init(originalModules);
+    define._init(originalModules, originalConstructors);
 });

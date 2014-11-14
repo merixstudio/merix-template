@@ -15,11 +15,10 @@
  *         }
  *     }
  */
-define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, Signal) {
+define('nebula/smart_blocks', ['nebula/window', 'settings', 'nebula/signal', 'nebula/viewport'], function(window, settings, Signal, viewport) {
     'use strict';
 
 
-    var winAPI = window;
     // Signal sent whenever any of the blocks had class changed.
     var onUpdate = new Signal();
 
@@ -31,10 +30,8 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, 
                  typeof args[0] === 'number' && typeof args[1] === 'number' && args[0] <= args[1]) {
             var width = args[2] === 'self' ? block.offsetWidth : block.parentNode.offsetWidth;
             return args[0] <= width && width <= args[1];
-        } else if (typeof args === 'string') {
-            var viewport = require('nebula/viewport');
+        } else if (typeof args === 'string')
             return viewport.is(args);
-        }
         throw new Error('Invalid smart blocks args: ' + args);
     }
 
@@ -71,19 +68,17 @@ define('nebula/smart_blocks', ['settings', 'nebula/signal'], function(settings, 
 
 
     function updateDocument() {
-        updateTree(winAPI.document.body);
+        updateTree(window.document.body);
     }
 
 
-    function enable(api) {
-        if (api)
-            winAPI = api;
-        winAPI.addEventListener('resize', updateDocument);
+    function enable() {
+        window.addEventListener('resize', updateDocument);
     }
 
 
     function disable() {
-        winAPI.removeEventListener('resize', updateDocument);
+        window.removeEventListener('resize', updateDocument);
     }
 
 

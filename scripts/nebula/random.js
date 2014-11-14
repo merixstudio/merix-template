@@ -40,7 +40,7 @@ define('nebula/random', function() {
 
     function integer() {
         // Returns a random integer, can be limited to a given range.
-        var n = uniform.apply(null, arguments);
+        var n = this.uniform.apply(null, arguments);
         // Always truncates value towards zero.
         return n >= 0 ? Math.floor(n) : Math.ceil(n);
     }
@@ -48,7 +48,7 @@ define('nebula/random', function() {
 
     function choice(population) {
         // Returns a random element from an array.
-        return population[integer(population.length)];
+        return population[this.integer(population.length)];
     }
 
 
@@ -56,7 +56,7 @@ define('nebula/random', function() {
         // Shuffles the `population` array in place.
         var i = population.length, j, temp;
         while (--i) {
-            j = integer(i + 1);
+            j = this.integer(i + 1);
             temp = population[i];
             population[i] = population[j];
             population[j] = temp;
@@ -72,7 +72,7 @@ define('nebula/random', function() {
         if (size > population.length/3) {
             var pool = population.slice(0);
             for (i = 0; i < size; i++) {
-                j = integer(population.length - i);
+                j = this.integer(population.length - i);
                 result[i] = pool[j];
                 pool[j] = pool[population.length - i - 1];
             }
@@ -80,7 +80,7 @@ define('nebula/random', function() {
             var selected = [];
             for (i = 0; i < size; i++) {
                 do {
-                    j = integer(population.length);
+                    j = this.integer(population.length);
                 } while (selected.indexOf(j) >= 0);
                 selected.push(j);
                 result[i] = population[j];
@@ -90,13 +90,12 @@ define('nebula/random', function() {
     }
 
 
-    return {
-        'setPRNG': setPRNG,
-        'sign': sign,
-        'uniform': uniform,
-        'integer': integer,
-        'choice': choice,
-        'shuffle': shuffle,
-        'sample': sample
-    };
+    return define.functions(
+        setPRNG,
+        sign,
+        uniform,
+        integer,
+        choice,
+        shuffle,
+        sample);
 });

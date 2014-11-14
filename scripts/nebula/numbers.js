@@ -1,4 +1,4 @@
-define('nebula/number', function() {
+define('nebula/numbers', function() {
     'use strict';
 
 
@@ -26,14 +26,36 @@ define('nebula/number', function() {
     }
 
 
+    function fract(n) {
+        return n - Math.trunc(n);
+    }
+
+
     function mod(n, m) {
         // Alternative modulo operation where result's sign is the same as divisor's.
         return ((n % m) + m) % m;
     }
 
 
-    function clamp(min, value, max) {
-        return Math.max(min, Math.min(value, max));
+    function clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+    }
+
+
+    function mix(min, max, alpha) {
+        return min * (1 - alpha) + max * alpha;
+    }
+
+
+    function step(edge, n) {
+        return n < edge ? 0 : 1;
+    }
+
+
+    function smoothStep(minEdge, maxEdge, n) {
+        // See also: http://en.wikipedia.org/wiki/Smoothstep
+        var t = this.clamp((n - minEdge) / (maxEdge - minEdge), 0, 1);
+        return t * t * (3 - 2*t);
     }
 
 
@@ -100,14 +122,61 @@ define('nebula/number', function() {
     }
 
 
-    return {
-        'sum': sum,
-        'multiply': multiply,
-        'mod': mod,
-        'clamp': clamp,
-        'scale': scale,
-        'range': range,
-        'format': format,
-        'distance': distance
-    };
+    function radians(angle) {
+        return angle * Math.PI / 180;
+    }
+
+
+    function degrees(angle) {
+        return angle * 180 / Math.PI;
+    }
+
+
+    function isPowerOfTwo(n) {
+        /*
+         * Returns `true` if `n` is a power of 2. `n` must be a positive integer. Works only up to 2^31.
+         * Source: https://graphics.stanford.edu/~seander/bithacks.html#DetermineIfPowerOf2
+         */
+        if (n <= 0 || (n !== 2147483648 && n !== ~~n))
+            return false;
+        return !(n & (n - 1));
+    }
+
+
+    function nextPowerOfTwo(n) {
+        /*
+         * Returns power of 2 greater or equal to `n`.
+         * Source: https://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2
+         */
+        if (n < 1)
+            return 1;
+        if (this.isPowerOfTwo(n))
+            return n;
+        n -= 1;
+        n |= n >> 1;
+        n |= n >> 2;
+        n |= n >> 4;
+        n |= n >> 8;
+        n |= n >> 16;
+        return n + 1;
+    }
+
+
+    return define.functions(
+        sum,
+        multiply,
+        fract,
+        mod,
+        clamp,
+        mix,
+        step,
+        smoothStep,
+        scale,
+        range,
+        format,
+        distance,
+        radians,
+        degrees,
+        isPowerOfTwo,
+        nextPowerOfTwo);
 });

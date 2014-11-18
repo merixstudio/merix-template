@@ -12,7 +12,7 @@ var imagemin = require('gulp-imagemin');
 var pngcrush = require('imagemin-pngcrush');
 
 var TEMPLATES_SRC = './templates/**/*';
-var TEMPLATES_TO_BUILD = './templates/!(_)*.html';
+var TEMPLATES_TO_BUILD = './templates/**/!(_)*.html';
 var STYLES_SRC = './styles/**/*';
 var STYLES_TO_BUILD = './_build/styles/';
 var BUILD_SRC = './_build/**/*';
@@ -22,7 +22,7 @@ var COPY_TASKS = {
     'fonts': ['./fonts/**/*', './_build/fonts/'],
     'images': ['./images/**/*', './_build/images/'],
     'media': ['./media/**/*', './_build/media/'],
-    'templatesToCopy': [['./templates/**/*', '!./templates/**/*.html', '!./templates/**/readme.txt'], './_build']
+    'templatesToCopy': [['./templates/**/!(_)*.html', '!./templates/**/readme.txt'], './_build']
 };
 
 var MEMORY_USAGE_PATHS = ['./images/**/*', './media/**/*'];
@@ -112,7 +112,7 @@ for (var name in COPY_TASKS)
     copyFilesTask(name, COPY_TASKS[name][0], COPY_TASKS[name][1]);
 
 
-gulp.task('zip', ['templates', 'styles', 'scripts', 'fonts', 'images', 'media'], function() {
+gulp.task('zip', ['templates', 'ajax', 'styles', 'scripts', 'fonts', 'images', 'media'], function() {
     exec('cd _build && 7z a ../build.zip *');
 });
 

@@ -1,38 +1,65 @@
 ****************
-Nebula Framework
+Pigie Framework
 ****************
-
-Nebula Framework is a small and fast JavaScript+CSS Web framework used to build web-based user interfaces for complex
-web sites (not single-page applications). Created by `Merixstudio <http://www.merixstudio.com/>`_ and used as a base for
-many of our sites.
+(Nebula Framework Fork - 95fe22c)
 
 .. warning::
-   This project is in very early development stage!
+   Dokumentacja w przygotowaniu
 
 
-Using Nebula
+Cechy framworka
 ============
 
-To use Nebula just clone it's repository::
+*//TODO:*/
 
-   hg clone ssh://hg@bitbucket.org/merixstudio/nebula
+Struktura katalogów (templates)
+============
 
-Or this one::
+Szablony wywoływane zapytaniami AJAX umieszczamy w katalogu::
 
-   git clone git@github.com:merixstudio/nebula.git
+   /templates/ajax/
 
-It's recommended to install `node.js <http://nodejs.org/>` and `gulp.js <http://gulpjs.com/>`, if you want to use some
-of the features. When node.js and gulp.js are installed, then type this at command line in Nebula directory to install
-any additional dependencies::
+Fragmenty kodu, które są powielane w kilku miejscach w projekcie::
 
-   npm install
+   /templates/elements/
 
-To build project type this at commandline::
+Skrypty wrzucamy do pliku::
 
-   gulp
+   /templates/elements/_scripts.html
 
+Style wrzucamy do pliku::
 
-Running the test suite
-======================
+   /templates/elements/_styles.html
 
-Just open the ``scripts/nebula/tests/index.html`` file in any browser.
+Szablony podstron znajdują się w ::
+
+   /templates/layouts/
+
+Makra znajdziemy w::
+
+   /templates/macros/
+
+.. note::
+   Plik został przygotowany tak, by nie było trzeba dokonywać w nim żadnych zmian w trakcie składania szablonu! Zostały w nim umieszczone style pomocnicze oraz style funkcjonalne dla dołączonych skryptów.
+
+Zaimplementowane dodatkowe moduły
+============
+
+* widgets/accordions.js::
+ Wykorzystuje: *nebula/viewport*
+ 
+* widgets/select_field.js::
+ Wykorzystuje: *detect, closest_scrollable, scrollable, offset_relative_to, safe_on*
+ 
+* widgets/file_field.js::
+ Wykorzystuje: *translate*
+ 
+* widgets/input_counter.js::
+ Wykorzystuje: *translate*
+
+* widgets/media_set.js::
+ Wykorzystuje: *throttle, image_loader, safe_on*
+ 
+* widgets/modal.js::
+ Wykorzystuje: *nebula/signal*
+ 

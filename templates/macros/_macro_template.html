@@ -1,0 +1,11 @@
+{% macro lorem(count) %}
+    {% set dummyText = ["Lorem", "ipsum", "dolor", "sit", "amet,", "consectetur", "adipiscing", "elit.", "Curabitur", "malesuada", "neque", "sed", "turpis", "aliquam,", "a", "congue", "mauris", "rhoncus.", "Aenean", "non", "ligula", "urna.", "Proin", "condimentum", "massa", "et", "imperdiet", "blandit.", "Maecenas", "non", "malesuada", "purus,", "eget", "ultricies", "lacus.", "Suspendisse", "at", "placerat", "urna.", "Phasellus", "semper", "adipiscing", "nulla", "et", "pharetra.", "Quisque", "sed", "odio", "eget", "ligula", "interdum", "rutrum", "eu", "eu", "nisi.", "Aliquam", "dapibus", "nunc", "mi,", "sed", "condimentum", "metus", "mollis", "nec.", "Morbi", "eget", "pulvinar", "erat.", "Nulla", "viverra", "id", "felis", "a", "dictum"] %}
+    {% set output = dummyText.slice(0, count) %}
+
+    {{ output|join(' ') }}
+
+{% endmacro %}
+
+{% macro toString(path) %}
+    {% include path %}
+{% endmacro %}

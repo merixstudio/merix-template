@@ -1,11 +1,20 @@
 /*
- * Base styles
+ *   BASE STYLES
+ *
+ * ! All changes should be overwritten in the file main.css !
  */
-html {overflow-y: scroll; -ms-overflow-style: auto}
-body {min-height: 100%; background: #fff; color: #000; font: 12px/1.5 /* 18px */ 'Arial', 'Helvetica', sans-serif}
+
+html {overflow-y: scroll; -ms-overflow-style: auto; height: 100%}
+html.no-scroll {overflow-y: hidden !important}
+
+body {height: 100%; background: #fff; color: #000; font: 12px/1.5 /* 18px */ 'Arial', 'Helvetica', sans-serif}
 body * {-moz-box-sizing: border-box; box-sizing: border-box; margin: 0; padding: 0; text-overflow: ellipsis; list-style: none}
 
+.page-wrap {min-height: 100%}
+
 a {text-decoration: none}
+
+figure img {display: block; width: 100%}
 
 /* Disable scrollbar and scrolling */
 .clip {overflow: hidden}
@@ -15,3 +24,59 @@ a {text-decoration: none}
 
 /* For backend developers: mark elements as not finished (when integrating templates with backend). */
 ._placeholder {outline: 2px dashed rgba(255, 0, 255, .33) !important}
+
+/* Remove shadows on inputs in iOS */
+.ios input, .ios select, .ios textarea {-webkit-appearance: none}
+
+/* Text classes */
+.text-bold {font-weight: 700}
+.text-italic {font-style: italic}
+.text-left {text-align: left}
+.text-center {text-align: center}
+.text-right {text-align: right}
+.text-uppercase {text-transform: uppercase}
+.text-lowercase {text-transform: lowercase}
+.text-hide {text-indent: -999em}
+
+.text-hide[class*="icon-"]:before {float: left; text-indent: 0;}
+
+/* Table scroll */
+.table-wrap {width: 100%; overflow-x: auto}
+
+
+/* Accordions */
+.accordion>.clip {position: relative; -webkit-transition: height 0.25s ease; transition: height 0.25s ease}
+.accordion>.clip.closed {height: 0 !important}
+
+.accordion-toggle:before {content: '\e604'; font-family: 'Icons'}
+.accordion-toggle.closed:before {content: '\e605'}
+.accordion-content {position: absolute; bottom: 0; width: 100%; padding-top: 10px}
+
+/* Buttons */
+.button.text-hide {padding-left: 0; padding-right: 0; text-indent: -999em}
+.button.text-hide[class*="icon-"]:before {float: right; width: 100%; margin: auto; text-align: center}
+
+/* Select box */
+.fake-select {overflow: hidden; position: relative; display: block; width: 100%; white-space: nowrap; cursor: pointer}
+.fake-select:before {float: right; margin-left: 10px}
+.fake-select .value {overflow: hidden; display: block}
+.fake-select select {left: -100%; width: 100%}
+.fake-dropdown {position: absolute}
+.fake-dropdown .scrollable {max-height: 200px}
+.fake-dropdown a {overflow: hidden; display: block; text-decoration: none; white-space: nowrap}
+
+/* Scrollbar */
+textarea {width: 100%; border: 0; background: transparent; resize: none}
+.scrollable {overflow-y: scroll !important; overflow-x: hidden}
+.scrollbar-wrapper {position: relative; display: block}
+.scrollbar-clip {overflow: hidden; display: block}
+.scrollbar-offset {display: block}
+.scrollbar {position: absolute}
+.scrollbar .handle {position: absolute; width: 100%}
+.scrollbar.hidden {display: none}
+
+/* Modal window */
+.overlay {position: fixed; top: 0; left: 0; z-index: 999; width: 100%; height: 100%}
+.overlay .overlay-content {position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: auto; overflow-y: scroll; -webkit-overflow-scrolling: touch}
+.overlay .overlay-background {position: absolute; width: 100%; height: 100%}
+.box-modal {display: none; position: relative; overflow: visible; width: 100%; max-width: 410px; margin: 0 auto}

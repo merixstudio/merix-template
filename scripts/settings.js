@@ -39,5 +39,14 @@ define('settings', {
         //    'medium': [300, 699, 'self'],
         //    'big': [700, Infinity, 'self'],
         //}
+    },
+    
+    'TRANSLATIONS': {
+        'ENG': {
+            'no_file': 'Click to select',
+            'characters': 'characters',
+            'hide': 'hide',
+            'message_delete_confirm': 'Do you really want to delete this message?',
+        }
     }
 });

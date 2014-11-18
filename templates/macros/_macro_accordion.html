@@ -1,0 +1,13 @@
+{% macro accordion(kwargs) %}
+    {% import '_macro_buttons.html' as buttons %}
+    <div class="accordion">
+        <header>
+            {{ buttons.button(kwargs.label, '', '', {'class': 'block accordion-toggle', 'data-target': kwargs.id}) }}
+        </header>
+        <div class="clip" id="{{ kwargs.id }}">
+            <div class="accordion-content">
+                {{ kwargs.content || '<p>Lorem ipsum</p>'|safe }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}

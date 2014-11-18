@@ -8,6 +8,7 @@ syntax: glob
 syntax: regexp
 
 ^_source/
+^nbproject/
 ^docs/_build/
 ^_build/
 ^build\.zip

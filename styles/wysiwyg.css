@@ -13,10 +13,12 @@
 .wysiwyg *+ul,
 .wysiwyg *+figure {margin-top: 18px}
 
-.wysiwyg ol,
-.wysiwyg ul {margin-left: 0; padding-left: 40px}
-.wysiwyg ul>li {overflow: visible; list-style: disc}
-.wysiwyg ol>li {overflow: visible; list-style: decimal}
+.wysiwyg li {position: relative; padding-left: 40px}
+.wysiwyg li:before {content: '♦'; position: absolute; left: 0; width: 28px; padding: 4px 0; color: #d97d34; text-align: center; line-height: 1}
+.wysiwyg li+li {margin-top: 10px}
+
+.wysiwyg ol>li {counter-increment: ordered-list}
+.wysiwyg ol>li:before {content: counter(ordered-list); padding: 7px 0; background: #d97d34; color: #fff; font-size: 14px}
 
 .wysiwyg li ol,
 .wysiwyg li ul {margin-top: 0; margin-bottom: 0}
@@ -30,7 +32,7 @@
 
 .wysiwyg dt {font-weight: 700}
 
-.wysiwyg a {color: #f00; text-decoration: none}
+.wysiwyg a {color: #d97d34; text-decoration: none}
 .wysiwyg a:hover {text-decoration: underline}
 
 .wysiwyg img {display: inline-block; vertical-align: middle}

@@ -1,0 +1,474 @@
+{% extends 'layouts/_default.html' %}
+{% import 'macros/_macro_forms.html' as forms %}
+{% import 'macros/_macro_buttons.html' as buttons %}
+{% import 'macros/_macro_accordion.html' as accordion %}
+{% import 'macros/_macro_template.html' as template %}
+
+{% set page_title = 'Common' %}
+
+{% block page_content %}
+
+<style>
+    fieldset {position: relative; min-width: 0; padding: 50px 0; border: 0}
+    fieldset legend {position: absolute; left: -140px; width: 120px; font-size: 18px; font-weight: 700}
+    code {display: block; padding-top: 10px}
+    code:before {content: '.icon-'; opacity: 0.2;}
+    
+    .viewport-960 fieldset legend,
+    .viewport-720 fieldset legend,
+    .viewport-480 fieldset legend,
+    .viewport-320 fieldset legend {position: static; padding-top: 20px}
+</style>
+
+<section class="page-column">
+
+    <fieldset>
+        <legend>Headers</legend>
+
+        <div class="wysiwyg">
+            <h1>H1 Lorem ipsum</h1>
+            <h2>H2 Lorem ipsum</h1>
+            <h3>H3 Lorem ipsum</h1>
+            <h4>H4 Lorem ipsum</h1>
+        </div>
+    </fieldset>
+
+    <fieldset class="page-section">
+        <legend>Text</legend>
+
+        <div class="wysiwyg">
+            <p>Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing</a> elit. Morbi vehicula congue erat tempus malesuada. Curabitur euismod lectus vitae sem consequat dignissim. Vestibulum vel porttitor ante. Proin aliquam pulvinar pretium. Donec consequat, lorem vel tempus placerat, nulla ipsum dignissim mauris, eget mattis ligula dolor ut risus. Ut eget molestie ligula. Praesent neque ante, gravida et purus non, ultricies ultricies magna. Curabitur cursus vel urna vel commodo. Aenean at orci condimentum, fringilla massa non, aliquam justo. Aliquam tincidunt et libero in ultricies.</p>
+
+            <p><strong>This is lorem ipsum macro:</strong> {{ template.lorem(74) }}</p>
+        </div>
+    </fieldset>
+
+    <fieldset class="page-section">
+        <legend>Lists</legend>
+
+        <div class="wysiwyg">
+            <p>Unordered list:</p>
+
+            <ul>
+                <li>Lorem ipsum</li>
+                <li>Dolor sit amet</li>
+                <li>Nullam viverra sollicitudin venenatis. Proin cursus laoreet urna auctor dignissim. Fusce tincidunt odio ac neque eleifend, at interdum leo facilisis. Nunc venenatis, ante nec laoreet aliquam, odio odio pharetra sapien, quis vehicula nisl arcu a purus. Quisque dapibus sapien auctor urna euismod congue. Etiam mi risus, posuere non interdum et, scelerisque sit amet nibh. Mauris sed aliquam orci. Nunc hendrerit ligula erat, ut fringilla libero molestie sed. Aliquam nec tortor sit amet augue interdum imperdiet eleifend quis odio.</li>
+                <li>Consectetur adipiscing</li>
+            </ul>
+
+            <p>Ordered list:</p>
+
+            <ol>
+                <li>Lorem ipsum</li>
+                <li>Dolor sit amet</li>
+                <li>Nullam viverra sollicitudin venenatis. Proin cursus laoreet urna auctor dignissim. Fusce tincidunt odio ac neque eleifend, at interdum leo facilisis. Nunc venenatis, ante nec laoreet aliquam, odio odio pharetra sapien, quis vehicula nisl arcu a purus. Quisque dapibus sapien auctor urna euismod congue. Etiam mi risus, posuere non interdum et, scelerisque sit amet nibh. Mauris sed aliquam orci. Nunc hendrerit ligula erat, ut fringilla libero molestie sed. Aliquam nec tortor sit amet augue interdum imperdiet eleifend quis odio.</li>
+                <li>Consectetur adipiscing</li>
+            </ol>
+        </div>
+    </fieldset>
+
+    <fieldset class="page-section">
+        <legend>Blockquote</legend>
+
+        <div class="wysiwyg">
+            <blockquote>
+                <p>Nullam viverra sollicitudin venenatis. Proin cursus laoreet urna auctor dignissim. Fusce tincidunt odio ac neque eleifend, at interdum leo facilisis. Nunc venenatis, ante nec laoreet aliquam, odio odio pharetra sapien, quis vehicula nisl arcu a purus. Quisque dapibus sapien auctor urna euismod congue. Etiam mi risus, posuere non interdum et, scelerisque sit amet nibh. Mauris sed aliquam orci. Nunc hendrerit ligula erat, ut fringilla libero molestie sed. Aliquam nec tortor sit amet augue interdum imperdiet eleifend quis odio.</p>
+            </blockquote>
+        </div>
+    </fieldset>
+
+    <div class="page-section">
+        <legend>Table</legend>
+
+        <div class="table-wrap">
+            <table>
+                <tr>
+                    <th>Table header</th>
+                    <th>Table header</th>
+                    <th>Table header</th>
+                    <th>Table header</th>
+                </tr>
+                {% for i in Array(5) %}
+                <tr>
+                    <th>Table header</th>
+                    <td>Lorem ipsum</td>
+                    <td>Lorem ipsum</td>
+                    <td>Lorem ipsum</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <fieldset class="page-section">
+        <legend>Icons</legend>
+
+        <div class="grid padding">
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-check"><code>check</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-plus"><code>plus</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-minus"><code>minus</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-close"><code>close</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-menu"><code>menu</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-facebook"><code>facebook</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-youtube"><code>youtube</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-twitter"><code>twitter</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-youtube"><code>youtube</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-googleplus"><code>googleplus</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-linkedin"><code>linkedin</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-calendar"><code>calendar</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-reply"><code>reply</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-clock"><code>clock</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-star"><code>star</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-share"><code>share</code></span>
+            </p>
+            <p class="v320-1-of-2 v720-1-of-4 text-center">
+                <span class="icon-search"><code>search</code></span>
+            </p>
+        </div>
+    </fieldset>
+
+    <fieldset class="page-section">
+        <legend>Buttons</legend>
+
+        <div class="grid padding middle">
+            <p class="v320-hide v480-hide v720-1-of-4">Types</p>
+            <p class="v320-hide v480-hide v720-1-of-4">Link</p>
+            <p class="v320-hide v480-hide v720-1-of-4">Button</p>
+            <p class="v320-hide v480-hide v720-1-of-4">Submit</p>
+
+            <p class="v320-1 v720-1-of-4">Default</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text') }}</p>
+
+            <p class="v320-1 v720-1-of-4">Big</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.linkBig('Button text') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.buttonBig('Button text') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submitBig('Button text') }}</p>
+
+            <p class="v320-1 v720-1-of-4">Disabled</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text', '', '', {'class': 'disabled'}) }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text', '', '', {'disabled': 'disabled'}) }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text', '', '', {'disabled': 'disabled'}) }}</p>
+            
+            <p class="v320-1 v720-1-of-4">Secondary</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.linkSecondary('Button text') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.buttonSecondary('Button text') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submitSecondary('Button text') }}</p>
+
+            <p class="v320-1 v720-1-of-4">Secondary big</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.linkSecondaryBig('Button text') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.buttonSecondaryBig('Button text') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submitSecondaryBig('Button text') }}</p>
+
+            <p class="v320-1 v720-1-of-4">Secondary disabled</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.linkSecondary('Button text', '', '', {'class': 'disabled'}) }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.buttonSecondary('Button text', '', '', {'disabled': 'disabled'}) }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submitSecondary('Button text', '', '', {'disabled': 'disabled'}) }}</p>
+        </div>
+
+    </fieldset>
+
+    <fieldset class="page-section">
+        <legend>Buttons with icons</legend>
+
+        <div class="grid padding middle">
+            <p class="v320-hide v480-hide v720-1-of-4">Types</p>
+            <p class="v320-hide v480-hide v720-1-of-4">Link</p>
+            <p class="v320-hide v480-hide v720-1-of-4">Button</p>
+            <p class="v320-hide v480-hide v720-1-of-4">Submit</p>
+
+            <p class="v320-1 v720-1-of-4">Icon on the right, small</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text', '', 'check') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text', '', 'check') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text', '', 'check') }}</p>
+
+            <p class="v320-1 v720-1-of-4">Icon on the right, big</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.linkBig('Button text', '', 'check') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.buttonBig('Button text', '', 'check') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submitBig('Button text', '', 'check') }}</p>
+
+            <p class="v320-1 v720-1-of-4">Icon on the left, small</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text', 'check', '') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text', 'check', '') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text', 'check', '') }}</p>
+
+            <p class="v320-1 v720-1-of-4">Icon on the left, big</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.linkBig('Button text', 'check', '') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.buttonBig('Button text', 'check', '') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submitBig('Button text', 'check', '') }}</p>
+
+            <p class="v320-1 v720-1-of-4">Icon on both sides, small</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text', 'check', 'check') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text', 'check', 'check') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text', 'check', 'check') }}</p>
+
+            <p class="v320-1 v720-1-of-4">Icon on both sides, big</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.linkBig('Button text', 'check', 'check') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.buttonBig('Button text', 'check', 'check') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submitBig('Button text', 'check', 'check') }}</p>
+            
+        </div>
+    </fieldset>
+
+    <fieldset class="page-section">
+        <legend>Buttons with icons only</legend>
+
+        <div class="grid padding middle">
+            <p class="v320-hide v480-hide v720-1-of-4">Types</p>
+            <p class="v320-hide v480-hide v720-1-of-4">Link</p>
+            <p class="v320-hide v480-hide v720-1-of-4">Button</p>
+            <p class="v320-hide v480-hide v720-1-of-4">Submit</p>
+
+            <p class="v320-1 v720-1-of-4">Small</p>
+            <p class="v320-1 v720-1-of-4">{{   buttons.linkNoText('Button text', '', 'check') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.buttonNoText('Button text', '', 'check') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submitNoText('Button text', '', 'check') }}</p>
+
+            <p class="v320-1 v720-1-of-4">Big</p>
+            <p class="v320-1 v720-1-of-4">{{   buttons.linkBigNoText('Button text', '', 'check') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.buttonBigNoText('Button text', '', 'check') }}</p>
+            <p class="v320-1 v720-1-of-4">{{ buttons.submitBigNoText('Button text', '', 'check') }}</p>
+
+        </div>
+    </fieldset>
+
+    <fieldset class="page-section">
+        <legend>Pagination</legend>
+
+        <div class="pagination">
+            <ul class="grid padding small middle">
+                <li>{{ buttons.linkLightNoText('', '', 'arrow-left') }}</li>
+                <li>{{ buttons.linkLight('1', '', '', {'class': 'small-padding'}) }}</li>
+                <li>{{ buttons.linkLight('2', '', '', {'class': 'small-padding active'}) }}</li>
+                <li>{{ buttons.linkLight('3', '', '', {'class': 'small-padding'}) }}</li>
+                <li>{{ buttons.linkLight('4', '', '', {'class': 'small-padding'}) }}</li>
+                <li>{{ buttons.linkLight('99', '', '', {'class': 'small-padding'}) }}</li>
+                <li>{{ buttons.linkLight('999', '', '', {'class': 'small-padding'}) }}</li>
+                <li>{{ buttons.linkLight('9999', '', '', {'class': 'small-padding'}) }}</li>
+                <li>{{ buttons.linkLightNoText('', '', 'arrow-right') }}</li>
+            </ul>
+        </div>
+    </fieldset>
+
+    <fieldset class="page-section">
+        <legend>Accordions</legend>
+
+        <div class="grid padding small">
+            <div class="v320-1">
+                {{ accordion.accordion({'id': 'accordion-1', 'label': 'Wishlist <span class="count">6</span> <span class="notice-count">2</span>', 'content': '<p>' + template.lorem(15) + '</p>'}) }}
+            </div>
+            <div class="v320-1">
+                {{ accordion.accordion({'id': 'accordion-2', 'content': template.toString('../elements/_lorem.html')}) }}
+            </div>
+            <div class="v320-1">
+                {{ accordion.accordion({'id': 'accordion-3', 'label': 'Achievements <span class="count">4</span>', 'content': template.toString('../elements/_lorem.html')}) }}
+            </div>
+        </div>
+    </fieldset>
+    
+    <fieldset class="page-section">
+        <legend>Modal</legend>
+
+        <div class="grid padding small">
+            <div class="v320-1">
+                <a href="ajax/modal.html" class="modal-open">Click to open</a>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="page-section">
+        <legend>Textfields / select</legend>
+
+        <div class="grid padding small">
+            <p class="v960-1-of-4">
+                {{ forms.textfield() }}
+            </p>
+            <p class="v960-1-of-4">
+                {{ forms.password() }}
+            </p>
+            <p class="v320-1-of-4">
+                {{ forms.select() }}
+            </p>
+            <p class="v320-1-of-4">
+                {{ buttons.link() }}
+            </p>
+        </div>
+    </fieldset>
+
+    <fieldset class="page-section">
+        <legend>Textfields / select (big)</legend>
+
+        <div class="grid padding small">
+            <p class="v960-1-of-4">
+                {{ forms.bigTextfield() }}
+            </p>
+            <p class="v960-1-of-4">
+                {{ forms.bigPassword() }}
+            </p>
+            <p class="v320-1-of-4">
+                {{ forms.bigSelect() }}
+            </p>
+            <p class="v320-1-of-4">
+                {{ buttons.linkBig() }}
+            </p>
+        </div>
+    </fieldset>
+
+    <fieldset class="page-section">
+        <legend>Textarea</legend>
+        <p class="v320-1-of-2">
+            {{ forms.textarea() }}
+        </p>
+    </fieldset>
+    
+    <fieldset class="page-section">
+        <legend>Input counter</legend>
+        <div class="grid padding">
+            <p class="v320-1-of-2">
+                {{ forms.textarea({'class': 'input-count'}) }}
+                <label class="text-count float-right">140 characters</label>
+            </p>
+            <p class="v320-1-of-2">
+                {{ forms.textfield({'class': 'input-count'}) }}
+                <label class="text-count float-right">140 characters</label>
+            </p>
+        </div>
+    </fieldset>
+    
+    <fieldset class="page-section">
+        <legend>Checkboxes / radiobuttons</legend>
+
+        <p>
+            {{ forms.checkbox() }}
+            {{ forms.checkbox({'id': 'test', 'name': 'test', 'label': 'test'}) }}
+
+            {{ forms.radio({'name': 'radio-test'}) }}
+            {{ forms.radio({'name': 'radio-test'}) }}
+            {{ forms.radio({'name': 'radio-test', 'id': 'radio1'}) }}
+        </p>
+    </fieldset>
+    
+    <fieldset class="page-section">
+        <legend>File field</legend>
+        
+        <div class="grid padding small">
+            <p class="v960-1-of-4">
+                {{ forms.file() }}
+            </p>
+        </div>
+    </fieldset>
+    <fieldset class="page-section">
+        <legend>Example form layout</legend>
+
+
+        <div class="grid padding large v320-1-of-2">
+            <div class="v320-1">
+                <div class="wysiwyg">
+                    <h1>Contact us</h1>
+                    <p>Answers to a number of common questions can be found on the Help page –before going through the trouble of writing out an email, why not have a look there first and see if it holds the answer to your question?</p>
+                </div>
+            </div>
+
+            <div class="v320-1">
+                <form class="grid padding">
+                    <div class="v320-1">
+                        <div class="grid padding small">
+                            <p class="v320-1">
+                                <label>Your name</label>
+                            </p>
+                            <p class="v320-1">
+                                {{ forms.bigTextfield() }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="v320-1">
+                        <div class="grid padding small">
+                            <p class="v320-1">
+                                <label>Email address</label>
+                            </p>
+                            <p class="v320-1">
+                                {{ forms.bigTextfield() }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="v320-1">
+                        <div class="grid padding small">
+                            <p class="v320-1">
+                                <label>Select type of your inquiry</label>
+                            </p>
+                            <p class="v320-1">
+                                {{ forms.bigSelect() }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="v320-1">
+                        <div class="grid padding small">
+                            <p class="v320-1">
+                                <label>Your message</label>
+                            </p>
+                            <p class="v320-1">
+                                {{ forms.textarea() }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="v320-1">
+                        <p>
+                            {{ buttons.submit('Send', '', 'arrow-right') }}
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Slider</legend>
+        <div class="slider">
+            //TODO:
+        </div>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Tabs</legend>
+        <div class="tabs">
+            //TODO:
+        </div>
+    </fieldset>
+
+
+</section>
+
+
+{% endblock %}

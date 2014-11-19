@@ -63,3 +63,6 @@ Zaimplementowane dodatkowe moduły
 * widgets/modal.js::
  Wykorzystuje: *nebula/signal*
  
+* widgets/equal_height.js::
+ Wykorzystuje: *nebula/viewport*
+ 

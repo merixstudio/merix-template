@@ -1,4 +1,4 @@
-define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate', 'media_set', 'scrollbar', 'widgets/accordions', 'widgets/file_field', 'widgets/modal', 'widgets/unify_height'], function(jQuery, viewport, smartBlocks, translate, mediaSet, scrollbar, accordions, fileField, modal, unifyHeight) {
+define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate', 'media_set', 'scrollbar', 'widgets/accordions', 'widgets/file_field', 'widgets/modal', 'widgets/equal_height'], function(jQuery, viewport, smartBlocks, translate, mediaSet, scrollbar, accordions, fileField, modal, equalHeight) {
     'use strict';
 
     function Site() {
@@ -17,11 +17,14 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate',
             return jQuery(root).is(selector) ? jQuery(root) : jQuery(root).find('*').filter(selector);
         }
         
+        /* Mobile menu */
+        this.createMobileMenu();
+        
         /* Media Set */
         find('script[type="image/mx-media-set"]').each(mediaSet);
         
-        /* Unify height */
-        //unifyHeight(selector, elementsPerRow);
+        /* Equal height */
+        //find('[data-equal-height-group]').each(equalHeight.handler);
         
         /* Forms */
         find('select').selectField();
@@ -44,7 +47,19 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate',
             });
         });
         
-        /* Mobile menu */
+        /* -------------------- */
+        
+        /* Put own scripts here */
+        
+        
+        
+        /* -------------------- */
+        
+        //equalHeight.updateAll();
+        smartBlocks.updateTree(root);
+    };
+
+    Site.prototype.createMobileMenu = function() {
         jQuery('.mobile-menu').html('\
             <a class="icon-menu text-hide">Menu</a>\
             <nav>' +
@@ -64,17 +79,7 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate',
             }
             
         });
-        
-        /* -------------------- */
-        
-        /* Put own scripts here */
-        
-        
-        
-        /* -------------------- */
-        
-        smartBlocks.updateTree(root);
-    };
+    }
 
     return Site;
 });

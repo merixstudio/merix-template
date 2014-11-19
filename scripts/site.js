@@ -1,4 +1,4 @@
-define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate', 'media_set', 'scrollbar', 'widgets/accordions', 'widgets/file_field', 'widgets/modal'], function(jQuery, viewport, smartBlocks, translate, mediaSet, scrollbar, accordions, fileField, modal) {
+define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate', 'media_set', 'scrollbar', 'widgets/accordions', 'widgets/file_field', 'widgets/modal', 'widgets/unify_height'], function(jQuery, viewport, smartBlocks, translate, mediaSet, scrollbar, accordions, fileField, modal, unifyHeight) {
     'use strict';
 
     function Site() {
@@ -19,6 +19,9 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate',
         
         /* Media Set */
         find('script[type="image/mx-media-set"]').each(mediaSet);
+        
+        /* Unify height */
+        //unifyHeight(selector, elementsPerRow);
         
         /* Forms */
         find('select').selectField();

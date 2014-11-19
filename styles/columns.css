@@ -347,7 +347,7 @@
     .v720-float-none {float: none}
 }
 
-@media (min-width: 960px) and (max-width: 1319px) {
+@media (min-width: 960px) and (max-width: 1279px) {
     .v960-hide {display: none !important}
 
     .v960-no-padding-top    {padding-top:    0 !important}

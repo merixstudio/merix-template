@@ -15,7 +15,7 @@
             <script src="scripts/libs/html5shiv.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body{% if page_index %} class="page-index"{% endif %}>
         <div class="page-wrap">
             {% block page_header %}{% include "../elements/_header.html" %}{% endblock %}
 

@@ -20,7 +20,7 @@ define('detect', [], function() {
         firefox = ua.match(/Firefox\/([\d.]+)/),
         ie = ua.match(/(Trident|MSIE\s([\d.])+)/),
         safari = webkit && ua.match(/Mobile\//) && !chrome,
-        webview = ua.match(/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/) && !chrome
+        webview = ua.match(/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/) && !chrome,
         wp8 = ua.match(/Trident\/([\d.]+)/) && ua.match(/IEMobile\/([\d.]+)/)
 
     if (browser.webkit = !!webkit) browser.version = webkit[1]

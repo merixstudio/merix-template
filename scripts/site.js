@@ -24,7 +24,7 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate',
         find('script[type="image/mx-media-set"]').each(mediaSet);
         
         /* Equal height */
-        //find('[data-equal-height-group]').each(equalHeight.handler);
+        find('[data-equal-height-group]').each(equalHeight.handler);
         
         /* Forms */
         find('select').selectField();
@@ -55,7 +55,7 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate',
         
         /* -------------------- */
         
-        //equalHeight.updateAll();
+        equalHeight.updateAll();
         smartBlocks.updateTree(root);
     };
 

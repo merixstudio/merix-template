@@ -16,13 +16,26 @@ define('widgets/equal_height', ['jquery', 'nebula/viewport'], function(jQuery, v
 
     function updateGroup(groupName) {
         var height = 0;
-        
-        var elements = jQuery('[data-equal-height-group="' + groupName + '"]').css('height', '');
+        var elements = [];
+
+        jQuery('[data-equal-height-group="' + groupName + '"]').css('height', '').each(function() {
+            var element = jQuery(this);
+
+            if (typeof element.attr('data-group-viewport') != 'undefined') {
+                var viewports = element.data('group-viewport').toString().split(' ');
+                for (var i = 0; i < viewports.length; i++) {
+                    if (viewport.is(viewports[i]))
+                        elements.push(element);
+                }
+            } else
+                elements.push(element);
+        });
 
         for (var i = 0; i < elements.length; i++)
-            height = Math.max(height, jQuery(elements[i]).outerHeight());
+            height = Math.max(height, elements[i].outerHeight());
 
-        elements.css('height', height);
+        for (var i = 0; i < elements.length; i++)
+            elements[i].css('height', height);
     }
 
     function handler() {

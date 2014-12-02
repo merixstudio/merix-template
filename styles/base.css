@@ -74,8 +74,8 @@ textarea {width: 100%; border: 0; background: transparent; resize: none}
 .scrollbar .handle {position: absolute; width: 100%}
 .scrollbar.hidden {display: none}
 
-/* Remove shadows on inputs in iOS */
-.ios input, .ios select, .ios textarea {-webkit-appearance: none}
+/* Remove default form appearance in iOS */
+.ios input, .ios select, .ios textarea {-webkit-appearance: none; border-radius: 0}
 
 /* Modal window */
 .overlay {position: fixed; top: 0; left: 0; z-index: 999; width: 100%; height: 100%}

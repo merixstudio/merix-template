@@ -1,4 +1,4 @@
-define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate', 'media_set', 'scrollbar', 'widgets/accordions', 'widgets/file_field', 'widgets/modal', 'widgets/equal_height'], function(jQuery, viewport, smartBlocks, translate, mediaSet, scrollbar, accordions, fileField, modal, equalHeight) {
+define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate', 'media_set', 'scrollbar', 'widgets/accordions', 'widgets/file_field', 'widgets/modal', 'widgets/equal_height', 'widgets/slider'], function(jQuery, viewport, smartBlocks, translate, mediaSet, scrollbar, accordions, fileField, modal, equalHeight, Slider) {
     'use strict';
 
     function Site() {
@@ -44,6 +44,35 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate',
                     jQuery('body').append(response);
                     modal.open(jQuery('.box-modal'));
                 }
+            });
+        });
+        
+        /* Slider */
+        find('.slider:not(.slider-thumbnails .slider)').each(function() {
+            var element = jQuery(this);
+            var sliderHome = element.parent();
+            var sliderWidth = element.width();
+            var slider = new Slider(element, {
+                'unit': '%',
+                'mode': Slider.MODE_CAROUSEL
+            });
+            
+            if (slider.itemState.length > 1) {
+                var navigation = '<a href="#" class="icon-arrow-left slider-navigation previous"></a><a href="#" class="icon-arrow-right slider-navigation next"></a>';
+                sliderHome.append(navigation);
+                sliderHome.addClass('navigations');
+            }
+            
+            sliderHome.find('.slider-navigation').each(function() {
+                jQuery(this).click(function(event) {
+                    event.preventDefault();
+
+                    var navigationLink = jQuery(this);
+                    if (navigationLink.hasClass('previous'))
+                        slider.next();
+                    else if (navigationLink.hasClass('next'))
+                        slider.previous();
+                });
             });
         });
         

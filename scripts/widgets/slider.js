@@ -1,4 +1,7 @@
 define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/signal'], function(jQuery, numbers, settings, gestures, Signal) {
+	
+	gestures.enable();
+
     // Check for transform support;
     var cssTransform;
     var prefixes = ['transform', '-webkit-transform', '-ms-transform'];

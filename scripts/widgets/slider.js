@@ -18,6 +18,7 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
         this.items = this.element.find('>*>li'); // Items in the slider.
         this.count = this.items.length; // Count of items in the slider.
         this.destination = this.position;
+		this.tempAuto = this.auto;
 
         this.itemState = [];
         for (var i = 0; i < this.count; i++)
@@ -172,10 +173,14 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
     };
 
     Slider.prototype.slideTo = function(position) {
-        this.disableAuto();
+        if (this.tempAuto && this.auto)
+            this.disableAuto();
+        
         this.destination = position;
         this.animate();
-        this.enableAuto();
+        
+        if (!(this.tempAuto) && this.auto)
+            this.enableAuto();
     };
 
     Slider.prototype.slideToIndex = function(index) {

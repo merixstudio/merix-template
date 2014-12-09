@@ -172,8 +172,10 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
     };
 
     Slider.prototype.slideTo = function(position) {
+        this.disableAuto();
         this.destination = position;
         this.animate();
+        this.enableAuto();
     };
 
     Slider.prototype.slideToIndex = function(index) {

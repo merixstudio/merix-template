@@ -1,7 +1,7 @@
 define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/signal'], function(jQuery, numbers, settings, gestures, Signal) {
-	
-	gestures.enable();
-
+    
+    gestures.enable();
+    
     // Check for transform support;
     var cssTransform;
     var prefixes = ['transform', '-webkit-transform', '-ms-transform'];
@@ -18,7 +18,7 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
         this.items = this.element.find('>*>li'); // Items in the slider.
         this.count = this.items.length; // Count of items in the slider.
         this.destination = this.position;
-		this.tempAuto = this.auto;
+        this.tempAuto = this.auto;
 
         this.itemState = [];
         for (var i = 0; i < this.count; i++)
@@ -205,6 +205,8 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
     };
     
     Slider.prototype.enableAuto = function() {
+        this.tempAuto = true;
+        
         if (this.count <= this.perPage)
             return false;
 
@@ -215,6 +217,8 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
     };
 
     Slider.prototype.disableAuto = function() {
+        this.tempAuto = false;
+        
         if (this._autoTimer) {
             clearInterval(this._autoTimer);
             delete this._autoTimer;

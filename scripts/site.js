@@ -17,8 +17,12 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate',
             return jQuery(root).is(selector) ? jQuery(root) : jQuery(root).find('*').filter(selector);
         }
         
+        var self = this;
+        
         /* Mobile menu */
-        this.createMobileMenu();
+        find('.mobile-menu').each(function() {
+            self.createMobileMenu(jQuery(this));
+        });
         
         /* Media Set */
         find('script[type="image/mx-media-set"]').each(mediaSet);
@@ -88,27 +92,23 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate',
         smartBlocks.updateTree(root);
     };
 
-    Site.prototype.createMobileMenu = function() {
-        jQuery('.mobile-menu').html('\
-            <a class="icon-menu text-hide">Menu</a>\
+    Site.prototype.createMobileMenu = function(mobileMenu) {
+        var mainMenu = mobileMenu.closest('.page-header').find('.main-menu');
+        var mobileOpener = jQuery('<a class="icon-menu text-hide">Menu</a>').appendTo(mobileMenu);
+        mobileMenu.append('\
             <nav>' +
-                jQuery('.page-header .main-menu').clone().html()
+                mainMenu.clone().html()
             + '</nav>\
         ');
-        jQuery('.mobile-menu .icon-menu').click(function(event) {
+        mobileOpener.click(function(event) {
             event.preventDefault();
             var button = jQuery(this);
             
-            if (!button.hasClass('active')) {
-                button.addClass('active');
-                jQuery('.mobile-menu nav').stop(true, true).slideDown();
-            } else {
-                button.removeClass('active');
-                jQuery('.mobile-menu nav').stop(true, true).slideUp();
-            }
+            button.toggleClass('active');
+            mobileMenu.find('nav').stop(true, true).slideToggle();
             
         });
-    }
+    };
 
     return Site;
 });

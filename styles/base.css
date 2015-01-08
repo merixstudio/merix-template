@@ -63,7 +63,7 @@ figure img {display: block; width: 100%}
 .fake-select {overflow: hidden; position: relative; display: block; width: 100%; white-space: nowrap; cursor: pointer}
 .fake-select:before {float: right; margin-left: 10px}
 .fake-select .value {overflow: hidden; display: block}
-.fake-select select {left: -100%; width: 100%}
+.fake-select select {top: 0; left: 0; width: 100%; height: 100%}
 .fake-dropdown {position: absolute}
 .fake-dropdown .scrollable {max-height: 200px}
 .fake-dropdown a {overflow: hidden; display: block; text-decoration: none; white-space: nowrap}

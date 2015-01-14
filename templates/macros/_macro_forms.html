@@ -33,7 +33,9 @@
         {% endif %}
 
         {% for n,v in kwargs %}
-            {{n}}="{{v}}"
+            {% if tag !== 'select' and n !== 'options' %}
+                {{n}}="{{v}}"
+            {% endif %}
         {% endfor %}
     >
     {% if tag === 'select' %}

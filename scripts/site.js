@@ -1,4 +1,4 @@
-define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate', 'media_set', 'scrollbar', 'widgets/accordions', 'widgets/file_field', 'widgets/modal', 'widgets/equal_height', 'widgets/slider'], function(jQuery, viewport, smartBlocks, translate, mediaSet, scrollbar, accordions, fileField, modal, equalHeight, Slider) {
+define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate', 'media_set', 'scrollbar', 'widgets/accordions', 'widgets/file_field', 'widgets/placeholder', 'widgets/modal', 'widgets/equal_height', 'widgets/slider'], function(jQuery, viewport, smartBlocks, translate, mediaSet, scrollbar, accordions, fileField, placeholders, modal, equalHeight, Slider) {
     'use strict';
 
     function Site() {
@@ -34,6 +34,7 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate',
         find('select').selectField();
         find('input:file').fileField();
         find('textarea').scrollbar();
+        find('[placeholder]').placeholders();
         find('.input-count').inputCount('.text-count', 140);
 
         /* Modal */

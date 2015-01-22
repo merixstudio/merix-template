@@ -1,4 +1,10 @@
 /*
- * IE8 fixes
+ * IE9 fixes
  */
 html {font-size: 100%}
+
+// Textarea scrollbar
+.scrollbar-offset {margin: 0 !important}
+.textarea-wrapper {padding: 0}
+.textarea-wrapper textarea {overflow-y: auto !important; padding: 10px}
+.scrollbar {display: none}

@@ -1,5 +1,11 @@
-define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate', 'media_set', 'scrollbar', 'widgets/accordions', 'widgets/file_field', 'widgets/placeholder', 'widgets/modal', 'widgets/equal_height', 'widgets/slider'], function(jQuery, viewport, smartBlocks, translate, mediaSet, scrollbar, accordions, fileField, placeholders, modal, equalHeight, Slider) {
+define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate', 'scrollbar', 'widgets/file_field', 'widgets/placeholder', 'widgets/modal', 'widgets/equal_height'], function(jQuery, viewport, smartBlocks, translate, scrollbar, fileField, placeholders, modal, equalHeight) {
     'use strict';
+    
+    // Delete if unused
+    var validate = require('validate');
+    var mediaSet = require('media_set');
+    var accordions = require('widgets/accordions');
+    var Slider = require('widgets/slider');
 
     function Site() {
         viewport.enable();
@@ -34,7 +40,8 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate',
         find('select').selectField();
         find('input:file').fileField();
         find('textarea').scrollbar();
-        find('[placeholder]').placeholders();
+        //find('[data-placeholder]').placeholders();
+        find('form.validate').validate();
         find('.input-count').inputCount('.text-count', 140);
 
         /* Modal */

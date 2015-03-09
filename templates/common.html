@@ -392,10 +392,10 @@
         </div>
     </fieldset>
     <fieldset class="page-section">
-        <legend>Example form layout</legend>
+        <legend>Example form with validation</legend>
 
 
-        <div class="grid padding large v320-1-of-2">
+        <div class="grid padding large v320-1">
             <div class="v320-1">
                 <div class="wysiwyg">
                     <h1>Contact us</h1>
@@ -403,52 +403,122 @@
                 </div>
             </div>
 
+            
             <div class="v320-1">
-                <form class="grid padding">
-                    <div class="v320-1">
-                        <div class="grid padding small">
-                            <p class="v320-1">
-                                <label>Your name</label>
-                            </p>
-                            <p class="v320-1">
-                                {{ forms.bigTextfield() }}
-                            </p>
+                <form class="grid padding validate">
+                    <div class="v320-1-of-2">
+                        <div class="grid padding">
+                            <div class="v320-1">
+                                <div class="grid padding small">
+                                    <p class="v320-1">
+                                        <label>Your name</label>
+                                    </p>
+                                    <p class="v320-1">
+                                        {{ forms.bigTextfield({'data-validate': '{"required": true}'}) }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="v320-1">
+                                <div class="grid padding small">
+                                    <p class="v320-1">
+                                        <label>Email address</label>
+                                    </p>
+                                    <p class="v320-1">
+                                        {{ forms.bigTextfield({'id': 'mail', 'data-validate': '{"required": true, "email": true, "equal-to": "mail-repeat"}'}) }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="v320-1">
+                                <div class="grid padding small">
+                                    <p class="v320-1">
+                                        <label>Repeat Email address</label>
+                                    </p>
+                                    <p class="v320-1">
+                                        {{ forms.bigTextfield({'id': 'mail-repeat',  'data-validate': '{"required": true, "email": true}'}) }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="v320-1">
+                                <div class="grid padding small">
+                                    <p class="v320-1">
+                                        <label>Select type of your inquiry</label>
+                                    </p>
+                                    <p class="v320-1">
+                                        {{ forms.bigSelect({'data-validate': '{"required": true}'}) }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="v320-1">
+                                <div class="grid padding small">
+                                    <p class="v320-1">
+                                        <label>Sex</label>
+                                    </p>
+                                    <p class="v320-1">
+                                        {{ forms.radio({'label': 'male', 'name': 'sex', 'data-validate': '{"required": true}'}) }}
+                                        {{ forms.radio({'label': 'female', 'name': 'sex', 'data-validate': '{"required": true}'}) }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="v320-1">
+                                <div class="grid padding small">
+                                    <p class="v320-1">
+                                        <label>Please accept rules</label>
+                                    </p>
+                                    <p class="v320-1">
+                                        {{ forms.checkbox({'label': 'Rules', 'data-validate': '{"required": "Custom validation message"}'}) }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="v320-1">
-                        <div class="grid padding small">
-                            <p class="v320-1">
-                                <label>Email address</label>
-                            </p>
-                            <p class="v320-1">
-                                {{ forms.bigTextfield() }}
-                            </p>
+                    <div class="v320-1-of-2">
+                        <div class="grid padding">
+                            <div class="v320-1">
+                                <div class="grid padding small">
+                                    <p class="v320-1">
+                                        <label>Phone number</label>
+                                    </p>
+                                    <p class="v320-1">
+                                        {{ forms.bigTextfield({'data-placeholder': 'test', 'data-validate': '{"required": true, "postcode": true}'}) }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="v320-1">
+                                <div class="grid padding small">
+                                    <p class="v320-1">
+                                        <label>Letters only</label>
+                                    </p>
+                                    <p class="v320-1">
+                                        {{ forms.bigTextfield({'data-validate': '{"letters-only": true}'}) }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="v320-1">
+                                <div class="grid padding small">
+                                    <p class="v320-1">
+                                        <label>Numbers only, min 6</label>
+                                    </p>
+                                    <p class="v320-1">
+                                        {{ forms.bigTextfield({'data-validate': '{"numbers": true, "min-length": 6}'}) }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="v320-1">
+                                <div class="grid padding small">
+                                    <p class="v320-1">
+                                        <label>Your message</label>
+                                    </p>
+                                    <p class="v320-1">
+                                        {{ forms.textarea({'data-validate': '{"required": true}'}) }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="v320-1">
+                                <p>
+                                    {{ buttons.submit('Send', '', 'arrow-right') }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="v320-1">
-                        <div class="grid padding small">
-                            <p class="v320-1">
-                                <label>Select type of your inquiry</label>
-                            </p>
-                            <p class="v320-1">
-                                {{ forms.bigSelect() }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="v320-1">
-                        <div class="grid padding small">
-                            <p class="v320-1">
-                                <label>Your message</label>
-                            </p>
-                            <p class="v320-1">
-                                {{ forms.textarea() }}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="v320-1">
-                        <p>
-                            {{ buttons.submit('Send', '', 'arrow-right') }}
-                        </p>
                     </div>
                 </form>
             </div>

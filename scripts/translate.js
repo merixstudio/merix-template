@@ -1,22 +1,18 @@
 define('translate', ['jquery', 'settings'], function(jQuery, settings) {
     'use strict';
 
-    function translate(key) {
+    function translate(key, variables) {
+        var translation;
         var language = settings('LANGUAGE');
-        var translation = settings('TRANSLATIONS')[language][key];
-
-        if(translation == undefined) {
-            translation = settings('TRANSLATIONS')['ENG'][key];
-
-            if(translation == undefined) {
-                console.error('Can\'t find key "' + key + '" in translate array');
-                return '';
-            } else
-                console.warn('Can\'t find key "' + key + '" in "' + language + '" translate array');
-        }
-
-        return translation;
-
+        
+        if (typeof settings(key) != 'undefined')
+            translation = settings(key);
+        else
+            translation = settings('TRANSLATIONS')[language][key];
+        
+        return translation.replace(/{(\d+)}/g, function(match, number) {
+            return typeof variables[number] != 'undefined' ? variables[number] : match;
+        });
     }
 
     return translate;

@@ -33,7 +33,7 @@
         {% endif %}
 
         {% for n,v in kwargs %}
-            {% if tag !== 'select' and n !== 'options' %}
+            {% if tag === 'select' and n !== 'options' %}
                 {{n}}="{{v}}"
             {% endif %}
         {% endfor %}
@@ -94,7 +94,7 @@
 {% macro select(kwargs) %}
     {% set params = kwargs || {} %}
     {% if !params.options %}
-        {% set params.options = {'lorem': 'Lorem ipsum', 'dolor': 'Dolor sit amet'} %}
+        {% set params.options = {'': '-- empty --', 'lorem': 'Lorem ipsum', 'dolor': 'Dolor sit amet'} %}
     {% endif %}
     <label class="fake-select icon-arrow-down">
         {{ element('select', null, params) }}
@@ -104,7 +104,7 @@
 {% macro bigSelect(kwargs) %}
     {% set params = kwargs || {} %}
     {% if !params.options %}
-        {% set params.options = {'lorem': 'Lorem ipsum', 'dolor': 'Dolor sit amet'} %}
+        {% set params.options = {'': '-- empty --', 'lorem': 'Lorem ipsum', 'dolor': 'Dolor sit amet'} %}
     {% endif %}
     <label class="fake-select icon-arrow-down big">
         {{ element('select', null, params) }}
@@ -131,6 +131,7 @@
     <label>
         {{ element('input', 'checkbox', kwargs) }}
         <span class="icon-check">{% if kwargs.label %}{{ kwargs.label }}{% else %}&nbsp;{% endif %}</span>
+        {% if kwargs.label %}{{ kwargs.label }}{% endif %}
     </label>
 {% endmacro %}
 
@@ -138,6 +139,7 @@
     <label>
         {{ element('input', 'radio', kwargs) }}
         <span>{% if kwargs.label %}{{ kwargs.label }}{% else %}&nbsp;{% endif %}</span>
+        {% if kwargs.label %}{{ kwargs.label }}{% endif %}
     </label>
 {% endmacro %}
 

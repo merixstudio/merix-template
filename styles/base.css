@@ -55,6 +55,42 @@ figure img {display: block; width: 100%}
 .accordion-toggle.closed:before {content: '\e605'}
 .accordion-content {position: absolute; bottom: 0; width: 100%; padding-top: 10px}
 
+/* Forms */
+label {cursor: pointer}
+
+input,
+button,
+select {vertical-align: middle; outline: none}
+textarea {vertical-align: top; outline: none}
+
+button,
+select,
+label[for],
+input[type="reset"],
+input[type="radio"],
+input[type="button"],
+input[type="submit"],
+input[type="checkbox"] {cursor: pointer}
+
+button[disabled],
+select[disabled],
+label[disabled][for],
+input[disabled][type="reset"],
+input[disabled][type="radio"],
+input[disabled][type="button"],
+input[disabled][type="submit"],
+input[disabled][type="checkbox"] {cursor: default}
+
+input[type="search"] {box-sizing: border-box}
+
+input[type="checkbox"] {position: absolute; visibility: hidden}
+input[type="checkbox"]+span {overflow: hidden; display: inline-block; text-indent: -99em; vertical-align: middle; white-space: nowrap; cursor: pointer}
+input[type="checkbox"]+span:before {float: left; text-indent: 0; color: transparent; text-align: center}
+
+input[type="radio"] {position: absolute; visibility: hidden}
+input[type="radio"]+span {position: relative; overflow: hidden; display: inline-block; text-indent: -99em; vertical-align: middle; white-space: nowrap; cursor: pointer}
+input[type="radio"]+span:before {content: ''; position: absolute; margin: auto; background: transparent}
+
 /* Buttons */
 .button.text-hide {padding-left: 0; padding-right: 0; text-indent: -999em}
 .button.text-hide[class*="icon-"]:before {float: right; width: 100%; margin: auto; text-align: center}

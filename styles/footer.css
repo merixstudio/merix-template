@@ -1,7 +1,7 @@
-.page-footer {width: 100%; min-height: 60px; border-top: 1px solid #d7d7d7; background: #f7f7f7}
+.page-footer {width: 100%; height: 60px; border-top: 1px solid #d7d7d7; background: #f7f7f7}
 .page-wrap {margin-bottom: -61px; padding-bottom: 61px}
 
-.page-footer .logo {display: inline-block; width: 140px; height: 44px; margin: 8px 0}
+.page-footer .logo {display: inline-block; width: 140px; height: 44px; margin: 5px 0}
 
 .page-footer .footer-menu {}
 .page-footer .footer-menu > ul > li {display: inline-block}

@@ -47,6 +47,13 @@ define('settings', {
             'characters': 'characters',
             'hide': 'hide',
             'message_delete_confirm': 'Do you really want to delete this message?',
+            'validation_required': 'Field is required',
+            'validation_email': 'Invalid email format',
+            'validation_minlength': 'Min. {0} characters',
+            'validation_equal': 'Equal field',
+            'validation_phone': 'Invalid phone number',
+            'validation_numbers': 'Numbers only',
+            'validation_letters-only': 'Letters only'
         }
     }
 });

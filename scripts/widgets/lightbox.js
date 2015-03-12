@@ -36,6 +36,7 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
                                         </div>\
                                         <div class="gallery-lightbox--modal">\
                                             <div class="gallery-lightbox--image">\
+                                                <p class="gallery-lightbox--counter">Image <span class="gallery-lightbox--image-current">0</span> of <span class="gallery-lightbox--image-all">0</span>\
                                                 <div class="gallery-lightbox--image-wrapper">\
                                                     <button class="gallery-lightbox--close icon-close"></button>\
                                                     <button class="gallery-lightbox--prev icon-arrow-left"></button>\
@@ -55,6 +56,8 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
          this.HtmlImageWrap = this.HtmlGallery.find('.gallery-lightbox--image-wrapper');
             this.HtmlThumbs = this.HtmlGallery.find('.gallery-lightbox--thumbs').hide();
        this.HtmlCloseButton = this.HtmlGallery.find('.gallery-lightbox--close');
+       this.HtmlCurrentImage = this.HtmlGallery.find('.gallery-lightbox--image-current');
+          this.HtmlAllImage = this.HtmlGallery.find('.gallery-lightbox--image-all');
          this.HtmlNextImage = this.HtmlGallery.find('.gallery-lightbox--next');
          this.HtmlPrevImage = this.HtmlGallery.find('.gallery-lightbox--prev');
         this.HtmlThumbsList = this.HtmlGallery.find('.gallery-lightbox--thumbs-list').appendTo(this.HtmlThumbs);
@@ -72,17 +75,17 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
             event.preventDefault();
 
             //left arrow
-            if (e.keyCode == 37){
+            if (event.keyCode == 37){
                 self.prevImage();
             }
 
             //right arrow
-            if (e.keyCode == 39){
+            if (event.keyCode == 39){
                 self.nextImage();
             }
 
             //escape
-            if (e.keyCode == 27){
+            if (event.keyCode == 27){
                 self.closeGallery();
             }
         }
@@ -165,6 +168,8 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
         var self = this;
         
         this.HtmlOverlay.find('.loader').fadeIn(250);
+        this.HtmlCurrentImage.html(this.currentItem + 1);
+        this.HtmlAllImage.html(this.items.length);
         var img = jQuery('<img src="' + element.attr('href') + '">');
         img.appendTo(this.HtmlImageWrap);
 
@@ -186,7 +191,6 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
                 self.loadImage(jQuery(self.items[self.currentItem]));
             });
         }
-        
     }
     
     Lightbox.prototype.nextImage = function() {
@@ -198,7 +202,6 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
                 self.loadImage(jQuery(self.items[self.currentItem]));
             });
         }
-        
     }
 
 

@@ -1,11 +1,16 @@
-define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate', 'scrollbar', 'widgets/file_field', 'widgets/placeholder', 'widgets/modal', 'widgets/equal_height'], function(jQuery, viewport, smartBlocks, translate, scrollbar, fileField, placeholders, modal, equalHeight) {
+define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'detect', 'hover2', 'translate'], function(jQuery, viewport, smartBlocks, detect, hover2, translate) {
     'use strict';
     
     // Delete if unused
-    var validate = require('validate');
     var mediaSet = require('media_set');
-    var accordions = require('widgets/accordions');
+    var equalHeight = require('widgets/equal_height');
+    var modal = require('widgets/modal');
     var Slider = require('widgets/slider');
+    var accordions = require('widgets/accordions');
+    var scrollbar = require('widgets/scrollbar');
+    var validate = require('widgets/validate');
+    var fileField = require('widgets/file_field');
+    var placeholders = require('widgets/placeholder');
 
     function Site() {
         viewport.enable();
@@ -22,8 +27,11 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'translate',
         function find(selector) {
             return jQuery(root).is(selector) ? jQuery(root) : jQuery(root).find('*').filter(selector);
         }
-        
+
         var self = this;
+        
+        find('[data-hover]').hover2();
+        find('[data-lightbox]').lightbox();
         
         /* Mobile menu */
         find('.mobile-menu').each(function() {

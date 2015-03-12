@@ -1,4 +1,4 @@
-define('scrollbar', ['jquery', 'safe_on'], function(jQuery, safeOn) {
+define('widgets/scrollbar', ['jquery', 'safe_on'], function(jQuery, safeOn) {
 
     function Handle(element) {
         this.element = element;

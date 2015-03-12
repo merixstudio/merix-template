@@ -542,6 +542,17 @@
     </fieldset>
     
     <fieldset>
+        <legend>Lightbox</legend>
+        <div class="lightbox-gallery">
+            {% for i,v in Array(6) %}
+                <a href="media/lightbox/sample_{{ i + 1 }}.jpeg" data-lightbox="gallery-1">
+                    <img src="media/lightbox/thumb_{{ i + 1 }}.jpeg">
+                </a>
+            {% endfor %}
+        </div>
+    </fieldset>
+    
+    <fieldset>
         <legend>Tabs</legend>
         <div class="tabs">
             //TODO:

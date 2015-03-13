@@ -26,7 +26,7 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
         if (this.galleryId != null)
             this.items = jQuery('[data-lightbox="' + this.galleryId + '"]');
 
-        this.currentItem = element.index();
+        this.currentItem = this.items.index(element);
         this.countItems = this.items.length;
         this.GalleryView = null;
 
@@ -58,8 +58,8 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
        this.HtmlCloseButton = this.HtmlGallery.find('.gallery-lightbox--close');
        this.HtmlCurrentImage = this.HtmlGallery.find('.gallery-lightbox--image-current');
           this.HtmlAllImage = this.HtmlGallery.find('.gallery-lightbox--image-all');
-         this.HtmlNextImage = this.HtmlGallery.find('.gallery-lightbox--next');
-         this.HtmlPrevImage = this.HtmlGallery.find('.gallery-lightbox--prev');
+         this.HtmlNextImage = this.HtmlGallery.find('.gallery-lightbox--next').hide();
+         this.HtmlPrevImage = this.HtmlGallery.find('.gallery-lightbox--prev').hide();
         this.HtmlThumbsList = this.HtmlGallery.find('.gallery-lightbox--thumbs-list').appendTo(this.HtmlThumbs);
 
 
@@ -100,7 +100,7 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
         });
 
 
-        jQuery(this.$element).unbind('keyup').bind('keyup', this._keyEvent);
+        jQuery('body').bind('keyup', this._keyEvent);
         this.openGallery(element);
     }
 
@@ -155,6 +155,7 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
     }
 
     Lightbox.prototype.closeGallery = function() {
+        jQuery('body').unbind('keyup');
         this.GalleryView.delay(100)
                         .stop(true)
                         .fadeOut(500, function(){
@@ -173,12 +174,26 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
         var img = jQuery('<img src="' + element.attr('href') + '">');
         img.appendTo(this.HtmlImageWrap);
 
-        if(this.options.thumbs && this.items)
+        if (this.options.thumbs && this.items)
             jQuery(this.getThumbs(element)).appendTo(this.HtmlThumbsList);
 
+        if (this.countItems <= 1)
+             this.HtmlGallery.find('.gallery-lightbox--counter').hide();
+            
         img.load(function(){
             self.HtmlOverlay.find('.loader').fadeOut(250);
             self.HtmlImage.delay(300).fadeIn(500);
+            
+            if (self.currentItem > 0)
+                self.HtmlPrevImage.show();
+            else
+                self.HtmlPrevImage.hide();
+            
+            if (self.currentItem < self.countItems - 1)
+                self.HtmlNextImage.show();
+            else
+                self.HtmlNextImage.hide();
+                
         });
     }
     

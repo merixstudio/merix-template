@@ -18,20 +18,21 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
         var self = this;
         this.form.find('[data-validate]').each(function() {
             var field = jQuery(this);
-            self.isRequired(field);
-            self.isMail(field);
-            self.isPhone(field);
-            self.hasLettersOnly(field);
-            self.isPostcode(field);
-            self.isEqualTo(field);
-            self.isNumber(field);
-            self.isMinLength(field);
+            var validateData = JSON.parse(field.data('validate').replace(/\'/g, '"'));
+            self.isRequired(field, validateData);
+            self.isMail(field, validateData);
+            self.isPhone(field, validateData);
+            self.hasLettersOnly(field, validateData);
+            self.isPostcode(field, validateData);
+            self.isEqualTo(field, validateData);
+            self.isNumber(field, validateData);
+            self.isMinLength(field, validateData);
         });
     };
 
-    Validate.prototype.isRequired = function(field) {
+    Validate.prototype.isRequired = function(field, validateData) {
         if (field.prop('tagName') != 'SPAN') {
-            if (field.data('validate')['required'] && field.is('[type="checkbox"]')) {
+            if (validateData['required'] && field.is('[type="checkbox"]')) {
                 if (field.is(':checked')) {
                     this.removeError(field);
                     this.formValid.push([true, field]);
@@ -39,7 +40,7 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
                     this.showError(field, 'required');
                     this.formValid.push([false, field]);
                 }
-            } else if (field.data('validate')['required'] && field.is('[type="radio"]')) {
+            } else if (validateData['required'] && field.is('[type="radio"]')) {
                 var i = 0;
                 jQuery('[name="'+field.attr('name')+'"]').each(function() {
                     if (jQuery(this).is(':checked'))
@@ -54,7 +55,7 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
                     this.showError(field, 'required');
                     this.formValid.push([false, field]);
                 }
-            } else if (field.data('validate')['required'] && field.val() == '') {
+            } else if (validateData['required'] && field.val() == '') {
                 this.showError(field, 'required');
                 this.formValid.push([false, field]);
             }
@@ -65,9 +66,9 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
         }
     };
 
-    Validate.prototype.isMail = function(field) {
+    Validate.prototype.isMail = function(field, validateData) {
         if (field.prop('tagName') != 'SPAN') {
-            if (field.data('validate')['email']) {
+            if (validateData['email']) {
                 var regex = /^[-!#$%&'*+/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$/;
                 var email = field.val();
                 if (regex.test(email)) {
@@ -81,9 +82,9 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
         }
     };
     
-    Validate.prototype.isPhone = function(field) {
+    Validate.prototype.isPhone = function(field, validateData) {
         if (field.prop('tagName') != 'SPAN') {
-            if (field.data('validate')['phone'] && field.val() != '') {
+            if (validateData['phone'] && field.val() != '') {
                 var regex = /\(?([0-9.\+\-\s()]+)/;
                 var phone = field.val();
                 if (regex.test(phone)) {
@@ -97,9 +98,9 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
         }
     };
     
-    Validate.prototype.hasLettersOnly = function(field) {
+    Validate.prototype.hasLettersOnly = function(field, validateData) {
         if (field.prop('tagName') != 'SPAN') {
-            if (field.data('validate')['letters-only'] && field.val() != '') {
+            if (validateData['letters-only'] && field.val() != '') {
                 var regex = /^[^!@#\$%\^&\*\(\)\[\]:;'",\.\d+-]+$/;
                 var name = field.val();
                 if (regex.test(name)) {
@@ -113,10 +114,10 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
         }
     };
     
-    Validate.prototype.isEqualTo = function(field) {
+    Validate.prototype.isEqualTo = function(field, validateData) {
         if (field.prop('tagName') != 'SPAN') {
-            if (field.data('validate')['equal-to'] && field.val() != '') {
-                var equalTo = this.form.find('#'+ field.data('validate')['equal-to']);
+            if (validateData['equal-to'] && field.val() != '') {
+                var equalTo = this.form.find('#'+ validateData['equal-to']);
                 if (field.val() === equalTo.val()) {
                     this.removeError(field);
                     this.formValid.push([true, field]);
@@ -130,9 +131,9 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
         }
     };
     
-    Validate.prototype.isPostcode = function(field) {
+    Validate.prototype.isPostcode = function(field, validateData) {
         if (field.prop('tagName') != 'SPAN') {
-            if (field.data('validate')['postcode'] && field.val() != '') {
+            if (validateData['postcode'] && field.val() != '') {
                 var regex = /^[0-9]{2}-[0-9]{3}$/;
                 var postcode = field.val();
                 if (regex.test(postcode)) {
@@ -146,9 +147,9 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
         }
     };
     
-    Validate.prototype.isNumber = function(field) {
+    Validate.prototype.isNumber = function(field, validateData) {
         if (field.prop('tagName') != 'SPAN') {
-            if (field.data('validate')['number'] && field.val() != '') {
+            if (validateData['number'] && field.val() != '') {
                 var regex = /^[0-9]*$/;
                 var name = field.val();
                 if (regex.test(name)) {
@@ -162,15 +163,15 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
         }
     };
     
-    Validate.prototype.isMinLength = function(field) {
+    Validate.prototype.isMinLength = function(field, validateData) {
         if (field.prop('tagName') != 'SPAN') {
-            if (field.data('validate')['min-length'] && field.val() != '') {
+            if (validateData['min-length'] && field.val() != '') {
                 var name = field.val();
-                if (name.length >= field.data('validate')['min-length']) {
+                if (name.length >= validateData['min-length']) {
                     this.removeError(field);
                     this.formValid.push([true, field]);
                 } else {
-                    this.showError(field, 'minlength', {0: field.data('validate')['min-length']});
+                    this.showError(field, 'minlength', {0: validateData['min-length']});
                     this.formValid.push([false, field]);
                 }
             }
@@ -197,8 +198,10 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
         else if (placeholder.length)
             placeholder.closest('.placeholder-container').addClass('error');
         
-        else if (element.hasClass('scrollable'))
-            element.closest('.scrollbar-wrapper').addClass('error');
+        else if (element.parent().hasClass('scrollbar-offset')) {
+            element.closest('.textarea-wrapper').addClass('error');
+            errorPlace = element.closest('.textarea-wrapper').parent();
+        }
         
         else if (element.prop('tagName') == 'SELECT') {
             element.closest('.fake-select').addClass('error');
@@ -207,17 +210,19 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
         
         else 
             element.parent().addClass('error');
-        
-        if (element.parent().children('.error-message').length == 0)
+
+        if (element.parent().children('.error-message').length == 0 && element.closest('.set').children('.error-message').length == 0) {
             if (multiple == false || (multiple == true && element.hasClass('error'))) {
                 var label = (typeof element.data('validate')[type] == 'string' ? element.data('validate')[type] : translate('validation_' + type, errorVariables));
                 
                 if (element.prop('tagName') == 'SELECT') {
                     if (element.parent().nextAll('.error-message').length == 0)
                         errorPlace.append('<p class="error-message">' + label + '</p>');
-                } else
+                } else {
                     errorPlace.append('<p class="error-message">' + label + '</p>');
+                }
             }
+        }
     };
 
     Validate.prototype.removeError = function(element) {
@@ -231,6 +236,9 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
         
         else if (element.hasClass('scrollable'))
             element.closest('.scrollbar-wrapper').removeClass('error');
+        
+        else if (element.parent().hasClass('scrollbar-offset'))
+            element.closest('.textarea-wrapper').removeClass('error');
         
         else if (element.prop('tagName') == 'SELECT') {
             element.closest('.fake-select').removeClass('error');
@@ -257,9 +265,11 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
     
     Validate.prototype.scrollToError = function(field) {
         var sectionOffset = Math.ceil(field.offset().top);
-        var scrollTo = sectionOffset - 40;
+        var scrollTo = sectionOffset - 50;
 
         jQuery('body, html').stop().animate({'scrollTop': scrollTo}, 500);
+
+        field.focus();
     };
 
     jQuery.fn.validate = function(){

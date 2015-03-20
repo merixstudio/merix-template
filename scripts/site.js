@@ -48,7 +48,7 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'detect', 'h
         find('select').selectField();
         find('input:file').fileField();
         find('textarea').scrollbar();
-        //find('[data-placeholder]').placeholders();
+        find('[data-placeholder]').placeholders();
         find('form.validate').validate();
         find('.input-count').inputCount('.text-count', 140);
 

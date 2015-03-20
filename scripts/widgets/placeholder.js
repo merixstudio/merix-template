@@ -17,9 +17,17 @@ define('widgets/placeholder', ['jquery'], function(jQuery) {
     function Placeholder(element) {
         var self = this;
         this.element = element;
-        this._buildPlaceholder();
         this.placeholder = element.siblings('label.placeholder');
-        
+
+        if (typeof this.element.attr('id') === 'undefined')
+            this.element.attr('id', 'placeholder' + new Date().getTime());
+        this.id = this.element.attr('id');
+
+        if (this.placeholder.length === 0)
+            this.buildPlaceholder();
+
+        this.element.removeAttr('placeholder');
+
         this.setPosition();
         
         this.element.focus(self.hidePlaceholder.bind(this)).blur(self.showPlaceholder.bind(this));
@@ -30,13 +38,14 @@ define('widgets/placeholder', ['jquery'], function(jQuery) {
         
         jQuery(window).resize(self.setPosition.bind(this));
     }
-    
-    Placeholder.prototype._buildPlaceholder = function() {
-        var container = this.element.parent();
-        var placeholder = container.find('.placeholder');
-        
-        if (placeholder.length === 0)
-            container.append('<label for="'+ this.element.attr('id') +'" class="placeholder"/>');
+
+    Placeholder.prototype.buildPlaceholder = function() {
+        this.element.wrap('<span class="relative" style="display: inline-block; width: 100%; height: 100%" />');
+        var placeholder = this.element.attr('placeholder');
+
+        this.placeholder = jQuery('<label for="' + this.id + '" class="placeholder">' + placeholder + '</label>');
+
+        this.element.before(this.placeholder);
     };
     
     Placeholder.prototype.setPosition = function() {

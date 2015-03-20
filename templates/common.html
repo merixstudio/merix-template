@@ -414,7 +414,7 @@
                                         <label>Your name</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigTextfield({'data-validate': '{"required": true}'}) }}
+                                        {{ forms.bigTextfield({'data-placeholder': 'aaa', 'data-validate': "{'required': true}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -424,7 +424,7 @@
                                         <label>Email address</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigTextfield({'id': 'mail', 'data-validate': '{"required": true, "email": true, "equal-to": "mail-repeat"}'}) }}
+                                        {{ forms.bigTextfield({'id': 'mail', 'data-validate': "{'required': true, 'email': true, 'equal-to': 'mail-repeat'}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -434,7 +434,7 @@
                                         <label>Repeat Email address</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigTextfield({'id': 'mail-repeat',  'data-validate': '{"required": true, "email": true}'}) }}
+                                        {{ forms.bigTextfield({'id': 'mail-repeat',  'data-validate': "{'required': true, 'email': true}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -444,7 +444,7 @@
                                         <label>Select type of your inquiry</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigSelect({'data-validate': '{"required": true}'}) }}
+                                        {{ forms.bigSelect({'data-validate': "{'required': true}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -454,8 +454,8 @@
                                         <label>Sex</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.radio({'label': 'male', 'name': 'sex', 'data-validate': '{"required": true}'}) }}
-                                        {{ forms.radio({'label': 'female', 'name': 'sex', 'data-validate': '{"required": true}'}) }}
+                                        {{ forms.radio({'label': 'male', 'name': 'sex', 'data-validate': "{'required': true}"}) }}
+                                        {{ forms.radio({'label': 'female', 'name': 'sex', 'data-validate': "{'required': true}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -465,7 +465,7 @@
                                         <label>Please accept rules</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.checkbox({'label': 'Rules', 'data-validate': '{"required": "Custom validation message"}'}) }}
+                                        {{ forms.checkbox({'label': 'Rules', 'data-validate': "{'required': 'Custom validation message'}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -479,7 +479,7 @@
                                         <label>Phone number</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigTextfield({'data-placeholder': 'test', 'data-validate': '{"required": true, "postcode": true}'}) }}
+                                        {{ forms.bigTextfield({'data-placeholder': 'test', 'data-validate': "{'required': true, 'postcode': true}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -489,7 +489,7 @@
                                         <label>Letters only</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigTextfield({'data-validate': '{"letters-only": true}'}) }}
+                                        {{ forms.bigTextfield({'data-validate': "{'letters-only': true}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -499,7 +499,7 @@
                                         <label>Numbers only, min 6</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigTextfield({'data-validate': '{"numbers": true, "min-length": 6}'}) }}
+                                        {{ forms.bigTextfield({'data-validate': "{'numbers': true, 'min-length': 6}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -509,10 +509,11 @@
                                         <label>Your message</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.textarea({'data-validate': '{"required": true}'}) }}
+                                        {{ forms.textarea({'data-validate': "{'required': true}"}) }}
                                     </p>
                                 </div>
                             </div>
+                            
                             <div class="v320-1">
                                 <p>
                                     {{ buttons.submit('Send', '', 'arrow-right') }}
@@ -567,7 +568,19 @@
     <fieldset>
         <legend>Tabs</legend>
         <div class="tabs">
-            //TODO:
+            <ul>
+                <li>
+                    <a href="#">Tab 1</a>
+                </li>
+                <li>
+                    <a href="#">Tab 2</a>
+                </li>
+                <li>
+                    <a href="#">Tab 3</a>
+                </li>
+            <div>
+                
+            </div>
         </div>
     </fieldset>
 

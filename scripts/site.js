@@ -6,6 +6,7 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'detect', 'h
     var equalHeight = require('widgets/equal_height');
     var modal = require('widgets/modal');
     var Slider = require('widgets/slider');
+    var tabs = require('widgets/tabs');
     var accordions = require('widgets/accordions');
     var scrollbar = require('widgets/scrollbar');
     var validate = require('widgets/validate');
@@ -32,6 +33,8 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'detect', 'h
         
         find('[data-hover]').hover2();
         find('[data-lightbox]').lightbox();
+        
+        find('.tabs').tabs();
         
         /* Mobile menu */
         find('.mobile-menu').each(function() {

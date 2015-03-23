@@ -1,0 +1,23 @@
+/*
+ * Tabs
+ */
+.tabs > ul:after {content: ''; clear: both; display: table}
+.tabs > ul li {float: left; display: inline-block}
+.tabs > ul li button {padding: 6px; border: 1px solid #F2F2F2; background: none}
+.tabs > ul li + li button {border-left: 0}
+.tabs > ul li.active button {border-bottom: 0; color: #D97D34}
+.tabs > ul li.active button {border-bottom: 0; color: #D97D34}
+
+.tabs > dl > dt {display: none}
+.tabs > dl > dt button {display: block; width: 100%; border: none; border-bottom: 1px solid #F2F2F2; background: none; text-align: left}
+.tabs > dl > dd {display: none}
+.tabs > dl > dd + dt {margin-top: 20px}
+.tabs > dl > dt.active + dd{display: block}
+.tabs .tab-content {padding: 20px}
+
+.viewport-720 .tabs ul,
+.viewport-480 .tabs ul,
+.viewport-320 .tabs ul {display: none}
+.viewport-720 .tabs dt,
+.viewport-480 .tabs dt,
+.viewport-320 .tabs dt {display: block}

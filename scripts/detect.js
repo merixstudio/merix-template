@@ -2,6 +2,7 @@ define('detect', [], function() {
     var browser = {};
     var os = {};
     var device = {};
+    var touch = false;
     var ua = navigator.userAgent;
     var webkit = ua.match(/Web[kK]it[\/]{0,1}([\d.]+)/),
         android = ua.match(/(Android);?[\s\/]+([\d.]+)?/),
@@ -19,12 +20,12 @@ define('detect', [], function() {
         chrome = ua.match(/Chrome\/([\d.]+)/) || ua.match(/CriOS\/([\d.]+)/),
         firefox = ua.match(/Firefox\/([\d.]+)/),
         ie = ua.match(/(Trident|MSIE\s([\d.])+)/),
-        safari = webkit && ua.match(/Mobile\//) && !chrome,
-        webview = ua.match(/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/) && !chrome,
+        safari = webkit && ua.match(/Mobile\//),
+        //webview = ua.match(/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/),
         wp8 = ua.match(/Trident\/([\d.]+)/) && ua.match(/IEMobile\/([\d.]+)/)
 
     if (browser.webkit = !!webkit) browser.version = webkit[1]
-
+    
     if (android) os.android = true, os.version = android[2]
     if (iphone && !ipod) os.ios = os.iphone = true, os.version = iphone[2].replace(/_/g, '.')
     if (ipad) os.ios = os.ipad = true, os.version = ipad[2].replace(/_/g, '.')
@@ -42,8 +43,8 @@ define('detect', [], function() {
     if (firefox) browser.firefox = true, browser.version = firefox[1]
     if (ie) browser.ie = true, browser.version = ie[1]
     if (safari && (ua.match(/Safari/) || !!os.ios)) browser.safari = true
-    if (webview) browser.webview = true
-    if (wp8) browser.ie = true
+    if (webkit && android && !chrome) browser.webview = true
+    if (wp8) browser.ie = true, os.android = os.ios = os.ipad = os.iphone = browser.webkit = browser.safari = browser.webview = false
 
     device.tablet = !!(ipad || playbook || (android && !ua.match(/Mobile/)) ||
       (firefox && ua.match(/Tablet/)) || (ie && !ua.match(/Phone/) && ua.match(/Touch/)));
@@ -66,9 +67,26 @@ define('detect', [], function() {
         for (var i in device)
             if (device[i] === true)
                 classes.push(i);
+        
+        if (device.desktop) {
+            if (touch = isTouchDevice() === true)
+                classes.push('touch');
+        } else { 
+            touch = true;
+            classes.push('touch');
+        }
 
         return classes.join(' ');
     }
+    
+    function isTouchDevice() {
+        try {
+            document.createEvent("TouchEvent");
+            return true;
+          } catch (e) {
+            return false;
+          }
+      };
 
     document.body.className += ' ' + toString();
 
@@ -76,6 +94,7 @@ define('detect', [], function() {
         'os': os,
         'browser': browser,
         'device': device,
+        'touch': touch,
         'toString': toString
     };
 });

@@ -65,18 +65,3 @@ input[type="radio"] {position: absolute; visibility: hidden}
 input[type="radio"]+span {width: 20px; height: 20px; border: 1px solid #dcdcdc; border-radius: 20px; background: #fff}
 input[type="radio"]+span:before {top: 0; right: 0; bottom: 0; left: 0; width: 10px; height: 10px; border-radius: 10px; transition: background 0.25s ease}
 input[type="radio"]:checked+span:before {background: #d97d34}
-
-/* Selectbox style */
-.fake-select {padding: 0px 10px; border-bottom: 1px solid #dadada; background: #f2f2f2; color: #928f8f; font-size: 14px; line-height: 34px; outline: none}
-.fake-select:before {color: #212121; font-size: 12px; line-height: 34px !important}
-.fake-select.big {line-height: 54px}
-.fake-select.big:before {line-height: 54px !important}
-
-.fake-dropdown {z-index: 12; margin-top: -1px; background: #fff; border: 1px solid #dcdcdc; border-radius: 0 0 3px 3px; font-size: 14px;}
-.fake-dropdown a {padding: 0px 10px; color: #212121; line-height: 34px}
-.fake-dropdown a:hover {background: #fafafa}
-.fake-dropdown li+li {border-top: 1px solid #eee}
-
-/* Scrollbar */
-.scrollbar {right: 0; top: 0; bottom: 0; width: 5px; background: rgba(33, 33, 33, 0.05)}
-.scrollbar .handle {background: #d97d34}

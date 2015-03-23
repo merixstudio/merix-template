@@ -1,0 +1,15 @@
+/* MODAL */
+.overlay {position: fixed; top: 0; left: 0; z-index: 999; width: 100%; height: 100%}
+.overlay .overlay-content {position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: auto; overflow-y: scroll; -webkit-overflow-scrolling: touch}
+.overlay .overlay-background {position: absolute; width: 100%; height: 100%}
+.box-modal {display: none; position: relative; overflow: visible; width: 100%; max-width: 410px; margin: 0 auto}
+
+/* MODAL STYLES */
+.overlay .overlay-content {padding: 100px 0}
+.overlay .overlay-background {background: #000}
+
+.box-modal {background: #fff}
+.box-modal .close {position: absolute; top: 10px; right: 10px; color: #fff; font-size: 10px; cursor: pointer}
+.box-modal .modal-title {display: table; width: 100%; height: 55px; background: #D97D34; color: #fff; font-family: 'Open Sans', 'Arial', 'Helvetica', sans-serif}
+.box-modal .modal-title h1 {display: table-cell; font-size: 16px; line-height: 16px; text-align: center; letter-spacing: 1px; vertical-align: middle}
+.box-modal .modal-content {padding: 20px}

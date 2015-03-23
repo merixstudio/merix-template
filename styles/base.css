@@ -47,14 +47,6 @@ figure img {display: block; width: 100%}
 /* Table scroll */
 .table-wrap {width: 100%; overflow-x: auto}
 
-/* Accordions */
-.accordion>.clip {position: relative; -webkit-transition: height 0.25s ease; transition: height 0.25s ease}
-.accordion>.clip.closed {height: 0 !important}
-
-.accordion-toggle:before {content: '\e604'; font-family: 'Icons'}
-.accordion-toggle.closed:before {content: '\e605'}
-.accordion-content {position: absolute; bottom: 0; width: 100%; padding-top: 10px}
-
 /* Forms */
 label {cursor: pointer}
 

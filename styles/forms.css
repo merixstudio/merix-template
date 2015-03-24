@@ -45,7 +45,8 @@ input[type="file"] + span:hover:before {color: #ccb423}
 
 /* Errors */
 .error input,
-.error.fake-select {border: 1px solid #F06060}
+.error.fake-select,
+.error.textarea-wrapper {border: 1px solid #F06060}
 .error-message {color: #F06060}
 
 /* Checkbox style */

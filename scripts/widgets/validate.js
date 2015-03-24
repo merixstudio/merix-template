@@ -194,7 +194,7 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
             }
         }
         
-        else if (element.parent().hasClass('scrollbar-offset')) {
+        else if (element.prop('tagName') == 'TEXTAREA') {
             element.closest('.textarea-wrapper').addClass('error');
             errorPlace = element.closest('.textarea-wrapper').parent();
         }
@@ -215,6 +215,9 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
                 if (element.prop('tagName') == 'SELECT') {
                     if (element.parent().nextAll('.error-message').length == 0)
                         errorPlace.append('<p class="error-message">' + label + '</p>');
+                } else if (element.prop('tagName') == 'TEXTAREA') {
+                    if (element.parents('.textarea-wrapper').nextAll('.error-message').length == 0)
+                        errorPlace.append('<p class="error-message">' + label + '</p>');
                 } else {
                     errorPlace.append('<p class="error-message">' + label + '</p>');
                 }
@@ -223,15 +226,15 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
     };
 
     Validate.prototype.removeError = function(element) {
-        
         if (element.is('[type="checkbox"]') || element.is('[type="radio"]'))
             element.next('label').removeClass('error');
         
+        else if (element.prop('tagName') == 'TEXTAREA') {
+            element.parents('.textarea-wrapper').removeClass('error').nextAll('.error-message').remove();
+        }
+        
         else if (element.hasClass('scrollable'))
             element.closest('.scrollbar-wrapper').removeClass('error');
-        
-        else if (element.parent().hasClass('scrollbar-offset'))
-            element.closest('.textarea-wrapper').removeClass('error');
         
         else if (element.prop('tagName') == 'SELECT') {
             element.closest('.fake-select').removeClass('error');

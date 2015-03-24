@@ -113,15 +113,14 @@
 
 {% macro textarea(kwargs) %}
     {% set params = '' %}
-    {% if kwargs %}
-        {% for f,v in kwargs %}
-            {% set params = params + ' ' + f + ' = ' + v %}
-        {% endfor %}
-    {% endif %}
     <label class="textarea-wrapper scrollbar-wrapper">
         <span class="scrollbar-clip">
             <span class="scrollbar-offset">
-                <textarea class="scrollable" cols="30" rows="10"{{ params }}></textarea>
+                <textarea class="scrollable" cols="30" rows="10"{% if kwargs %}
+        {% for f,v in kwargs %}
+             {{ ' ' + f }}="{{ v }}"
+        {% endfor %}
+    {% endif %}></textarea>
             </span>
         </span>
     </label>

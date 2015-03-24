@@ -174,11 +174,6 @@
             <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text') }}</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text') }}</p>
 
-            <p class="v320-1 v720-1-of-4">Big</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.linkBig('Button text') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.buttonBig('Button text') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submitBig('Button text') }}</p>
-
             <p class="v320-1 v720-1-of-4">Disabled</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text', '', '', {'class': 'disabled'}) }}</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text', '', '', {'disabled': 'disabled'}) }}</p>
@@ -188,11 +183,6 @@
             <p class="v320-1 v720-1-of-4">{{ buttons.linkSecondary('Button text') }}</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.buttonSecondary('Button text') }}</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.submitSecondary('Button text') }}</p>
-
-            <p class="v320-1 v720-1-of-4">Secondary big</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.linkSecondaryBig('Button text') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.buttonSecondaryBig('Button text') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submitSecondaryBig('Button text') }}</p>
 
             <p class="v320-1 v720-1-of-4">Secondary disabled</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.linkSecondary('Button text', '', '', {'class': 'disabled'}) }}</p>
@@ -216,31 +206,16 @@
             <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text', '', 'check') }}</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text', '', 'check') }}</p>
 
-            <p class="v320-1 v720-1-of-4">Icon on the right, big</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.linkBig('Button text', '', 'check') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.buttonBig('Button text', '', 'check') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submitBig('Button text', '', 'check') }}</p>
-
             <p class="v320-1 v720-1-of-4">Icon on the left, small</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text', 'check', '') }}</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text', 'check', '') }}</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text', 'check', '') }}</p>
-
-            <p class="v320-1 v720-1-of-4">Icon on the left, big</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.linkBig('Button text', 'check', '') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.buttonBig('Button text', 'check', '') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submitBig('Button text', 'check', '') }}</p>
 
             <p class="v320-1 v720-1-of-4">Icon on both sides, small</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text', 'check', 'check') }}</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text', 'check', 'check') }}</p>
             <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text', 'check', 'check') }}</p>
 
-            <p class="v320-1 v720-1-of-4">Icon on both sides, big</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.linkBig('Button text', 'check', 'check') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.buttonBig('Button text', 'check', 'check') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submitBig('Button text', 'check', 'check') }}</p>
-            
         </div>
     </fieldset>
 
@@ -374,8 +349,8 @@
 
         <p>
             {{ forms.checkbox() }}
-            {{ forms.checkbox({'id': 'test', 'name': 'test', 'label': 'test'}) }}
-
+            {{ forms.checkbox({'id': 'test', 'name': 'test', 'label': 'label'}) }}
+            <br>
             {{ forms.radio({'name': 'radio-test'}) }}
             {{ forms.radio({'name': 'radio-test'}) }}
             {{ forms.radio({'name': 'radio-test', 'id': 'radio1'}) }}

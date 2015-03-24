@@ -12,7 +12,15 @@
     fieldset {position: relative; min-width: 0; padding: 50px 0; border: 0}
     fieldset legend {position: absolute; left: -140px; width: 120px; font-size: 18px; font-weight: 700}
     code {display: block; padding-top: 10px}
-    code:before {content: '.icon-'; opacity: 0.2;}
+    code:before {content: '.icon-'; opacity: 0.2}
+    
+    /* Hover/Tap example */
+    .hover-test {display: inline-block}
+    .hover-test p {width: 200px; height: 200px}
+    .hover-test p.green {display: none; background: green}
+    .hover-test p.red {display: inline-block; background: red}
+    .hover-test.hover p.green {display: inline-block}
+    .hover-test.hover p.red {display: none}
     
     .viewport-960 fieldset legend,
     .viewport-720 fieldset legend,
@@ -389,7 +397,7 @@
                                         <label>Your name</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigTextfield({'data-placeholder': 'aaa', 'data-validate': "{'required': true}"}) }}
+                                        {{ forms.textfield({'data-placeholder': 'aaa', 'data-validate': "{'required': true}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -399,7 +407,7 @@
                                         <label>Email address</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigTextfield({'id': 'mail', 'data-validate': "{'required': true, 'email': true, 'equal-to': 'mail-repeat'}"}) }}
+                                        {{ forms.textfield({'id': 'mail', 'data-validate': "{'required': true, 'email': true, 'equal-to': 'mail-repeat'}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -409,7 +417,7 @@
                                         <label>Repeat Email address</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigTextfield({'id': 'mail-repeat',  'data-validate': "{'required': true, 'email': true}"}) }}
+                                        {{ forms.textfield({'id': 'mail-repeat',  'data-validate': "{'required': true, 'email': true}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -419,7 +427,7 @@
                                         <label>Select type of your inquiry</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigSelect({'data-validate': "{'required': true}"}) }}
+                                        {{ forms.select({'data-validate': "{'required': true}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -454,7 +462,7 @@
                                         <label>Phone number</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigTextfield({'data-placeholder': 'test', 'data-validate': "{'required': true, 'postcode': true}"}) }}
+                                        {{ forms.textfield({'data-placeholder': 'test', 'data-validate': "{'required': true, 'postcode': true}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -464,7 +472,7 @@
                                         <label>Letters only</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigTextfield({'data-validate': "{'letters-only': true}"}) }}
+                                        {{ forms.textfield({'data-validate': "{'letters-only': true}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -474,7 +482,7 @@
                                         <label>Numbers only, min 6</label>
                                     </p>
                                     <p class="v320-1">
-                                        {{ forms.bigTextfield({'data-validate': "{'numbers': true, 'min-length': 6}"}) }}
+                                        {{ forms.textfield({'data-validate': "{'numbers': true, 'min-length': 6}"}) }}
                                     </p>
                                 </div>
                             </div>
@@ -514,6 +522,14 @@
                     </li>
                 </ul>
             </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Hover or tap on mobile</legend>
+        <div class="hover-test" data-hover>
+            <p class="red">Disactive</p>
+            <p class="green">Active</p>
         </div>
     </fieldset>
     

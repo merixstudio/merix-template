@@ -1,4 +1,4 @@
-define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'detect', 'hover2', 'translate'], function(jQuery, viewport, smartBlocks, detect, hover2, translate) {
+define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'detect', 'hover_tap', 'translate'], function(jQuery, viewport, smartBlocks, detect, hoverTap, translate) {
     'use strict';
     
     // Delete if unused
@@ -31,7 +31,7 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'detect', 'h
 
         var self = this;
         
-        find('[data-hover]').hover2();
+        find('[data-hover]').hoverTap();
         find('[data-lightbox]').lightbox();
         
         find('.tabs').tabs();

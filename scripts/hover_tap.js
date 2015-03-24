@@ -1,14 +1,13 @@
-define('hover2', ['jquery', 'detect'], function(jQuery, detect) {
+define('hover_tap', ['jquery', 'detect'], function(jQuery, detect) {
     'use strict';
 
-    function Hover(element) {
-        console.log(element);
-        if (detect.device.desktop) {
+    function HoverTap(element) {
+        if (!detect.touch) {
             element.on('mouseenter', function() {
-                element.addClass('hover')
+                element.addClass('hover');
             });
             element.on('mouseleave', function() {
-                element.removeClass('hover')
+                element.removeClass('hover');
             });
         } else {
             element.on('click', function() {
@@ -24,11 +23,11 @@ define('hover2', ['jquery', 'detect'], function(jQuery, detect) {
     /*
      * jQuery plugin
      */
-    jQuery.fn.hover2 = function() {
+    jQuery.fn.hoverTap = function() {
         return this.each(function() {
-            new Hover(jQuery(this));
+            new HoverTap(jQuery(this));
         });
     };
 
-    return Hover;
+    return HoverTap;
 });

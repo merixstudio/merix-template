@@ -16,7 +16,7 @@
     
     /* Hover/Tap example */
     .hover-test {display: inline-block}
-    .hover-test p {width: 200px; height: 200px}
+    .hover-test p {width: 200px; height: 200px; color: #fff; font-size: 36px; line-height: 200px; text-align: center}
     .hover-test p.green {display: none; background: green}
     .hover-test p.red {display: inline-block; background: red}
     .hover-test.hover p.green {display: inline-block}
@@ -513,13 +513,13 @@
         <legend>Slider</legend>
         <div class="slider">
             <div class="slide">
-                slide 1
+                <img src="media/placeholder_1200x400.gif">
             </div>
             <div class="slide">
-                slide 2
+                <img src="media/placeholder_1200x400.gif">
             </div>
             <div class="slide">
-                slide 3
+                <img src="media/placeholder_1200x400.gif">
             </div>
         </div>
     </fieldset>
@@ -527,8 +527,8 @@
     <fieldset>
         <legend>Hover or tap on mobile</legend>
         <div class="hover-test" data-hover>
-            <p class="red">Disactive</p>
-            <p class="green">Active</p>
+            <p class="red icon-close"></p>
+            <p class="green icon-check"></p>
         </div>
     </fieldset>
     
@@ -536,21 +536,21 @@
         <legend>Lightbox</legend>
         <div class="lightbox-gallery">
             {% for i,v in Array(6) %}
-                <a href="media/lightbox/sample_{{ i + 1 }}.jpeg" data-lightbox="gallery-1">
-                    <img src="media/lightbox/thumb_{{ i + 1 }}.jpeg">
+                <a href="media/placeholder_720x480.jpeg" data-lightbox="gallery-1">
+                    <img src="media/placeholder_163x100.gif">
                 </a>
             {% endfor %}
         </div>
         <div class="lightbox-gallery">
             {% for i,v in Array(3) %}
-                <a href="media/lightbox/sample_{{ i + 1 }}.jpeg" data-lightbox="gallery-2">
-                    <img src="media/lightbox/thumb_{{ i + 1 }}.jpeg">
+                <a href="media/placeholder_720x480.jpeg" data-lightbox="gallery-2">
+                    <img src="media/placeholder_163x100.gif">
                 </a>
             {% endfor %}
         </div>
         <div class="lightbox-gallery">
-                <a href="media/lightbox/sample_1.jpeg" data-lightbox="gallery-3">
-                    <img src="media/lightbox/thumb_1.jpeg">
+                <a href="media/placeholder_720x480.jpeg" data-lightbox="gallery-3">
+                    <img src="media/placeholder_163x100.gif">
                 </a>
         </div>
     </fieldset>

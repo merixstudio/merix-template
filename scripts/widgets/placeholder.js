@@ -10,7 +10,7 @@
  * </p>
  * 
  * js:
- * find('.has-placeholder').placeholders();
+ * find('[placeholder]').placeholders();
  */
 define('widgets/placeholder', ['jquery'], function(jQuery) {
     

@@ -185,8 +185,10 @@ gulp.task('make_columns', function() {
 });
 
 
-gulp.task('server', ['templates', 'templatesToCopy', 'styles', 'scripts', 'fonts', 'images', 'media'], function() {
-    gulp.watch(TEMPLATES_SRC, ['templates', 'templatesToCopy']);
+//gulp.task('server', ['templates', 'templatesToCopy', 'styles', 'scripts', 'fonts', 'images', 'media'], function() {
+//    gulp.watch(TEMPLATES_SRC, ['templates', 'templatesToCopy']);
+gulp.task('server', ['templates', 'styles', 'scripts', 'fonts', 'images', 'media'], function() {
+    gulp.watch(TEMPLATES_SRC, ['templates']);
     gulp.watch(STYLES_SRC, ['styles']);
     gulp.watch(COPY_TASKS.scripts[0], ['scripts']);
     gulp.watch(COPY_TASKS.fonts[0], ['fonts']);

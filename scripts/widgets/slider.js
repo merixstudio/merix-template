@@ -15,7 +15,7 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
         jQuery.extend(true, this, Slider.DEFAULT_SETTINGS, options);
 
         this.element = element;
-        this.items = this.element.find('>*>li'); // Items in the slider.
+        this.items = this.element.find('>.slide'); // Items in the slider.
         this.count = this.items.length; // Count of items in the slider.
         this.destination = this.position;
         this.tempAuto = this.auto;
@@ -32,6 +32,8 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
         this.sliderTouch();
         
         this.onChangeSlide = new Signal();
+        
+        this.items.wrapAll('<div class="slider-container"></div>');
     }
 
     Slider.MODE_DEFAULT = 'default';
@@ -57,7 +59,7 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
         var x = 0;
         var y = 0;
         var css = {};
-        var list = this.element.find('>ul');
+        var list = this.element.find('.slider-container');
 
         if (this.animatedProperty == 'left' || this.animatedProperty == 'top') {
             if (this.animatedProperty == 'left')
@@ -126,7 +128,7 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
 
         this.itemState.push(this.itemState.shift());
 
-        var elements = this.element.find('>*>li');
+        var elements = this.element.find('.slide');
         elements.first().insertAfter(elements.last());
     };
 
@@ -136,7 +138,7 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
 
         this.itemState.unshift(this.itemState.pop());
 
-        var elements = this.element.find('>*>li');
+        var elements = this.element.find('.slide');
         elements.last().insertBefore(elements.first());
     };
 

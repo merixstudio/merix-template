@@ -69,7 +69,7 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
     Validate.prototype.isMail = function(field, validateData) {
         if (field.prop('tagName') != 'SPAN') {
             if (validateData['email']) {
-                var regex = /^[-!#$%&'*+/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$/;
+                var regex = /^[-!#$%&'*+/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z{|}~])*@[a-zA-Z](-?[a-zA-Z0-9])*(\.[a-zA-Z](-?[a-zA-Z0-9])*)+$/; // regex '
                 var email = field.val();
                 if (regex.test(email)) {
                     this.removeError(field);
@@ -213,7 +213,8 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
 
         if (element.parent().children('.error-message').length == 0 && element.closest('.set').children('.error-message').length == 0) {
             if (multiple == false || (multiple == true && element.hasClass('error'))) {
-                var label = (typeof element.data('validate')[type] == 'string' ? element.data('validate')[type] : translate('validation_' + type, errorVariables));
+                var validate = JSON.parse(element.data('validate').replace(/\'/g, '"'));
+                var label = (typeof validate[type] == 'string' ? validate[type] : translate('validation_' + type, errorVariables));
                 
                 if (element.prop('tagName') == 'SELECT') {
                     if (element.parent().nextAll('.error-message').length == 0)

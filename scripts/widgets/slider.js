@@ -25,15 +25,23 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
             this.itemState.push(i);
 
         this.animated = false;
+        
+        this.items.wrapAll('<div class="slider-container"></div>');
+        this.container = this.element.children('.slider-container');
 
         if (this.auto)
             this.enableAuto();
         
         this.sliderTouch();
         
+        if (this.arrows)
+            this.createArrows();
+        
+        if (this.dots)
+            this.createDots();
+        
         this.onChangeSlide = new Signal();
         
-        this.items.wrapAll('<div class="slider-container"></div>');
     }
 
     Slider.MODE_DEFAULT = 'default';
@@ -45,7 +53,9 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
         'perPage': 1, // Number of slides per page. Can be 1 to N, where N <= this.count.
         'step': 1,
         'ease': 0.2, // Speed of animation, smaller value is faster.
-        'unit': 'px',
+        'unit': '%', // 'px'
+        'arrows': true,
+        'dots': true,
         'auto': true,
         'autoInterval': 5000,
         'animatedProperty': 'left',
@@ -59,7 +69,7 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
         var x = 0;
         var y = 0;
         var css = {};
-        var list = this.element.find('.slider-container');
+        var list = this.container;
 
         if (this.animatedProperty == 'left' || this.animatedProperty == 'top') {
             if (this.animatedProperty == 'left')
@@ -84,7 +94,7 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
             this.animated = false;
             return;
         }
-
+        
         if (instant)
             this.position = this.destination;
 
@@ -110,8 +120,9 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
         if (typeof newItemIndex != 'undefined' && newItemIndex != this.itemIndex) {
             this.itemIndex = newItemIndex;
             this.onChangeSlide.send(this.itemIndex);
+            this.update();
         }
-
+        
         // Actually move the slider elements.
         this.render();
 
@@ -206,6 +217,51 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
         this.slideTo(position);
     };
     
+    Slider.prototype.createArrows = function() {
+        var self = this;
+        if (this.itemState.length > 1) {
+                var navigation = '<button href="#" class="icon-arrow-left slider-navigation previous"></button><button href="#" class="icon-arrow-right slider-navigation next"></button>';
+                this.element.append(navigation);
+                this.element.addClass('navigations');
+            }
+            
+            this.element.find('.slider-navigation').each(function() {
+                jQuery(this).click(function(event) {
+                    event.preventDefault();
+
+                    var navigationLink = jQuery(this);
+                    if (navigationLink.hasClass('previous'))
+                        self.next();
+                    else if (navigationLink.hasClass('next'))
+                        self.previous();
+                });
+            });
+    };
+    
+    Slider.prototype.createDots = function() {
+        var self = this;
+        if (this.itemState.length > 1) {
+            var navigation = '<ul class="navigation-list grid">';
+            for (var i = 0; i < this.itemState.length; i++) {
+                if (i == 0)
+                    navigation += '<li class="active"><button data-slide="'+i+'" /></li>';
+                else
+                    navigation += '<li><button data-slide="'+i+'" /></li>';
+            }
+            navigation += '</ul>';
+            this.element.append(navigation);
+            this.element.addClass('navigations');
+            
+            this.element.find('.navigation-list button').click(function(event) {
+                event.preventDefault();
+                var element = jQuery(this);
+                var slideIndex = element.data('slide');
+
+                self.slideToIndex(slideIndex);
+            });
+        }
+    };
+    
     Slider.prototype.enableAuto = function() {
         this.tempAuto = true;
         
@@ -216,6 +272,15 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
             clearInterval(this._autoTimer);
 
         this._autoTimer = setInterval(this.previous.bind(this), this.autoInterval);
+    };
+    
+    Slider.prototype.update = function() {
+        var self = this;
+        if (this.dots) {
+            var dots = this.element.find('.navigation-list li');
+            dots.removeClass('active');
+            dots.eq(self.itemIndex).addClass('active');
+        }
     };
 
     Slider.prototype.disableAuto = function() {

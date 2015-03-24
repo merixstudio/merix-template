@@ -15,3 +15,8 @@
 .slider-navigation.next {right: -3px}
 .slider-navigation:hover {border-color: #7f9abc}
 .slider-navigation:hover:before {color: #7f9abc}
+
+.slider .navigation-list {position: absolute; width: 100%; height: auto; bottom: 20px; text-align: center}
+.slider .navigation-list li button {width: 14px; height: 14px; margin: 0 2px; border-radius: 100%; background: #F2F2F2; border: none; transition: all 0.25s ease}
+.slider .navigation-list li button:hover {background: #fff}
+.slider .navigation-list li.active button {background: #D97D34}

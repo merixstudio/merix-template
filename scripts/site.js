@@ -71,31 +71,9 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'detect', 'h
         });
         
         /* Slider */
-        find('.slider:not(.slider-thumbnails .slider)').each(function() {
-            var element = jQuery(this);
-            var sliderHome = element.parent();
-            var sliderWidth = element.width();
-            var slider = new Slider(element, {
-                'unit': '%',
+        find('.slider').each(function() {
+            new Slider(jQuery(this), {
                 'mode': Slider.MODE_CAROUSEL
-            });
-            
-            if (slider.itemState.length > 1) {
-                var navigation = '<a href="#" class="icon-arrow-left slider-navigation previous"></a><a href="#" class="icon-arrow-right slider-navigation next"></a>';
-                sliderHome.append(navigation);
-                sliderHome.addClass('navigations');
-            }
-            
-            sliderHome.find('.slider-navigation').each(function() {
-                jQuery(this).click(function(event) {
-                    event.preventDefault();
-
-                    var navigationLink = jQuery(this);
-                    if (navigationLink.hasClass('previous'))
-                        slider.next();
-                    else if (navigationLink.hasClass('next'))
-                        slider.previous();
-                });
             });
         });
         

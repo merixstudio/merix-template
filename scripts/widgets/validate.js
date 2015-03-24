@@ -180,7 +180,6 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
 
     Validate.prototype.showError = function(element, type, errorVariables) {
         var multiple = false;
-        var placeholder = element.siblings('.placeholder');
         var errorPlace = element.parent();
         errorVariables = errorVariables || null;
         
@@ -194,9 +193,6 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
                 element.next('label').addClass('error');
             }
         }
-        
-        else if (placeholder.length)
-            placeholder.closest('.placeholder-container').addClass('error');
         
         else if (element.parent().hasClass('scrollbar-offset')) {
             element.closest('.textarea-wrapper').addClass('error');
@@ -227,13 +223,9 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
     };
 
     Validate.prototype.removeError = function(element) {
-        var placeholder = element.siblings('.placeholder');
         
         if (element.is('[type="checkbox"]') || element.is('[type="radio"]'))
             element.next('label').removeClass('error');
-        
-        else if (placeholder.length)
-            placeholder.closest('.placeholder-container').removeClass('error');
         
         else if (element.hasClass('scrollable'))
             element.closest('.scrollbar-wrapper').removeClass('error');

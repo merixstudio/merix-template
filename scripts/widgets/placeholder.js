@@ -6,7 +6,7 @@
  *     <label for="input" class="placeholder">
  *         Text
  *     </label>
- *     <input id="input" class="has-placeholder">
+ *     <input id="input" data-placeholder="text">
  * </p>
  * 
  * js:

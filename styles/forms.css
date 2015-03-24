@@ -13,14 +13,6 @@ input[type="password"],
 .placeholder,
 .textarea-wrapper {width: 100%; padding: 7px 10px; border: none; border-top: 1px solid #f2f2f2; border-bottom: 1px solid #dadada; background: #f2f2f2; color: #928f8f; font-size: 14px; vertical-align: middle; outline: none}
 
-input[type="text"].big,
-input[type="email"].big,
-input[type="search"].big,
-input[type="number"].big,
-input[type="date"].big,
-input[type="url"].big,
-input[type="password"].big {padding: 17px 10px}
-
 input[type="file"] {display: none}
 input[type="file"] + span {color: #D97D34; transition: color 0.25s ease}
 input[type="file"] + span:before {margin-right: 5px; color: #212121; font-size: 12px; transition: color 0.25s ease}

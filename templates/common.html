@@ -510,16 +510,34 @@
     </fieldset>
 
     <fieldset>
-        <legend>Slider</legend>
+        <legend>Slider with mx-media-set</legend>
         <div class="slider">
             <figure class="slide">
-                <img src="media/placeholder_1200x400.gif">
+                <script type="image/mx-media-set">
+                    <img media="(max-width: 320px)" width="320" height="160" data-src="media/placeholder_320x160.gif"  />
+                    <img media="(max-width: 480px)" width="480" height="220" data-src="media/placeholder_480x220.gif"  />
+                    <img media="(max-width: 720px)" width="720" height="280"  data-src="media/placeholder_720x280.gif"  />
+                    <img media="(max-width: 960px)" width="960" height="320" data-src="media/placeholder_960x320.gif"  />
+                    <img width="1200" height="400" data-media-fallback data-src="media/placeholder_1200x400.gif"/>
+                </script>
             </figure>
             <figure class="slide">
-                <img src="media/placeholder_1200x400.gif">
+                <script type="image/mx-media-set">
+                    <img media="(max-width: 320px)" width="320" height="160" data-src="media/placeholder_320x160.gif"  />
+                    <img media="(max-width: 480px)" width="480" height="220" data-src="media/placeholder_480x220.gif"  />
+                    <img media="(max-width: 720px)" width="720" height="280"  data-src="media/placeholder_720x280.gif"  />
+                    <img media="(max-width: 960px)" width="960" height="320" data-src="media/placeholder_960x320.gif"  />
+                    <img width="1200" height="400" data-media-fallback data-src="media/placeholder_1200x400.gif"/>
+                </script>
             </figure>
             <figure class="slide">
-                <img src="media/placeholder_1200x400.gif">
+                <script type="image/mx-media-set">
+                    <img media="(max-width: 320px)" width="320" height="160" data-src="media/placeholder_320x160.gif"  />
+                    <img media="(max-width: 480px)" width="480" height="220" data-src="media/placeholder_480x220.gif"  />
+                    <img media="(max-width: 720px)" width="720" height="280"  data-src="media/placeholder_720x280.gif"  />
+                    <img media="(max-width: 960px)" width="960" height="320" data-src="media/placeholder_960x320.gif"  />
+                    <img width="1200" height="400" data-media-fallback data-src="media/placeholder_1200x400.gif"/>
+                </script>
             </figure>
         </div>
     </fieldset>

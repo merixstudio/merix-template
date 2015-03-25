@@ -18,7 +18,7 @@ a:hover,
 a:active,
 a:focus {outline: 0}
 
-figure img {display: block; width: 100%}
+figure img {display: block; width: 100%; height: auto}
 
 .block {display: block}
 .relative {position: relative}

@@ -14,6 +14,6 @@ define('image_loader', ['jquery'], function(jQuery) {
             });
         });
         image.attr('src', image.attr('data-src'));
-        jQuery('[data-media-fallback]').hide();
+        //jQuery('[data-media-fallback]').hide();
     };
 });

@@ -1,327 +1,329 @@
-define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/signal'], function(jQuery, numbers, settings, gestures, Signal) {
-    
-    gestures.enable();
-    
-    // Check for transform support;
-    var cssTransform;
-    var prefixes = ['transform', '-webkit-transform', '-ms-transform'];
+var jQuery = require('jquery');
+var numbers = require('../nebula/numbers');
+var settings = require('../settings');
+var gestures = require('../gestures');
+var Signal = require('../nebula/signal');
+gestures.enable();
 
-    for (var i = 0; i < prefixes.length; i++)
-        if (typeof document.body.style[prefixes[i]] != 'undefined')
-            cssTransform = prefixes[i];
+// Check for transform support;
+var cssTransform;
+var prefixes = ['transform', '-webkit-transform', '-ms-transform'];
+
+for (var i = 0; i < prefixes.length; i++)
+  if (typeof document.body.style[prefixes[i]] != 'undefined')
+      cssTransform = prefixes[i];
 
 
-    function Slider(element, options) {
-        jQuery.extend(true, this, Slider.DEFAULT_SETTINGS, options);
+function Slider(element, options) {
+  jQuery.extend(true, this, Slider.DEFAULT_SETTINGS, options);
 
-        this.element = element;
-        this.items = this.element.find('>.slide'); // Items in the slider.
-        this.count = this.items.length; // Count of items in the slider.
-        this.destination = this.position;
-        this.tempAuto = this.auto;
+  this.element = element;
+  this.items = this.element.find('>.slide'); // Items in the slider.
+  this.count = this.items.length; // Count of items in the slider.
+  this.destination = this.position;
+  this.tempAuto = this.auto;
 
-        this.itemState = [];
-        for (var i = 0; i < this.count; i++)
-            this.itemState.push(i);
+  this.itemState = [];
+  for (var i = 0; i < this.count; i++)
+      this.itemState.push(i);
 
-        this.animated = false;
-        
-        this.items.wrapAll('<div class="slider-container"></div>');
-        this.container = this.element.children('.slider-container');
+  this.animated = false;
 
-        if (this.auto)
-            this.enableAuto();
-        
-        this.sliderTouch();
-        
-        if (this.arrows)
-            this.createArrows();
-        
-        if (this.dots)
-            this.createDots();
-        
-        this.onChangeSlide = new Signal();
-        
-    }
+  this.items.wrapAll('<div class="slider-container"></div>');
+  this.container = this.element.children('.slider-container');
 
-    Slider.MODE_DEFAULT = 'default';
-    Slider.MODE_CAROUSEL = 'carousel';
+  if (this.auto)
+      this.enableAuto();
 
-    Slider.DEFAULT_SETTINGS = {
-        'itemIndex': 0,
-        'itemSize': 100,  // Usually width of one slide (or height in case of vertical slider).
-        'perPage': 1, // Number of slides per page. Can be 1 to N, where N <= this.count.
-        'step': 1,
-        'ease': 0.2, // Speed of animation, smaller value is faster.
-        'unit': '%', // 'px'
-        'arrows': true,
-        'dots': true,
-        'auto': true,
-        'autoInterval': 5000,
-        'animatedProperty': 'left',
-        'minCount': 1,
-        'mode': Slider.MODE_DEFAULT,
-        'position': 0,
-        'takeShortcuts': true
-    };
+  this.sliderTouch();
 
-    Slider.prototype.render = function() {
-        var x = 0;
-        var y = 0;
-        var css = {};
-        var list = this.container;
+  if (this.arrows)
+      this.createArrows();
 
-        if (this.animatedProperty == 'left' || this.animatedProperty == 'top') {
-            if (this.animatedProperty == 'left')
-                x = this.position;
+  if (this.dots)
+      this.createDots();
 
-            if (this.animatedProperty == 'top')
-                y = this.position;
+  this.onChangeSlide = new Signal();
 
-            css[cssTransform] = 'translate(' + x + this.unit + ', ' + y + this.unit + ')';
-        } else
-            css[this.animatedProperty] = Math.round(this.position) + this.unit;
+}
 
-        list.css(css);
-    };
+Slider.MODE_DEFAULT = 'default';
+Slider.MODE_CAROUSEL = 'carousel';
 
-    Slider.prototype.animate = function(instant) {
-        var newItemIndex;
+Slider.DEFAULT_SETTINGS = {
+  'itemIndex': 0,
+  'itemSize': 100,  // Usually width of one slide (or height in case of vertical slider).
+  'perPage': 1, // Number of slides per page. Can be 1 to N, where N <= this.count.
+  'step': 1,
+  'ease': 0.2, // Speed of animation, smaller value is faster.
+  'unit': '%', // 'px'
+  'arrows': true,
+  'dots': true,
+  'auto': true,
+  'autoInterval': 5000,
+  'animatedProperty': 'left',
+  'minCount': 1,
+  'mode': Slider.MODE_DEFAULT,
+  'position': 0,
+  'takeShortcuts': true
+};
 
-        this.animated = true;
+Slider.prototype.render = function() {
+  var x = 0;
+  var y = 0;
+  var css = {};
+  var list = this.container;
 
-        if (this.position == this.destination) {
-            this.animated = false;
-            return;
-        }
-        
-        if (instant)
-            this.position = this.destination;
+  if (this.animatedProperty == 'left' || this.animatedProperty == 'top') {
+      if (this.animatedProperty == 'left')
+          x = this.position;
 
-        var distance = this.destination - this.position;
+      if (this.animatedProperty == 'top')
+          y = this.position;
 
-        if (Math.abs(distance) < (this.unit == '%' ? 0.01 : 1))
-            this.position = this.destination;
-        else
-            this.position += Math.abs(distance) * this.ease * numbers.sign(distance);
+      css[cssTransform] = 'translate(' + x + this.unit + ', ' + y + this.unit + ')';
+  } else
+      css[this.animatedProperty] = Math.round(this.position) + this.unit;
 
-        //Carousel mode required moving slider elements from beginning to the end and vice versa.
-        if (this.mode == Slider.MODE_CAROUSEL) {
-            if (distance < 0 && this.position <= -this.itemSize)
-                this.append();
+  list.css(css);
+};
 
-            if (distance > 0 && this.position > 0)
-                this.prepend();
+Slider.prototype.animate = function(instant) {
+  var newItemIndex;
 
-            newItemIndex = numbers.mod(this.itemState[0] + Math.round(-this.position / this.itemSize), this.count);
-        } else
-            newItemIndex = Math.round(-this.position / this.itemSize);
+  this.animated = true;
 
-        if (typeof newItemIndex != 'undefined' && newItemIndex != this.itemIndex) {
-            this.itemIndex = newItemIndex;
-            this.onChangeSlide.send(this.itemIndex);
-            this.update();
-        }
-        
-        // Actually move the slider elements.
-        this.render();
+  if (this.position == this.destination) {
+      this.animated = false;
+      return;
+  }
 
-        if (this._timer)
-            clearTimeout(this._timer);
-        this._timer = setTimeout(this.animate.bind(this), 33);
-        
-        
-    };
+  if (instant)
+      this.position = this.destination;
 
-    Slider.prototype.append = function() {
-        this.position += this.itemSize;
-        this.destination += this.itemSize;
+  var distance = this.destination - this.position;
 
-        this.itemState.push(this.itemState.shift());
+  if (Math.abs(distance) < (this.unit == '%' ? 0.01 : 1))
+      this.position = this.destination;
+  else
+      this.position += Math.abs(distance) * this.ease * Math.sign(distance);
 
-        var elements = this.element.find('.slide');
-        elements.first().insertAfter(elements.last());
-    };
+  //Carousel mode required moving slider elements from beginning to the end and vice versa.
+  if (this.mode == Slider.MODE_CAROUSEL) {
+      if (distance < 0 && this.position <= -this.itemSize)
+          this.append();
 
-    Slider.prototype.prepend = function() {
-        this.position -= this.itemSize;
-        this.destination -= this.itemSize;
+      if (distance > 0 && this.position > 0)
+          this.prepend();
 
-        this.itemState.unshift(this.itemState.pop());
+      newItemIndex = numbers.mod(this.itemState[0] + Math.round(-this.position / this.itemSize), this.count);
+  } else
+      newItemIndex = Math.round(-this.position / this.itemSize);
 
-        var elements = this.element.find('.slide');
-        elements.last().insertBefore(elements.first());
-    };
+  if (typeof newItemIndex != 'undefined' && newItemIndex != this.itemIndex) {
+      this.itemIndex = newItemIndex;
+      this.onChangeSlide.send(this.itemIndex);
+      this.update();
+  }
 
-    Slider.prototype.next = function() {
-        var newItemIndex, position;
+  // Actually move the slider elements.
+  this.render();
 
-        if (this.mode == Slider.MODE_DEFAULT) {
-            newItemIndex = Math.min(this.itemIndex + this.step, this.count);
+  if (this._timer)
+      clearTimeout(this._timer);
+  this._timer = setTimeout(this.animate.bind(this), 33);
 
-            if (newItemIndex == this.itemIndex)
-                return;
 
-            position = this.destination + (newItemIndex - this.itemIndex) * this.itemSize;
-        } else
-            position = this.destination + this.step * this.itemSize;
+};
 
-        this.slideTo(position);
-    };
+Slider.prototype.append = function() {
+  this.position += this.itemSize;
+  this.destination += this.itemSize;
 
-    Slider.prototype.previous = function() {
-        var newItemIndex, position;
+  this.itemState.push(this.itemState.shift());
 
-        if (this.mode == Slider.MODE_DEFAULT) {
-            newItemIndex = Math.max(0, this.itemIndex - this.step);
+  var elements = this.element.find('.slide');
+  elements.first().insertAfter(elements.last());
+};
 
-            if (newItemIndex == this.itemIndex)
-                return;
+Slider.prototype.prepend = function() {
+  this.position -= this.itemSize;
+  this.destination -= this.itemSize;
 
-            position = this.destination - (this.itemIndex - newItemIndex) * this.itemSize;
-        } else
-            position = this.destination - this.step * this.itemSize;
+  this.itemState.unshift(this.itemState.pop());
 
-        this.slideTo(position);
-    };
+  var elements = this.element.find('.slide');
+  elements.last().insertBefore(elements.first());
+};
 
-    Slider.prototype.slideTo = function(position) {
-        if (this.tempAuto && this.auto)
-            this.disableAuto();
-        
-        this.destination = position;
-        this.animate();
-        
-        if (!(this.tempAuto) && this.auto)
-            this.enableAuto();
-    };
+Slider.prototype.next = function() {
+  var newItemIndex, position;
 
-    Slider.prototype.slideToIndex = function(index) {
-        var position;
-        var half = this.itemState.length / 2;
+  if (this.mode == Slider.MODE_DEFAULT) {
+      newItemIndex = Math.min(this.itemIndex + this.step, this.count);
 
-        if (this.mode == Slider.MODE_DEFAULT)
-            position = -index * this.itemSize;
-        else {
-            for (var i = 0; i < this.itemState.length; i++) {
-                if (index == this.itemState[i]) {
-                    if ((this.takeShortcuts && i < half) || index > this.itemIndex)
-                        position = -i * this.itemSize;
-                    else if ((this.takeShortcuts && i > half) || index <= this.itemIndex)
-                        position = (this.itemState.length-i) * this.itemSize;
-                    break;
-                }
-            }
-        }
-        
-        this.slideTo(position);
-    };
-    
-    Slider.prototype.createArrows = function() {
-        var self = this;
-        if (this.itemState.length > 1) {
-                var navigation = '<button href="#" class="icon-arrow-left slider-navigation previous"></button><button href="#" class="icon-arrow-right slider-navigation next"></button>';
-                this.element.append(navigation);
-                this.element.addClass('navigations');
-            }
-            
-            this.element.find('.slider-navigation').each(function() {
-                jQuery(this).click(function(event) {
-                    event.preventDefault();
+      if (newItemIndex == this.itemIndex)
+          return;
 
-                    var navigationLink = jQuery(this);
-                    if (navigationLink.hasClass('previous'))
-                        self.next();
-                    else if (navigationLink.hasClass('next'))
-                        self.previous();
-                });
-            });
-    };
-    
-    Slider.prototype.createDots = function() {
-        var self = this;
-        if (this.itemState.length > 1) {
-            var navigation = '<ul class="navigation-list grid">';
-            for (var i = 0; i < this.itemState.length; i++) {
-                if (i == 0)
-                    navigation += '<li class="active"><button data-slide="'+i+'" /></li>';
-                else
-                    navigation += '<li><button data-slide="'+i+'" /></li>';
-            }
-            navigation += '</ul>';
-            this.element.append(navigation);
-            this.element.addClass('navigations');
-            
-            this.element.find('.navigation-list button').click(function(event) {
-                event.preventDefault();
-                var element = jQuery(this);
-                var slideIndex = element.data('slide');
+      position = this.destination + (newItemIndex - this.itemIndex) * this.itemSize;
+  } else
+      position = this.destination + this.step * this.itemSize;
 
-                self.slideToIndex(slideIndex);
-            });
-        }
-    };
-    
-    Slider.prototype.enableAuto = function() {
-        this.tempAuto = true;
-        
-        if (this.count <= this.perPage)
-            return false;
+  this.slideTo(position);
+};
 
-        if (this._autoTimer)
-            clearInterval(this._autoTimer);
+Slider.prototype.previous = function() {
+  var newItemIndex, position;
 
-        this._autoTimer = setInterval(this.previous.bind(this), this.autoInterval);
-    };
-    
-    Slider.prototype.update = function() {
-        var self = this;
-        if (this.dots) {
-            var dots = this.element.find('.navigation-list li');
-            dots.removeClass('active');
-            dots.eq(self.itemIndex).addClass('active');
-        }
-    };
+  if (this.mode == Slider.MODE_DEFAULT) {
+      newItemIndex = Math.max(0, this.itemIndex - this.step);
 
-    Slider.prototype.disableAuto = function() {
-        this.tempAuto = false;
-        
-        if (this._autoTimer) {
-            clearInterval(this._autoTimer);
-            delete this._autoTimer;
-        }
-    };
-    
-    Slider.prototype.sliderTouch = function() {
-        var self = this;
-        
-        gestures.onTouchMove(function(target, touch, event) {
-            var sliderChild = jQuery.contains(self.element[0], target);
-            
-            if (sliderChild)
-                if (Math.abs(touch.dx) > Math.abs(touch.dy))
-                    event.preventDefault();
-        });
+      if (newItemIndex == this.itemIndex)
+          return;
 
-        gestures.onTouchEnd(function(target, touch, event) {
-            var sliderChild = jQuery.contains(self.element[0], target);
-            
-            if (sliderChild) {
-                if (touch.dx > 0 && touch.dx > 100)
-                    self.next();
-                else if (touch.dx < 0 && touch.dx < -100)
-                    self.previous();
-                
-                event.stopPropagation();
-            }
-        });
-    };
+      position = this.destination - (this.itemIndex - newItemIndex) * this.itemSize;
+  } else
+      position = this.destination - this.step * this.itemSize;
 
-    jQuery.fn.slider = function(options) {
-        return this.each(function() {
-            new Slider(jQuery(this), options);
-        });
-    };
+  this.slideTo(position);
+};
 
-    return Slider;
-});
+Slider.prototype.slideTo = function(position) {
+  if (this.tempAuto && this.auto)
+      this.disableAuto();
+
+  this.destination = position;
+  this.animate();
+
+  if (!(this.tempAuto) && this.auto)
+      this.enableAuto();
+};
+
+Slider.prototype.slideToIndex = function(index) {
+  var position;
+  var half = this.itemState.length / 2;
+
+  if (this.mode == Slider.MODE_DEFAULT)
+      position = -index * this.itemSize;
+  else {
+      for (var i = 0; i < this.itemState.length; i++) {
+          if (index == this.itemState[i]) {
+              if ((this.takeShortcuts && i < half) || index > this.itemIndex)
+                  position = -i * this.itemSize;
+              else if ((this.takeShortcuts && i > half) || index <= this.itemIndex)
+                  position = (this.itemState.length-i) * this.itemSize;
+              break;
+          }
+      }
+  }
+
+  this.slideTo(position);
+};
+
+Slider.prototype.createArrows = function() {
+  var self = this;
+  if (this.itemState.length > 1) {
+          var navigation = '<button href="#" class="icon-arrow-left slider-navigation previous"></button><button href="#" class="icon-arrow-right slider-navigation next"></button>';
+          this.element.append(navigation);
+          this.element.addClass('navigations');
+      }
+
+      this.element.find('.slider-navigation').each(function() {
+          jQuery(this).click(function(event) {
+              event.preventDefault();
+
+              var navigationLink = jQuery(this);
+              if (navigationLink.hasClass('previous'))
+                  self.next();
+              else if (navigationLink.hasClass('next'))
+                  self.previous();
+          });
+      });
+};
+
+Slider.prototype.createDots = function() {
+  var self = this;
+  if (this.itemState.length > 1) {
+      var navigation = '<ul class="navigation-list grid">';
+      for (var i = 0; i < this.itemState.length; i++) {
+          if (i == 0)
+              navigation += '<li class="active"><button data-slide="'+i+'" /></li>';
+          else
+              navigation += '<li><button data-slide="'+i+'" /></li>';
+      }
+      navigation += '</ul>';
+      this.element.append(navigation);
+      this.element.addClass('navigations');
+
+      this.element.find('.navigation-list button').click(function(event) {
+          event.preventDefault();
+          var element = jQuery(this);
+          var slideIndex = element.data('slide');
+
+          self.slideToIndex(slideIndex);
+      });
+  }
+};
+
+Slider.prototype.enableAuto = function() {
+  this.tempAuto = true;
+
+  if (this.count <= this.perPage)
+      return false;
+
+  if (this._autoTimer)
+      clearInterval(this._autoTimer);
+
+  this._autoTimer = setInterval(this.previous.bind(this), this.autoInterval);
+};
+
+Slider.prototype.update = function() {
+  var self = this;
+  if (this.dots) {
+      var dots = this.element.find('.navigation-list li');
+      dots.removeClass('active');
+      dots.eq(self.itemIndex).addClass('active');
+  }
+};
+
+Slider.prototype.disableAuto = function() {
+  this.tempAuto = false;
+
+  if (this._autoTimer) {
+      clearInterval(this._autoTimer);
+      delete this._autoTimer;
+  }
+};
+
+Slider.prototype.sliderTouch = function() {
+  var self = this;
+
+  gestures.onTouchMove(function(target, touch, event) {
+      var sliderChild = jQuery.contains(self.element[0], target);
+
+      if (sliderChild)
+          if (Math.abs(touch.dx) > Math.abs(touch.dy))
+              event.preventDefault();
+  });
+
+  gestures.onTouchEnd(function(target, touch, event) {
+      var sliderChild = jQuery.contains(self.element[0], target);
+
+      if (sliderChild) {
+          if (touch.dx > 0 && touch.dx > 100)
+              self.next();
+          else if (touch.dx < 0 && touch.dx < -100)
+              self.previous();
+
+          event.stopPropagation();
+      }
+  });
+};
+
+jQuery.fn.slider = function(options) {
+  return this.each(function() {
+      new Slider(jQuery(this), options);
+  });
+};
+
+module.exports = Slider;

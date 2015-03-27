@@ -1,3 +1,9 @@
+@import 'utils/*';
+@import 'grid/*';
+@import 'fonts/*';
+@import 'partials/*';
+@import 'widgets/*';
+
 /* BASE ELEMENTS */
 body,
 .grid > * {font-family: 'Titillium', 'Arial', 'Helvetica', sans-serif; font-size: 16px}

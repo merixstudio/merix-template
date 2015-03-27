@@ -232,20 +232,22 @@
 
 
     // Publicize things.
-    require.Error = RequireError;
-    require.ArgumentsError = RequireArgumentsError;
-    define.Error = DefineError;
-    define.ArgumentCountError = DefineArgumentCountError;
-    define.InvalidModuleNameError = DefineInvalidModuleNameError;
-    define.InvalidModuleError = DefineInvalidModuleError;
-    define.DuplicateModuleError = DefineDuplicateModuleError;
-    define.functions = functions;
-    define._init = init;
-    define._modules = modules;
-    define._constructors = constructors;
-    window.define = define;
-    window.require = require;
+    // require.Error = RequireError;
+    // require.ArgumentsError = RequireArgumentsError;
+    // define.Error = DefineError;
+    // define.ArgumentCountError = DefineArgumentCountError;
+    // define.InvalidModuleNameError = DefineInvalidModuleNameError;
+    // define.InvalidModuleError = DefineInvalidModuleError;
+    // define.DuplicateModuleError = DefineDuplicateModuleError;
+    // define.functions = functions;
+    // define._init = init;
+    // define._modules = modules;
+    // define._constructors = constructors;
+    // window.define = define;
+    // window.require = require;
+    //
+    // init(null, null, window);
 
-    init(null, null, window);
+    module.exports = define;
 
 })();

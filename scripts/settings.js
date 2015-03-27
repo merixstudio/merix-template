@@ -1,7 +1,7 @@
 /*
  * Put global configuration options here.
  */
-define('settings', {
+module.exports = {
     // Enable or disable jQuery 'no conflict' mode. Defaults to `true`.
     'JQUERY_NO_CONFLICT': true,
 
@@ -22,7 +22,7 @@ define('settings', {
         '1920': [1920, Infinity]
     },
     // Uncomment this to disable 'viewport-portrait' and 'viewport-landscape' classes added automatically to body.
-    // 'VIEWPORT_ORIENTATION_CLASS': false,
+    // 'VIEWPORT_ORIENTATION_CLASS': true,
 
     'SMART_BLOCKS': {
         // Example smart block configuration.
@@ -40,7 +40,7 @@ define('settings', {
         //    'big': [700, Infinity, 'self'],
         //}
     },
-    
+
     'TRANSLATIONS': {
         'ENG': {
             'no_file': 'Click to select',
@@ -56,4 +56,4 @@ define('settings', {
             'validation_letters-only': 'Letters only'
         }
     }
-});
+};

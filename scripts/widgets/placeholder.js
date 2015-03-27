@@ -8,78 +8,74 @@
  *     </label>
  *     <input id="input" data-placeholder="text">
  * </p>
- * 
+ *
  * js:
  * find('[placeholder]').placeholders();
  */
-define('widgets/placeholder', ['jquery'], function(jQuery) {
-    
-    function Placeholder(element) {
-        var self = this;
-        this.element = element;
-        this.placeholder = element.siblings('label.placeholder');
+var jQuery = require('jquery');
 
-        if (typeof this.element.attr('id') === 'undefined')
-            this.element.attr('id', 'placeholder' + new Date().getTime());
-        this.id = this.element.attr('id');
+function Placeholder(element) {
+    var self = this;
+    this.element = element;
+    this.placeholder = element.siblings('label.placeholder');
 
-        if (this.placeholder.length === 0)
-            this.buildPlaceholder();
+    if (typeof this.element.attr('id') === 'undefined')
+        this.element.attr('id', 'placeholder' + new Date().getTime());
+    this.id = this.element.attr('id');
 
-        this.element.removeAttr('placeholder');
+    if (this.placeholder.length === 0)
+        this.buildPlaceholder();
 
-        this.setPosition();
-        
-        this.element.focus(self.hidePlaceholder.bind(this)).blur(self.showPlaceholder.bind(this));
-        
-        // FF fix
-        this.hidePlaceholder();
-        this.showPlaceholder();
-        
-        jQuery(window).resize(self.setPosition.bind(this));
-    }
+    this.element.removeAttr('placeholder');
 
-    Placeholder.prototype.buildPlaceholder = function() {
-        this.element.wrap('<span class="relative" style="display: inline-block; width: 100%; height: 100%" />');
-        var placeholder = this.element.attr('placeholder');
+    this.setPosition();
 
-        this.placeholder = jQuery('<label for="' + this.id + '" class="placeholder">' + placeholder + '</label>');
+    this.element.focus(self.hidePlaceholder.bind(this)).blur(self.showPlaceholder.bind(this));
 
-        this.element.before(this.placeholder);
-    };
-    
-    Placeholder.prototype.setPosition = function() {
-        var elementWidth = this.element.outerWidth();
-        var elementHeight = this.element.outerHeight();
-        this.placeholder.css({
-            'width': elementWidth,
-            'height': elementHeight
-        });
-    };
-    
-    Placeholder.prototype.hidePlaceholder = function() {
-        this.placeholder.hide();
-    };
-    
-    Placeholder.prototype.showPlaceholder = function() {
-        if (!this.element.val())
-            this.placeholder.show();
-        
-        if (this.element.hasClass('error'))
-            this.placeholder.addClass('error');
-        else
-            this.placeholder.removeClass('error');
-    };
+    // FF fix
+    this.hidePlaceholder();
+    this.showPlaceholder();
 
-    jQuery.fn.placeholders = function() {
-        jQuery(this).each(function() {
-            new Placeholder(jQuery(this));
-        });
-        return this;
-    };
+    jQuery(window).resize(self.setPosition.bind(this));
+}
 
-    return {
-        'placeholder': Placeholder
-    };
+Placeholder.prototype.buildPlaceholder = function() {
+    this.element.wrap('<span class="relative" style="display: inline-block; width: 100%; height: 100%" />');
+    var placeholder = this.element.attr('placeholder');
 
-});
+    this.placeholder = jQuery('<label for="' + this.id + '" class="placeholder">' + placeholder + '</label>');
+
+    this.element.before(this.placeholder);
+};
+
+Placeholder.prototype.setPosition = function() {
+    var elementWidth = this.element.outerWidth();
+    var elementHeight = this.element.outerHeight();
+    this.placeholder.css({
+        'width': elementWidth,
+        'height': elementHeight
+    });
+};
+
+Placeholder.prototype.hidePlaceholder = function() {
+    this.placeholder.hide();
+};
+
+Placeholder.prototype.showPlaceholder = function() {
+    if (!this.element.val())
+        this.placeholder.show();
+
+    if (this.element.hasClass('error'))
+        this.placeholder.addClass('error');
+    else
+        this.placeholder.removeClass('error');
+};
+
+jQuery.fn.placeholders = function() {
+    jQuery(this).each(function() {
+        new Placeholder(jQuery(this));
+    });
+    return this;
+};
+
+module.exports = Placeholder;

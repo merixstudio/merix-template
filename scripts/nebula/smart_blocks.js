@@ -15,79 +15,79 @@
  *         }
  *     }
  */
-define('nebula/smart_blocks', ['nebula/window', 'settings', 'nebula/signal', 'nebula/viewport'], function(window, settings, Signal, viewport) {
-    'use strict';
+'use strict';
+
+var settings = require('../settings');
+var Signal = require('./signal');
+var viewport = require('./viewport');
+// Signal sent whenever any of the blocks had class changed.
+var onUpdate = new Signal();
 
 
-    // Signal sent whenever any of the blocks had class changed.
-    var onUpdate = new Signal();
+function clean(block, args) {
+    if (typeof args === 'function')
+        return args(block);
+    else if (args instanceof Array && (args.length == 2 || (args.length == 3 && args[2] === 'self')) &&
+             typeof args[0] === 'number' && typeof args[1] === 'number' && args[0] <= args[1]) {
+        var width = args[2] === 'self' ? block.offsetWidth : block.parentNode.offsetWidth;
+        return args[0] <= width && width <= args[1];
+    } else if (typeof args === 'string')
+        return viewport.is(args);
+    throw new Error('Invalid smart blocks args: ' + args);
+}
 
 
-    function clean(block, args) {
-        if (typeof args === 'function')
-            return args(block);
-        else if (args instanceof Array && (args.length == 2 || (args.length == 3 && args[2] === 'self')) &&
-                 typeof args[0] === 'number' && typeof args[1] === 'number' && args[0] <= args[1]) {
-            var width = args[2] === 'self' ? block.offsetWidth : block.parentNode.offsetWidth;
-            return args[0] <= width && width <= args[1];
-        } else if (typeof args === 'string')
-            return viewport.is(args);
-        throw new Error('Invalid smart blocks args: ' + args);
-    }
+function updateBlock(block, specification, selector) {
+    var classModified = false;
+    for (var className in specification) {
+        var classAdded = block.classList.contains(className);
 
-
-    function updateBlock(block, specification, selector) {
-        var classModified = false;
-        for (var className in specification) {
-            var classAdded = block.classList.contains(className);
-
-            if (clean(block, specification[className])) {
-                if (!classAdded) {
-                    block.classList.add(className);
-                    classModified = true;
-                }
-            } else if (classAdded) {
-                block.classList.remove(className);
+        if (clean(block, specification[className])) {
+            if (!classAdded) {
+                block.classList.add(className);
                 classModified = true;
             }
-        }
-        if (classModified)
-            onUpdate.send(selector, block);
-    }
-
-
-    function updateTree(root) {
-        var BLOCKS = settings('SMART_BLOCKS', {});
-        var selector, blocks, i;
-        for (selector in BLOCKS) {
-            blocks = root.querySelectorAll(selector);
-            for (i = 0; i < blocks.length; i++)
-                updateBlock(blocks[i], BLOCKS[selector], selector);
+        } else if (classAdded) {
+            block.classList.remove(className);
+            classModified = true;
         }
     }
+    if (classModified)
+        onUpdate.send(selector, block);
+}
 
 
-    function updateDocument() {
-        updateTree(window.document.body);
+function updateTree(root) {
+    var BLOCKS = settings['SMART_BLOCKS'];
+    var selector, blocks, i;
+    for (selector in BLOCKS) {
+        blocks = root.querySelectorAll(selector);
+        for (i = 0; i < blocks.length; i++)
+            updateBlock(blocks[i], BLOCKS[selector], selector);
     }
+}
 
 
-    function enable() {
-        window.addEventListener('resize', updateDocument);
-    }
+function updateDocument() {
+    updateTree(window.document.body);
+}
 
 
-    function disable() {
-        window.removeEventListener('resize', updateDocument);
-    }
+function enable() {
+    window.addEventListener('resize', updateDocument);
+}
 
 
-    return {
-        'onUpdate': onUpdate,
-        'updateBlock': updateBlock,
-        'updateTree': updateTree,
-        'updateDocument': updateDocument,
-        'enable': enable,
-        'disable': disable
-    };
-});
+function disable() {
+    window.removeEventListener('resize', updateDocument);
+}
+
+
+module.exports = {
+    'onUpdate': onUpdate,
+    'updateBlock': updateBlock,
+    'updateTree': updateTree,
+    'updateDocument': updateDocument,
+    'enable': enable,
+    'disable': disable
+};

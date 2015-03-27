@@ -13,28 +13,26 @@
  *      delay - (Number) > 0 Time beetween callback firing
  *      callback - (Function) callback function
  */
-define('throttle', [], function() {
-    return function(scope, delay, callback) {
-        var delay = delay || 250;
-        var lastExecution, timer;
+module.exports = function(scope, delay, callback) {
+    var delay = delay || 250;
+    var lastExecution, timer;
 
-        return function () {
-            clearTimeout(timer);
+    return function () {
+        clearTimeout(timer);
 
-            var context = scope || this;
+        var context = scope || this;
 
-            var now = new Date,
-                args = arguments;
+        var now = new Date,
+            args = arguments;
 
-            var fn = function () {
-                lastExecution = now.getTime();
-                callback.apply(context, args);
-            };
-
-            if (lastExecution && now.getTime() < lastExecution + delay)
-                timer = setTimeout(fn, delay);
-            else
-                fn();
+        var fn = function () {
+            lastExecution = now.getTime();
+            callback.apply(context, args);
         };
-    }
-});
+
+        if (lastExecution && now.getTime() < lastExecution + delay)
+            timer = setTimeout(fn, delay);
+        else
+            fn();
+    };
+};

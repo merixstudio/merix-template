@@ -127,7 +127,7 @@
 {% endmacro %}
 
 {% macro checkbox(kwargs) %}
-    <label>
+    <label class="checkbox">
         {{ element('input', 'checkbox', kwargs) }}
         <span class="icon-check">{% if kwargs.label %}{{ kwargs.label }}{% else %}&nbsp;{% endif %}</span>
         {% if kwargs.label %}{{ kwargs.label }}{% endif %}
@@ -135,7 +135,7 @@
 {% endmacro %}
 
 {% macro radio(kwargs) %}
-    <label>
+    <label class="radio">
         {{ element('input', 'radio', kwargs) }}
         <span>{% if kwargs.label %}{{ kwargs.label }}{% else %}&nbsp;{% endif %}</span>
         {% if kwargs.label %}{{ kwargs.label }}{% endif %}

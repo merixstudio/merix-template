@@ -4,11 +4,9 @@
     "gulp": "~3.5.2",
     "gulp-autoprefixer": "0.0.7",
     "gulp-concat": "~2.2.0",
-    "gulp-imagemin": "^1.0.1",
     "gulp-swig": "~0.3.0",
     "htmltidy": "0.0.6",
     "image-size": "~0.2.3",
-    "imagemin-pngcrush": "^1.0.0",
     "map-stream": "^0.1.0",
     "yargs": "~1.2.6"
   }

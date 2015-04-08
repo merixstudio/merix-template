@@ -16,7 +16,7 @@ function build(file){
         entries: config.browserify.entries,
         cache: {},
         packageCache: {},
-        fullPaths: true
+        fullPaths: false
     }, watchify.args)
 
     bundler = watchify(bundler);

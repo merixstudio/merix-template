@@ -1,8 +1,8 @@
 'use strict';
 
 var jQuery = require('jquery');
-var settings = require('../settings');
-var viewport = require('../nebula/viewport');
+var settings = require('../utilities/settings');
+var viewport = require('../utilities/viewport');
 jQuery('.accordion-toggle').each(function() {
     var toggler = jQuery(this);
     var target = jQuery('#' + toggler.data('target'));

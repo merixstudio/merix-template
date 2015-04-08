@@ -18,7 +18,7 @@
  * (random one will be returned), thus it's recommened to define non-overlapping breakpoints.
  */
 'use strict';
-var settings = require('../settings');
+var settings = require('./settings');
 var Signal = require('./signal');
 var active = undefined, portrait = undefined;
 var onChange = new Signal();

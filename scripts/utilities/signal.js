@@ -2,7 +2,7 @@
  * Simple signal dispatcher implementation.
  */
 'use strict';
-var detect = require('../detect');
+var detect = require('./detect');
 
 function connect() {
     var kwargs = typeof arguments[0] === 'function' ? {'receiver': arguments[0]} : arguments[0];

@@ -1,4 +1,4 @@
-var Signal = require('./nebula/signal');
+var Signal = require('./signal');
 var EVENTS = {};
 
 EVENTS.START = 'touchstart';

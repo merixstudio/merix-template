@@ -1,7 +1,7 @@
 'use strict';
 
 var jQuery = require('jquery');
-var viewport = require('../nebula/viewport')
+var viewport = require('../utilities/viewport')
 var groups = {};
 
 function add(element) {

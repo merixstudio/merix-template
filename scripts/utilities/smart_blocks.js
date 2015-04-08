@@ -17,7 +17,7 @@
  */
 'use strict';
 
-var settings = require('../settings');
+var settings = require('./settings');
 var Signal = require('./signal');
 var viewport = require('./viewport');
 // Signal sent whenever any of the blocks had class changed.

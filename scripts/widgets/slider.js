@@ -1,8 +1,8 @@
 var jQuery = require('jquery');
-var numbers = require('../nebula/numbers');
-var settings = require('../settings');
-var gestures = require('../gestures');
-var Signal = require('../nebula/signal');
+var numbers = require('../utilities/numbers');
+var settings = require('../utilities/settings');
+var gestures = require('../utilities/gestures');
+var Signal = require('../utilities/signal');
 gestures.enable();
 
 // Check for transform support;

@@ -1,6 +1,6 @@
 'use strict';
 var jQuery = require('jquery');
-var viewport = require('../nebula/viewport');
+var viewport = require('../utilities/viewport');
 
 function Tabs(element) {
     var self = this;

@@ -3,9 +3,9 @@
 */
 
 var jQuery = require('jquery');
-var detect = require('../detect');
-require('../closest_scrollable');
-require('../offset_relative_to');
+var detect = require('../utilities/detect');
+require('../utilities/closest_scrollable');
+require('../utilities/offset_relative_to');
 
 function escapeHTML(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');

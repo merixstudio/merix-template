@@ -1,6 +1,6 @@
 'use strict';
 var jQuery = require('jquery');
-var Signal = require('../nebula/signal');
+var Signal = require('../utilities/signal');
 
 /*
  * modal manager

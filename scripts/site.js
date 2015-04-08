@@ -1,7 +1,7 @@
 ;(function () {
     'use strict';
 
-    var jQuery = require('jquery');
+    window.$ = window.jQuery = require('jquery');
     var viewport = require('./utilities/viewport');
     var smartBlocks = require('./utilities/smart_blocks');
     var detect = require('./utilities/detect');

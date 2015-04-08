@@ -1,4 +1,9 @@
 {
+  "name": "Pigie",
+  "description": "**************** Pigie Framework **************** (Nebula Framework Fork - 95fe22c)",
+  "version": "0.0.1",
+  "main": "gulpfile.js",
+  "dependencies": {},
   "devDependencies": {
     "browser-sync": "^1.9.1",
     "browserify": "^8.1.1",
@@ -22,5 +27,10 @@
     "vinyl-map": "^1.0.1",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.2.1"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Merixstudio",
+  "license": "ISC"
 }

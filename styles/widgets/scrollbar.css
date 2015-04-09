@@ -4,7 +4,7 @@ textarea {width: 100%; border: 0; background: transparent; resize: none}
 .scrollbar-wrapper {position: relative; display: block}
 .scrollbar-clip {overflow: hidden; display: block}
 .scrollbar-offset {display: block}
-.scrollbar {position: absolute}
+.scrollbar {position: absolute; overflow: hidden}
 .scrollbar .handle {position: absolute; width: 100%}
 .scrollbar.hidden {display: none}
 

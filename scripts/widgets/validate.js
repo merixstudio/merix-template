@@ -6,11 +6,12 @@
  */
 define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) {
 
-    function Validate(form) {
+    function Validate(form, options) {
         var self = this;
         this.form = form;
         this.formValid = new Array();
-
+        this.options = options;
+        
         this.checkFields();
     }
 
@@ -261,14 +262,14 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
     
     Validate.prototype.scrollToError = function(field) {
         var sectionOffset = Math.ceil(field.offset().top);
-        var scrollTo = sectionOffset - 50;
+        var scrollTo = sectionOffset - 50 + this.options['offset'];
 
         jQuery('body, html').stop().animate({'scrollTop': scrollTo}, 500);
 
         field.focus();
     };
 
-    jQuery.fn.validate = function(){
+    jQuery.fn.validate = function(options){
         jQuery(this).each(function() {
             var form = jQuery(this);
             var button = form.find('button');
@@ -276,7 +277,7 @@ define('widgets/validate', ['jquery', 'translate'], function(jQuery, translate) 
             form.attr('novalidate', 'novalidate');
             form.on('submit', function(event) {
                     event.preventDefault(); ///DELETE
-                var valid = new Validate(form);
+                var valid = new Validate(form, options);
 
                 if (valid.isValid() != true)
                     event.preventDefault();

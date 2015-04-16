@@ -46,7 +46,7 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
         this._selectEvent = function(e) {
             e.preventDefault();
             e.stopPropagation();
-            var value = jQuery(this).find(':hidden').val();
+            var value = jQuery(this).find(':hidden').val() || '';
             var $option = self.$select.find('option').removeAttr('selected').filter('[value="' + value + '"]');
             if (!$option.length)
                 self.$select.find('option').each(function() {
@@ -90,7 +90,7 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
 
         jQuery(function() {
             self._updateFake();
-            self.$select.css({'position': 'absolute', 'opacity': 0}).attr('size', 2);
+            self.$select.css({'position': 'absolute', 'opacity': 0}); // .attr('size', 2)
         });
     }
 
@@ -98,7 +98,6 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
     SelectField.MODE_OVERLAP = 1;
 
     SelectField.fakeHTML = '<span class="fake-select"><span><span class="value"/></span></span>';
-
 
 
 
@@ -110,7 +109,7 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
             classes += ' selected';
         if (classes)
             classes = ' class="' + classes + '"';
-        return '<li><a href="#"' + classes + '><input type="hidden" value="' + escapeHTML(value || label) + '"> ' + escapeHTML(label) + '</a></li>';
+        return '<li><a href="#"' + classes + '><input type="hidden" value="' + escapeHTML(value) + '"> ' + escapeHTML(label) + '</a></li>';
     };
 
     SelectField.fakeDropdownHTML = function(choices, initial, nested) {
@@ -140,13 +139,13 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
     };
 
     SelectField.prototype._updateFake = function() {
-        var rawValue = this.$select.find(':selected').val();
+        var rawValue = this.$select.find(':selected').val() || '';
         this.$fake.toggleClass('default', rawValue == '');
 
         this.$fake.find('.value').text(this.$select.find(':selected').text());
         if (this.$fakeDropdown)
             this.$fakeDropdown.find('a').removeClass('selected').find(
-                'input[value="' + this.$select.val() + '"]').closest('a').addClass('selected');
+                'input[value="' + (this.$select.val() || '') + '"]').closest('a').addClass('selected');
     };
 
     SelectField.prototype._showDropdown = function() {
@@ -161,7 +160,7 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
 
         if (!this.$fakeDropdown) {
             var choices = this.$select.optionsToChoices();
-            this.$fakeDropdown = jQuery(SelectField.fakeDropdownHTML(choices, this.$select.val()));
+            this.$fakeDropdown = jQuery(SelectField.fakeDropdownHTML(choices, this.$select.val() || ''));
             this.$fakeDropdown.show().addClass(this.$select.attr('class'));
             this.$fakeDropdown.mousedown(false);
             this.$fakeDropdown.find('a').click(false).mousedown(this._selectEvent);
@@ -212,9 +211,10 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
 
         this.children().each(function() {
             var option = jQuery(this), choice;
-            if (option.is('option'))
-                choice = [option.attr('value') || '', option.text(), option.attr('class')];
-            else if (option.is('optgroup'))
+            if (option.is('option')) {
+                var value = option.attr('value') !== null ? option.attr('value') : option.text();
+                choice = [value, option.text(), option.attr('class')];
+            } else if (option.is('optgroup'))
                 choice = [option.attr('label'), option.optionsToChoices(), option.attr('class')];
             choices.push(choice);
         });

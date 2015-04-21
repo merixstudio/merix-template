@@ -22,7 +22,7 @@ define('widgets/accordions', ['jquery', 'settings', 'nebula/viewport'], function
             clip.css('height', content.outerHeight());
         }
 
-        update();
+        jQuery(window).load(update);
 
         viewport.onChange.connect(update);
         jQuery(window).resize(update);

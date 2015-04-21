@@ -1,6 +1,6 @@
 'use strict';
 var jQuery = require('jquery');
-var Signal = require('../utilities/signal');
+var Signal = require('../utils/signal');
 
 /*
  * modal manager

@@ -3,9 +3,9 @@
 */
 
 var jQuery = require('jquery');
-var detect = require('../utilities/detect');
-require('../utilities/closest_scrollable');
-require('../utilities/offset_relative_to');
+var detect = require('../utils/detect');
+require('../utils/closest_scrollable');
+require('../utils/offset_relative_to');
 
 function escapeHTML(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
@@ -150,7 +150,8 @@ SelectField.prototype._updateFake = function() {
 
   this.$fake.find('.value').text(this.$select.find(':selected').text());
   if (this.$fakeDropdown)
-      this.$fakeDropdown.find('a').removeClass('selected').find(
+    //   this.$fakeDropdown.find('a').removeClass('selected').find(
+      this.$fakeDropdown.find('a').find(
           'input[value="' + this.$select.val() + '"]').closest('a').addClass('selected');
 };
 

@@ -1,7 +1,7 @@
 'use strict';
 
 var jQuery = require('jquery');
-var viewport = require('../utilities/viewport')
+var viewport = require('../utils/viewport')
 var groups = {};
 
 function add(element) {

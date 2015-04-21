@@ -15,5 +15,6 @@
 
 .fake-dropdown {z-index: 12; margin-top: -1px; background: #fff; border: 1px solid #dcdcdc; border-radius: 0 0 3px 3px; font-size: 14px;}
 .fake-dropdown a {padding: 0px 10px; color: #212121; line-height: 34px}
+.fake-dropdown a.selected {color: red}
 .fake-dropdown a:hover {background: #fafafa}
 .fake-dropdown li+li {border-top: 1px solid #eee}

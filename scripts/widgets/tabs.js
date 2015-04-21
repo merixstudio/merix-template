@@ -1,6 +1,6 @@
 'use strict';
 var jQuery = require('jquery');
-var viewport = require('../utilities/viewport');
+var viewport = require('../utils/viewport');
 
 function Tabs(element) {
     var self = this;

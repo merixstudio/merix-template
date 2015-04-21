@@ -6,7 +6,7 @@
 */
 
 var jQuery = require('jquery');
-var translate = require('../utilities/translate')
+var translate = require('../utils/translate')
 function Validate(form) {
     var self = this;
     this.form = form;

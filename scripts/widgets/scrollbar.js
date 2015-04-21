@@ -1,5 +1,5 @@
 var jQuery = require('jquery');
-var safeOn = require('../utilities/safe_on');
+var safeOn = require('../utils/safe_on');
 
 function Handle(element) {
     this.element = element;

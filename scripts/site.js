@@ -2,15 +2,15 @@
     'use strict';
 
     window.$ = window.jQuery = require('jquery');
-    var viewport = require('./utilities/viewport');
-    var smartBlocks = require('./utilities/smart_blocks');
-    var detect = require('./utilities/detect');
-    var hoverTap = require('./utilities/hover_tap');
+    var viewport = require('./utils/viewport');
+    var smartBlocks = require('./utils/smart_blocks');
+    var detect = require('./utils/detect');
+    var hoverTap = require('./utils/hover_tap');
     var lightbox = require('./widgets/lightbox');
     var inputCount = require('./widgets/input_count');
     var selectField = require('./widgets/select_field');
-    var translate = require('./utilities/translate');
-    var mediaSet = require('./utilities/media_set');
+    var translate = require('./utils/translate');
+    var mediaSet = require('./utils/media_set');
     var equalHeight = require('./widgets/equal_height');
     var modal = require('./widgets/modal');
     var Slider = require('./widgets/slider');

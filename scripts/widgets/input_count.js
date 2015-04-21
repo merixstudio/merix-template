@@ -1,5 +1,5 @@
 var jQuery = require('jquery');
-var translate = require('../utilities/translate');
+var translate = require('../utils/translate');
 
 jQuery.fn.inputCount = function(counter, count) {
     var length = [];

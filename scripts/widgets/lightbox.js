@@ -7,7 +7,7 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
             event.preventDefault();
             var fileFormats = ['.jpeg', '.jpg', '.png', '.bmp', '.gif'];
             var href = element.attr('href').slice(element.attr('href').lastIndexOf('.')).toLowerCase();
-            if (jQuery.inArray(href, fileFormats)) {
+            if (jQuery.inArray(href, fileFormats) === -1) {
                 alert('No image');
                 return;
             }

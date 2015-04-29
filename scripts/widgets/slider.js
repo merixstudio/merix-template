@@ -1,3 +1,6 @@
+/*
+ * HTML settings usage: data-settings="'arrows': false, 'dots': false"
+ */
 define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/signal'], function(jQuery, numbers, settings, gestures, Signal) {
     
     gestures.enable();
@@ -12,7 +15,11 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
 
 
     function Slider(element, options) {
-        jQuery.extend(true, this, Slider.DEFAULT_SETTINGS, options);
+		var htmlSettings = {};
+        if (element.data('settings'))
+            htmlSettings = jQuery.parseJSON('{' + jQuery(element).data('settings').replace(new RegExp('(\')', 'g'), '"') + '}');
+        
+        jQuery.extend(true, this, Slider.DEFAULT_SETTINGS, options, htmlSettings);
 
         this.element = element;
         this.items = this.element.find('>.slide'); // Items in the slider.

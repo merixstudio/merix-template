@@ -6,7 +6,7 @@
 .slider>.grid>* {white-space: normal}
 
 .slider-container {white-space: nowrap}
-.slide {display: inline-block; position: relative; overflow: hidden; width: 100%; white-space: nowrap}
+.slide {display: inline-block; position: relative; overflow: hidden; width: 100%; white-space: nowrap; vertical-align: top}
 .slide > * {white-space: normal}
 
 .slider-navigation {position: absolute; top: 50%; z-index: 10; display: inline-block; margin-top: -31px; padding: 20px 25px; border: 3px solid #d2d2d2; background: rgba(255, 255, 255, .75); font-size: 0; transition: all 0.25s ease}

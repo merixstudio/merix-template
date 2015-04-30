@@ -10,7 +10,8 @@ define('hover_tap', ['jquery', 'detect'], function(jQuery, detect) {
                 element.removeClass('hover');
             });
         } else {
-            element.on('click', function() {
+            element.on('click', function(event) {
+                event.preventDefault();
                 if (!element.hasClass('hover')) {
                     element.addClass('hover');
                 } else {

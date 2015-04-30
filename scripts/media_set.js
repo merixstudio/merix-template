@@ -1,5 +1,6 @@
 /*
  * Responsive images
+ * To work in ie9 all imgs should be in one line
  */
 define('media_set', ['jquery', 'throttle', 'image_loader', 'safe_on'], function(jQuery, throttle, imageLoader, safeOn) {
     return function() {

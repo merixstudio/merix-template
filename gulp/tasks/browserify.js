@@ -6,11 +6,10 @@ var browserify   = require('browserify');
 var watchify     = require('watchify');
 var gutil        = require('gulp-util');
 var source       = require('vinyl-source-stream');
-var watchify     = require('watchify');
 var browserify   = require('browserify');
 var browserSync  = require('browser-sync');
 
-function build(file){
+var build = function (file) {
 
     var bundler = browserify({
         entries: config.browserify.entries,
@@ -21,6 +20,7 @@ function build(file){
     }, watchify.args);
 
     bundler = watchify(bundler);
+
     bundler.on('update', function(){
        rebundle();
     });
@@ -37,7 +37,7 @@ function build(file){
 
 }
 
-gulp.task('browserify', function(){
+gulp.task('browserify', function() {
 
     return build('main.js');
 

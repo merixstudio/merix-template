@@ -1,6 +1,6 @@
 module.exports = {
 
-    'serverport': 3000,
+    'serverport': 1337,
 
     'styles': {
         'src' : 'styles/**/*.scss',
@@ -29,7 +29,6 @@ module.exports = {
 
     'views': {
         'watch': 'templates/**/*.html',
-        // 'src': 'templates/**/*.html',
         'src': ['templates/**/*.html', '!templates/{macros,macros/**,elements,elements/**,layouts,layouts/**}'],
         'dest': '_build'
     },

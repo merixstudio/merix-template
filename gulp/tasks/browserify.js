@@ -2,13 +2,14 @@ var config       = require('../config');
 var gulp         = require('gulp');
 var browserify   = require('browserify');
 var watchify     = require('watchify');
+var uglify       = require('gulp-uglify');
 var gutil        = require('gulp-util');
 var source       = require('vinyl-source-stream');
+var buffer       = require('vinyl-buffer');
 var browserify   = require('browserify');
 var browserSync  = require('browser-sync');
 
-var build = function (file) {
-
+var buildDev = function (file) {
     var bundler = browserify({
         entries: config.browserify.entries,
         cache: {},
@@ -23,7 +24,7 @@ var build = function (file) {
        rebundle();
     });
 
-    function rebundle(){
+    function rebundle() {
         var stream = bundler.bundle();
         return stream.on('error', gutil.log.bind(gutil, 'Browserify Error'))
             .pipe(source(file))
@@ -32,11 +33,33 @@ var build = function (file) {
     }
 
     return rebundle();
-
 }
 
-gulp.task('browserify', function() {
+var buildProduction = function (file) {
+    var bundler = browserify({
+        entries: config.browserify.entries,
+        cache: {},
+        packageCache: {},
+        fullPaths: false,
+        debug: false
+    }, watchify.args);
 
-    return build('main.js');
+    function rebundle() {
+        var stream = bundler.bundle();
+        return stream.on('error', gutil.log.bind(gutil, 'Browserify Error'))
+            .pipe(source(file))
+            .pipe(buffer())
+            .pipe(uglify())
+            .pipe(gulp.dest(config.scripts.dest));
+    }
 
+    return rebundle();
+}
+
+gulp.task('browserify:dev', function() {
+    return buildDev('main.js');
+});
+
+gulp.task('browserify:production', function() {
+    return buildProduction('main.js');
 });

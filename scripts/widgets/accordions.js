@@ -1,8 +1,8 @@
 'use strict';
 
 var jQuery = require('jquery');
-var settings = require('../utilities/settings');
-var viewport = require('../utilities/viewport');
+var settings = require('../utils/settings');
+var viewport = require('../utils/viewport');
 jQuery('.accordion-toggle').each(function() {
     var toggler = jQuery(this);
     var target = jQuery('#' + toggler.data('target'));

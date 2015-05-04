@@ -1,8 +1,8 @@
 var jQuery = require('jquery');
-var numbers = require('../utilities/numbers');
-var settings = require('../utilities/settings');
-var gestures = require('../utilities/gestures');
-var Signal = require('../utilities/signal');
+var numbers = require('../utils/numbers');
+var settings = require('../utils/settings');
+var gestures = require('../utils/gestures');
+var Signal = require('../utils/signal');
 gestures.enable();
 
 // Check for transform support;

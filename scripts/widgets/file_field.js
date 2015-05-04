@@ -4,7 +4,7 @@
  * require module: find(element).fileField();
  */
 var jQuery = require('jquery');
-var translate = require('../utilities/translate');
+var translate = require('../utils/translate');
 function getFilename(path) {
     var lastSep = path.lastIndexOf('/');
     if (lastSep < 0)

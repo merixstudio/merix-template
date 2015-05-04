@@ -1,0 +1,74 @@
+.page-header {
+	overflow: hidden;
+	position: relative;
+	z-index: 3;
+	height: 107px;
+	border-bottom: 1px solid #d7d7d7;
+	background: #f7f7f7;
+	.logo {
+		@include col(1/4);
+		display: table-cell;
+		width: 100%;
+		max-width: 225px;
+		height: 105px;
+		margin: 18px 0;
+		vertical-align: middle;
+	}
+	.main-menu {
+		@include col (3/4);
+		text-align: right;
+		> ul > li {
+			display: inline-block;
+			> a {
+				display: block;
+				padding: 43px 34px;
+			}
+		}
+	}
+}
+
+.mobile-menu {
+	display: none;
+	.icon-menu {
+		position: absolute;
+		width: 35px;
+		height: 35px;
+		top: 42px;
+		right: 25px;
+		font-size: 24px;
+		cursor: pointer;
+		&:hover
+		&.active {
+            color: #d97d34;
+		}
+	}
+	nav {
+		display: none;
+		position: absolute;
+		top: 107px;
+		left: 0;
+		overflow: hidden;
+		width: 100%;
+		background: #fff;
+		border-bottom: 1px solid #d7d7d7;
+		text-align: center;
+		li {
+			transition: all 0.25s ease;
+			a {
+				display: block;
+				padding: 8px 10px;
+			}
+			&:hover a {
+				background: #fafafa;
+			}
+			+ li {
+				border-top: 1px solid #d7d7d7;
+			}
+		}
+	}
+}
+
+.viewport-480 .mobile-menu,
+.viewport-320 .mobile-menu {
+    display: block;
+}

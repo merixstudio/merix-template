@@ -1,24 +1,28 @@
-@import 'utils/*';
-@import 'grid/*';
-@import 'fonts/*';
-@import 'partials/*';
-@import 'widgets/*';
+@import 'utils/vars';
+@import 'utils/mixins';
 
-/* BASE ELEMENTS */
-body,
-.grid > * {font-family: 'Titillium', 'Arial', 'Helvetica', sans-serif; font-size: 16px}
+@import 'layout/grid';
 
-a {color: #000; transition: color 0.25s ease}
-a:hover {color: #d97d34; text-decoration: none}
+@import 'base/normalize';
+@import 'base/ie9';
+@import 'base/base';
+@import 'base/typography';
+@import 'base/fonts';
+@import 'base/icons';
 
-blockquote {position: relative; padding: 20px 20px 20px 50px; border: 1px solid #dadada; border-width: 1px 0;font-style: italic}
-blockquote:before {content: open-quote; position: absolute; top: 20px; left: 0; color: #D97D34; font-size: 92px; font-style: normal; line-height: 72px}
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/forms';
+@import 'layout/tables';
+@import 'layout/wysiwyg';
 
-table {width: 100%; border-spacing: 10px; color: #212121; font-size: 13px}
-table tr>* {padding: 15px 30px; background: #F7F7F7; text-align: left}
-table tr:nth-child(2n+1)>* {background: #F2F2F2}
-table tr+tr>* {border-top: 1px solid #fff}
-table tr>* {border-left: 1px solid #fff}
-table th {font-size: 18px; text-transform: uppercase}
+@import 'components/accordions';
+@import 'components/lightbox';
+@import 'components/modal';
+@import 'components/placeholders';
+@import 'components/scrollbar';
+@import 'components/select_field';
+@import 'components/slider';
+@import 'components/tabs';
 
-.page-column {width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 20px}
+@import 'pages/common';

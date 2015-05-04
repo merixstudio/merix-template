@@ -16,7 +16,7 @@
     </head>
     <body{% if page_index %} class="page-index"{% endif %}>
         <div class="page-wrap">
-            {% block page_header %}{% include "../elements/_header.html" %}{% endblock %}
+            {% block page_header %}{% include "../partials/_header.html" %}{% endblock %}
 
             <main>
                 {% block page_content %}{% endblock %}
@@ -24,7 +24,7 @@
 
         </div>
 
-        {% block page_footer %}{% include "../elements/_footer.html" %}{% endblock %}
+        {% block page_footer %}{% include "../partials/_footer.html" %}{% endblock %}
 
         <!-- HTML settings take priority over the JS ones and can be backend-generated. -->
         <script>

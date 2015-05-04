@@ -1,0 +1,65 @@
+html {
+	overflow-y: scroll;
+	height: 100%;
+	&.no-scroll {
+		overflow-y: hidden !important;
+	}
+}
+
+body {
+	height: 100%;
+	background: #fff;
+	color: #000;
+	font: 12px/1.5 'Arial', 'Helvetica', sans-serif;
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+		text-overflow: ellipsis;
+		list-style: none;
+	}
+}
+
+.page-wrap {
+	min-height: 100%;
+}
+
+.page-column {
+	@include cf();
+	width: 100%;
+	max-width: 1240px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.block {
+	display: block;
+}
+
+.relative {
+	position: relative;
+}
+
+.clip {
+	overflow: hidden;
+}
+
+.ios {
+	input,
+	select,
+	textarea {
+        -webkit-appearance: none; border-radius: 0
+	}
+}
+
+figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.clear:after {
+	content: '';
+	clear: both;
+	display: block;
+}

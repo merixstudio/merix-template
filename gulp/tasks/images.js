@@ -1,5 +1,3 @@
-'use strict';
-
 var config   = require('../config');
 var changed  = require('gulp-changed');
 var gulp     = require('gulp');
@@ -11,7 +9,7 @@ gulp.task('images', function(){
 
     return gulp.src(config.images.src)
         .pipe(changed(dest))
-        .pipe(imagemin())
+        // .pipe(imagemin())
         .pipe(gulp.dest(dest));
 
 });

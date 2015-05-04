@@ -3,6 +3,42 @@
  */
 
 /* Input style */
+
+label {cursor: pointer}
+
+input,
+button,
+select {vertical-align: middle; outline: none}
+textarea {vertical-align: top; outline: none}
+
+button,
+select,
+label[for],
+input[type="reset"],
+input[type="radio"],
+input[type="button"],
+input[type="submit"],
+input[type="checkbox"] {cursor: pointer}
+
+button[disabled],
+select[disabled],
+label[disabled][for],
+input[disabled][type="reset"],
+input[disabled][type="radio"],
+input[disabled][type="button"],
+input[disabled][type="submit"],
+input[disabled][type="checkbox"] {cursor: default}
+
+input[type="search"] {box-sizing: border-box}
+
+input[type="checkbox"] {position: absolute; visibility: hidden}
+input[type="checkbox"]+span {overflow: hidden; display: inline-block; text-indent: -99em; vertical-align: middle; white-space: nowrap; cursor: pointer}
+input[type="checkbox"]+span:before {float: left; text-indent: 0; color: transparent; text-align: center}
+
+input[type="radio"] {position: absolute; visibility: hidden}
+input[type="radio"]+span {position: relative; overflow: hidden; display: inline-block; text-indent: -99em; vertical-align: middle; white-space: nowrap; cursor: pointer}
+input[type="radio"]+span:before {content: ''; position: absolute; margin: auto; background: transparent}
+
 input[type="text"],
 input[type="email"],
 input[type="search"],

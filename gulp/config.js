@@ -1,11 +1,9 @@
-'use strict';
-
 module.exports = {
 
     'serverport': 3000,
 
     'styles': {
-        'src' : ['styles/**/*.scss', 'styles/**/*.css'],
+        'src' : 'styles/**/*.scss',
         'dest': '_build/styles'
     },
 

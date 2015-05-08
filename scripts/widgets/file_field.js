@@ -15,7 +15,7 @@ define('widgets/file_field', ['jquery', 'translate'], function(jQuery, translate
         if (typeof element === 'undefined')
             element = jQuery(this);
         var fileName = getFilename(element.val() || translate('no_file'));
-        element.next().html(fileName);
+        element.siblings('.file-name').html(fileName);
     }
 
     function init(element) {

@@ -31,6 +31,7 @@ gulp
 
 ## Struktura katalogów
 
+
 - /_build (Niewersjonowany)
 
     Folder zawierający zbudowany projekt
@@ -39,7 +40,7 @@ gulp
     Folder dla czcionek
 - /gulp
 
-  Zawiera pliki opisujące zadania dla Gulp'a
+  Zawiera pliki opisujące zadania dla Gulp\'a
 - /images
 
     Folder dla obrazków wykorzystywanych w szablonach
@@ -48,13 +49,13 @@ gulp
         Folder dla obrazków tymczasowych (placeholderów)
 - /media
 
-       Inne pliki takie jak dokumenty, wideo i inne wykorzystywane w szablonach
+    Inne pliki takie jak dokumenty, wideo i inne wykorzystywane w szablonach
 - /node_modules (Niewersjonowany)
 
-       Folder przechowujący moduly pobrane z NPM'a
+    Folder przechowujący moduly pobrane z NPM\'a
 - /scripts
 
-       Pliki skryptów
+    Pliki skryptów
 - /styles
     Pliki styli
     - /base

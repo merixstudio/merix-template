@@ -55,30 +55,6 @@ input[type="file"] + span:before {margin-right: 5px; color: #212121; font-size: 
 input[type="file"] + span:hover {color: #212121}
 input[type="file"] + span:hover:before {color: #ccb423}
 
-/* Button style */
-.button {overflow: hidden; display: inline-block; padding: 12px 25px; border: none; background: #D97D34; color: #fff; font-family: 'Titillium', 'Open Sans', 'Arial', 'Helvetica', sans-serif; font-size: 12px; line-height: 1; text-align: left; text-transform: uppercase; vertical-align: middle; -webkit-transition: all 0.25s ease; transition: all 0.25s ease; white-space: nowrap}
-.button.block {display: block; width: 100%}
-.button.big {padding: 19px 36px; font-size: 17px}
-.button.disabled, .button:disabled {color: #fff; opacity: 0.5; cursor: default}
-
-.button.active:not(.disabled):not(:disabled),
-.button:hover:not(.disabled):not(:disabled) {background: #fd913b; color: #fff}
-
-.button.secondary {background: #f2f2f2; color: #000}
-.button.secondary.disabled, .button.secondary:disabled {color: #000}
-.button.secondary.active:not(.disabled):not(:disabled),
-.button.secondary:hover:not(.disabled):not(:disabled) {background: #dadada}
-
-.button:before,
-.button>span:before {text-indent: 0; text-shadow: none}
-.button:before {float: right; margin-left: 25px}
-.button>span:before {float: left; margin-right: 25px}
-.button.big:before {margin-left: 36px}
-.button.big>span:before {margin-right: 36px}
-
-.button.text-hide {width: 40px; padding-left: 0; padding-right: 0; text-indent: -999em}
-.button.text-hide.big {width: 55px}
-
 /* Errors */
 .error input,
 .error.fake-select,

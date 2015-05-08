@@ -1,0 +1,114 @@
+//////////
+// Base //
+//////////
+
+$base-font-size: 16px;
+$base-line-height: 1.5;
+$base-text-color: #666;
+
+//////////
+// Grid //
+//////////
+
+$container-width: 1200px;
+
+////////////
+// Global //
+////////////
+
+// We use these as default fonts
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+$font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+$font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
+
+// We use these as default colors throughout
+$primary-color: #d97d34;
+$secondary-color: #f2f2f2;
+$alert-color: #f04124;
+$success-color: #43ac6a;
+$warning-color: #f0af24;
+$info-color: #a0d3e8;
+
+// We use these to control various global styles
+$body-bg: #fff;
+$body-font-color: $base-text-color;
+$body-font-family: $font-family-sans-serif;
+$body-font-weight: normal;
+$body-font-style: normal;
+
+////////////////
+// Typography //
+////////////////
+
+
+// We use these to control header font styles
+$header-font-family: "Titillium", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;;
+$header-font-weight: normal;
+$header-font-style: normal;
+$header-font-color: #000;
+$header-line-height: $base-line-height;
+$header-top-margin: 5px;
+$header-bottom-margin: 10px;
+$header-text-rendering: optimizeLegibility;
+
+// We use these to control header font sizes
+$h1-font-size: 32px;
+$h2-font-size: 28px;
+$h3-font-size: 24px;
+$h4-font-size: 20px;
+$h5-font-size: 18px;
+$h6-font-size: 16px;
+
+// We use these to control header size reduction on small screens
+$h1-font-reduction: 24px;
+$h2-font-reduction: 20px;
+$h3-font-reduction: 18px;
+$h4-font-reduction: 16px;
+$h5-font-reduction: 14px;
+$h6-font-reduction: 14px;
+
+// A general <small> styling
+$small-font-size: 60%;
+$small-font-color: scale-color($header-font-color, $lightness: 35%);
+
+// We use these to style paragraphs
+$paragraph-font-family: inherit;
+$paragraph-font-weight: normal;
+$paragraph-font-size: $base-font-size;
+$paragraph-line-height: $base-line-height;
+$paragraph-margin-bottom: 20px;
+$paragraph-text-rendering: optimizeLegibility;
+
+// We use these to style anchors
+$anchor-text-decoration: none;
+$anchor-text-decoration-hover: none;
+$anchor-font-color: $primary-color;
+$anchor-font-color-hover: scale-color($anchor-font-color, $lightness: -14%);
+
+// We use these to style the <hr> element
+$hr-border-width: 1px;
+$hr-border-style: solid;
+$hr-border-color: #ccc;
+$hr-margin: 20px;
+
+// We use these to style lists
+$list-font-family: $paragraph-font-family;
+$list-font-size: $paragraph-font-size;
+$list-line-height: $paragraph-line-height;
+$list-margin-bottom: $paragraph-margin-bottom;
+$list-style-position: outside;
+$list-side-margin: 21px;
+$list-ordered-side-margin: 26px;
+$list-side-margin-no-bullet: 0;
+$list-nested-margin: 20px;
+$definition-list-header-weight: bold;
+$definition-list-header-margin-bottom: 3px;
+$definition-list-margin-bottom: 12px;
+
+// We use these to style blockquotes
+$blockquote-font-color: scale-color($header-font-color, $lightness: 35%);
+$blockquote-padding: 9px 20px 0 19px;
+$blockquote-border: 1px solid #ccc;
+$blockquote-cite-font-size: 13px;
+$blockquote-cite-font-color: scale-color($header-font-color, $lightness: 23%);
+$blockquote-cite-link-color: $blockquote-cite-font-color;

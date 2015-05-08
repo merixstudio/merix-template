@@ -15,3 +15,7 @@
 @import 'grid/_settings';
 @import 'grid/_functions';
 @import 'grid/_grid';
+
+main {
+  @include cf();
+}

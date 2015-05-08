@@ -1,0 +1,106 @@
+/* Button style */
+
+.button {
+  overflow: hidden;
+  display: inline-block;
+  padding: 12px 25px;
+  border: none;
+  background: $primary-color;
+  color: #fff;
+  font-family: 'Titillium', 'Open Sans', 'Arial', 'Helvetica', sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  text-align: left;
+  text-transform: uppercase;
+  vertical-align: middle;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  white-space: nowrap
+}
+
+.button.block {
+  display: block;
+  width: 100%
+}
+
+.button.big {
+  padding: 19px 36px;
+  font-size: 17px
+}
+
+.button.disabled,
+.button:disabled {
+  color: #fff;
+  opacity: 0.5;
+  cursor: default
+}
+
+.button.active:not(.disabled):not(:disabled),
+.button:hover:not(.disabled):not(:disabled) {
+  background: scale-color($primary-color, $saturation: 55%, $lightness: 30%);
+  color: #fff
+}
+
+.button.secondary {
+  background: $secondary-color;
+  color: #000;
+}
+
+.button.secondary.disabled,
+.button.secondary:disabled {
+  color: #000;
+}
+
+.button.secondary.active:not(.disabled):not(:disabled),
+.button.secondary:hover:not(.disabled):not(:disabled) {
+  background: scale-color($secondary-color, $lightness: -20%);
+}
+
+.button:before,
+.button>span:before {
+  text-indent: 0;
+  text-shadow: none;
+}
+
+.button:before {
+  float: right;
+  margin-left: 25px
+}
+
+.button>span:before {
+  float: left;
+  margin-right: 25px
+}
+
+.button.big:before {
+  margin-left: 36px
+}
+
+.button.big>span:before {
+  margin-right: 36px
+}
+
+.button.text-hide {
+  width: 40px;
+  padding-left: 0;
+  padding-right: 0;
+  text-indent: -999em
+}
+
+.button.text-hide.big {
+  width: 55px
+}
+
+.button {
+  &.text-hide {
+    padding-left: 0;
+    padding-right: 0;
+    text-indent: -999em;
+  }
+  &.text-hide[class*="icon-"]:before {
+    float: right;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+  }
+}

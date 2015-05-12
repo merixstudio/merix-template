@@ -77,8 +77,10 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
                 e.preventDefault();
                 if (!self._closeFlag) {
                     self.$select.focus();
+                    self._closeFlag = true;
                 }
                 else {
+                    self._hideDropdown();
                     self._closeFlag = false;
                 }
             });

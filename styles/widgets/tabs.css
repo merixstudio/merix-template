@@ -6,7 +6,7 @@
 .tabs > ul li {position: relative; top: 1px; float: left; display: inline-block}
 .tabs > ul li button {padding: 6px; border: 1px solid #F2F2F2; background: none}
 .tabs > ul li + li button {border-left: 0}
-.tabs > ul li.active button {border-bottom: 1px solid #fff; color: #D97D34}
+.tabs > ul li.active button {border-bottom: 1px solid #fff}
 
 .tabs > dl > dt {display: none}
 .tabs > dl > dt button {display: block; width: 100%; border: none; border-bottom: 1px solid #F2F2F2; background: none; text-align: left}

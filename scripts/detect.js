@@ -20,10 +20,10 @@ define('detect', [], function() {
         chrome = ua.match(/Chrome\/([\d.]+)/) || ua.match(/CriOS\/([\d.]+)/),
         firefox = ua.match(/Firefox\/([\d.]+)/),
         ie = ua.match(/(Trident|MSIE\s([\d.])+)/),
-        safari = webkit && ua.match(/Mobile\//),
         //webview = ua.match(/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/),
-        wp8 = ua.match(/Trident\/([\d.]+)/) && ua.match(/IEMobile\/([\d.]+)/)
-
+        wp8 = ua.match(/Trident\/([\d.]+)/) && ua.match(/IEMobile\/([\d.]+)/),
+        safari = webkit && ua.match(/Safari\//) && !chrome && !wp8
+        
     if (browser.webkit = !!webkit) browser.version = webkit[1]
     
     if (android) os.android = true, os.version = android[2]

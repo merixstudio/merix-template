@@ -77,11 +77,9 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
                 e.preventDefault();
                 if (!self._closeFlag) {
                     self.$select.focus();
-                    self._closeFlag = true;
                 }
                 else {
                     self._hideDropdown();
-                    self._closeFlag = false;
                 }
             });
         }
@@ -186,6 +184,7 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
 
         this.$fakeDropdown.find('.scrollable').scrollbar();
         this.$fake.addClass('dropdown-visible');
+        this._closeFlag = true;
     };
 
     SelectField.prototype._hideDropdown = function() {
@@ -199,6 +198,7 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
             jQuery(document).unbind('mousedown', this._hideEvent);
 
             this.$fake.removeClass('dropdown-visible');
+            this._closeFlag = false;
         }
     };
 

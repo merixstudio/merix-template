@@ -14,6 +14,7 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
         this.$fake.append('<span class="value"/>');
         this.$fakeDropdown = null;
         this.mode = options.mode || SelectField.MODE_DEFAULT;
+        this._showFlag = false;
         this._closeFlag = false;
 
         this._showEvent = function() {
@@ -64,7 +65,12 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
         this.$select.bind('change keypress keydown keyup', this._updateEvent);
         if (detect.device.desktop) {
             this.$select.mousedown(false);
-            this.$select.focus(this._showEvent).blur(this._hideEvent);
+            this.$select.focus(function() {
+                if (self._showFlag)
+                    self._hideEvent();
+                else
+                    self._showEvent();
+            }).blur(this._hideEvent);
             this.$select.closest('form').submit(this._submitEvent);
             this.$select.keydown(this._keyEvent);
 
@@ -76,10 +82,10 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
             }).click(function(e) {
                 e.preventDefault();
                 if (!self._closeFlag) {
-                    //self.$select.focus();
+                    self.$select.focus();
                 }
                 else {
-                    self._hideDropdown();
+                    self._closeFlag = false;
                 }
             });
         }
@@ -152,6 +158,7 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
         if (!detect.device.desktop)
             return;
 
+        this._showFlag = true;
         this.$fake.stop(true).css('opacity', 1);
         var scrollableParent = this.$select.closestScrollable();
 
@@ -184,11 +191,11 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
 
         this.$fakeDropdown.find('.scrollable').scrollbar();
         this.$fake.addClass('dropdown-visible');
-        this._closeFlag = true;
     };
 
     SelectField.prototype._hideDropdown = function() {
         if (this.$fakeDropdown) {
+            this._showFlag = false;
             this.$fakeDropdown.stop(true).animate({'opacity': 0}, 0, function() {
                 jQuery(this).remove();
             });
@@ -198,7 +205,6 @@ define('widgets/select_field', ['jquery', 'detect'], function(jQuery, detect) {
             jQuery(document).unbind('mousedown', this._hideEvent);
 
             this.$fake.removeClass('dropdown-visible');
-            this._closeFlag = false;
         }
     };
 

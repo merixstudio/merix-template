@@ -227,7 +227,7 @@ define('widgets/slider', ['jquery', 'numbers', 'settings', 'gestures', 'nebula/s
     Slider.prototype.createArrows = function() {
         var self = this;
         if (this.itemState.length > 1) {
-                var navigation = '<button href="#" class="icon-arrow-left slider-navigation previous"></button><button href="#" class="icon-arrow-right slider-navigation next"></button>';
+                var navigation = '<a href="#" class="icon-arrow-left slider-navigation previous"></a><a href="#" class="icon-arrow-right slider-navigation next"></a>';
                 this.element.append(navigation);
                 this.element.addClass('navigations');
             }

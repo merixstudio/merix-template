@@ -9,10 +9,10 @@ var autoprefixer = require('gulp-autoprefixer');
 gulp.task('styles:dev', function(){
     return gulp.src(config.styles.src)
         .pipe(sourcemaps.init())
-            .pipe(sass({
-                outputStyle: 'nested'
-            }))
-            // .pipe(autoprefixer("last 2 versions", "> 1%", "ie 8"))
+        .pipe(sass())
+        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(autoprefixer())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(config.styles.dest))
         .pipe(gulpif(browserSync.active, browserSync.reload({ stream: true })));

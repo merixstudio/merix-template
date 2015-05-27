@@ -36,7 +36,10 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
                                         </div>\
                                         <div class="gallery-lightbox--modal">\
                                             <div class="gallery-lightbox--image">\
-                                                <p class="gallery-lightbox--counter">Image <span class="gallery-lightbox--image-current">0</span> of <span class="gallery-lightbox--image-all">0</span>\
+                                                <div class="gallery-lightbox--informations">\
+                                                    <p class="gallery-lightbox--description"></p>\
+                                                    <p class="gallery-lightbox--counter">Image <span class="gallery-lightbox--image-current">0</span> of <span class="gallery-lightbox--image-all">0</span></p>\
+                                                </div>\
                                                 <div class="gallery-lightbox--image-wrapper">\
                                                     <button class="gallery-lightbox--close icon-close"></button>\
                                                     <button class="gallery-lightbox--prev icon-arrow-left"></button>\
@@ -55,6 +58,7 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
              this.HtmlImage = this.HtmlGallery.find('.gallery-lightbox--image').hide();
          this.HtmlImageWrap = this.HtmlGallery.find('.gallery-lightbox--image-wrapper');
             this.HtmlThumbs = this.HtmlGallery.find('.gallery-lightbox--thumbs').hide();
+       this.HtmlDescription = this.HtmlGallery.find('.gallery-lightbox--description');
        this.HtmlCloseButton = this.HtmlGallery.find('.gallery-lightbox--close');
        this.HtmlCurrentImage = this.HtmlGallery.find('.gallery-lightbox--image-current');
           this.HtmlAllImage = this.HtmlGallery.find('.gallery-lightbox--image-all');
@@ -183,6 +187,9 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
         img.load(function(){
             self.HtmlOverlay.find('.loader').fadeOut(250);
             self.HtmlImage.delay(300).fadeIn(500);
+            
+            if (typeof(element.data('lightbox-title')) != 'undefined')
+                self.HtmlDescription.text(element.data('lightbox-title'));
             
             if (self.currentItem > 0)
                 self.HtmlPrevImage.show();

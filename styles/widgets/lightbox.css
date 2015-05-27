@@ -4,7 +4,7 @@
 .gallery-lightbox--modal {position: absolute; top: 50%; left: 50%; z-index: 1; text-align: center; transform: translateX(-50%) translateY(-50%)}
 .gallery-lightbox--image {box-shadow: 0 0 20px #000}
 .gallery-lightbox--image img {display: block; max-width: 100%; max-height: 100%}
-.gallery-lightbox--informations {position: absolute; right: 0; top: 100%; width: 100%; padding-top: 5px; color: #eee; font-size: 12px; text-align: left}
+.gallery-lightbox--informations {padding-top: 5px; color: #eee; font-size: 12px; text-align: left}
 .gallery-lightbox--description {display: inline-block; width: 70%}
 .gallery-lightbox--counter {float: right; display: inline-block; width: 30%; text-align: right}
 .gallery-lightbox--close {position: absolute; top: 0; right: 0; display: block; z-index: 2; width: 40px; height: 40px; background: #fff; border: none; line-height: 40px}

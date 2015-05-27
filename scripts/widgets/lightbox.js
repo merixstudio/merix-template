@@ -36,14 +36,14 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
                                         </div>\
                                         <div class="gallery-lightbox--modal">\
                                             <div class="gallery-lightbox--image">\
-                                                <div class="gallery-lightbox--informations">\
-                                                    <p class="gallery-lightbox--description"></p>\
-                                                    <p class="gallery-lightbox--counter">Image <span class="gallery-lightbox--image-current">0</span> of <span class="gallery-lightbox--image-all">0</span></p>\
-                                                </div>\
                                                 <div class="gallery-lightbox--image-wrapper">\
                                                     <button class="gallery-lightbox--close icon-close"></button>\
                                                     <button class="gallery-lightbox--prev icon-arrow-left"></button>\
                                                     <button class="gallery-lightbox--next icon-arrow-right"></button>\
+                                                    <div class="gallery-lightbox--informations">\
+                                                        <p class="gallery-lightbox--description"></p>\
+                                                        <p class="gallery-lightbox--counter">Image <span class="gallery-lightbox--image-current">0</span> of <span class="gallery-lightbox--image-all">0</span></p>\
+                                                    </div>\
                                                 </div>\
                                             </div>\
                                             <div class="gallery-lightbox--thumbs">\
@@ -58,6 +58,7 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
              this.HtmlImage = this.HtmlGallery.find('.gallery-lightbox--image').hide();
          this.HtmlImageWrap = this.HtmlGallery.find('.gallery-lightbox--image-wrapper');
             this.HtmlThumbs = this.HtmlGallery.find('.gallery-lightbox--thumbs').hide();
+      this.HtmlInformations = this.HtmlGallery.find('.gallery-lightbox--informations');
        this.HtmlDescription = this.HtmlGallery.find('.gallery-lightbox--description');
        this.HtmlCloseButton = this.HtmlGallery.find('.gallery-lightbox--close');
        this.HtmlCurrentImage = this.HtmlGallery.find('.gallery-lightbox--image-current');
@@ -176,7 +177,7 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
         this.HtmlCurrentImage.html(this.currentItem + 1);
         this.HtmlAllImage.html(this.items.length);
         var img = jQuery('<img src="' + element.attr('href') + '">');
-        img.appendTo(this.HtmlImageWrap);
+        this.HtmlInformations.before(img);
 
         if (this.options.thumbs && this.items)
             jQuery(this.getThumbs(element)).appendTo(this.HtmlThumbsList);

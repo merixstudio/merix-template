@@ -12,6 +12,11 @@ module.exports = {
         'dest': '_build/scripts'
     },
 
+    'libs': {
+        'src' : 'scripts/libs/**/*.js',
+        'dest': '_build/scripts/libs'
+    },
+
     'fonts': {
         'src' : 'fonts/**/*',
         'dest': '_build/fonts'

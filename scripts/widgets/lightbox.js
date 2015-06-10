@@ -177,6 +177,7 @@ define('widgets/lightbox', ['jquery'], function(jQuery) {
         this.HtmlCurrentImage.html(this.currentItem + 1);
         this.HtmlAllImage.html(this.items.length);
         var img = jQuery('<img src="' + element.attr('href') + '">');
+        img.css('max-height', jQuery(window).height() + this.HtmlInformations.height() * 2);
         this.HtmlInformations.before(img);
 
         if (this.options.thumbs && this.items)

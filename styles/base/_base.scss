@@ -19,6 +19,11 @@ body {
   }
 }
 
+figure img {
+  display: block;
+  width: 100%;
+}
+
 /* Default paragraph styles */
 p {
   font-family: $paragraph-font-family;

@@ -1,57 +1,112 @@
-//////////
-// Base //
-//////////
-
-$base-font-size: 16px;
-$base-line-height: 1.5;
-$base-text-color: #666;
-
-//////////
-// Grid //
-//////////
-
-$container-width: 1200px;
-
 ////////////
 // Global //
 ////////////
 
 // We use these as default fonts
-$font-family-sans-serif: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+$font-family: "Open Sans", Arial, Helvetica, sans-serif;
 $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
+
+$base-font-size: 16px;
+$base-line-height: 1.4;
+$base-font-color: #666;
+
+// body
+// We use these to control various global styles
+$body-background: #fff;
+$body-font-color: $base-font-color;
+$body-font-family: $font-family;
+$body-font-size: $base-font-size;
+$body-font-weight: normal;
+$body-font-style: normal;
+
+
+
+//////////
+// Misc //
+//////////
+
+// Container width
+$container-width: 1200px;
+
+// Border radius
+$border-radius: 10px;
+
+// Opacity
+$opacity: 0.6;
+
+// Padding
+$padding: 20px;
+
+
+
+////////////
+// Colors //
+////////////
 
 // We use these as default colors throughout
 $primary-color: #d97d34;
 $secondary-color: #f2f2f2;
+
+$dark-color: #222;
+$light-color: #f2f2f2;
+
 $alert-color: #f04124;
 $success-color: #43ac6a;
 $warning-color: #f0af24;
 $info-color: #a0d3e8;
 
-// We use these to control various global styles
-$body-bg: #fff;
-$body-font-color: $base-text-color;
-$body-font-family: $font-family-sans-serif;
-$body-font-weight: normal;
-$body-font-style: normal;
+$border-width: 1px;
+$border-style: solid;
+$border-color: #f2f2f2;
+$border: $border-width $border-style $border-color;
+
+
+
+/////////////
+// Buttons //
+/////////////
+
+$button-font-size: 12px;
+$button-background: $primary-color;
+
+
+
+///////////
+// Forms //
+///////////
+
+$input-background: #f2f2f2;
+$input-border-color: #dadada;
+$input-border: 1px solid $input-border-color;
+$input-font-color: #928f8f;
+$input-font-size: 14px;
+
 
 ////////////////
 // Typography //
 ////////////////
 
+// Wysiwyg text vertical space
+$wysiwyg-space: 18px;
+$wysiwyg-font-size: $body-font-size;
 
-// We use these to control header font styles
-$header-font-family: "Titillium", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;;
-$header-font-weight: normal;
-$header-font-style: normal;
-$header-font-color: #000;
-$header-line-height: $base-line-height;
-$header-top-margin: 5px;
-$header-bottom-margin: 10px;
-$header-text-rendering: optimizeLegibility;
+// <> a
+// We use these to style anchors
+$link-color: $primary-color;
+$link-color-hover: $dark-color;
+$link-decoration: none;
+$link-decoration-hover: none;
 
-// We use these to control header font sizes
+
+
+/////////////
+// Headers //
+/////////////
+
+// <> h1, h2, h3, h4, h5, h6
+
+// Font size
 $h1-font-size: 32px;
 $h2-font-size: 28px;
 $h3-font-size: 24px;
@@ -59,56 +114,26 @@ $h4-font-size: 20px;
 $h5-font-size: 18px;
 $h6-font-size: 16px;
 
-// We use these to control header size reduction on small screens
-$h1-font-reduction: 24px;
-$h2-font-reduction: 20px;
-$h3-font-reduction: 18px;
-$h4-font-reduction: 16px;
-$h5-font-reduction: 14px;
-$h6-font-reduction: 14px;
+// Font-weight
+$header-font-weight: 400;
+$h1-font-weight: $header-font-weight;
+$h2-font-weight: $header-font-weight;
+$h3-font-weight: $header-font-weight;
+$h4-font-weight: $header-font-weight;
+$h5-font-weight: $header-font-weight;
+$h6-font-weight: $header-font-weight;
 
-// A general <small> styling
-$small-font-size: 60%;
-$small-font-color: scale-color($header-font-color, $lightness: 35%);
+// Misc
+$header-font-family: $font-family;
+$header-font-color: $primary-color;
+$header-font-style: inherit;
+$header-line-height: inherit;
 
-// We use these to style paragraphs
-$paragraph-font-family: inherit;
-$paragraph-font-weight: normal;
-$paragraph-font-size: $base-font-size;
-$paragraph-line-height: $base-line-height;
-$paragraph-margin-bottom: 20px;
-$paragraph-text-rendering: optimizeLegibility;
-
-// We use these to style anchors
-$anchor-text-decoration: none;
-$anchor-text-decoration-hover: none;
-$anchor-font-color: $primary-color;
-$anchor-font-color-hover: scale-color($anchor-font-color, $lightness: -14%);
-
-// We use these to style the <hr> element
-$hr-border-width: 1px;
-$hr-border-style: solid;
-$hr-border-color: #ccc;
-$hr-margin: 20px;
-
-// We use these to style lists
-$list-font-family: $paragraph-font-family;
-$list-font-size: $paragraph-font-size;
-$list-line-height: $paragraph-line-height;
-$list-margin-bottom: $paragraph-margin-bottom;
-$list-style-position: outside;
-$list-side-margin: 21px;
-$list-ordered-side-margin: 26px;
-$list-side-margin-no-bullet: 0;
-$list-nested-margin: 20px;
-$definition-list-header-weight: bold;
-$definition-list-header-margin-bottom: 3px;
-$definition-list-margin-bottom: 12px;
-
-// We use these to style blockquotes
-$blockquote-font-color: scale-color($header-font-color, $lightness: 35%);
-$blockquote-padding: 9px 20px 0 19px;
-$blockquote-border: 1px solid #ccc;
-$blockquote-cite-font-size: 13px;
-$blockquote-cite-font-color: scale-color($header-font-color, $lightness: 23%);
-$blockquote-cite-link-color: $blockquote-cite-font-color;
+// <> small
+$h1-small: 24px;
+$h2-small: 20px;
+$h3-small: 18px;
+$h4-small: 16px;
+$h5-small: 14px;
+$h6-small: 14px;
+$header-small-color: inherit;

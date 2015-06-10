@@ -2,7 +2,7 @@
   @include cf();
   @include center($container-width);
   position: relative;
-  @include breakpoint(tablet) {
+  @include media('<=tablet') {
     padding: 0 20px;
   }
 }
@@ -25,12 +25,12 @@
     @include col(1/4, $cycle: 4);
     text-align: center;
   }
-  @include breakpoint(tablet) {
+  @include media('<=tablet') {
     & > .icon {
       @include col(1/2, $uncycle: 4, $cycle: 2);
     }
   }
-  @include breakpoint(phone) {
+  @include media('<=phone') {
     & > .icon {
       @include col(1, $uncycle: 2);
     }

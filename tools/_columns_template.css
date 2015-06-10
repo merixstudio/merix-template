@@ -21,7 +21,7 @@
     .grid.v{{ min }}-top>* {vertical-align: top}
     .grid.v{{ min }}-middle>* {vertical-align: middle}
     .grid.v{{ min }}-bottom>* {vertical-align: bottom}
-	
+
     .v{{ min }}-auto {width: auto}
     .v{{ min }}-1 {width: 100%}
     {{ property('width', min) }}

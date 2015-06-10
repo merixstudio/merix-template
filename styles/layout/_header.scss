@@ -23,7 +23,7 @@
         padding: 43px 34px;
       }
     }
-    @include breakpoint(phone) {
+    @include media('<tablet') {
       display: none;
     }
   }
@@ -40,7 +40,7 @@
     font-size: 24px;
     cursor: pointer;
     &:hover
-    &.active {
+      &.active {
       color: #d97d34;
     }
   }
@@ -68,9 +68,7 @@
       }
     }
   }
-}
-
-.viewport-480 .mobile-menu,
-.viewport-320 .mobile-menu {
+  @include media('<tablet') {
     display: block;
+  }
 }

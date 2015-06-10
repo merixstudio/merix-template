@@ -5,93 +5,85 @@
   display: inline-block;
   padding: 12px 25px;
   border: none;
-  background: $primary-color;
+  background: $button-background;
   color: #fff;
-  font-family: 'Titillium', 'Open Sans', 'Arial', 'Helvetica', sans-serif;
-  font-size: 12px;
+  font-family: $font-family;
+  font-size: $button-font-size;
   line-height: 1;
   text-align: left;
   text-transform: uppercase;
   vertical-align: middle;
-  -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease;
-  white-space: nowrap
-}
+  white-space: nowrap;
+  &.block {
+    display: block;
+    width: 100%;
+  }
+  &.big {
+    padding: 19px 36px;
+    font-size: 17px;
+  }
+  &.disabled,
+  &:disabled {
+    color: #fff;
+    opacity: 0.5;
+    cursor: default;
+  }
+  &.active:not(.disabled):not(:disabled),
+    &:hover:not(.disabled):not(:disabled) {
+    background: scale-color($primary-color, $saturation: 55%, $lightness: 30%);
+    color: #fff;
+  }
 
-.button.block {
-  display: block;
-  width: 100%
-}
+  // Secondary color
+  &.secondary {
+    background: $secondary-color;
+    color: #000;
+    &.disabled,
+    &:disabled {
+      color: #000;
+    }
+    &.active:not(.disabled):not(:disabled),
+      &:hover:not(.disabled):not(:disabled) {
+      background: scale-color($secondary-color, $lightness: -20%);
+    }
+  }
 
-.button.big {
-  padding: 19px 36px;
-  font-size: 17px
-}
+  // Icons
+  &:before,
+    & > span:before {
+    text-indent: 0;
+    text-shadow: none;
+  }
+  &:before {
+    float: right;
+    margin-left: 25px
+  }
+  & > span:before {
+    float: left;
+    margin-right: 25px
+  }
 
-.button.disabled,
-.button:disabled {
-  color: #fff;
-  opacity: 0.5;
-  cursor: default
-}
 
-.button.active:not(.disabled):not(:disabled),
-.button:hover:not(.disabled):not(:disabled) {
-  background: scale-color($primary-color, $saturation: 55%, $lightness: 30%);
-  color: #fff
-}
+  &.big:before {
+    margin-left: 36px
+  }
 
-.button.secondary {
-  background: $secondary-color;
-  color: #000;
-}
+  &.big>span:before {
+    margin-right: 36px
+  }
 
-.button.secondary.disabled,
-.button.secondary:disabled {
-  color: #000;
-}
+  &.text-hide {
+    width: 40px;
+    padding-left: 0;
+    padding-right: 0;
+    text-indent: -999em
+  }
 
-.button.secondary.active:not(.disabled):not(:disabled),
-.button.secondary:hover:not(.disabled):not(:disabled) {
-  background: scale-color($secondary-color, $lightness: -20%);
-}
+  &.text-hide.big {
+    width: 55px
+  }
 
-.button:before,
-.button>span:before {
-  text-indent: 0;
-  text-shadow: none;
-}
-
-.button:before {
-  float: right;
-  margin-left: 25px
-}
-
-.button>span:before {
-  float: left;
-  margin-right: 25px
-}
-
-.button.big:before {
-  margin-left: 36px
-}
-
-.button.big>span:before {
-  margin-right: 36px
-}
-
-.button.text-hide {
-  width: 40px;
-  padding-left: 0;
-  padding-right: 0;
-  text-indent: -999em
-}
-
-.button.text-hide.big {
-  width: 55px
-}
-
-.button {
   &.text-hide {
     padding-left: 0;
     padding-right: 0;

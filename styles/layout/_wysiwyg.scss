@@ -2,85 +2,103 @@
  * Styles for WYSIWYG editors like TinyMCE or CKEditor
  */
 .wysiwyg {
-	*+p,
-	*+dl,
-	*+h1,
-	*+h2,
-	*+h3,
-	*+h4,
-	*+h5,
-	*+h6,
-	*+ol,
-	*+ul,
-	*+figure {
-        margin-top: 18px;
-	}
-	li {
-		position: relative;
-		padding-left: 40px;
-		&:before {
-			content: '♦';
-			position: absolute;
-			left: 0;
-			width: 28px;
-			padding: 4px 0;
-			color: #d97d34;
-			text-align: center;
-			line-height: 1;
-		}
-		ol,
-		ul {
-            margin-top: 0;
-        	margin-bottom: 0;
-		}
-	}
-	li+li {
-		margin-top: 10px;
-	}
-	ol>li {
-		counter-increment: ordered-list;
-		&:before {
-			content: counter(ordered-list);
-			padding: 7px 0;
-			background: #d97d34;
-			color: #fff;
-			font-size: 14px;
-		}
-	}
-	h1 {
-		font-size: 36px;
-	}
-	h2 {
-		font-size: 30px;
-	}
-	h3 {
-		font-size: 24px;
-	}
-	h4 {
-		font-size: 18px;
-	}
-	h5 {
-		font-size: 12px;
-	}
-	h6 {
-		font-size: 12px;
-		font-weight: 400;
-	}
-	dt {
-		font-weight: 700;
-	}
-	a {
-		color: #d97d34;
-		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-	img {
-		display: inline-block;
-		vertical-align: middle;
-	}
-	figure img {
-		display: block;
-	}
+  *+p,
+  *+dl,
+  *+h1,
+  *+h2,
+  *+h3,
+  *+h4,
+  *+h5,
+  *+h6,
+  *+ol,
+  *+ul,
+  *+table,
+  *+figure {
+    margin-top: $wysiwyg-space;
+  }
+  li {
+    position: relative;
+    padding-left: 40px;
+    &:before {
+      content: '»';
+      position: absolute;
+      left: 0;
+      width: 28px;
+      padding: 4px 0;
+      color: $base-font-color;
+      text-align: center;
+      line-height: 1;
+    }
+    ol,
+    ul {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+  li+li {
+    margin-top: 10px;
+  }
+  ol>li {
+    counter-increment: ordered-list;
+    &:before {
+      content: counter(ordered-list);
+      top: -3px;
+      padding: 7px 0;
+      background: #d97d34;
+      color: #fff;
+      font-size: 14px;
+    }
+  }
+  h1 {
+    font-size: $h1-font-size;
+    font-weight: $h1-font-weight;
+  }
+  h2 {
+    font-size: $h2-font-size;
+    font-weight: $h2-font-weight;
+  }
+  h3 {
+    font-size: $h3-font-size;
+    font-weight: $h3-font-weight;
+  }
+  h4 {
+    font-size: $h4-font-size;
+    font-weight: $h4-font-weight;
+  }
+  h5 {
+    font-size: $h5-font-size;
+    font-weight: $h5-font-weight;
+  }
+  h6 {
+    font-size: $h6-font-size;
+    font-weight: $h6-font-weight;
+  }
+  dt {
+    font-weight: 700;
+  }
+  a {
+    color: $link-color;
+    text-decoration: $link-decoration;
+    &:hover {
+      color: $link-color-hover;
+      text-decoration: $link-decoration-hover;
+    }
+  }
+  img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  img[style*="float:left"],
+  img[style*="float: left"] {
+    padding-top: $padding;
+    padding-right: $padding;
+  }
+  img[style*="float:right"],
+  img[style*="float: right"] {
+    padding-top: $padding;
+    padding-left: $padding;
+  }
+  figure img {
+    display: block;
+  }
 }

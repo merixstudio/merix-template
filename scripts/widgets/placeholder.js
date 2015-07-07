@@ -57,7 +57,7 @@ define('widgets/placeholder', ['jquery'], function(jQuery) {
 
         this.placeholder = jQuery('<label for="' + this.id + '" class="placeholder">' + placeholder + '</label>');
 
-        this.element.before(this.placeholder);
+        this.element.after(this.placeholder);
     };
     
     Placeholder.prototype.setPosition = function() {

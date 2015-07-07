@@ -6,7 +6,7 @@
  *     <label for="input" class="placeholder">
  *         Text
  *     </label>
- *     <input id="input" data-placeholder="text">
+ *     <input id="input" placeholder="text">
  * </p>
  * 
  * js:
@@ -30,12 +30,24 @@ define('widgets/placeholder', ['jquery'], function(jQuery) {
 
         this.setPosition();
         
-        this.element.focus(self.hidePlaceholder.bind(this)).blur(self.showPlaceholder.bind(this));
-        
+        this.element.on('focus hidePlaceholder', self.hidePlaceholder.bind(this)).on('blur showPlaceholder', self.showPlaceholder.bind(this));
+        this.element.change(function() {
+            self.hidePlaceholder();
+            self.showPlaceholder();
+        });
+
         // FF fix
-        this.hidePlaceholder();
-        this.showPlaceholder();
+        this.element.trigger('hidePlaceholder');
+        this.element.trigger('showPlaceholder');
         
+        // Chrome autofill fix
+        setTimeout(function() {
+            self.hidePlaceholder();
+            self.showPlaceholder();
+        }, 500);
+
+        this.element.on('setPosition', this.setPosition.bind(this));
+
         jQuery(window).resize(self.setPosition.bind(this));
     }
 
@@ -52,6 +64,9 @@ define('widgets/placeholder', ['jquery'], function(jQuery) {
         var elementWidth = this.element.outerWidth();
         var elementHeight = this.element.outerHeight();
         this.placeholder.css({
+            'position': 'absolute',
+            'top': 0,
+            'left': 0,
             'width': elementWidth,
             'height': elementHeight
         });

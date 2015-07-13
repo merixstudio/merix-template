@@ -5,7 +5,7 @@ a {
   outline: 0;
   &:hover {
     outline: 0;
-    color: #d97d34;
+    color: $primary-color;
     text-decoration: none;
   }
   &:active,
@@ -47,7 +47,7 @@ blockquote {
     position: absolute;
     top: 20px;
     left: 0;
-    color: #d97d34;
+    color: $primary-color;
     font-size: 92px;
     font-style: normal;
     line-height: 72px;

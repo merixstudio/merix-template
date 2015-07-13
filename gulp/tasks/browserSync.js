@@ -5,7 +5,8 @@ var gulp = require('gulp');
 gulp.task('browserSync', function(){
 
     browserSync({
-        proxy: 'localhost:' + config.serverport
+        proxy: 'localhost:' + config.serverport,
+        port: config.serverport
     });
 
 });

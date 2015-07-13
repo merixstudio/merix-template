@@ -1,7 +1,6 @@
 var config   = require('../config');
 var changed  = require('gulp-changed');
 var gulp     = require('gulp');
-var imagemin = require('gulp-imagemin');
 
 gulp.task('media:dev', function(){
     var dest = config.medias.dest;
@@ -15,6 +14,5 @@ gulp.task('media:production', function(){
     var dest = config.medias.dest;
 
     return gulp.src(config.medias.src)
-        .pipe(imagemin())
         .pipe(gulp.dest(dest));
 });

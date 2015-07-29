@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1">
-        <title>{% if page_title %}{{ page_title }}{% else %}Pigie{% endif %}</title>
+        <title>{% block title %}Pigie{% endblock %}</title>
         <link rel="icon" type="image/png" href="images/favicon.png" sizes="96x96">
 
         <link rel="stylesheet" href="styles/main.css">
@@ -26,10 +26,6 @@
 
         {% block page_footer %}{% include "../partials/_footer.html" %}{% endblock %}
 
-        <!-- HTML settings take priority over the JS ones and can be backend-generated. -->
-        <script>
-        var language = 'ENG';
-        </script>
         <script src="scripts/main.js"></script>
     </body>
 </html>

@@ -1,5 +1,6 @@
+{% import '_macro_buttons.html' as buttons %}
+
 {% macro accordion(kwargs) %}
-    {% import '_macro_buttons.html' as buttons %}
     <div class="accordion">
         <header>
             {{ buttons.button(kwargs.label, '', '', {'class': 'block accordion-toggle', 'data-target': kwargs.id}) }}

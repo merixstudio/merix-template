@@ -2,7 +2,6 @@ var config       = require('../config');
 var gulp         = require('gulp');
 var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
-var gulpif       = require('gulp-if');
 var browserSync  = require('browser-sync');
 var autoprefixer = require('gulp-autoprefixer');
 
@@ -18,7 +17,7 @@ gulp.task('styles:dev', function(){
         }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(config.styles.dest))
-        .pipe(gulpif(browserSync.active, browserSync.reload({ stream: true })));
+        .pipe(browserSync.reload({ stream: true }));
 });
 
 gulp.task('styles:production', function(){

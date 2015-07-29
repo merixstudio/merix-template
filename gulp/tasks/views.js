@@ -1,14 +1,18 @@
 var config       = require('../config');
 var gulp         = require('gulp');
-var gulpif       = require('gulp-if');
 var browserSync  = require('browser-sync');
-var swig         = require('gulp-swig');
+var nunjucks     = require('gulp-nunjucks');
 
-gulp.task('views', function(){
-
+gulp.task('views:dev', function() {
     return gulp.src(config.views.src)
-        .pipe(swig({defaults: {cache: false}}))
+        .pipe(nunjucks())
         .pipe(gulp.dest(config.views.dest))
-        .pipe(gulpif(browserSync.active, browserSync.reload({ stream: true })));
-
+        .pipe(browserSync.reload({ stream: true }));
 });
+
+gulp.task('views:production', function() {
+    return gulp.src(config.views.src)
+        .pipe(nunjucks())
+        .pipe(gulp.dest(config.views.dest));
+});
+

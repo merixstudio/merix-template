@@ -1,8 +1,10 @@
-{% extends 'layouts/_default.html' %}
-{% import 'macros/_macro_forms.html' as forms %}
-{% import 'macros/_macro_buttons.html' as buttons %}
-{% import 'macros/_macro_accordion.html' as accordion %}
-{% import 'macros/_macro_template.html' as template %}
+{% extends './layouts/_default.html' %}
+{% import './macros/_macro_forms.html' as forms %}
+{% import './macros/_macro_buttons.html' as buttons %}
+{% import './macros/_macro_accordion.html' as accordion %}
+{% import './macros/_macro_template.html' as template %}
+
+{% set page_title = 'Common' %}
 
 {% block page_content %}
 
@@ -652,6 +654,5 @@
         </div>
     </fieldset>
 </section>
-
 
 {% endblock %}

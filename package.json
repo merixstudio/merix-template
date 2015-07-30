@@ -14,7 +14,6 @@
     "gulp-changed": "^1.2.1",
     "gulp-css-globbing": "^0.1.8",
     "gulp-jshint": "^1.11.2",
-    "gulp-nunjucks": "^1.0.3",
     "gulp-sass": "^2.0.4",
     "gulp-sass-bulk-import": "^0.3.2",
     "gulp-sourcemaps": "^1.5.2",

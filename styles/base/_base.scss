@@ -1,0 +1,36 @@
+html {
+  overflow-y: scroll;
+  height: 100%;
+  &.no-scroll {
+    overflow-y: hidden !important;
+  }
+}
+
+body {
+  height: 100%;
+  background: $body-background;
+  color: $body-font-color;
+  font-family: $body-font-family;
+  font-size: $body-font-size;
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-overflow: ellipsis;
+    list-style: none;
+  }
+}
+
+figure img {
+  display: block;
+  width: 100%;
+}
+
+hr {
+  border: solid $border-color;
+  border-width: 0 0 1px 0;
+  clear: both;
+  height: 0;
+  margin: $padding 0;
+}
+

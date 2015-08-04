@@ -5,9 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
         <title>{% if page_title %}{{ page_title }}{% else %}Pigie{% endif %}</title>
         <link rel="icon" type="image/png" href="images/favicon.png" sizes="96x96">
-        
-        {% block styles %}{% include "../elements/_styles.html" %}{% endblock %}
 
+        <link rel="stylesheet" href="styles/main.css">
         <!--[if lte IE 9]>
             <link rel="stylesheet" href="styles/ie9.css">
         <![endif]-->
@@ -17,23 +16,16 @@
     </head>
     <body{% if page_class %} class="page-{{ page_class }}"{% endif %}>
         <div class="page-wrap">
-            {% block page_header %}{% include "../elements/_header.html" %}{% endblock %}
+            {% block page_header %}{% include "../partials/_header.html" %}{% endblock %}
 
             <main>
                 {% block page_content %}{% endblock %}
             </main>
 
         </div>
-        
-        {% block page_footer %}{% include "../elements/_footer.html" %}{% endblock %}
 
-        <!-- HTML settings take priority over the JS ones and can be backend-generated. -->
-        <script type="application/vnd.nebula-settings+json">
-        {
-            "LANGUAGE": "ENG"
-        }
-        </script>
+        {% block page_footer %}{% include "../partials/_footer.html" %}{% endblock %}
 
-        {% block scripts %}{% include "../elements/_scripts.html" %}{% endblock %}
+        <script src="scripts/main.js"></script>
     </body>
 </html>

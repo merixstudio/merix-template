@@ -8,93 +8,86 @@
  *     </label>
  *     <input id="input" placeholder="text">
  * </p>
- * 
+ *
  * js:
  * find('[placeholder]').placeholders();
  */
-define('widgets/placeholder', ['jquery'], function(jQuery) {
-    
-    function Placeholder(element) {
-        var self = this;
-        this.element = element;
-        this.placeholder = element.siblings('label.placeholder');
+var jQuery = require('jquery');
 
-        if (typeof this.element.attr('id') === 'undefined')
-            this.element.attr('id', 'placeholder' + new Date().getTime());
-        this.id = this.element.attr('id');
+function Placeholder(element) {
+	var self = this;
+	this.element = element;
+	this.placeholder = element.siblings('label.placeholder');
 
-        if (this.placeholder.length === 0)
-            this.buildPlaceholder();
+	if (typeof this.element.attr('id') === 'undefined')
+		this.element.attr('id', 'placeholder' + new Date().getTime());
+	this.id = this.element.attr('id');
 
-        this.element.removeAttr('placeholder');
+	if (this.placeholder.length === 0)
+		this.buildPlaceholder();
 
-        this.setPosition();
-        
-        this.element.on('focus hidePlaceholder', self.hidePlaceholder.bind(this)).on('blur showPlaceholder', self.showPlaceholder.bind(this));
-        this.element.change(function() {
-            self.hidePlaceholder();
-            self.showPlaceholder();
-        });
+	this.element.removeAttr('placeholder');
 
-        // FF fix
-        this.element.trigger('hidePlaceholder');
-        this.element.trigger('showPlaceholder');
-        
-        // Chrome autofill fix
-        setTimeout(function() {
-            self.hidePlaceholder();
-            self.showPlaceholder();
-        }, 500);
+	this.setPosition();
+	
+	this.element.on('focus hidePlaceholder', self.hidePlaceholder.bind(this)).on('blur showPlaceholder', self.showPlaceholder.bind(this));
+	this.element.change(function() {
+		self.hidePlaceholder();
+		self.showPlaceholder();
+	});
 
-        this.element.on('setPosition', this.setPosition.bind(this));
+	// FF fix
+	this.element.trigger('hidePlaceholder');
+	this.element.trigger('showPlaceholder');
+	
+	// Chrome autofill fix
+	setTimeout(function() {
+		self.hidePlaceholder();
+		self.showPlaceholder();
+	}, 500);
 
-        jQuery(window).resize(self.setPosition.bind(this));
-    }
+	this.element.on('setPosition', this.setPosition.bind(this));
 
-    Placeholder.prototype.buildPlaceholder = function() {
-        this.element.wrap('<span class="relative" style="display: inline-block; width: 100%; height: 100%" />');
-        var placeholder = this.element.attr('placeholder');
+	jQuery(window).resize(self.setPosition.bind(this));
+}
 
-        this.placeholder = jQuery('<label for="' + this.id + '" class="placeholder">' + placeholder + '</label>');
+Placeholder.prototype.buildPlaceholder = function() {
+    this.element.wrap('<span class="relative" style="display: inline-block; width: 100%; height: 100%" />');
+    var placeholder = this.element.attr('placeholder');
 
-        this.element.after(this.placeholder);
-    };
-    
-    Placeholder.prototype.setPosition = function() {
-        var elementWidth = this.element.outerWidth();
-        var elementHeight = this.element.outerHeight();
-        this.placeholder.css({
-            'position': 'absolute',
-            'top': 0,
-            'left': 0,
-            'width': elementWidth,
-            'height': elementHeight
-        });
-    };
-    
-    Placeholder.prototype.hidePlaceholder = function() {
-        this.placeholder.hide();
-    };
-    
-    Placeholder.prototype.showPlaceholder = function() {
-        if (!this.element.val())
-            this.placeholder.show();
-        
-        if (this.element.hasClass('error'))
-            this.placeholder.addClass('error');
-        else
-            this.placeholder.removeClass('error');
-    };
+    this.placeholder = jQuery('<label for="' + this.id + '" class="placeholder">' + placeholder + '</label>');
 
-    jQuery.fn.placeholders = function() {
-        jQuery(this).each(function() {
-            new Placeholder(jQuery(this));
-        });
-        return this;
-    };
+    this.element.after(this.placeholder);
+};
 
-    return {
-        'placeholder': Placeholder
-    };
+Placeholder.prototype.setPosition = function() {
+    var elementWidth = this.element.outerWidth();
+    var elementHeight = this.element.outerHeight();
+    this.placeholder.css({
+        'width': elementWidth,
+        'height': elementHeight
+    });
+};
 
-});
+Placeholder.prototype.hidePlaceholder = function() {
+    this.placeholder.hide();
+};
+
+Placeholder.prototype.showPlaceholder = function() {
+    if (!this.element.val())
+        this.placeholder.show();
+
+    if (this.element.hasClass('error'))
+        this.placeholder.addClass('error');
+    else
+        this.placeholder.removeClass('error');
+};
+
+jQuery.fn.placeholders = function() {
+    jQuery(this).each(function() {
+        new Placeholder(jQuery(this));
+    });
+    return this;
+};
+
+module.exports = Placeholder;

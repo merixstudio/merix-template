@@ -1,8 +1,8 @@
-{% extends 'layouts/_default.html' %}
-{% import 'macros/_macro_forms.html' as forms %}
-{% import 'macros/_macro_buttons.html' as buttons %}
-{% import 'macros/_macro_accordion.html' as accordion %}
-{% import 'macros/_macro_template.html' as template %}
+{% extends './layouts/_default.html' %}
+{% import './macros/_macro_forms.html' as forms %}
+{% import './macros/_macro_buttons.html' as buttons %}
+{% import './macros/_macro_accordion.html' as accordion %}
+{% import './macros/_macro_template.html' as template %}
 
 {% set page_class = 'common' %}
 {% set page_title = 'Common' %}
@@ -14,7 +14,7 @@
     fieldset legend {position: absolute; left: -140px; width: 120px; font-size: 18px; font-weight: 700}
     code {display: block; padding-top: 10px}
     code:before {content: '.icon-'; opacity: 0.2}
-    
+
     /* Hover/Tap example */
     .hover-test {display: inline-block}
     .hover-test p {width: 200px; height: 200px; color: #fff; font-size: 36px; line-height: 200px; text-align: center}
@@ -22,16 +22,17 @@
     .hover-test p.red {display: inline-block; background: red}
     .hover-test.hover p.green {display: inline-block}
     .hover-test.hover p.red {display: none}
-    
+
+    .viewport-1280 fieldset legend,
     .viewport-960 fieldset legend,
     .viewport-720 fieldset legend,
     .viewport-480 fieldset legend,
     .viewport-320 fieldset legend {position: static; padding-top: 20px}
 </style>
 
-<section class="page-column">
+<section class="container">
 
-    <fieldset>
+    <fieldset class="page-section">
         <legend>Headers</legend>
 
         <div class="wysiwyg">
@@ -58,7 +59,7 @@
         <legend>Lists</legend>
 
         <div class="wysiwyg">
-            <p>Unordered list:</p>
+            <h3>Unordered list:</h3>
 
             <ul>
                 <li>Lorem ipsum</li>
@@ -67,7 +68,7 @@
                 <li>Consectetur adipiscing</li>
             </ul>
 
-            <p>Ordered list:</p>
+            <h3>Ordered list:</h3>
 
             <ol>
                 <li>Lorem ipsum</li>
@@ -75,20 +76,31 @@
                 <li>Nullam viverra sollicitudin venenatis. Proin cursus laoreet urna auctor dignissim. Fusce tincidunt odio ac neque eleifend, at interdum leo facilisis. Nunc venenatis, ante nec laoreet aliquam, odio odio pharetra sapien, quis vehicula nisl arcu a purus. Quisque dapibus sapien auctor urna euismod congue. Etiam mi risus, posuere non interdum et, scelerisque sit amet nibh. Mauris sed aliquam orci. Nunc hendrerit ligula erat, ut fringilla libero molestie sed. Aliquam nec tortor sit amet augue interdum imperdiet eleifend quis odio.</li>
                 <li>Consectetur adipiscing</li>
             </ol>
+
+            <h3>Definition list:</h3>
+
+            <dl>
+                <dt>{{ template.lorem(2) }}</dt>
+                <dd>{{ template.lorem(74) }}</dd>
+                <dt>{{ template.lorem(2) }}</dt>
+                <dd>{{ template.lorem(74) }}</dd>
+                <dt>{{ template.lorem(2) }}</dt>
+                <dd>{{ template.lorem(74) }}</dd>
+            </dl>
         </div>
     </fieldset>
 
     <fieldset class="page-section">
         <legend>Blockquote</legend>
 
-        <div class="wysiwyg">
+        <div>
             <blockquote>
                 <p>Nullam viverra sollicitudin venenatis. Proin cursus laoreet urna auctor dignissim. Fusce tincidunt odio ac neque eleifend, at interdum leo facilisis. Nunc venenatis, ante nec laoreet aliquam, odio odio pharetra sapien, quis vehicula nisl arcu a purus. Quisque dapibus sapien auctor urna euismod congue. Etiam mi risus, posuere non interdum et, scelerisque sit amet nibh. Mauris sed aliquam orci. Nunc hendrerit ligula erat, ut fringilla libero molestie sed. Aliquam nec tortor sit amet augue interdum imperdiet eleifend quis odio.</p>
             </blockquote>
         </div>
     </fieldset>
 
-    <div class="page-section">
+    <fieldset class="page-section">
         <legend>Table</legend>
 
         <div class="table-wrap">
@@ -109,61 +121,61 @@
                 {% endfor %}
             </table>
         </div>
-    </div>
+    </fieldset>
 
     <fieldset class="page-section">
         <legend>Icons</legend>
 
-        <div class="grid padding">
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+        <div class="icons-list">
+            <p class="icon">
                 <span class="icon-check"><code>check</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-plus"><code>plus</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-minus"><code>minus</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-close"><code>close</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-menu"><code>menu</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-facebook"><code>facebook</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-youtube"><code>youtube</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-twitter"><code>twitter</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-youtube"><code>youtube</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-googleplus"><code>googleplus</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-linkedin"><code>linkedin</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-calendar"><code>calendar</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-reply"><code>reply</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-clock"><code>clock</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-star"><code>star</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-share"><code>share</code></span>
             </p>
-            <p class="v320-1-of-2 v720-1-of-4 text-center">
+            <p class="icon">
                 <span class="icon-search"><code>search</code></span>
             </p>
         </div>
@@ -172,31 +184,31 @@
     <fieldset class="page-section">
         <legend>Buttons</legend>
 
-        <div class="grid padding middle">
-            <p class="v320-hide v480-hide v720-1-of-4">Types</p>
-            <p class="v320-hide v480-hide v720-1-of-4">Link</p>
-            <p class="v320-hide v480-hide v720-1-of-4">Button</p>
-            <p class="v320-hide v480-hide v720-1-of-4">Submit</p>
+        <div class="grid-4">
+            <p>Types</p>
+            <p>Link</p>
+            <p>Button</p>
+            <p>Submit</p>
 
-            <p class="v320-1 v720-1-of-4">Default</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text') }}</p>
+            <p>Default</p>
+            <p>{{ buttons.link('Button text') }}</p>
+            <p>{{ buttons.button('Button text') }}</p>
+            <p>{{ buttons.submit('Button text') }}</p>
 
-            <p class="v320-1 v720-1-of-4">Disabled</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text', '', '', {'class': 'disabled'}) }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text', '', '', {'disabled': 'disabled'}) }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text', '', '', {'disabled': 'disabled'}) }}</p>
-            
-            <p class="v320-1 v720-1-of-4">Secondary</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.linkSecondary('Button text') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.buttonSecondary('Button text') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submitSecondary('Button text') }}</p>
+            <p>Disabled</p>
+            <p>{{ buttons.link('Button text', '', '', {'class': 'disabled'}) }}</p>
+            <p>{{ buttons.button('Button text', '', '', {'disabled': 'disabled'}) }}</p>
+            <p>{{ buttons.submit('Button text', '', '', {'disabled': 'disabled'}) }}</p>
 
-            <p class="v320-1 v720-1-of-4">Secondary disabled</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.linkSecondary('Button text', '', '', {'class': 'disabled'}) }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.buttonSecondary('Button text', '', '', {'disabled': 'disabled'}) }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submitSecondary('Button text', '', '', {'disabled': 'disabled'}) }}</p>
+            <p>Secondary</p>
+            <p>{{ buttons.linkSecondary('Button text') }}</p>
+            <p>{{ buttons.buttonSecondary('Button text') }}</p>
+            <p>{{ buttons.submitSecondary('Button text') }}</p>
+
+            <p>Secondary disabled</p>
+            <p>{{ buttons.linkSecondary('Button text', '', '', {'class': 'disabled'}) }}</p>
+            <p>{{ buttons.buttonSecondary('Button text', '', '', {'disabled': 'disabled'}) }}</p>
+            <p>{{ buttons.submitSecondary('Button text', '', '', {'disabled': 'disabled'}) }}</p>
         </div>
 
     </fieldset>
@@ -204,26 +216,26 @@
     <fieldset class="page-section">
         <legend>Buttons with icons</legend>
 
-        <div class="grid padding middle">
-            <p class="v320-hide v480-hide v720-1-of-4">Types</p>
-            <p class="v320-hide v480-hide v720-1-of-4">Link</p>
-            <p class="v320-hide v480-hide v720-1-of-4">Button</p>
-            <p class="v320-hide v480-hide v720-1-of-4">Submit</p>
+        <div class="grid-4">
+            <p>Types</p>
+            <p>Link</p>
+            <p>Button</p>
+            <p>Submit</p>
 
-            <p class="v320-1 v720-1-of-4">Icon on the right, small</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text', '', 'check') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text', '', 'check') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text', '', 'check') }}</p>
+            <p>Icon on the right, small</p>
+            <p>{{ buttons.link('Button text', '', 'check') }}</p>
+            <p>{{ buttons.button('Button text', '', 'check') }}</p>
+            <p>{{ buttons.submit('Button text', '', 'check') }}</p>
 
-            <p class="v320-1 v720-1-of-4">Icon on the left, small</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text', 'check', '') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text', 'check', '') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text', 'check', '') }}</p>
+            <p>Icon on the left, small</p>
+            <p>{{ buttons.link('Button text', 'check', '') }}</p>
+            <p>{{ buttons.button('Button text', 'check', '') }}</p>
+            <p>{{ buttons.submit('Button text', 'check', '') }}</p>
 
-            <p class="v320-1 v720-1-of-4">Icon on both sides, small</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.link('Button text', 'check', 'check') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.button('Button text', 'check', 'check') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submit('Button text', 'check', 'check') }}</p>
+            <p>Icon on both sides, small</p>
+            <p>{{ buttons.link('Button text', 'check', 'check') }}</p>
+            <p>{{ buttons.button('Button text', 'check', 'check') }}</p>
+            <p>{{ buttons.submit('Button text', 'check', 'check') }}</p>
 
         </div>
     </fieldset>
@@ -231,21 +243,21 @@
     <fieldset class="page-section">
         <legend>Buttons with icons only</legend>
 
-        <div class="grid padding middle">
-            <p class="v320-hide v480-hide v720-1-of-4">Types</p>
-            <p class="v320-hide v480-hide v720-1-of-4">Link</p>
-            <p class="v320-hide v480-hide v720-1-of-4">Button</p>
-            <p class="v320-hide v480-hide v720-1-of-4">Submit</p>
+        <div class="grid-4">
+            <p>Types</p>
+            <p>Link</p>
+            <p>Button</p>
+            <p>Submit</p>
 
-            <p class="v320-1 v720-1-of-4">Small</p>
-            <p class="v320-1 v720-1-of-4">{{   buttons.linkNoText('Button text', '', 'check') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.buttonNoText('Button text', '', 'check') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submitNoText('Button text', '', 'check') }}</p>
+            <p>Small</p>
+            <p>{{ buttons.linkNoText('Button text', '', 'check') }}</p>
+            <p>{{ buttons.buttonNoText('Button text', '', 'check') }}</p>
+            <p>{{ buttons.submitNoText('Button text', '', 'check') }}</p>
 
-            <p class="v320-1 v720-1-of-4">Big</p>
-            <p class="v320-1 v720-1-of-4">{{   buttons.linkBigNoText('Button text', '', 'check') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.buttonBigNoText('Button text', '', 'check') }}</p>
-            <p class="v320-1 v720-1-of-4">{{ buttons.submitBigNoText('Button text', '', 'check') }}</p>
+            <p>Big</p>
+            <p>{{ buttons.linkBigNoText('Button text', '', 'check') }}</p>
+            <p>{{ buttons.buttonBigNoText('Button text', '', 'check') }}</p>
+            <p>{{ buttons.submitBigNoText('Button text', '', 'check') }}</p>
 
         </div>
     </fieldset>
@@ -253,8 +265,8 @@
     <fieldset class="page-section">
         <legend>Pagination</legend>
 
-        <div class="pagination">
-            <ul class="grid padding small middle">
+        <div>
+            <ul class="pagination">
                 <li>{{ buttons.linkNoText('', '', 'arrow-left') }}</li>
                 <li>{{ buttons.link('1', '', '', {'class': 'small-padding'}) }}</li>
                 <li>{{ buttons.link('2', '', '', {'class': 'small-padding active'}) }}</li>
@@ -271,43 +283,39 @@
     <fieldset class="page-section">
         <legend>Accordions</legend>
 
-        <div class="grid padding small">
-            <div class="v320-1">
-                {{ accordion.accordion({'id': 'accordion-1', 'label': 'Wishlist <span class="count">6</span> <span class="notice-count">2</span>', 'content': '<p>' + template.lorem(15) + '</p>'}) }}
+        <div>
+            <div>
+                {{ accordion.accordion({'id': 'accordion-1', 'label': 'Wishlist <span class="count">6</span> <span class="notice-count">2</span>', 'content': '<p>' + template.lorem(45) + '</p>'}) }}
             </div>
-            <div class="v320-1">
-                {{ accordion.accordion({'id': 'accordion-2', 'content': template.toString('../elements/_lorem.html')}) }}
+            <div>
+                {{ accordion.accordion({'id': 'accordion-2', 'label': 'Wishlist <span class="count">6</span> <span class="notice-count">2</span>', 'content': '<p>' + template.lorem(45) + '</p>'}) }}
             </div>
-            <div class="v320-1">
-                {{ accordion.accordion({'id': 'accordion-3', 'label': 'Achievements <span class="count">4</span>', 'content': template.toString('../elements/_lorem.html')}) }}
+            <div>
+                {{ accordion.accordion({'id': 'accordion-3', 'label': 'Wishlist <span class="count">6</span> <span class="notice-count">2</span>', 'content': '<p>' + template.lorem(45) + '</p>'}) }}
             </div>
         </div>
     </fieldset>
-    
+
     <fieldset class="page-section">
         <legend>Modal</legend>
 
-        <div class="grid padding small">
-            <div class="v320-1">
-                <a href="ajax/modal.html" class="modal-open">Click to open</a>
-            </div>
-        </div>
+        <a href="ajax/modal.html" class="button primiary modal-open">Click to open</a>
     </fieldset>
 
     <fieldset class="page-section">
         <legend>Textfields / select</legend>
 
-        <div class="grid padding small">
-            <p class="v960-1-of-4">
+        <div class="grid-4">
+            <p>
                 {{ forms.textfield() }}
             </p>
-            <p class="v960-1-of-4">
+            <p>
                 {{ forms.password() }}
             </p>
-            <p class="v320-1-of-4">
+            <p>
                 {{ forms.select() }}
             </p>
-            <p class="v320-1-of-4">
+            <p>
                 {{ buttons.link() }}
             </p>
         </div>
@@ -338,7 +346,7 @@
             {{ forms.textarea() }}
         </p>
     </fieldset>
-    
+
     <fieldset class="page-section">
         <legend>Input counter</legend>
         <div class="grid padding">
@@ -352,7 +360,7 @@
             </p>
         </div>
     </fieldset>
-    
+
     <fieldset class="page-section">
         <legend>Checkboxes / radiobuttons</legend>
 
@@ -365,10 +373,10 @@
             {{ forms.radio({'name': 'radio-test', 'id': 'radio1'}) }}
         </p>
     </fieldset>
-    
+
     <fieldset class="page-section">
         <legend>File field</legend>
-        
+
         <div class="grid padding small">
             <p class="v960-1-of-4">
                 {{ forms.file() }}
@@ -381,13 +389,13 @@
 
         <div class="grid padding large v320-1">
             <div class="v320-1">
-                <div class="wysiwyg">
+                <div>
                     <h1>Contact us</h1>
                     <p>Answers to a number of common questions can be found on the Help page –before going through the trouble of writing out an email, why not have a look there first and see if it holds the answer to your question?</p>
                 </div>
             </div>
 
-            
+
             <div class="v320-1">
                 <form class="grid padding validate">
                     <div class="v320-1-of-2">
@@ -497,7 +505,7 @@
                                     </p>
                                 </div>
                             </div>
-                            
+
                             <div class="v320-1">
                                 <p>
                                     {{ buttons.submit('Send', '', 'arrow-right') }}
@@ -510,7 +518,7 @@
         </div>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="page-section">
         <legend>Slider with mx-media-set</legend>
         <div class="slider">
             <figure class="slide">
@@ -543,15 +551,15 @@
         </div>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="page-section">
         <legend>Hover or tap on mobile</legend>
         <div class="hover-test" data-hover>
             <p class="red icon-close"></p>
             <p class="green icon-check"></p>
         </div>
     </fieldset>
-    
-    <fieldset>
+
+    <fieldset class="page-section">
         <legend>Lightbox</legend>
         <div class="lightbox-gallery">
             {% for i,v in Array(6) %}
@@ -573,8 +581,8 @@
                 </a>
         </div>
     </fieldset>
-    
-    <fieldset>
+
+    <fieldset class="page-section">
         <legend>Tabs</legend>
         <div class="tabs">
             <ul>
@@ -617,37 +625,35 @@
         </div>
     </fieldset>
 
-    <fieldset>
+    <fieldset class="page-section">
         <legend>Equal height</legend>
+
+        <div class="grid-2">
+            <div class="v320-1-of-2">
+                <p data-equal-height-group="group1" data-group-viewport="320 480 720 960 1280 1600 1920">
+                    320 480 720 960 1280 1600 1920
+                    <br><br><br>
+                </p>
+            </div>
+            <div class="v320-1-of-2">
+                <p data-equal-height-group="group1" data-group-viewport="320 480 1920">
+                    320 480 1920
+                </p>
+            </div>
+            <div class="v320-1-of-2">
+                <p data-equal-height-group="group1">
+                    no data-group-viewport
+                    <br>
+                    3
+                </p>
+            </div>
+            <div class="v320-1-of-2">
+                <p data-equal-height-group="group1" data-group-viewport="720">
+                    720
+                </p>
+            </div>
+        </div>
     </fieldset>
-
-    <div class="grid padding small bottom">
-        <div class="v320-1-of-2">
-            <p data-equal-height-group="group1" data-group-viewport="320 480 720 960 1280 1600 1920">
-                320 480 720 960 1280 1600 1920
-                <br><br><br>
-            </p>
-        </div>
-        <div class="v320-1-of-2">
-            <p data-equal-height-group="group1" data-group-viewport="320 480 1920">
-                320 480 1920
-            </p>
-        </div>
-        <div class="v320-1-of-2">
-            <p data-equal-height-group="group1">
-                no data-group-viewport
-                <br>
-                3
-            </p>
-        </div>
-        <div class="v320-1-of-2">
-            <p data-equal-height-group="group1" data-group-viewport="720">
-                720
-            </p>
-        </div>
-    </div>
-
 </section>
-
 
 {% endblock %}

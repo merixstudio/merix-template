@@ -1,26 +1,34 @@
-define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'detect', 'hover_tap', 'translate'], function(jQuery, viewport, smartBlocks, detect, hoverTap, translate) {
+;(function () {
     'use strict';
-    
-    // Delete if unused
-    var mediaSet = require('media_set');
-    var equalHeight = require('widgets/equal_height');
-    var modal = require('widgets/modal');
-    var Slider = require('widgets/slider');
-    var tabs = require('widgets/tabs');
-    var accordions = require('widgets/accordions');
-    var scrollbar = require('widgets/scrollbar');
-    var validate = require('widgets/validate');
-    var fileField = require('widgets/file_field');
-    var placeholders = require('widgets/placeholder');
+
+    window.$ = window.jQuery = require('jquery');
+    var viewport = require('./utils/viewport');
+    var smartBlocks = require('./utils/smart_blocks');
+    var detect = require('./utils/detect');
+    var hoverTap = require('./utils/hover_tap');
+    var lightbox = require('./widgets/lightbox');
+    var inputCount = require('./widgets/input_count');
+    var selectField = require('./widgets/select_field');
+    var translate = require('./utils/translate');
+    var mediaSet = require('./utils/media_set');
+    var equalHeight = require('./widgets/equal_height');
+    var modal = require('./widgets/modal');
+    var Slider = require('./widgets/slider');
+    var tabs = require('./widgets/tabs');
+    var accordions = require('./widgets/accordions');
+    var scrollbar = require('./widgets/scrollbar');
+    var validate = require('./widgets/validate');
+    var fileField = require('./widgets/file_field');
+    var placeholders = require('./widgets/placeholder');
 
     function Site() {
         viewport.enable();
         smartBlocks.enable();
-        
+
         viewport.onChange.connect(function() {
             // Put there code to be executed when viewport is changed
         });
-        
+
         this.parseContent(document.body);
     }
 
@@ -30,23 +38,23 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'detect', 'h
         }
 
         var self = this;
-        
+
         find('[data-hover]').hoverTap();
         find('[data-lightbox]').lightbox();
-        
+
         find('.tabs').tabs();
-        
+
         /* Mobile menu */
         find('.mobile-menu').each(function() {
             self.createMobileMenu(jQuery(this));
         });
-        
+
         /* Media Set */
         find('script[type="image/mx-media-set"]').each(mediaSet);
-        
+
         /* Equal height */
         find('[data-equal-height-group]').each(equalHeight.handler);
-        
+
         /* Forms */
         find('select').selectField();
         find('input:file').fileField();
@@ -69,22 +77,22 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'detect', 'h
                 }
             });
         });
-        
+
         /* Slider */
         find('.slider').each(function() {
             new Slider(jQuery(this), {
                 'mode': Slider.MODE_CAROUSEL
             });
         });
-        
+
         /* -------------------- */
-        
+
         /* Put own scripts here */
-        
-        
-        
+
+
+
         /* -------------------- */
-        
+
         equalHeight.updateAll();
         smartBlocks.updateTree(root);
     };
@@ -100,12 +108,11 @@ define('site', ['jquery', 'nebula/viewport', 'nebula/smart_blocks', 'detect', 'h
         mobileOpener.click(function(event) {
             event.preventDefault();
             var button = jQuery(this);
-            
+
             button.toggleClass('active');
             mobileMenu.find('nav').stop(true, true).slideToggle();
-            
+
         });
     };
-
-    return Site;
-});
+    new Site();
+}());

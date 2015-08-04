@@ -1,0 +1,26 @@
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-spacing: 10px;
+  color: #212121;
+  font-size: 13px;
+  tr>* {
+    padding: 15px 30px;
+    background: #f7f7f7;
+    text-align: left;
+    border-left: 1px solid #fff;
+  }
+  tr+tr>* {
+    border-top: 1px solid #fff;
+  }
+  th {
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+  tr:nth-child(2n+1)>* {
+    background: #f2f2f2;
+  }
+}

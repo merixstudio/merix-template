@@ -1,1 +1,0 @@
-http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubble/examples/example.html - plugin do stylowania infowindow w mapach google

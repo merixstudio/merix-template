@@ -1,0 +1,98 @@
+/* Button style */
+
+.button {
+  overflow: hidden;
+  display: inline-block;
+  padding: 12px 25px;
+  border: none;
+  background: $button-background;
+  color: #fff;
+  font-family: $font-family;
+  font-size: $button-font-size;
+  line-height: 1;
+  text-align: left;
+  text-transform: uppercase;
+  vertical-align: middle;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  &.block {
+    display: block;
+    width: 100%;
+  }
+  &.big {
+    padding: 19px 36px;
+    font-size: 17px;
+  }
+  &.disabled,
+  &:disabled {
+    color: #fff;
+    opacity: 0.5;
+    cursor: default;
+  }
+  &.active:not(.disabled):not(:disabled),
+    &:hover:not(.disabled):not(:disabled) {
+    background: scale-color($primary-color, $saturation: 55%, $lightness: 30%);
+    color: #fff;
+  }
+
+  // Secondary color
+  &.secondary {
+    background: $secondary-color;
+    color: #000;
+    &.disabled,
+    &:disabled {
+      color: #000;
+    }
+    &.active:not(.disabled):not(:disabled),
+      &:hover:not(.disabled):not(:disabled) {
+      background: scale-color($secondary-color, $lightness: -20%);
+    }
+  }
+
+  // Icons
+  &:before,
+    & > span:before {
+    text-indent: 0;
+    text-shadow: none;
+  }
+  &:before {
+    float: right;
+    margin-left: 25px
+  }
+  & > span:before {
+    float: left;
+    margin-right: 25px
+  }
+
+
+  &.big:before {
+    margin-left: 36px
+  }
+
+  &.big>span:before {
+    margin-right: 36px
+  }
+
+  &.text-hide {
+    width: 40px;
+    padding-left: 0;
+    padding-right: 0;
+    text-indent: -999em
+  }
+
+  &.text-hide.big {
+    width: 55px
+  }
+
+  &.text-hide {
+    padding-left: 0;
+    padding-right: 0;
+    text-indent: -999em;
+  }
+  &.text-hide[class*="icon-"]:before {
+    float: right;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+  }
+}

@@ -1,0 +1,92 @@
+a {
+  text-decoration: none;
+  color: #000;
+  transition: color 0.25s ease;
+  outline: 0;
+  &:hover {
+    outline: 0;
+    color: $primary-color;
+    text-decoration: none;
+  }
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+}
+
+/* Default paragraph styles */
+
+/* Default header styles */
+h1, h2, h3, h4, h5, h6 {
+  color: $header-font-color;
+  font-family: $header-font-family;
+  font-style: $header-font-style;
+  font-weight: $header-font-weight;
+  line-height: $header-line-height;
+  small {
+    color: $header-small-color;
+  }
+}
+
+h1 { font-size: $h1-font-size }
+h2 { font-size: $h2-font-size }
+h3 { font-size: $h3-font-size }
+h4 { font-size: $h4-font-size }
+h5 { font-size: $h5-font-size }
+h6 { font-size: $h6-font-size }
+
+
+blockquote {
+  position: relative;
+  padding: 20px 20px 20px 50px;
+  border: 1px solid #dadada;
+  border-width: 1px 0;
+  font-style: italic;
+  &:before {
+    content: open-quote;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    color: $primary-color;
+    font-size: 92px;
+    font-style: normal;
+    line-height: 72px;
+  }
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-italic {
+  font-style: italic;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-hide {
+  text-indent: -999em;
+}
+
+.text-hide[class*="icon-"]:before {
+  float: left;
+  text-indent: 0;
+}

@@ -8,11 +8,12 @@
 
         <link rel="stylesheet" href="styles/main.css">
         <!--[if lte IE 9]>
-            <link rel="stylesheet" href="styles/ie9.css">
+        <link rel="stylesheet" href="styles/base/ie9.css">
         <![endif]-->
         <!--[if lte IE 8]>
             <script src="scripts/libs/html5shiv.js"></script>
         <![endif]-->
+        <script src="scripts/libs/polyfills.js"></script>
     </head>
     <body{% if page_class %} class="page-{{ page_class }}"{% endif %}>
         <div class="page-wrap">

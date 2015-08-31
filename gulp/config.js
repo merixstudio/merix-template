@@ -12,9 +12,9 @@ module.exports = {
         'dest': '_build/scripts'
     },
 
-    'libs': {
-        'src' : 'scripts/libs/**/*.js',
-        'dest': '_build/scripts/libs'
+    'polyfills': {
+        'src' : 'scripts/polyfills/**/*.js',
+        'dest': '_build/scripts/polyfills'
     },
 
     'fonts': {

@@ -21,6 +21,14 @@ body {
   }
 }
 
+.container {
+  @include cf();
+  display: block;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 figure img {
   display: block;
   width: 100%;
@@ -33,4 +41,3 @@ hr {
   height: 0;
   margin: $padding 0;
 }
-

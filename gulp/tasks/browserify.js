@@ -33,7 +33,7 @@ var buildDev = function (file) {
     }
 
     return rebundle();
-}
+};
 
 var buildProduction = function (file) {
     var bundler = browserify({
@@ -47,6 +47,7 @@ var buildProduction = function (file) {
     function rebundle() {
         var stream = bundler.bundle();
         return stream.on('error', gutil.log.bind(gutil, 'Browserify Error'))
+            .transform("strictify")
             .pipe(source(file))
             .pipe(buffer())
             .pipe(uglify())
@@ -54,7 +55,7 @@ var buildProduction = function (file) {
     }
 
     return rebundle();
-}
+};
 
 gulp.task('browserify:dev', function() {
     return buildDev('main.js');

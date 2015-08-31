@@ -1,1 +1,0 @@
-Place placeholder images here.

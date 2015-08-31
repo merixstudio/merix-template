@@ -3,19 +3,18 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
-        <title>{% if page_title %}{{ page_title }}{% else %}Pigie{% endif %}</title>
-        <link rel="icon" type="image/png" href="images/favicon.png" sizes="96x96">
+        <title>Homepage</title>
 
         <link rel="stylesheet" href="styles/main.css">
         <!--[if lte IE 9]>
         <link rel="stylesheet" href="styles/base/ie9.css">
         <![endif]-->
         <!--[if lte IE 8]>
-            <script src="scripts/libs/html5shiv.js"></script>
+            <script src="scripts/polyfills/html5shiv.js"></script>
         <![endif]-->
-        <script src="scripts/libs/polyfills.js"></script>
+        <script src="scripts/polyfills/polyfills.js"></script>
     </head>
-    <body{% if page_class %} class="page-{{ page_class }}"{% endif %}>
+    <body>
         <div class="page-wrap">
             {% block page_header %}{% include "../partials/_header.html" %}{% endblock %}
 

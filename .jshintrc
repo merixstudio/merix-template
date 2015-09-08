@@ -1,0 +1,11 @@
+{
+   "browserify": true,
+   "browser": true,
+   "devel": true,
+   "globals": {
+        "$": false,
+        "jQuery": false
+    },
+    "strict": false,
+    "globalstrict": false
+}

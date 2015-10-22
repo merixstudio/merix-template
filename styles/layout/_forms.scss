@@ -58,7 +58,7 @@ input[type="password"],
 
 input[type="checkbox"] {
     position: absolute;
-    visibility: hidden;
+    // visibility: hidden;
     & + span {
         overflow: hidden;
         display: inline-block;

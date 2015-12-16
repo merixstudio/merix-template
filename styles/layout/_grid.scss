@@ -1,21 +1,63 @@
-/*  Syntax Quick Reference
-  --------------------------
-  column($ratios: 1, $offset: 0, $cycle: 0, $uncycle: 0, $gutter: $jeet-gutter)
-  span($ratio: 1, $offset: 0)
-  shift($ratios: 0, $col_or_span: column, $gutter: $jeet-gutter)
-  unshift()
-  edit()
-  center($max_width: 1410px, $pad: 0)
-  stack($pad: 0, $align: false)
-  unstack()
-  align($direction: both)
-  cf()
-*/
+// Import gridle
+@import 'gridle';
 
-@import 'grid/_settings';
-@import 'grid/_functions';
-@import 'grid/_grid';
+// context : 12,            # number of columns in your grid
+// column-width : null,     # by default it's percentage based depending on the context but you can specify a column width yourself
+// gutter-width : 20px,     # size of the gutters
+// gutter-height : 0,       # size of top and bottom gutters
+// gutter-top    : 0,       # size of top gutter
+// gutter-bottom : 0,       # size of bottom gutter
+// gutter-left   : 10px,    # size of left gutter
+// gutter-right  : 10px,    # size of right gutter
+// direction : ltr,         # direction
+// dir-attribute : false,   # if need to generate support for dir="rtl" in order to set part of layout direction
+// states-classes : false,  # if we need to generate the states classes
+// name-multiplicator : 1,  # if 5, generate gr-5, gr-10, etc...
+// classes-prefix : ''      # the prefix used for all classes
 
-main {
-  @include cf();
-}
+
+// setup the grid (required)
+@include gridle_setup((
+  context : 12,
+  gutter-width : 20px,
+  states-classes : true
+));
+
+// register states
+@include gridle_register_state(desktop-fullhd, (
+  min-width : 1920px,
+  gutter-width : 16px
+));
+@include gridle_register_state(desktop-large, (
+  min-width : 1600px,
+  max-width : 1919px,
+  gutter-width : 16px
+));
+@include gridle_register_state(desktop, (
+  min-width : 1280px,
+  max-width : 1599px,
+  gutter-width : 16px
+));
+@include gridle_register_state(tablet-large, (
+  min-width : 960px,
+  max-width : 1279px,
+  gutter-width : 16px
+));
+@include gridle_register_state(tablet, (
+  min-width : 720px,
+  max-width : 959px,
+  gutter-width : 12px
+));
+@include gridle_register_state(mobile, (
+  min-width : 480px,
+  max-width : 719px,
+  gutter-width : 12px
+));
+@include gridle_register_state(mobile-small, (
+  max-width : 479px,
+  gutter-width : 12px
+));
+
+
+// Generate classes:
+// @include gridle_generate_classes();

@@ -47,7 +47,6 @@ var buildProduction = function (file) {
     function rebundle() {
         var stream = bundler.bundle();
         return stream.on('error', gutil.log.bind(gutil, 'Browserify Error'))
-            .transform("strictify")
             .pipe(source(file))
             .pipe(buffer())
             .pipe(uglify())

@@ -1,5 +1,4 @@
 module.exports = {
-
     'serverport': 1337,
 
     'styles': {
@@ -46,5 +45,4 @@ module.exports = {
         'entries'   : './scripts/site.js',
         'bundleName': 'main.js'
     }
-
 };

@@ -5,16 +5,19 @@
   border-bottom: 1px solid #d7d7d7;
   background: #f7f7f7;
   .logo {
-    @include col(1/4);
-    display: table-cell;
-    width: 100%;
-    max-width: 225px;
-    height: 70px;
-    margin: 18px 0;
-    vertical-align: middle;
+    @include gridle(3);
+    & > a {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      max-width: 225px;
+      height: 70px;
+      margin: 18px 0;
+      vertical-align: middle;
+    }
   }
   .main-menu {
-    @include col (3/4);
+    @include gridle(9);
     text-align: right;
     > ul > li {
       display: inline-block;
@@ -23,7 +26,7 @@
         padding: 43px 34px;
       }
     }
-    @include media('<tablet') {
+    @include gridle_state(tablet) {
       display: none;
     }
   }
@@ -68,7 +71,7 @@
       }
     }
   }
-  @include media('<tablet') {
+  @include gridle_state(tablet) {
     display: block;
   }
 }

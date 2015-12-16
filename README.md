@@ -25,10 +25,9 @@ gulp
 ## Cechy framworka
 - Browserify
 - Gulp
-- [Nunjucks Templates](https://mozilla.github.io/nunjucks/)
+- [Swig template engine](http://paularmstrong.github.io/swig/)
 - SASS/SCSS
-    - [Jeet Grid System](http://jeet.gs)
-    - [Include Media](http://include-media.com/)
+    - [Gridle](http://gridle.org/)
 
 ## Struktura katalogów
 
@@ -36,7 +35,6 @@ gulp
 - **/fonts** - Folder dla czcionek
 - **/gulp** - Zawiera pliki opisujące zadania dla Gul\'a
 - **/images** - Folder dla obrazków wykorzystywanych w szablonach
-
     - **/placeholders** - Folder dla obrazków tymczasowych (placeholderów)
 - **/media** - Inne pliki takie jak dokumenty, wideo i inne wykorzystywane w szablonach
 - **/node_modules (Niewersjonowany)** - Folder przechowujący moduly pobrane z NPM'a

@@ -22,11 +22,21 @@ body {
 }
 
 .container {
-  @include cf();
+  @include gridle_container();
   display: block;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1248px;
   margin: 0 auto;
+  @include gridle_state(desktop-fullhd) {
+    max-width: 1824px;
+  }
+  @include gridle_state(desktop-large) {
+    max-width: 1536px;
+  }
+}
+
+.row {
+  @include gridle_row();
 }
 
 figure img {

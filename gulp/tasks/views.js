@@ -1,18 +1,19 @@
 var config      = require('../config');
 var gulp        = require('gulp');
 var browserSync = require('browser-sync');
-var swig        = require('gulp-swig');
+var nunjucksRender = require('gulp-nunjucks-render');
 
 gulp.task('views:dev', function() {
+    nunjucksRender.nunjucks.configure(['templates/'], {watch: true});
     return gulp.src(config.views.src)
-        .pipe(swig({ defaults: { cache: false } }))
+        .pipe(nunjucksRender())
         .pipe(gulp.dest(config.views.dest))
         .pipe(browserSync.reload({ stream: true }));
 });
 
 gulp.task('views:production', function() {
+    nunjucksRender.nunjucks.configure(['templates/'], {watch: false});
     return gulp.src(config.views.src)
-        .pipe(swig({ defaults: { cache: false } }))
+        .pipe(nunjucksRender())
         .pipe(gulp.dest(config.views.dest));
 });
-

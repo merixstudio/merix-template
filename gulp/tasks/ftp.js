@@ -31,16 +31,14 @@ gulp.task('ftp', function () {
                         pass: data.pass,
                         remotePath: '/domains/' + data.domain + '/public_html/' + getProjectName()
                     }))
-                    // you need to have some kind of stream after gulp-ftp to make sure it's flushed 
-                    // this can be a gulp plugin, gulp.dest, or any kind of stream 
-                    // here we use a passthrough stream 
                     .on('finish', function() {
                         spinner.stop();
+                        console.log('\nURL: http://' + data.domain + '/' + getProjectName() + '/');
                     })
                     .pipe(gutil.noop()); 
         } else {
             var ftpExamplePath = ftpPath.replace('ftp.json', 'ftp_example.json');
-            fs.writeFile(ftpExamplePath, '{\n"host": "website.com",\n"user": "johndoe",\n"pass": "1234",\n"domain": "domain.com"\n}', (err) => {
+            fs.writeFile(ftpExamplePath, '{\n"host": "live-preview.com",\n"user": "johndoe",\n"pass": "1234",\n"domain": "XX.live-preview.com"\n}', (err) => {
                 if (err) throw err;
                 console.log('Can\'t found ftp.json file with access data. Check file ' + ftpExamplePath + ', rename to \"ftp.json\" and run \"gulp ftp\" again.');
             });

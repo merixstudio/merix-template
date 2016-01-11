@@ -71,7 +71,7 @@ gulp
 
 that needs to be run in project root where `gulpfiles.js` file is located.
 
-This will run gulp in `dev` mode that additionally starts a dev server on `http://localhost:3000 and watches for file changes so it can reload the page on each save. Dev server is created with [BrowserSync](https://www.browsersync.io/).
+This will run gulp in `dev` mode that additionally starts a dev server on `http://localhost:1337 and watches for file changes so it can reload the page on each save. Dev server is created with [BrowserSync](https://www.browsersync.io/).
 
 There is also another gulp command for compiling files for production environment:
 

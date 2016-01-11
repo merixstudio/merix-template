@@ -1,49 +1,101 @@
-# Pigie (Web starter kit)
+# Pigie (Merix Studio Web starter kit)
 
-## Instalacja
+## Tools and technologies used in this project:
 
-Wymagana jest instalacja [Node.js](https://nodejs.org/).
+- [Gulp](http://gulpjs.com/)
+- [Browserify](http://browserify.org/)
+- [Nunjucks template engine](https://mozilla.github.io/nunjucks/)
+- [Sass](http://sass-lang.com/)
+    - [Gridle](http://gridle.org/)
 
-Następnie konieczne jest zainstalowanie modułu Gulp (Jesli nie posiadasz)
+## Getting started
+
+### Installing Node.js
+
+Only requirement is to install [Node.js](https://nodejs.org/).
+
+Please be sure you have Node.js and npm (node package manager that comes along with Node) in your OS enviroment path so it can be run from command line interface.
+
+If you work on Windows the default paths are:
+
+`C:\Program Files\nodejs\`
+
+`C:\Users\<user_name>\AppData\Roaming\npm\`
+
+When installing Node you can choose to add them for you automatically.
+
+### Installing other tools
+
+Gulp is needed to be installed globally (one time installation) with commands:
 
 ```
 npm install -g gulp
 ```
-_-g flaga ta okresla ze moduł jest instalowany globalnie_
 
-Po sklonowaniu repozytorium konieczne jest zainstalowanie wymaganych modułów
+_The `-g` flag means that it will be installed in Node.js path and will be available from CLI globally._
+
+To install all required local dependencies mentioned above run this command in the project root (where `package.json` file is located):
+
 ```
-cd <folder_projektu>
 npm install
 ```
 
-Aby uruchomić serwer i proces budowy projektu
+This will install all the required modules in `node_modules` folder. This folder is not versioned and has to be installed manually by everyone working on the project.
+
+### Running
+
+To run build process and start development server simply run:
+
 ```
 gulp
 ```
 
-## Cechy framworka
-- Browserify
-- Gulp
-- [Swig template engine](http://paularmstrong.github.io/swig/)
-- SASS/SCSS
-    - [Gridle](http://gridle.org/)
+## Gulp tasks
 
-## Struktura katalogów
+Gulp is responsible for the whole compiling and bundling process. All Gulp tasks are defined in the `gulp` folder.
 
-- **/_build (Niewersjonowany)** - Folder zawierający zbudowany projekt
-- **/fonts** - Folder dla czcionek
-- **/gulp** - Zawiera pliki opisujące zadania dla Gul\'a
-- **/images** - Folder dla obrazków wykorzystywanych w szablonach
-    - **/placeholders** - Folder dla obrazków tymczasowych (placeholderów)
-- **/media** - Inne pliki takie jak dokumenty, wideo i inne wykorzystywane w szablonach
-- **/node_modules (Niewersjonowany)** - Folder przechowujący moduly pobrane z NPM'a
-- **/scripts** - Pliki skryptów
-- **/styles** - Pliki styli
-    - **/base** - Style bazowe
-    - **/compontents** - Style poszczególnych powtarzalnych bloków/elementów/widgetów
-    - **/layout** -  Style układu strony (bloków grupujących) takich jak naglowek, stopka, kontener treści (tylko style definiujące układ)
-    - **/pages** - Style dla konkretnych podstron (elementów na podstronach które są unikalne tylko dla niej)
-    - **/utils** - Pliki SCSS definiujące zmienne, funkcje pomocnicze.
-- **/templates** - Folder z szablonami stron
-- **/tools** - Narzędzia skrypty itd.
+Compiled and bundled files are stored in `_build` dir that is created when Gulp task are started (those files are not versioned).
+
+Gulp tasks are responsible for:
+
+- Copy all static files (fonts, images, html) in the directory to `_build`
+- Compile Nunjucks templates from `templates/` to HTML files in `_build/`
+- Compile `*.scss` Sass files from `styles/` to one CSS file in `_build/styles/main.css`
+- Bundles them into one file using `Browserify` to `_build/scripts/main.js`
+
+The default command for running gulp tasks is:
+
+```
+gulp
+```
+
+that needs to be run in project root where `gulpfiles.js` file is located.
+
+This will run gulp in `dev` mode that additionally starts a dev server on `http://localhost:3000 and watches for file changes so it can reload the page on each save. Dev server is created with [BrowserSync](https://www.browsersync.io/).
+
+There is also another gulp command for compiling files for production environment:
+
+```
+gulp production
+```
+
+this command doesn't start a dev server and it minifies all the styles and scripts. This command should be used when build files for backend integration.
+
+## Folder structure
+
+```
+├── _build  # Contains builded project
+├── fonts   # Contains fonts and icon fonts used in the project
+│           # (without fonts imported from Google Fonts/Typekit etc.)
+├── gulp    # Contains Gulp tasks definitions
+├── images  # Contains images used in the project
+├── media   # Contains other media files used in project (documents, videos etc.)
+├── scripts         # Contains all script files
+├── styles          # Contains all styles used in the project
+│   ├── base        # Base styles
+│   ├── components  # Styles for specific components
+│   ├── layout      # Layout styles
+│   ├── pages       # Page specific styles
+│   └── utils       # Utilities, helpers styles
+└── templates       # Contains all HTML templates files
+```

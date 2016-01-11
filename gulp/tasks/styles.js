@@ -7,7 +7,7 @@ var sass         = require('gulp-sass');
 var sassNpm      = require('sass-npm')();
 var plumber      = require('gulp-plumber');
 var sourcemaps   = require('gulp-sourcemaps');
-var browserSync  = require('browser-sync');
+var bs           = require('browser-sync');
 var autoprefixer = require('gulp-autoprefixer');
 
 var importer = function(url, file, done) {
@@ -33,6 +33,8 @@ var importer = function(url, file, done) {
 }
 
 gulp.task('styles:dev', function(){
+    var browserSync = bs.get('pigie');
+
     return gulp.src(config.styles.src)
         .pipe(plumber({
             errorHandler: function(err) {
@@ -48,7 +50,7 @@ gulp.task('styles:dev', function(){
         }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(config.styles.dest))
-        .pipe(browserSync.reload({ stream: true }));
+        .pipe(browserSync.stream());
 });
 
 gulp.task('styles:production', function(){

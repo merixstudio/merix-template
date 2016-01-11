@@ -12,4 +12,5 @@ syntax: regexp
 ^docs/_build/
 ^_build/
 ^build\.zip
+ftp.json
 ^node_modules/

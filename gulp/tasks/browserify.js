@@ -7,47 +7,57 @@ var gutil        = require('gulp-util');
 var source       = require('vinyl-source-stream');
 var buffer       = require('vinyl-buffer');
 var browserify   = require('browserify');
-var browserSync  = require('browser-sync');
+var bs           = require('browser-sync');
 
-var buildDev = function (file) {
+var buildDev = function(file) {
+    var browserSync = bs.get('pigie');
+
     var bundler = browserify({
         entries: config.browserify.entries,
         cache: {},
         packageCache: {},
         fullPaths: false,
         debug: true
-    }, watchify.args);
+    });
 
-    bundler = watchify(bundler);
+    bundler.plugin(watchify, {
+        ignoreWatch: ['**/node_modules/**', '_build/**']
+    });
 
     bundler.on('update', function(){
        rebundle();
     });
 
+    // bundler.on('log', gutil.log);
+
     function rebundle() {
         var stream = bundler.bundle();
-        return stream.on('error', gutil.log.bind(gutil, 'Browserify Error'))
-            .pipe(source(file))
+        return stream.on('error', function(err) {
+                gutil.log(err);
+            })
+            .pipe(source(config.browserify.bundleName))
             .pipe(gulp.dest(config.scripts.dest))
-            .pipe(browserSync.reload({stream: true, once: true }));
+            .pipe(browserSync.stream());
     }
 
     return rebundle();
 };
 
-var buildProduction = function (file) {
+var buildProduction = function() {
     var bundler = browserify({
         entries: config.browserify.entries,
         cache: {},
         packageCache: {},
         fullPaths: false,
         debug: false
-    }, watchify.args);
+    });
 
     function rebundle() {
         var stream = bundler.bundle();
-        return stream.on('error', gutil.log.bind(gutil, 'Browserify Error'))
-            .pipe(source(file))
+        return stream.on('error', function(err) {
+                gutil.log(err);
+            })
+            .pipe(source(config.browserify.bundleName))
             .pipe(buffer())
             .pipe(uglify())
             .pipe(gulp.dest(config.scripts.dest));
@@ -57,9 +67,9 @@ var buildProduction = function (file) {
 };
 
 gulp.task('browserify:dev', function() {
-    return buildDev('main.js');
+    return buildDev();
 });
 
 gulp.task('browserify:production', function() {
-    return buildProduction('main.js');
+    return buildProduction();
 });

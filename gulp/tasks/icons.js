@@ -7,10 +7,16 @@ var rename = require('gulp-rename');
 var replace = require('gulp-replace');
 var runSequence = require('run-sequence');
 var chalk = require('chalk');
+var userArgs = process.argv.slice(3);
+var customUrl;
+if (userArgs.length)
+    customUrl = userArgs[0].slice(1);
 
 function time(color) {
     var date = new Date();
-        date = ((date.getHours() < 10) ? '0' + date.getHours() : date.getHours())+':'+date.getMinutes()+':'+((date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds());
+        date =   ((date.getHours() < 10) ? '0' + date.getHours() : date.getHours()) +':'
+                +((date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes())+':'
+                +((date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds());
     var time = '[' + chalk.styles.grey.open + date + chalk.styles.grey.close + ']';
 
     if (color == 'red') {
@@ -20,17 +26,25 @@ function time(color) {
     return time;
 }
 
+function fileExist(file, cb) {
+    fs.stat(file, function(err, stat) {
+        if(err == null) {
+            runSequence('icons:unzip', 'icons:remove', 'icons:replace', 'icons:clean', cb);
+        } else {
+            console.log(time('red') + ' ' + chalk.styles.bgRed.open + 'There is no zip file in "'+file+'"' + chalk.styles.bgRed.close);
+            cb();
+        }
+    });
+}
+
 gulp.task('icons', function(cb) {
     cb = cb || function() {};
     if (config.icons.enable) {
-        fs.stat(config.icons.zip, function(err, stat) {
-            if(err == null) {
-                runSequence('icons:unzip', 'icons:remove', 'icons:replace', 'icons:clean', cb);
-            } else {
-                console.log(time('red') + ' ' + chalk.styles.bgRed.open + 'There is no zip file in /fonts' + chalk.styles.bgRed.close);
-                cb();
-            }
-        });
+        if (customUrl) {
+            fileExist(customUrl, cb);
+        } else {
+            fileExist(config.icons.zip, cb);
+        }
     } else {
         console.log(time('red') + ' ' + chalk.styles.bgRed.open + 'Unzipping files is disabled in config' + chalk.styles.bgRed.close);
         cb();
@@ -38,7 +52,8 @@ gulp.task('icons', function(cb) {
 });
 
 gulp.task('icons:unzip', function() {
-    var zip = new admZip(config.icons.zip);
+    var zipPath = customUrl || config.icons.zip;
+    var zip = new admZip(zipPath);
     var zipEntries = zip.getEntries();
     var search = [];
     var files = config.icons.files;
@@ -57,8 +72,6 @@ gulp.task('icons:unzip', function() {
             console.log(time() + ' Extract file: ' + chalk.styles.blue.open + filePath + chalk.styles.blue.close + ' - ' + result);
         }
     });
-
-
 });
 
 gulp.task('icons:remove', function() {
@@ -88,7 +101,9 @@ gulp.task('icons:replace', function(cb) {
 
 gulp.task('icons:clean', function() {
     return del([
-        './styles/base/style.css'
+        './styles/base/style.css',
+        config.icons.zip,
+        customUrl || ''
     ]);
 });
 

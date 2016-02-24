@@ -5,6 +5,7 @@
   "main": "gulpfile.js",
   "dependencies": {},
   "devDependencies": {
+    "adm-zip": "^0.4.7",
     "browser-sync": "^2.11.0",
     "browserify": "^13.0.0",
     "cli-spinner": "^0.2.1",
@@ -22,6 +23,8 @@
     "gulp-jshint": "^2.0.0",
     "gulp-nunjucks-render": "^1.0.0",
     "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.1.0",
     "gulp-sass-bulk-import": "^0.3.2",
     "gulp-sourcemaps": "^1.5.2",

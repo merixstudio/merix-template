@@ -21,6 +21,23 @@ module.exports = {
         'dest': '_build/fonts'
     },
 
+    'icons': {
+        'enable': true,
+        'zip' : 'fonts/icons.zip',
+        'replace': {
+            'from': 'fonts/',
+            'to': '../fonts/'
+        },
+        'files' : {
+            'selection.json'  : './fonts',
+            'fonts/icons.ttf' : './fonts',
+            'fonts/icons.woff': './fonts',
+            'fonts/icons.eot' : './fonts',
+            'fonts/icons.svg' : './fonts',
+            'style.css'       : './styles/base',
+        }
+    },
+
     'images': {
         'src' : 'images/**/*',
         'dest': '_build/images'

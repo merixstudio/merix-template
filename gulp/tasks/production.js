@@ -3,5 +3,5 @@ var runSequence = require('run-sequence');
 
 gulp.task('production', function(cb){
     cb = cb || function(){};
-    runSequence('clean', 'fonts', 'styles:production', 'polyfills:production', 'images:production', 'media:production', 'views:production', 'browserify:production', cb);
+    runSequence('clean', 'icons', 'fonts', 'styles:production', 'polyfills:production', 'images:production', 'media:production', 'views:production', 'browserify:production', cb);
 });

@@ -19,7 +19,6 @@
     "gulp-css-globbing": "^0.1.5",
     "gulp-ftp": "^1.1.0",
     "gulp-if": "^2.0.0",
-    "gulp-imagemin": "^2.1.0",
     "gulp-jshint": "^2.0.0",
     "gulp-nunjucks-render": "^1.0.0",
     "gulp-plumber": "^1.0.1",

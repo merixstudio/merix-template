@@ -50,7 +50,7 @@ module.exports = {
 
     'views': {
         'watch': 'templates/**/*.html',
-        'src': ['templates/**/*.html', '!templates/{macros,macros/**,elements,elements/**,layouts,layouts/**}'],
+        'src': ['templates/**/*.html', '!templates/{macros,macros/**,partials,partials/**,layouts,layouts/**}'],
         'dest': '_build'
     },
 

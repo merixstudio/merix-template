@@ -19,43 +19,31 @@
 // setup the grid (required)
 @include gridle_setup((
   context : 12,
-  gutter-width : 20px,
+  gutter-width : 32px,
   states-classes : true
 ));
 
 // register states
 @include gridle_register_state(desktop-fullhd, (
-  min-width : 1920px,
-  gutter-width : 16px
+  min-width : 1920px
 ));
 @include gridle_register_state(desktop-large, (
-  min-width : 1600px,
-  max-width : 1919px,
-  gutter-width : 16px
+  max-width : 1919px
 ));
 @include gridle_register_state(desktop, (
-  min-width : 1280px,
-  max-width : 1599px,
-  gutter-width : 16px
+  max-width : 1599px
 ));
 @include gridle_register_state(tablet-large, (
-  min-width : 960px,
-  max-width : 1279px,
-  gutter-width : 16px
+  max-width : 1279px
 ));
 @include gridle_register_state(tablet, (
-  min-width : 720px,
-  max-width : 959px,
-  gutter-width : 12px
+  max-width : 959px
 ));
 @include gridle_register_state(mobile, (
-  min-width : 480px,
-  max-width : 719px,
-  gutter-width : 12px
+  max-width : 719px
 ));
 @include gridle_register_state(mobile-small, (
-  max-width : 479px,
-  gutter-width : 12px
+  max-width : 479px
 ));
 
 

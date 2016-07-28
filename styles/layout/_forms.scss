@@ -3,138 +3,60 @@
  */
 
 /* Input style */
-
-label {cursor: pointer}
-
 input,
 button,
 select {
     vertical-align: middle;
     outline: none;
 }
-textarea {vertical-align: top; outline: none}
 
-button,
-select,
-label[for],
-input[type="reset"],
-input[type="radio"],
-input[type="button"],
-input[type="submit"],
-input[type="checkbox"] {cursor: pointer}
-
-button[disabled],
-select[disabled],
-label[disabled][for],
-input[disabled][type="reset"],
-input[disabled][type="radio"],
-input[disabled][type="button"],
-input[disabled][type="submit"],
-input[disabled][type="checkbox"] {cursor: default}
-
-input[type="search"] {box-sizing: border-box}
-
-
-input[type="text"],
-input[type="email"],
-input[type="search"],
-input[type="number"],
-input[type="date"],
-input[type="url"],
-input[type="password"],
-.placeholder,
-.textarea-wrapper {
-  width: 100%;
-  padding: 7px 10px;
-  border: $input-border;
-  background: $input-background;
-  color: $input-font-color;
-  font-size: $input-font-size;
-  vertical-align: middle;
+textarea {
+  vertical-align: top;
   outline: none;
 }
 
-/* Checkbox styles */
-
+button,
+select,
+label,
+input[type="reset"],
+input[type="button"],
+input[type="image"],
+input[type="submit"],
+input[type="radio"],
 input[type="checkbox"] {
-    position: absolute;
-    // visibility: hidden;
-    & + span {
-        overflow: hidden;
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: $input-border;
-        background: $input-background;
-        text-indent: -99em;
-        vertical-align: middle;
-        white-space: nowrap;
-        cursor: pointer;
-        &:before {
-            float: left;
-            width: 100%;
-            height: 100%;
-            font-size: 12px;
-            line-height: 18px;
-            transition: color 0.25s ease;
-            color: transparent;
-            text-align: center;
-            text-indent: 0;
-        }
-    }
-    &:checked + span:before {
-        color: $primary-color;
-    }
+  cursor: pointer;
 }
 
-/* Radio styles */
-
-input[type="radio"] {
-    position: absolute;
-    visibility: hidden;
-    & + span {
-        position: relative;
-        overflow: hidden;
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: $input-border;
-        border-radius: 20px;
-        background: $input-background;
-        text-indent: -99em;
-        vertical-align: middle;
-        white-space: nowrap;
-        cursor: pointer;
-        &:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            width: 10px;
-            height: 10px;
-            border-radius: 10px;
-            margin: auto;
-            background: transparent;
-            transition: background 0.25s ease;
-        }
-    }
-    &:checked + span:before {background: $primary-color}
+button[disabled],
+select[disabled],
+label[disabled],
+input[disabled][type="reset"],
+input[disabled][type="button"],
+input[disabled][type="image"],
+input[disabled][type="submit"],
+input[disabled][type="radio"],
+input[disabled][type="checkbox"] {
+  cursor: default;
 }
 
-
-input[type="file"] {
-    display: none;
-    & + span {
-        color: $link-color;
-        transition: color 0.25s ease;
-        &:hover {color: $link-color-hover}
-    }
+input[type="search"] {
+  box-sizing: border-box; // overwrite normalize
 }
 
-/* Errors */
-.error input,
-.error.fake-select,
-.error.textarea-wrapper {border: 1px solid $alert-color}
-.error-message {color: $alert-color}
+select,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="search"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="time"],
+input[type="week"],
+input[type="month"],
+input[type="color"] {
+  width: 100%;
+}

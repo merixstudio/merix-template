@@ -1,6 +1,7 @@
 html {
   overflow-y: scroll;
   height: 100%;
+
   &.no-scroll {
     overflow-y: hidden !important;
   }
@@ -12,12 +13,19 @@ body {
   color: $body-font-color;
   font-family: $body-font-family;
   font-size: $body-font-size;
+
   * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    text-overflow: ellipsis;
     list-style: none;
+
+    &:before,
+    &:after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
   }
 }
 
@@ -27,9 +35,11 @@ body {
   width: 100%;
   max-width: 1248px;
   margin: 0 auto;
+
   @include gridle_state(desktop-fullhd) {
     max-width: 1824px;
   }
+
   @include gridle_state(desktop-large) {
     max-width: 1536px;
   }
@@ -37,17 +47,4 @@ body {
 
 .row {
   @include gridle_row();
-}
-
-figure img {
-  display: block;
-  width: 100%;
-}
-
-hr {
-  border: solid $border-color;
-  border-width: 0 0 1px 0;
-  clear: both;
-  height: 0;
-  margin: $padding 0;
 }

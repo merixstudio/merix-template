@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.1
+
+- Removed unnecessary fonts and icons.
+- Removed unused styles.
+- Removed polyfills for unsupported browsers.
+- Removed default markups of header and footer.
+
 ## 1.1.1
 
 - Updated packages to latest versions

@@ -2,103 +2,136 @@
  * Styles for WYSIWYG editors like TinyMCE or CKEditor
  */
 .wysiwyg {
-  *+p,
-  *+dl,
-  *+h1,
-  *+h2,
-  *+h3,
-  *+h4,
-  *+h5,
-  *+h6,
-  *+ol,
-  *+ul,
-  *+table,
-  *+figure {
+  // Space between elements
+  * + h1,
+  * + h2,
+  * + h3,
+  * + h4,
+  * + h5,
+  * + h6,
+  * + p,
+  * + blockquote,
+  * + ol,
+  * + ul,
+  * + dl,
+  * + table,
+  * + figure {
     margin-top: $wysiwyg-space;
   }
+
+  // Lists
   li {
     position: relative;
     padding-left: 40px;
+
     &:before {
       content: '»';
       position: absolute;
+      top: 0;
       left: 0;
       width: 28px;
-      padding: 4px 0;
-      color: $base-font-color;
       text-align: center;
-      line-height: 1;
     }
+
+    & + & {
+      margin-top: 10px;
+    }
+
     ol,
     ul {
       margin-top: 0;
       margin-bottom: 0;
     }
   }
-  li+li {
-    margin-top: 10px;
-  }
-  ol>li {
+
+  ol > li {
     counter-increment: ordered-list;
+
     &:before {
       content: counter(ordered-list);
-      top: -3px;
-      padding: 7px 0;
-      background: $primary-color;
-      color: #fff;
-      font-size: 14px;
     }
   }
-  h1 {
-    font-size: $h1-font-size;
-    font-weight: $h1-font-weight;
-  }
-  h2 {
-    font-size: $h2-font-size;
-    font-weight: $h2-font-weight;
-  }
-  h3 {
-    font-size: $h3-font-size;
-    font-weight: $h3-font-weight;
-  }
-  h4 {
-    font-size: $h4-font-size;
-    font-weight: $h4-font-weight;
-  }
-  h5 {
-    font-size: $h5-font-size;
-    font-weight: $h5-font-weight;
-  }
-  h6 {
-    font-size: $h6-font-size;
-    font-weight: $h6-font-weight;
-  }
+
   dt {
     font-weight: 700;
   }
+
+  // Headlines
+  h1 {
+    font-size: $wysiwyg-h1-font-size;
+    font-weight: $wysiwyg-h1-font-weight;
+  }
+
+  h2 {
+    font-size: $wysiwyg-h2-font-size;
+    font-weight: $wysiwyg-h2-font-weight;
+  }
+
+  h3 {
+    font-size: $wysiwyg-h3-font-size;
+    font-weight: $wysiwyg-h3-font-weight;
+  }
+  h4 {
+    font-size: $wysiwyg-h4-font-size;
+    font-weight: $wysiwyg-h4-font-weight;
+  }
+
+  h5 {
+    font-size: $wysiwyg-h5-font-size;
+    font-weight: $wysiwyg-h5-font-weight;
+  }
+
+  h6 {
+    font-size: $wysiwyg-h6-font-size;
+    font-weight: $wysiwyg-h6-font-weight;
+  }
+
   a {
-    color: $link-color;
-    text-decoration: $link-decoration;
+    color: $wysiwyg-link-color;
+    text-decoration: $wysiwyg-link-decoration;
+
     &:hover {
-      color: $link-color-hover;
-      text-decoration: $link-decoration-hover;
+      color: $wysiwyg-link-color-hover;
+      text-decoration: $wysiwyg-link-decoration-hover;
     }
   }
+
+  // Images
   img {
     display: inline-block;
     vertical-align: middle;
   }
+
   img[style*="float:left"],
-  img[style*="float: left"] {
-    padding-top: $padding;
-    padding-right: $padding;
-  }
+  img[style*="float: left"],
   img[style*="float:right"],
   img[style*="float: right"] {
-    padding-top: $padding;
-    padding-left: $padding;
+    padding-top: $wysiwyg-img-padding;
+    padding-bottom: $wysiwyg-img-padding;
   }
+
+  img[style*="float:left"],
+  img[style*="float: left"] {
+    padding-right: $wysiwyg-img-padding;
+  }
+
+  img[style*="float:right"],
+  img[style*="float: right"] {
+    padding-left: $wysiwyg-img-padding;
+  }
+
   figure img {
     display: block;
+  }
+
+  // Blockquotes
+  blockquote {
+    position: relative;
+    font-style: italic;
+
+    &:before {
+      content: open-quote;
+      font-style: normal;
+    }
   }
 }

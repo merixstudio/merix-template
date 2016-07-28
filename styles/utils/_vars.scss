@@ -1,139 +1,49 @@
 ////////////
 // Global //
 ////////////
-
-// We use these as default fonts
-$font-family: "Open Sans", Arial, Helvetica, sans-serif;
+$font-family: Arial, Helvetica, sans-serif;
 $font-family-serif: Georgia, Cambria, "Times New Roman", Times, serif;
 $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 
 $base-font-size: 16px;
-$base-line-height: 1.4;
+$base-line-height: 1.42857143;
 $base-font-color: #666;
 
 // body
-// We use these to control various global styles
 $body-background: #fff;
 $body-font-color: $base-font-color;
 $body-font-family: $font-family;
 $body-font-size: $base-font-size;
-$body-font-weight: normal;
-$body-font-style: normal;
-
-
-
-//////////
-// Misc //
-//////////
-
-// Container width
-$container-width: 1200px;
-
-// Border radius
-$border-radius: 10px;
-
-// Opacity
-$opacity: 0.6;
-
-// Padding
-$padding: 20px;
-
-
-
-////////////
-// Colors //
-////////////
-
-// We use these as default colors throughout
-$primary-color: #d97d34;
-$secondary-color: #f2f2f2;
-
-$dark-color: #222;
-$light-color: #f2f2f2;
-
-$alert-color: #f04124;
-$success-color: #43ac6a;
-$warning-color: #f0af24;
-$info-color: #a0d3e8;
-
-$border-width: 1px;
-$border-style: solid;
-$border-color: #f2f2f2;
-$border: $border-width $border-style $border-color;
 
 
 
 /////////////
-// Buttons //
+// Wysiwyg //
 /////////////
-
-$button-font-size: 12px;
-$button-background: $primary-color;
-
-
-
-///////////
-// Forms //
-///////////
-
-$input-background: #f2f2f2;
-$input-border-color: #dadada;
-$input-border: 1px solid $input-border-color;
-$input-font-color: #928f8f;
-$input-font-size: 14px;
-
-
-////////////////
-// Typography //
-////////////////
-
-// Wysiwyg text vertical space
 $wysiwyg-space: 18px;
-$wysiwyg-font-size: $body-font-size;
 
-// <> a
-// We use these to style anchors
-$link-color: $primary-color;
-$link-color-hover: $dark-color;
-$link-decoration: none;
-$link-decoration-hover: none;
+// Headlines
+$wysiwyg-headline-font-weight: 700;
+$wysiwyg-h1-font-weight: $wysiwyg-headline-font-weight;
+$wysiwyg-h2-font-weight: $wysiwyg-headline-font-weight;
+$wysiwyg-h3-font-weight: $wysiwyg-headline-font-weight;
+$wysiwyg-h4-font-weight: $wysiwyg-headline-font-weight;
+$wysiwyg-h5-font-weight: $wysiwyg-headline-font-weight;
+$wysiwyg-h6-font-weight: $wysiwyg-headline-font-weight;
 
+$wysiwyg-h1-font-size: 32px;
+$wysiwyg-h2-font-size: 28px;
+$wysiwyg-h3-font-size: 24px;
+$wysiwyg-h4-font-size: 20px;
+$wysiwyg-h5-font-size: 18px;
+$wysiwyg-h6-font-size: 16px;
 
+// Links
+$wysiwyg-link-color: #009cdc;
+$wysiwyg-link-decoration: none;
 
-/////////////
-// Headers //
-/////////////
+$wysiwyg-link-color-hover: #1465ff;
+$wysiwyg-link-decoration-hover: underline;
 
-// <> h1, h2, h3, h4, h5, h6
-
-// Font size
-$h1-font-size: 32px;
-$h2-font-size: 28px;
-$h3-font-size: 24px;
-$h4-font-size: 20px;
-$h5-font-size: 18px;
-$h6-font-size: 16px;
-
-// Font-weight
-$header-font-weight: 400;
-$h1-font-weight: $header-font-weight;
-$h2-font-weight: $header-font-weight;
-$h3-font-weight: $header-font-weight;
-$h4-font-weight: $header-font-weight;
-$h5-font-weight: $header-font-weight;
-$h6-font-weight: $header-font-weight;
-
-// Misc
-$header-font-family: $font-family;
-$header-font-color: $primary-color;
-$header-font-style: inherit;
-$header-line-height: inherit;
-
-// <> small
-$h1-small: 24px;
-$h2-small: 20px;
-$h3-small: 18px;
-$h4-small: 16px;
-$h5-small: 14px;
-$h6-small: 14px;
-$header-small-color: inherit;
+// Images
+$wysiwyg-img-padding: 10px;

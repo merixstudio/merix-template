@@ -9,8 +9,11 @@ var runSequence = require('run-sequence');
 var chalk = require('chalk');
 var userArgs = process.argv.slice(3);
 var customUrl;
-if (userArgs.length)
-    customUrl = userArgs[0].slice(1);
+var argv = require('yargs').argv;
+
+if (argv.icons) {
+    customUrl = argv.icons;
+}
 
 function time(color) {
     var date = new Date();

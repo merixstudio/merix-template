@@ -50,6 +50,25 @@ To run build process and start development server simply run:
 gulp
 ```
 
+To automatically open the page in a default browser you can add parameter:
+
+```
+gulp --open
+```
+
+Also you can choose the browser (`--open` parameter is unnecessary):
+
+```
+gulp --chrome
+gulp --firefox
+```
+
+Gulp is finding `icons.zip` file to add them to project. You can change options in `config.js` file. Also you can change path to zip in console:
+
+```
+gulp --icons new/path/to/icons.zip
+```
+
 ## Gulp tasks
 
 Gulp is responsible for the whole compiling and bundling process. All Gulp tasks are defined in the `gulp` folder.

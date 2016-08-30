@@ -1,6 +1,6 @@
 {
-  "name": "Pigie",
-  "description": "**************** Pigie Framework ****************",
+  "name": "Merix Template",
+  "description": "MerixStudio frontend boilerplate",
   "version": "1.1.1",
   "main": "gulpfile.js",
   "dependencies": {},

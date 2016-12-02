@@ -1,4 +1,4 @@
-# Merix Studio Web starter Kit
+# Merix Studio Web Starter Kit
 
 ## Tools and technologies used in this project:
 

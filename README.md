@@ -1,4 +1,4 @@
-# Pigie (Merix Studio Web starter kit)
+# Merix Studio Web starter Kit
 
 ## Tools and technologies used in this project:
 
@@ -6,7 +6,7 @@
 - [Browserify](http://browserify.org/)
 - [Nunjucks template engine](https://mozilla.github.io/nunjucks/)
 - [Sass](http://sass-lang.com/)
-    - [Gridle](http://gridle.org/)
+- [Gridle](http://gridle.org/)
 
 ## Getting started
 

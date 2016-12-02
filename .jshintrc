@@ -7,5 +7,6 @@
         "jQuery": false
     },
     "strict": false,
-    "globalstrict": false
+    "globalstrict": false,
+    "esversion": 6
 }

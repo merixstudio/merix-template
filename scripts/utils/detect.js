@@ -46,10 +46,10 @@ if (webkit && android && !chrome) browser.webview = true
 if (wp8) browser.ie = true, os.android = os.ios = os.ipad = os.iphone = browser.webkit = browser.safari = browser.webview = false
 
 device.tablet = !!(ipad || playbook || (android && !ua.match(/Mobile/)) ||
-  (firefox && ua.match(/Tablet/)) || (ie && !ua.match(/Phone/) && ua.match(/Touch/)));
+    (firefox && ua.match(/Tablet/)) || (ie && !ua.match(/Phone/) && ua.match(/Touch/)));
 device.phone = !!(!device.tablet && !os.ipod && (android || iphone || webos || blackberry || bb10 ||
-  (chrome && ua.match(/Android/)) || (chrome && ua.match(/CriOS\/([\d.]+)/)) ||
-  (firefox && ua.match(/Mobile/)) || (ie && ua.match(/Touch/))) || (wp8));
+    (chrome && ua.match(/Android/)) || (chrome && ua.match(/CriOS\/([\d.]+)/)) ||
+    (firefox && ua.match(/Mobile/)) || (ie && ua.match(/Touch/))) || (wp8));
 device.desktop = !device.tablet && !device.phone;
 
 function toString() {
@@ -82,17 +82,17 @@ function isTouchDevice() {
     try {
         document.createEvent("TouchEvent");
         return true;
-      } catch (e) {
+    } catch (e) {
         return false;
-      }
-  };
+    }
+}
 
 document.body.className += ' ' + toString();
 
-module.exports = {
-    'os': os,
-    'browser': browser,
-    'device': device,
-    'touch': touch,
-    'toString': toString
+export {
+    os: os,
+    browser: browser,
+    device: device,
+    touch: touch,
+    toString: toString
 };

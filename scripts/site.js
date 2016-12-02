@@ -1,15 +1,19 @@
-"use strict";
+import jQuery from 'jQuery';
+window.$ = window.jQuery = jQuery;
 
-window.$ = window.jQuery = require('jquery');
-
-function Site() {
-    this.parseContent(document.body);
-}
-
-Site.prototype.parseContent = function(root) {
-    function find(selector) {
-        return jQuery(root).is(selector) ? jQuery(root) : jQuery(root).find(selector);
+class Site {
+    constructor() {
+        this.root = document.body;
+        this.parseContent(this.root);
     }
-};
+
+    find(selector) {
+        return jQuery(this.root).is(selector) ? jQuery(this.root) : jQuery(this.root).find(selector);
+    }
+
+    parseContent(root) {
+        this.root = root;
+    }
+}
 
 new Site();

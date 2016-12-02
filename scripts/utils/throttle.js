@@ -13,16 +13,16 @@
  *      delay - (Number) > 0 Time beetween callback firing
  *      callback - (Function) callback function
  */
-module.exports = function(scope, delay, callback) {
-    var delay = delay || 250;
+export function(scope, delay, callback) {
     var lastExecution, timer;
+    delay = delay || 250;
 
     return function () {
         clearTimeout(timer);
 
         var context = scope || this;
 
-        var now = new Date,
+        var now = new Date(),
             args = arguments;
 
         var fn = function () {
@@ -35,4 +35,4 @@ module.exports = function(scope, delay, callback) {
         else
             fn();
     };
-};
+}

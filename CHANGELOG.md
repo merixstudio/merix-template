@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0
+
+- Added ES6 support
+- Changed Site from function to class
+
 ## 1.2.1
 
 - Removed unnecessary fonts and icons.

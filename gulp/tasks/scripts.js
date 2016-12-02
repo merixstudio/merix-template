@@ -66,10 +66,10 @@ var buildProduction = function() {
     return rebundle();
 };
 
-gulp.task('browserify:dev', function() {
+gulp.task('scripts:dev', function() {
     return buildDev();
 });
 
-gulp.task('browserify:production', function() {
+gulp.task('scripts:production', function() {
     return buildProduction();
 });

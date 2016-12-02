@@ -9,9 +9,9 @@
  *      delay - (Number) Delay time after last event to fire callback
  *      callback - (Function) callback function
  */
-module.exports = function(scope, delay, callback) {
-    var delay = delay || 250;
+export function(scope, delay, callback) {
     var timer = null;
+    delay = delay || 250;
 
     return function () {
         if (timer !== null) {
@@ -28,4 +28,4 @@ module.exports = function(scope, delay, callback) {
 
         timer = setTimeout(fn, delay);
     };
-};
+}

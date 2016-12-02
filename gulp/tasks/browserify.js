@@ -18,7 +18,7 @@ var buildDev = function(file) {
         packageCache: {},
         fullPaths: false,
         debug: true
-    });
+    }).transform("babelify", {presets: ["es2015"]});
 
     bundler.plugin(watchify, {
         ignoreWatch: ['**/node_modules/**', '_build/**']
@@ -50,7 +50,7 @@ var buildProduction = function() {
         packageCache: {},
         fullPaths: false,
         debug: false
-    });
+    }).transform("babelify", {presets: ["es2015"]});
 
     function rebundle() {
         var stream = bundler.bundle();

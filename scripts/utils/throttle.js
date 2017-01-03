@@ -13,7 +13,7 @@
  *      delay - (Number) > 0 Time beetween callback firing
  *      callback - (Function) callback function
  */
-export function(scope, delay, callback) {
+export default function(scope, delay, callback) {
     var lastExecution, timer;
     delay = delay || 250;
 

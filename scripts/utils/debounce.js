@@ -9,7 +9,7 @@
  *      delay - (Number) Delay time after last event to fire callback
  *      callback - (Function) callback function
  */
-export function(scope, delay, callback) {
+export default function(scope, delay, callback) {
     var timer = null;
     delay = delay || 250;
 

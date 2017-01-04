@@ -1,18 +1,22 @@
+import 'babel-polyfill';
 import jQuery from 'jquery';
 window.$ = window.jQuery = jQuery;
 
 class Site {
     constructor() {
-        this.root = document.body;
-        this.parseContent(this.root);
+        this.parseContent();
     }
 
     find(selector) {
-        return jQuery(this.root).is(selector) ? jQuery(this.root) : jQuery(this.root).find(selector);
+        return this.root.matches(selector) ? [this.root] : this.root.querySelectorAll(selector);
     }
 
-    parseContent(root) {
+    parseContent(root = document.body) {
         this.root = root;
+
+        this.find('.page-wrapper').forEach((el) => {
+            console.log(el);
+        });
     }
 }
 

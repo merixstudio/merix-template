@@ -194,3 +194,19 @@ if (!Math.acosh)
     Math.acosh = function acosh(n) {
         return Math.log(n + Math.sqrt(n*n - 1));
     };
+
+// Source: https://developer.mozilla.org/en/docs/Web/API/Element/matches
+if (!Element.prototype.matches) {
+    Element.prototype.matches =
+        Element.prototype.matchesSelector ||
+        Element.prototype.mozMatchesSelector ||
+        Element.prototype.msMatchesSelector ||
+        Element.prototype.oMatchesSelector ||
+        Element.prototype.webkitMatchesSelector ||
+        function(s) {
+            var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+                i = matches.length;
+            while (--i >= 0 && matches.item(i) !== this) {}
+            return i > -1;
+        };
+}

@@ -1,1 +1,11 @@
+@mixin container() {
+  @include gridle_row();
+  display: block;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
 
+@mixin row() {
+  @include gridle_row();
+}

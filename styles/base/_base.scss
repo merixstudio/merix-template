@@ -1,10 +1,6 @@
 html {
   overflow-y: scroll;
   height: 100%;
-
-  &.no-scroll {
-    overflow-y: hidden !important;
-  }
 }
 
 body {
@@ -27,24 +23,12 @@ body {
       box-sizing: border-box;
     }
   }
-}
 
-.container {
-  @include gridle_container();
-  display: block;
-  width: 100%;
-  max-width: 1248px;
-  margin: 0 auto;
-
-  @include gridle_state(desktop-fullhd) {
-    max-width: 1824px;
+  .container {
+    @include container();
   }
 
-  @include gridle_state(desktop-large) {
-    max-width: 1536px;
+  .row {
+    @include row();
   }
-}
-
-.row {
-  @include gridle_row();
 }

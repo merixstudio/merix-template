@@ -8,7 +8,7 @@ class Site {
     }
 
     find(selector) {
-        return this.root.matches(selector) ? [this.root] : this.root.querySelectorAll(selector);
+        return this.root.matches(selector) ? [this.root] : Array.from(this.root.querySelectorAll(selector));
     }
 
     parseContent(root = document.body) {

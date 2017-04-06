@@ -5,9 +5,14 @@ var bs              = require('browser-sync');
 var nunjucksRender  = require('gulp-nunjucks-render');
 
 gulp.task('views:dev:render', function() {
-    nunjucksRender.nunjucks.configure(['templates/'], {watch: true});
+    var nunjucksSettings = {
+		path: 'templates/',
+		envOptions: {
+			watch: true
+		}
+	};
     return gulp.src(config.views.src)
-        .pipe(nunjucksRender())
+        .pipe(nunjucksRender(nunjucksSettings))
         .pipe(gulp.dest(config.views.dest));
 });
 
@@ -19,8 +24,13 @@ gulp.task('views:dev', function(cb) {
 });
 
 gulp.task('views:production', function() {
-    nunjucksRender.nunjucks.configure(['templates/'], {watch: false});
+    var nunjucksSettings = {
+		path: 'templates/',
+		envOptions: {
+			watch: false
+		}
+	};
     return gulp.src(config.views.src)
-        .pipe(nunjucksRender())
+        .pipe(nunjucksRender(nunjucksSettings))
         .pipe(gulp.dest(config.views.dest));
 });

@@ -125,3 +125,25 @@ This command does not start a dev server and it minifies all the styles and scri
 |   └── vendors/         * all styles required by the external libraries
 └── templates            * contains all HTML templates files
 ```
+
+## Jenkins
+To use Merix Jenkins modify file
+```
+Jenkinsfile
+```
+Find
+```
+merix-template
+```
+and replace it with your project name
+
+## Docker
+To build docker image use command
+```
+docker-compose -f dev.yml build
+```
+After docker build finishes successfully, run image by command
+```
+docker-compose -f dev.yml up
+```
+To open your app use [http://localhost:1337](http://localhost:1337) (also works on your local ip)

@@ -1,0 +1,10 @@
+FROM node:6
+
+RUN mkdir /code
+
+WORKDIR /
+ADD package.json /
+RUN yarn install
+ENV PATH /node_modules/.bin:$PATH
+WORKDIR /code/
+ADD . /code/

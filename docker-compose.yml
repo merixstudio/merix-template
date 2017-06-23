@@ -1,0 +1,17 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile
+    image: ${REPOSITORY_URL}/web:${BUILD_NUMBER}
+    deploy:
+      labels:
+        - "traefik.port=80"
+        - "traefik.docker.network=traefik-net"
+        - "traefik.frontend.rule=Host:${DEPLOY_HOSTNAME}"
+    networks:
+      - traefik-net
+networks:
+  traefik-net:
+    external: true

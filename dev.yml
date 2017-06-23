@@ -1,0 +1,14 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./compose/Dockerfile.dev
+    command: gulp
+    volumes:
+      - ./:/code
+    ports:
+      - "1337:1337"
+volumes:
+  web:
+    driver: local

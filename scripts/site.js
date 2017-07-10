@@ -5,6 +5,7 @@ import jQuery from 'jquery';
 window.$ = window.jQuery = jQuery;
 /* eslint-enable no-multi-assign */
 
+/* eslint-disable no-new */
 class Site {
   constructor() {
     this.parseContent();
@@ -28,3 +29,4 @@ class Site {
 }
 
 new Site();
+/* eslint-enable no-new */

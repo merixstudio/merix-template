@@ -4,3 +4,4 @@ _source/
 *.sublime-project
 *.sublime-workspace
 .idea/
+.vscode/

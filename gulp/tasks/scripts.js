@@ -18,7 +18,7 @@ var buildDev = function(file) {
         packageCache: {},
         fullPaths: false,
         debug: true
-    }).transform("babelify", {presets: ["es2015"]});
+    }).transform("babelify", {presets: ["es2015", "stage-0"]});
 
     bundler.plugin(watchify, {
         ignoreWatch: ['**/node_modules/**', '_build/**']

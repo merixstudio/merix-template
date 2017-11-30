@@ -1,5 +1,8 @@
 # Merix Studio Web Starter Kit
 
+## Coding guidelines
+Detailed merixstudio coding guidelines can be found [here](http://coding-guidelines.next.mrx.gd/)
+
 ## Tools and technologies used in this project:
 
 - [Gulp](http://gulpjs.com/)
@@ -7,6 +10,7 @@
 - [Nunjucks template engine](https://mozilla.github.io/nunjucks/)
 - [Sass](http://sass-lang.com/)
 - [Gridle](http://gridle.org/)
+- [Yarn](https://yarnpkg.com/lang/en/)
 
 ## Getting started
 
@@ -34,10 +38,16 @@ npm install -g gulp
 
 The `-g` flag means that it will be installed in Node.js path and will be available from CLI globally.
 
+#### Installing Yarn
+
+To manage dependencies please use Yarn that can be downloaded [here](https://yarnpkg.com/lang/en/).
+
+#### Dependencies
+
 To install all required local dependencies mentioned above run this command in the project root (where `package.json` file is located):
 
 ```
-npm install
+yarn install
 ```
 
 This will install all the required modules in `node_modules` folder. This folder is not versioned and has to be installed manually by everyone working on the project.

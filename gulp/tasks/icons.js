@@ -1,26 +1,26 @@
-var config = require('../config');
-var fs = require('fs');
-var gulp   = require('gulp');
-var del    = require('del');
-var admZip = require('adm-zip');
-var rename = require('gulp-rename');
-var replace = require('gulp-replace');
-var runSequence = require('run-sequence');
-var chalk = require('chalk');
-var userArgs = process.argv.slice(3);
-var customUrl;
-var argv = require('yargs').argv;
+import config from '../config';
+import fs from 'fs';
+import { task, src, dest, series } from 'gulp';
+import del from 'del';
+import admZip from 'adm-zip';
+import rename from 'gulp-rename';
+import replace from 'gulp-replace';
+import chalk from 'chalk';
+import { argv } from 'yargs';
+
+const userArgs = process.argv.slice(3);
+let customUrl;
 
 if (argv.icons) {
     customUrl = argv.icons;
 }
 
-function time(color) {
-    var date = new Date();
+const time = (color) => {
+    let date = new Date();
         date =   ((date.getHours() < 10) ? '0' + date.getHours() : date.getHours()) +':'
                 +((date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes())+':'
                 +((date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds());
-    var time = '[' + chalk.styles.grey.open + date + chalk.styles.grey.close + ']';
+    let time = '[' + chalk.styles.grey.open + date + chalk.styles.grey.close + ']';
 
     if (color == 'red') {
        time = '[' + chalk.styles.red.open + date + chalk.styles.red.close + ']';
@@ -29,10 +29,10 @@ function time(color) {
     return time;
 }
 
-function fileExist(file, cb) {
-    fs.stat(file, function(err, stat) {
+const fileExist = (file, cb) => {
+    fs.stat(file, (err, stat) => {
         if(err == null) {
-            runSequence('icons:unzip', 'icons:remove', 'icons:replace', 'icons:clean', cb);
+            series('icons:unzip', 'icons:remove', 'icons:replace', 'icons:clean', cb)();
         } else {
             console.log(time('red') + ' ' + chalk.styles.bgRed.open + 'There is no zip file in "'+file+'"' + chalk.styles.bgRed.close);
             cb();
@@ -40,7 +40,7 @@ function fileExist(file, cb) {
     });
 }
 
-gulp.task('icons', function(cb) {
+task('icons', (cb) => {
     cb = cb || function() {};
     if (config.icons.enable) {
         if (customUrl) {
@@ -54,22 +54,22 @@ gulp.task('icons', function(cb) {
     }
 });
 
-gulp.task('icons:unzip', function() {
-    var zipPath = customUrl || config.icons.zip;
-    var zip = new admZip(zipPath);
-    var zipEntries = zip.getEntries();
-    var search = [];
-    var files = config.icons.files;
+task('icons:unzip', () => {
+    const zipPath = customUrl || config.icons.zip;
+    const zip = new admZip(zipPath);
+    const zipEntries = zip.getEntries();
+    let search = [];
+    const files = config.icons.files;
 
-    for (var source in files)
+    for (let source in files)
         search.push(source);
 
-    zipEntries.forEach(function(zipEntry) {
-        var filePath = zipEntry.entryName.toString();
+    zipEntries.forEach((zipEntry) => {
+        const filePath = zipEntry.entryName.toString();
         if (search.indexOf(filePath) !== -1) {
             // extractEntryTo(entryName, targetPath, maintainEntryPath, overwrite)
-            var test = zip.extractEntryTo(filePath, files[filePath], false, true);
-            var result = chalk.styles.green.open + 'SUCCESS' + chalk.styles.green.close;
+            const test = zip.extractEntryTo(filePath, files[filePath], false, true);
+            let result = chalk.styles.green.open + 'SUCCESS' + chalk.styles.green.close;
             if (!test)
                 result = chalk.styles.red.open + 'FAILED' + chalk.styles.red.close;
             console.log(time() + ' Extract file: ' + chalk.styles.blue.open + filePath + chalk.styles.blue.close + ' - ' + result);
@@ -77,23 +77,23 @@ gulp.task('icons:unzip', function() {
     });
 });
 
-gulp.task('icons:remove', function() {
+task('icons:remove', () => {
     return del([
         './styles/base/_icons.scss'
     ]);
 });
 
-gulp.task('icons:replace', function(cb) {
-    var stylesFile = './styles/base/style.css';
-    fs.stat(stylesFile, function(err, stat) {
+task('icons:replace', (cb) => {
+    const stylesFile = './styles/base/style.css';
+    fs.stat(stylesFile, (err, stat) => {
         if (err == null) {
-            gulp.src(stylesFile)
+            src(stylesFile)
                 .pipe(replace(config.icons.replace.from, config.icons.replace.to))
-                .pipe(rename(function (path) {
+                .pipe(rename((path) => {
                     path.basename = '_icons';
                     path.extname = '.scss'
                 }))
-                .pipe(gulp.dest('./styles/base'));
+                .pipe(dest('./styles/base'));
             cb();
         } else {
             console.log(time() + chalk.styles.red.open + ' No file to change' + chalk.styles.red.close);
@@ -102,12 +102,10 @@ gulp.task('icons:replace', function(cb) {
     });
 });
 
-gulp.task('icons:clean', function() {
+task('icons:clean', () => {
     return del([
         './styles/base/style.css',
         config.icons.zip,
         customUrl || ''
     ]);
 });
-
-

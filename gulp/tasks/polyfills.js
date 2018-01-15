@@ -1,18 +1,18 @@
-var config   = require('../config');
-var changed  = require('gulp-changed');
-var gulp     = require('gulp');
+import config from '../config';
+import changed from 'gulp-changed';
+import { task, src, dest } from 'gulp';
 
-gulp.task('polyfills:dev', function(){
-    var dest = config.polyfills.dest;
+task('polyfills:dev', () => {
+    const destination = config.polyfills.dest;
 
-    return gulp.src(config.polyfills.src)
-        .pipe(changed(dest))
-        .pipe(gulp.dest(dest));
+    return src(config.polyfills.src)
+        .pipe(changed(destination))
+        .pipe(dest(destination));
 });
 
-gulp.task('polyfills:production', function(){
-    var dest = config.polyfills.dest;
+task('polyfills:production', () => {
+    const destination = config.polyfills.dest;
 
-    return gulp.src(config.polyfills.src)
-        .pipe(gulp.dest(dest));
+    return src(config.polyfills.src)
+        .pipe(dest(destination));
 });

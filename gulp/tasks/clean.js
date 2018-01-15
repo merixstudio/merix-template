@@ -1,8 +1,8 @@
-var config = require('../config');
-var gulp   = require('gulp');
-var del    = require('del');
+import config from '../config';
+import { task } from 'gulp';
+import del from 'del';
 
-gulp.task('clean', function(cb) {
+task('clean', (done) => {
     del.sync([config.dist.root]);
-    cb();
+    done();
 });

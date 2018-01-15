@@ -1,11 +1,14 @@
-var config = require('../config');
-var bs = require('browser-sync').create('pigie');
-var gulp = require('gulp');
-var argv = require('yargs').argv;
+import config from '../config';
+import { create } from 'browser-sync';
+import { task } from 'gulp';
+import yargs from 'yargs'
 
-var browser = '';
-var notify = true;
-var open = false;
+const bs = create('merix');
+const argv = yargs.argv;
+
+let browser = '';
+let notify = true;
+let open = false;
 
 if (argv.chrome) {
     browser = 'chrome';
@@ -23,7 +26,7 @@ if (argv.open) {
     open = true;
 }
 
-gulp.task('browserSync', function(cb) {
+task('browserSync', (done) => {
     bs.init({
         server: {
             baseDir: './_build'
@@ -32,7 +35,6 @@ gulp.task('browserSync', function(cb) {
         browser: browser,
         notify: notify,
         open: open
-
     });
-    cb();
+    done();
 });

@@ -1,18 +1,18 @@
-var config   = require('../config');
-var changed  = require('gulp-changed');
-var gulp     = require('gulp');
+import config from '../config';
+import changed from 'gulp-changed';
+import { task, src, dest } from 'gulp';
 
-gulp.task('images:dev', function(){
-    var dest = config.images.dest;
+task('images:dev', () => {
+    const destination = config.images.dest;
 
-    return gulp.src(config.images.src)
-        .pipe(changed(dest))
-        .pipe(gulp.dest(dest));
+    return src(config.images.src)
+        .pipe(changed(destination))
+        .pipe(dest(destination));
 });
 
-gulp.task('images:production', function(){
-    var dest = config.images.dest;
+task('images:production', () => {
+    const destination = config.images.dest;
 
-    return gulp.src(config.images.src)
-        .pipe(gulp.dest(dest));
+    return src(config.images.src)
+        .pipe(dest(destination));
 });

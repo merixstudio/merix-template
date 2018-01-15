@@ -1,7 +1,7 @@
-var config = require('../config');
-var gulp   = require('gulp');
+import config from '../config';
+import { task, src, dest } from 'gulp';
 
-gulp.task('fonts', function(){
-    return gulp.src(config.fonts.src)
-        .pipe(gulp.dest(config.fonts.dest));
+task('fonts', () => {
+    return src(config.fonts.src)
+        .pipe(dest(config.fonts.dest));
 });

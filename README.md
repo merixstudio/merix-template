@@ -35,8 +35,28 @@ Gulp is needed to be installed globally (one time installation) with commands:
 ```
 npm install -g gulp
 ```
-
 The `-g` flag means that it will be installed in Node.js path and will be available from CLI globally.
+
+The project uses gulp 4. To run it `gulp-cli` version `^2.0.0` should be installed. You can check it by running:
+
+```
+gulp -v
+```
+
+If you don't have client version 2 installed, first uninstall the previous version:
+
+
+```
+npm uninstall gulp -g
+```
+
+and then:
+
+```
+npm install gulp-cli -g
+```
+
+
 
 #### Installing Yarn
 
@@ -98,7 +118,7 @@ The default command for running gulp tasks is:
 gulp
 ```
 
-that needs to be run in project root where `gulpfiles.js` file is located.
+that needs to be run in project root where `gulpfile.babel.js` file is located.
 
 This will run gulp in dev mode that additionally starts a dev server on `http://localhost:1337` and watches for file changes so it can reload the page on each save. Dev server is created with [BrowserSync](https://www.browsersync.io/).
 

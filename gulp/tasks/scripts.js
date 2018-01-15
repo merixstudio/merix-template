@@ -1,50 +1,49 @@
-var config       = require('../config');
-var gulp         = require('gulp');
-var browserify   = require('browserify');
-var watchify     = require('watchify');
-var uglify       = require('gulp-uglify');
-var gutil        = require('gulp-util');
-var source       = require('vinyl-source-stream');
-var buffer       = require('vinyl-buffer');
-var browserify   = require('browserify');
-var bs           = require('browser-sync');
+import config from '../config';
+import { task, dest } from 'gulp';
+import browserify from 'browserify';
+import watchify from 'watchify';
+import uglify from 'gulp-uglify';
+import gutil from 'gulp-util';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
+import { get } from 'browser-sync';
 
-var buildDev = function(file) {
-    var browserSync = bs.get('pigie');
+const buildDev = (file) => {
+    const browserSync = get('merix');
 
-    var bundler = browserify({
+    const bundler = browserify({
         entries: config.browserify.entries,
         cache: {},
         packageCache: {},
         fullPaths: false,
         debug: true
-    }).transform("babelify", {presets: ["es2015", "stage-0"]});
+    }).transform("babelify", {presets: ["env"]});
 
     bundler.plugin(watchify, {
         ignoreWatch: ['**/node_modules/**', '_build/**']
     });
 
-    bundler.on('update', function(){
+    bundler.on('update', () => {
        rebundle();
     });
 
     // bundler.on('log', gutil.log);
 
-    function rebundle() {
-        var stream = bundler.bundle();
-        return stream.on('error', function(err) {
+    const rebundle = () => {
+        const stream = bundler.bundle();
+        return stream.on('error', (err) => {
                 gutil.log(err);
             })
             .pipe(source(config.browserify.bundleName))
-            .pipe(gulp.dest(config.scripts.dest))
+            .pipe(dest(config.scripts.dest))
             .pipe(browserSync.stream());
     }
 
     return rebundle();
 };
 
-var buildProduction = function() {
-    var bundler = browserify({
+const buildProduction = () => {
+    const bundler = browserify({
         entries: config.browserify.entries,
         cache: {},
         packageCache: {},
@@ -52,24 +51,24 @@ var buildProduction = function() {
         debug: false
     }).transform("babelify", {presets: ["es2015"]});
 
-    function rebundle() {
-        var stream = bundler.bundle();
-        return stream.on('error', function(err) {
+    const rebundle = () => {
+        const stream = bundler.bundle();
+        return stream.on('error', (err) => {
                 gutil.log(err);
             })
             .pipe(source(config.browserify.bundleName))
             .pipe(buffer())
             .pipe(uglify())
-            .pipe(gulp.dest(config.scripts.dest));
+            .pipe(dest(config.scripts.dest));
     }
 
     return rebundle();
 };
 
-gulp.task('scripts:dev', function() {
+task('scripts:dev', () => {
     return buildDev();
 });
 
-gulp.task('scripts:production', function() {
+task('scripts:production', () => {
     return buildProduction();
 });

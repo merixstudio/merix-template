@@ -32,9 +32,9 @@ task('browserSync', (done) => {
             baseDir: './_build'
         },
         port: config.serverport,
-        browser: browser,
-        notify: notify,
-        open: open
+        browser,
+        notify,
+        open,
     });
     done();
 });

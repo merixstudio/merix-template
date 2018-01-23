@@ -17,7 +17,7 @@ const buildDev = (file) => {
         packageCache: {},
         fullPaths: false,
         debug: true
-    }).transform("babelify", {presets: ["env"]});
+    }).transform("babelify", { presets: ["env", "stage-3"] });
 
     bundler.plugin(watchify, {
         ignoreWatch: ['**/node_modules/**', '_build/**']

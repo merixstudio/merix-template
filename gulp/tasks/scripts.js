@@ -49,7 +49,7 @@ const buildProduction = () => {
         packageCache: {},
         fullPaths: false,
         debug: false
-    }).transform("babelify", {presets: ["es2015"]});
+    }).transform("babelify", { presets: ["es2015", "stage-3"] });
 
     const rebundle = () => {
         const stream = bundler.bundle();

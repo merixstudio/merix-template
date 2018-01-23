@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
     'serverport': 1337,
 
     'styles': {
@@ -63,3 +63,5 @@ module.exports = {
         'bundleName': 'main.js'
     }
 };
+
+export default config

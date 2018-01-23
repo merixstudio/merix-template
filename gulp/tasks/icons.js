@@ -17,13 +17,11 @@ if (argv.icons) {
 
 const time = (color) => {
     let date = new Date();
-        date =   ((date.getHours() < 10) ? '0' + date.getHours() : date.getHours()) +':'
-                +((date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes())+':'
-                +((date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds());
-    let time = '[' + chalk.styles.grey.open + date + chalk.styles.grey.close + ']';
+    date = `${(date.getHours() < 10) ? '0' + date.getHours() : date.getHours()}:${(date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes()}:${(date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds()}`;
+    let time = `[${chalk.styles.grey.open + date + chalk.styles.grey.close}]`;
 
     if (color == 'red') {
-       time = '[' + chalk.styles.red.open + date + chalk.styles.red.close + ']';
+       time = `[${chalk.styles.red.open + date + chalk.styles.red.close}]`;
     }
 
     return time;
@@ -34,7 +32,7 @@ const fileExist = (file, cb) => {
         if(err == null) {
             series('icons:unzip', 'icons:remove', 'icons:replace', 'icons:clean', cb)();
         } else {
-            console.log(time('red') + ' ' + chalk.styles.bgRed.open + 'There is no zip file in "'+file+'"' + chalk.styles.bgRed.close);
+            console.log(`${time('red')} ${chalk.styles.bgRed.open} There is no zip file in ${file} ${chalk.styles.bgRed.close}`);
             cb();
         }
     });
@@ -49,7 +47,7 @@ task('icons', (cb) => {
             fileExist(config.icons.zip, cb);
         }
     } else {
-        console.log(time('red') + ' ' + chalk.styles.bgRed.open + 'Unzipping files is disabled in config' + chalk.styles.bgRed.close);
+        console.log(`${time('red')} ${chalk.styles.bgRed.open} Unzipping files is disabled in config ${chalk.styles.bgRed.close}`);
         cb();
     }
 });
@@ -72,7 +70,7 @@ task('icons:unzip', () => {
             let result = chalk.styles.green.open + 'SUCCESS' + chalk.styles.green.close;
             if (!test)
                 result = chalk.styles.red.open + 'FAILED' + chalk.styles.red.close;
-            console.log(time() + ' Extract file: ' + chalk.styles.blue.open + filePath + chalk.styles.blue.close + ' - ' + result);
+            console.log(`${time()} Extract file: ${chalk.styles.blue.open + filePath + chalk.styles.blue.close} - ${result}`);
         }
     });
 });
@@ -96,7 +94,7 @@ task('icons:replace', (cb) => {
                 .pipe(dest('./styles/base'));
             cb();
         } else {
-            console.log(time() + chalk.styles.red.open + ' No file to change' + chalk.styles.red.close);
+            console.log(`${time() + chalk.styles.red.open} No file to change ${chalk.styles.red.close}`);
             cb();
         }
     });

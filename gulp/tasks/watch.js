@@ -1,13 +1,16 @@
-var config = require('../config');
-var gulp   = require('gulp');
+import config from '../config';
+import {
+  series,
+  task,
+  watch,
+} from 'gulp';
 
-gulp.task('watch', ['browserSync'], function(){
-
-    gulp.watch(config.polyfills.src, ['polyfills:dev']);
-    gulp.watch(config.fonts.src, ['fonts']);
-    gulp.watch(config.styles.src, ['styles:dev']);
-    gulp.watch(config.images.src, ['images:dev']);
-    gulp.watch(config.medias.src, ['media:dev']);
-    gulp.watch(config.views.watch, ['views:dev']);
-
-});
+task('watch', series('browserSync', (done) => {
+    watch(config.polyfills.src, series('polyfills:dev'));
+    watch(config.fonts.src, series('fonts'));
+    watch(config.styles.src, series('styles:dev'));
+    watch(config.images.src, series('images:dev'));
+    watch(config.medias.src, series('media:dev'));
+    watch(config.views.watch, series('views:dev'));
+    done();
+}));

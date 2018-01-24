@@ -1,6 +1,15 @@
-var fs = require('fs');
-var tasks = fs.readdirSync('./gulp/tasks/');
-
-tasks.forEach(function(task) {
-    require('./tasks/' + task);
-});
+import './tasks/browserSync.js';
+import './tasks/watch.js';
+import './tasks/clean.js';
+import './tasks/fonts.js';
+import './tasks/icons.js';
+import './tasks/images.js';
+import './tasks/media.js';
+import './tasks/polyfills.js';
+import './tasks/styles.js';
+import './tasks/views.js';
+import './tasks/scripts.js';
+import './tasks/watch.js';
+import './tasks/production.js';
+import './tasks/dev.js';
+import './tasks/reload.js';

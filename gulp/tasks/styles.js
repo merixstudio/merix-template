@@ -1,20 +1,25 @@
-var fs           = require('fs');
-var path         = require('path');
+import fs from 'fs';
+import path from 'path';
+import config from '../config';
+import {
+  dest,
+  src,
+  task,
+} from 'gulp';
+import sass from 'gulp-sass';
+import sassNpm from 'sass-npm';
+import plumber from 'gulp-plumber';
+import sourcemaps from 'gulp-sourcemaps';
+import { get } from 'browser-sync';
+import autoprefixer from 'gulp-autoprefixer';
 
-var config       = require('../config');
-var gulp         = require('gulp');
-var sass         = require('gulp-sass');
-var sassNpm      = require('sass-npm')();
-var plumber      = require('gulp-plumber');
-var sourcemaps   = require('gulp-sourcemaps');
-var bs           = require('browser-sync');
-var autoprefixer = require('gulp-autoprefixer');
+sassNpm();
 
-var importer = function(url, file, done) {
+const importer = (url, file, done) => {
     // look for modules installed through npm
     try {
-        var newPath = require.resolve(url);
-        fs.exists(newPath, function(exists) {
+        const newPath = require.resolve(url);
+        fs.exists(newPath, (exists) => {
             if ( exists ) {
                 return done({
                     file: newPath
@@ -32,10 +37,10 @@ var importer = function(url, file, done) {
     }
 }
 
-gulp.task('styles:dev', function(){
-    var browserSync = bs.get('pigie');
+task('styles:dev', () => {
+    const browserSync = get('merix');
 
-    return gulp.src(config.styles.src)
+    return src(config.styles.src)
         .pipe(plumber({
             errorHandler: function(err) {
                 console.log(err.message);
@@ -49,12 +54,12 @@ gulp.task('styles:dev', function(){
             cascade: false
         }))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest(config.styles.dest))
+        .pipe(dest(config.styles.dest))
         .pipe(browserSync.stream());
 });
 
-gulp.task('styles:production', function(){
-    return gulp.src(config.styles.src)
+task('styles:production', () => {
+    return src(config.styles.src)
         .pipe(sass({
             outputStyle: 'compressed',
             importer: importer
@@ -63,5 +68,5 @@ gulp.task('styles:production', function(){
             browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'],
             cascade: false
         }))
-        .pipe(gulp.dest(config.styles.dest));
+        .pipe(dest(config.styles.dest));
 });

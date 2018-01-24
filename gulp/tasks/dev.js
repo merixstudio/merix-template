@@ -1,7 +1,9 @@
-var gulp        = require('gulp');
-var runSequence = require('run-sequence');
+import {
+  parallel,
+  series,
+  task,
+} from 'gulp';
 
-gulp.task('default', function(cb) {
-    cb = cb || function() {};
-    runSequence('watch', 'clean', 'icons', 'fonts', 'styles:dev', 'polyfills:dev', 'images:dev', 'media:dev', 'views:dev', 'scripts:dev', cb);
-});
+const build = series('watch', 'clean', parallel('icons', 'fonts', 'styles:dev', 'polyfills:dev', 'images:dev', 'media:dev'), 'views:dev', 'scripts:dev');
+
+task('default', build);

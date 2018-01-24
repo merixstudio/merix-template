@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     'serverport': 1337,
 
     'styles': {

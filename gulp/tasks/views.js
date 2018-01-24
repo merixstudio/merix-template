@@ -1,36 +1,40 @@
-var config          = require('../config');
-var gulp            = require('gulp');
-var runSequence     = require('run-sequence');
-var bs              = require('browser-sync');
-var nunjucksRender  = require('gulp-nunjucks-render');
+import config from '../config';
+import {
+  dest,
+  series,
+  src,
+  task,
+} from 'gulp';
+import { get } from 'browser-sync';
+import nunjucksRender from 'gulp-nunjucks-render';
 
-gulp.task('views:dev:render', function() {
-    var nunjucksSettings = {
+task('views:dev:render', () => {
+    const nunjucksSettings = {
 		path: 'templates/',
 		envOptions: {
 			watch: true
 		}
 	};
-    return gulp.src(config.views.src)
+    return src(config.views.src)
         .pipe(nunjucksRender(nunjucksSettings))
-        .pipe(gulp.dest(config.views.dest));
+        .pipe(dest(config.views.dest));
 });
 
-gulp.task('views:dev', function(cb) {
-    var browserSync = bs.get('pigie');
+task('views:dev', (done) => {
+    const browserSync = get('merix');
 
-    runSequence('views:dev:render', browserSync.reload);
-    cb();
+    series('views:dev:render', browserSync.reload)();
+    done();
 });
 
-gulp.task('views:production', function() {
-    var nunjucksSettings = {
+task('views:production', () => {
+    const nunjucksSettings = {
 		path: 'templates/',
 		envOptions: {
 			watch: false
 		}
 	};
-    return gulp.src(config.views.src)
+    return src(config.views.src)
         .pipe(nunjucksRender(nunjucksSettings))
-        .pipe(gulp.dest(config.views.dest));
+        .pipe(dest(config.views.dest));
 });

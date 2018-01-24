@@ -1,18 +1,22 @@
-var config   = require('../config');
-var changed  = require('gulp-changed');
-var gulp     = require('gulp');
+import config from '../config';
+import changed from 'gulp-changed';
+import {
+  dest,
+  src,
+  task,
+} from 'gulp';
 
-gulp.task('media:dev', function(){
-    var dest = config.medias.dest;
+task('media:dev', () => {
+    const destination = config.medias.dest;
 
-    return gulp.src(config.medias.src)
-        .pipe(changed(dest))
-        .pipe(gulp.dest(dest));
+    return src(config.medias.src)
+        .pipe(changed(destination))
+        .pipe(dest(destination));
 });
 
-gulp.task('media:production', function(){
-    var dest = config.medias.dest;
+task('media:production', () => {
+    const destination = config.medias.dest;
 
-    return gulp.src(config.medias.src)
-        .pipe(gulp.dest(dest));
+    return src(config.medias.src)
+        .pipe(dest(destination));
 });

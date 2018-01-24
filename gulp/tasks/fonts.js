@@ -1,5 +1,9 @@
 import config from '../config';
-import { task, src, dest } from 'gulp';
+import {
+  dest,
+  src,
+  task,
+} from 'gulp';
 
 task('fonts', () => {
     return src(config.fonts.src)

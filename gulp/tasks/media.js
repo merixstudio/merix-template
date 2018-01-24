@@ -1,6 +1,10 @@
 import config from '../config';
 import changed from 'gulp-changed';
-import { task, src, dest } from 'gulp';
+import {
+  dest,
+  src,
+  task,
+} from 'gulp';
 
 task('media:dev', () => {
     const destination = config.medias.dest;

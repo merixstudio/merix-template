@@ -1,7 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 import config from '../config';
-import { task, src, dest } from 'gulp';
+import {
+  dest,
+  src,
+  task,
+} from 'gulp';
 import sass from 'gulp-sass';
 import sassNpm from 'sass-npm';
 import plumber from 'gulp-plumber';

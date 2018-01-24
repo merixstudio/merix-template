@@ -1,5 +1,9 @@
 import config from '../config';
-import { task, watch, series } from 'gulp';
+import {
+  series,
+  task,
+  watch,
+} from 'gulp';
 
 task('watch', series('browserSync', (done) => {
     watch(config.polyfills.src, series('polyfills:dev'));

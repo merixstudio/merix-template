@@ -1,6 +1,11 @@
 import config from '../config';
 import fs from 'fs';
-import { task, src, dest, series } from 'gulp';
+import {
+  dest,
+  series,
+  src,
+  task,
+} from 'gulp';
 import del from 'del';
 import admZip from 'adm-zip';
 import rename from 'gulp-rename';

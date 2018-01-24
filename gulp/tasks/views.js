@@ -1,5 +1,10 @@
 import config from '../config';
-import { task, src, dest, series } from 'gulp';
+import {
+  dest,
+  series,
+  src,
+  task,
+} from 'gulp';
 import { get } from 'browser-sync';
 import nunjucksRender from 'gulp-nunjucks-render';
 

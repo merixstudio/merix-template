@@ -1,5 +1,8 @@
 import config from '../config';
-import { task, dest } from 'gulp';
+import {
+  dest,
+  task,
+} from 'gulp';
 import browserify from 'browserify';
 import watchify from 'watchify';
 import uglify from 'gulp-uglify';

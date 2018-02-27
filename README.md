@@ -28,35 +28,6 @@ If you work on Windows the default paths are:
 
 When installing Node you can choose to add them for you automatically.
 
-### Installing other tools
-
-Gulp is needed to be installed globally (one time installation) with commands:
-
-```
-npm install -g gulp
-```
-The `-g` flag means that it will be installed in Node.js path and will be available from CLI globally.
-
-The project uses gulp 4. To run it `gulp-cli` version `^2.0.0` should be installed. You can check it by running:
-
-```
-gulp -v
-```
-
-If you don't have client version 2 installed, first uninstall the previous version:
-
-
-```
-npm uninstall gulp -g
-```
-
-and then:
-
-```
-npm install gulp-cli -g
-```
-
-
 
 #### Installing Yarn
 
@@ -77,7 +48,7 @@ This will install all the required modules in `node_modules` folder. This folder
 To run build process and start development server simply run:
 
 ```
-gulp
+npm start
 ```
 
 To automatically open the page in a default browser you can add parameter:
@@ -99,7 +70,7 @@ Gulp is finding `icons.zip` file to add them to project. You can change options 
 gulp --icons new/path/to/icons.zip
 ```
 
-## Gulp tasks
+## Building tasks
 
 Gulp is responsible for the whole compiling and bundling process. All Gulp tasks are defined in the `gulp` folder.
 
@@ -115,17 +86,17 @@ Gulp tasks are responsible for:
 The default command for running gulp tasks is:
 
 ```
-gulp
+npm start
 ```
 
-that needs to be run in project root where `gulpfile.babel.js` file is located.
+that needs to be run in project root where `package.json` file is located.
 
 This will run gulp in dev mode that additionally starts a dev server on `http://localhost:1337` and watches for file changes so it can reload the page on each save. Dev server is created with [BrowserSync](https://www.browsersync.io/).
 
-There is also another gulp command for compiling files for production environment:
+There is also another npm command for compiling files for production environment:
 
 ```
-gulp production
+npm run production
 ```
 
 This command does not start a dev server and it minifies all the styles and scripts. This command should be used when building files for backend integration.

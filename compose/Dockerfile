@@ -8,7 +8,7 @@ RUN yarn install
 ENV PATH /node_modules/.bin:$PATH
 WORKDIR /code/
 ADD . /code/
-RUN gulp production
+RUN npm run production
 
 FROM nginx:latest
 

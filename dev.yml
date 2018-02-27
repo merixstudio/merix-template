@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/Dockerfile.dev
-    command: gulp
+    command: npm start
     volumes:
       - ./:/code
     ports:

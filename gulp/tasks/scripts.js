@@ -52,7 +52,7 @@ const buildProduction = () => {
         packageCache: {},
         fullPaths: false,
         debug: false
-    }).transform("babelify", { presets: ["es2015", "stage-3"] });
+    }).transform("babelify", { presets: ["env", "stage-3"] });
 
     const rebundle = () => {
         const stream = bundler.bundle();

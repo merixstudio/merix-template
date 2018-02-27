@@ -4,6 +4,6 @@ import {
   task,
 } from 'gulp';
 
-const build = series('watch', 'clean', parallel('icons', 'fonts', 'styles:dev', 'polyfills:dev', 'images:dev', 'media:dev'), 'views:dev', 'scripts:dev');
+const build = series('clean', 'scripts:dev', 'watch', parallel('icons', 'fonts', 'styles:dev', 'polyfills:dev', 'images:dev', 'media:dev'), 'views:dev');
 
 task('default', build);

@@ -1,14 +1,15 @@
-FROM node:6 AS builder
+FROM node:8 AS builder
 
 RUN mkdir /code
 
 WORKDIR /
 ADD package.json /
+ADD yarn.lock /
 RUN yarn install
 ENV PATH /node_modules/.bin:$PATH
 WORKDIR /code/
 ADD . /code/
-RUN npm run production
+RUN yarn production
 
 FROM nginx:latest
 

@@ -24,17 +24,13 @@
     position: relative;
     padding-left: 40px;
 
-    &:before {
+    &::before {
       content: '»';
       position: absolute;
       top: 0;
       left: 0;
       width: 28px;
       text-align: center;
-    }
-
-    & + & {
-      margin-top: 10px;
     }
 
     ol,
@@ -47,9 +43,13 @@
   ol > li {
     counter-increment: ordered-list;
 
-    &:before {
+    &::before {
       content: counter(ordered-list);
     }
+  }
+
+  li + li {
+    margin-top: 10px;
   }
 
   dt {
@@ -71,6 +71,7 @@
     font-size: $wysiwyg-h3-font-size;
     font-weight: $wysiwyg-h3-font-weight;
   }
+
   h4 {
     font-size: $wysiwyg-h4-font-size;
     font-weight: $wysiwyg-h4-font-weight;
@@ -129,7 +130,7 @@
     position: relative;
     font-style: italic;
 
-    &:before {
+    &::before {
       content: open-quote;
       font-style: normal;
     }

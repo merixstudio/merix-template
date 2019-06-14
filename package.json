@@ -33,9 +33,14 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.3",
     "gulp-uglify": "^2.1.0",
+    "husky": "^2.4.1",
+    "lint-staged": "^8.2.0",
     "nunjucks": "^3.0.0",
     "sass-npm": "^1.0.2",
     "strictify": "^0.2.0",
+    "stylelint": "^10.1.0",
+    "stylelint-config-standard": "^18.3.0",
+    "stylelint-order": "^3.0.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
     "watchify": "^3.9.0"
@@ -43,7 +48,8 @@
   "scripts": {
     "start": "gulp",
     "production": "gulp production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . && stylelint \"styles/**/*.scss\""
   },
   "browserify": {
     "transform": [
@@ -51,5 +57,18 @@
     ]
   },
   "author": "Merixstudio",
-  "license": "ISC"
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "yarn eslint"
+    ],
+    "*.scss": [
+      "yarn stylelint \"styles/**/*.scss\""
+    ]
+  }
 }

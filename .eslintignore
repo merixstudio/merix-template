@@ -1,3 +1,7 @@
 webpack/*
 karma.conf.js
 tests.webpack.js
+gulp/*
+scripts/polyfills/*
+_build/*
+scripts/utils/detect.js

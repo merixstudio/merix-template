@@ -13,26 +13,30 @@
  *      delay - (Number) > 0 Time beetween callback firing
  *      callback - (Function) callback function
  */
-export default function(scope, delay, callback) {
-    var lastExecution, timer;
-    delay = delay || 250;
+export default function (scope, delay = 250, callback) {
+  let lastExecution;
+  let timer;
 
-    return function () {
-        clearTimeout(timer);
+  // eslint-disable-next-line func-names
+  return function () {
+    clearTimeout(timer);
 
-        var context = scope || this;
+    const context = scope || this;
 
-        var now = new Date(),
-            args = arguments;
+    const now = new Date();
+    // eslint-disable-next-line prefer-rest-params
+    const args = arguments;
 
-        var fn = function () {
-            lastExecution = now.getTime();
-            callback.apply(context, args);
-        };
-
-        if (lastExecution && now.getTime() < lastExecution + delay)
-            timer = setTimeout(fn, delay);
-        else
-            fn();
+    // eslint-disable-next-line func-names
+    const fn = function () {
+      lastExecution = now.getTime();
+      callback.apply(context, args);
     };
+
+    if (lastExecution && now.getTime() < lastExecution + delay) {
+      timer = setTimeout(fn, delay);
+    } else {
+      fn();
+    }
+  };
 }

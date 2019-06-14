@@ -15,7 +15,6 @@
 // name-multiplicator : 1,  # if 5, generate gr-5, gr-10, etc...
 // classes-prefix : ''      # the prefix used for all classes
 
-
 // setup the grid (required)
 @include gridle_setup((
   context : 12,
@@ -44,7 +43,6 @@
 @include gridle_register_state(mobile-small, (
   max-width : 479px
 ));
-
 
 // Generate classes:
 // @include gridle_generate_classes();

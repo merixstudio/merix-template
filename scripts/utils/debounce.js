@@ -9,23 +9,25 @@
  *      delay - (Number) Delay time after last event to fire callback
  *      callback - (Function) callback function
  */
-export default function(scope, delay, callback) {
-    var timer = null;
-    delay = delay || 250;
+export default function (scope, delay = 250, callback) {
+  let timer = null;
 
-    return function () {
-        if (timer !== null) {
-            clearTimeout(timer);
-            timer = null;
-        }
+  // eslint-disable-next-line func-names
+  return function () {
+    if (timer !== null) {
+      clearTimeout(timer);
+      timer = null;
+    }
 
-        var context = scope || this;
-        var args = arguments;
+    const context = scope || this;
+    // eslint-disable-next-line prefer-rest-params
+    const args = arguments;
 
-        var fn = function () {
-            callback.apply(context, args);
-        };
-
-        timer = setTimeout(fn, delay);
+    // eslint-disable-next-line func-names
+    const fn = function () {
+      callback.apply(context, args);
     };
+
+    timer = setTimeout(fn, delay);
+  };
 }

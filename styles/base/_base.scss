@@ -16,11 +16,11 @@ body {
     padding: 0;
     list-style: none;
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
   }
 
